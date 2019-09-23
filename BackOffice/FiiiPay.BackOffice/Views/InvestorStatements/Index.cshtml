@@ -1,0 +1,69 @@
+﻿<div class="gridSearchTool" style="padding-right:100px">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="Username">Username</label>
+            <input type="text" class="form-control" id="txtUsername" placeholder="Input Username to search">
+        </div>
+        <div class="form-group">
+            <label for="InvestorName">InvestorName</label>
+            <input type="text" class="form-control" id="txtInvestorName" placeholder="Input InvestorName to search">
+        </div>
+        <div class="form-group">
+            <label for="CellPhone">CellPhone</label>
+            <input type="text" class="form-control" id="CellPhone" placeholder="Input CellPhone to search">
+        </div>
+        <div class="form-group">
+            <label for="Action">Action</label>
+            @Html.DropDownList("Action", (List<SelectListItem>)ViewBag.ActionList, new { Class = "form-control" })
+        </div>
+        
+        <button type="button" class="btn btn-primary btn-sm" onclick="Search()">Search</button>
+    </form>
+</div>
+<table id="dtGrid"></table>
+<div id="dtGridPager"></div>
+
+<script>
+    $(function () {
+        var colModels = new Array({ name: 'Id', index: 'Id', hidden: true },
+            { name: 'Username', index: 'Username', width: 100, align: 'center' },
+            { name: 'InvestorName', index: 'InvestorName', width: 100, align: 'center' },
+            { name: 'CellPhone', index: 'CellPhone', width: 100, align: 'center' },
+            { name: 'Action', index: 'Action', width: 100, align: 'center' },
+            { name: 'Amount', index: 'Amount', width: 100, align: 'center' },
+            { name: 'Timestamp', index: 'Timestamp', width: 100, align: 'center' }
+        );
+        var colNames = new Array("Id", "Username", "InvestorName", "CellPhone", "Action", "Amount", "Timestamp");
+
+        $("#dtGrid").BoGrid({
+            url: '/InvestorStatements/LoadData',
+            colName: colNames,
+            colModel: colModels,
+            postData: GetSearchCondition(),
+            sortname: "Timestamp",
+            sortorder: "desc",
+            pager: '#dtGridPager'
+        });
+    });
+
+    function GetSearchCondition() {
+        var postData = {
+            Username: $.trim($("#txtUsername").val()),
+            InvestorName: $("#txtInvestorName").val(),
+            CellPhone: $("#CellPhone").val(),
+            Action: $("#Action").val()
+        };
+        return postData;
+    }
+
+    function Search() {
+        var postdata = GetSearchCondition();
+        $("#dtGrid").jqGrid('setGridParam', { postData: postdata, page: 1 }).trigger("reloadGrid");
+    }
+
+    function refreshPage() {
+        var postdata = GetSearchCondition();
+        $("#dtGrid").jqGrid('setGridParam', { postData: postdata }).trigger("reloadGrid");
+    }
+
+</script>

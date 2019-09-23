@@ -1,0 +1,157 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permobj = new GeneralPermission { Create = permissionCodeList.Contains("AgentCreate"), Update = permissionCodeList.Contains("AgentUpdate"), Delete = permissionCodeList.Contains("AgentDelete") };
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permobj);
+}
+<div>
+    <div class="gridSearchTool">
+        <form class="form-inline" onkeypress="return ExecuteSearch()">
+            <div class="form-group largesearchwidth">
+                <label>Area</label>
+                @Html.DropDownList("SearchCountryId", (List<SelectListItem>)ViewBag.CountryList, new { @class = "form-control",style="width:150px;" })
+                <select id="SearchStateId" class="form-control" style="width:150px;"><option>Select state</option></select>
+                <select id="SearchCityId" class="form-control" style="width:150px;"><option>Select city</option></select>
+            </div>
+            <div class="form-group">
+                <label>CompanyName</label>
+                <input type="text" id="SearchCompanyName" name="SearchCompanyName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-primary btn-sm" value="Search" onclick="DoSearch()" />
+            </div>
+        </form>
+        @if (permobj.Create)
+        {
+            <a href="javascript:" class="btn btn-create" onclick="GoCreatePage()">Create</a>
+        }
+    </div>
+    <table id="gridlist"></table>
+    <div id="gridlistpager"></div>
+</div>
+<script>
+    $(function() {
+        var colname = [
+            "Id", "Code", "CompanyName", "Country", "State", "City", "Contact", "Contact method", "Seller", "Time"
+        ];
+        var colmodel = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'AgentCode', index: 'AgentCode', width: 100, align: 'center' },
+            { name: 'CompanyName', index: 'CompanyName', width: 100, align: 'center' },
+            { name: 'CountryName', index: 'CountryName', width: 100, align: 'center', sortable: false },
+            { name: 'StateName', index: 'StateName', width: 100, align: 'center', sortable: false },
+            { name: 'CityName', index: 'CityName', width: 100, align: 'center', sortable: false },
+            { name: 'ContactName', index: 'ContactName', width: 100, align: 'center' },
+            { name: 'ContactWay', index: 'ContactWay', width: 100, align: 'center' },
+            { name: 'SaleName', index: 'SaleName', width: 100, align: 'center' },
+            { name: 'CreateTime', index: 'CreateTime', width: 100, align: 'center' }
+        ];
+        $("#gridlist").BoGrid({
+            url: '/Agent/LoadData',
+            showBtn: true,
+            permvalue: "@sePermission",
+            colNames: colname,
+            colModel: colmodel,
+            onEditClick: "GoEditPage",
+            onDeleteClick: "DeleteRole",
+            pager: '#gridlistpager'
+        });
+
+        $("#SearchCountryId").on("change",
+            function() {
+                var $select = $(this);
+                var $stateselect = $("#SearchStateId");
+                var countryId = $select.children(":selected").val();
+                $("#SearchCityId").empty().append('<option>Select city</option>');
+                $stateselect.empty().append('<option>Select state</option>');
+                if (!countryId) {
+                    return;
+                }
+                $.get("/Agent/GetStateList",
+                    { countryId: countryId },
+                    function(context) {
+                        if (context) {
+                            var liststr = '';
+                            for (var i = 0; i < context.length; i++) {
+                                liststr += '<option value="' + context[i].Id + '">' + context[i].Name + '</option>';
+                            }
+                            $stateselect.append(liststr);
+                        }
+                    });
+            });
+        $("#SearchStateId").on("change",
+            function() {
+                var $select = $(this);
+                var $cityselect = $("#SearchCityId");
+                var stateId = $select.children(":selected").val();
+                $cityselect.empty().append('<option>Select city</option>');
+                if (!stateId) {
+                    return;
+                }
+                $.get("/Agent/GetCityList",
+                    { stateId: stateId },
+                    function(context) {
+                        if (context) {
+                            var liststr = '';
+                            for (var i = 0; i < context.length; i++) {
+                                liststr += '<option value="' + context[i].Id + '">' + context[i].Name + '</option>';
+                            }
+                            $cityselect.append(liststr);
+                        }
+                    });
+            });
+    });
+    function ExecuteSearch(e) {
+        if (event.keyCode == 13) {
+            DoSearch();
+            return false;
+        }
+        return true;
+    }
+    function DoSearch() {
+        $("#gridlist").jqGrid('setGridParam', { postData: GetSearchConditions(), page: 1 }).trigger("reloadGrid");
+    }
+    function GetSearchConditions() {
+        var countryId = $("#SearchCountryId").children(":selected").val();
+        var stateId = $("#SearchStateId").children(":selected").val();
+        var cityId = $("#SearchCityId").children(":selected").val();
+        var companyName = $.trim($("#SearchCompanyName").val());
+        return { countryId: countryId, stateId: stateId, cityId: cityId, companyName: companyName };
+    }
+    function refreshPage() {
+        $("#gridlist").jqGrid('setGridParam', { postData: GetSearchConditions() }).trigger("reloadGrid");
+    }
+    function GoEditPage(id) {
+        $.opentabpage("/Agent/Edit?id=" + id, "Edit Agent", id);
+    }
+    function GoCreatePage() {
+        $.opentabpage("/Agent/Create", "Create Agent", 0);
+    }
+    function DeleteRole(id) {
+        $.swconfirm("Sure to delete this agent？", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: '/Agent/Delete',
+                    data: { id: id },
+                    dataType: "json",
+                    success: function(context) {
+                        if (context.Status) {
+                            swal({
+                                    title: "Delete Success",
+                                    type: "success"
+                                },
+                                function() {
+                                    $("#gridlist").trigger('reloadGrid');
+                                });
+                        } else {
+                            swal({
+                                title: "Delete Failed",
+                                type: "error",
+                                text: context.Message
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+</script>

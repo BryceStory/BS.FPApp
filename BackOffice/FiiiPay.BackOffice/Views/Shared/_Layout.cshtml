@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>FiiiPay BackOffice</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/js")
+    @Scripts.Render("~/bundles/plugins")
+</head>
+<body>
+    @Html.AntiForgeryToken()
+    <div class="container-fluid body-content">
+        @RenderBody()
+    </div>
+    <script>
+        $(function () {
+            setiframeheight();
+        })
+        var _ajax = $.ajax;
+        $.ajax = function (opt) {
+            var hideloadding = opt.hideloadding;
+            var errorfun = opt.error;
+            opt.error = null;
+            var _opt = $.extend(opt, {
+                beforeSend: function (xhr) {
+                    if (!hideloadding) {
+                        $.openloadding();
+                    }
+                },
+                error: function (xhr,s) {
+                    if (errorfun) {
+                        errorfun.call(null, xhr, s);
+                    }
+                    var sessionstatus = xhr.getResponseHeader('sessionstatus');
+                    if (sessionstatus === 'timeout') {
+                        window.top.location.href = '/Login/Index';
+                    }
+                },
+                complete: function (xhr, ts) {
+                    if (!hideloadding) {
+                        $.closeloadding();
+                    }
+                },
+                headers: {},
+                type: 'post'
+            });
+            var token = _opt.headers["__RequestVerificationToken"];
+            if (!token) {
+                token = $('input[name="__RequestVerificationToken"]').val();
+                if (token) {
+                    _opt.headers["__RequestVerificationToken"] = token;
+                }
+            }
+            return _ajax(_opt);
+        }
+
+        $(window).resize(function (x, y) {
+            var grid = $(".bo-grid");
+            if (grid && grid.length > 0) {
+                grid.each(function () {
+                    var $this = $(this);
+                    var gridContainor = $this.closest('.jqgridContainor');
+                    if (gridContainor.length > 0) {
+                        $this.setGridWidth(gridContainor.width()-2, true);
+                    } else {
+                        $this.setGridWidth($(window).width()-2, true);
+                    }
+                });
+            }
+            setiframeheight();
+        })
+        function setiframeheight() {
+            var iframe = window.parent.getIframeByElement(document.body);
+            $(iframe).css('height', document.body.scrollHeight);
+            $(top.document).find(".app-container").first().css('height', document.body.scrollHeight + 100);
+        }
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

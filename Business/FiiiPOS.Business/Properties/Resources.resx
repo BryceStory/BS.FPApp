@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountHasBoundOtherPOS" xml:space="preserve">
+    <value>Account has been bound to other POS</value>
+    <comment>该账号已绑定了其他POS机</comment>
+  </data>
+  <data name="AccountHasBoundThisPOS" xml:space="preserve">
+    <value>Please login as account was bound to the FiiiPOS</value>
+    <comment>该账号已绑定了这台POS机</comment>
+  </data>
+  <data name="AccountNotExists" xml:space="preserve">
+    <value>Merchant account not found</value>
+    <comment>账号不存在</comment>
+  </data>
+  <data name="AccountUnbundled" xml:space="preserve">
+    <value>Account has been unbound</value>
+    <comment>账号还未绑定POS机</comment>
+  </data>
+  <data name="CurrencyForbidden" xml:space="preserve">
+    <value>The cryptocurrency cannot be used currently, please contact customer service if any question</value>
+  </data>
+  <data name="EMInvalidTag" xml:space="preserve">
+    <value>Invalid tag</value>
+  </data>
+  <data name="FailedGenerateAddress" xml:space="preserve">
+    <value>Failed to generate address</value>
+  </data>
+  <data name="FiiiPOSCantWithdrawToFiiiPOS" xml:space="preserve">
+    <value>Cannot withdraw between FiiiPOS users</value>
+  </data>
+  <data name="MerchantLv1Reject" xml:space="preserve">
+    <value>Lv1 Verify Failed</value>
+  </data>
+  <data name="MerchantLv1RejectSubTitle" xml:space="preserve">
+    <value>Lv1 Identity verification was failed, check details</value>
+  </data>
+  <data name="MerchantLv1Verified" xml:space="preserve">
+    <value>Lv1 Verify Passed</value>
+  </data>
+  <data name="MerchantLv1VerifiedSubTitle" xml:space="preserve">
+    <value>Lv1 Identity verification has been approved, check details</value>
+  </data>
+  <data name="MerchantLv2Reject" xml:space="preserve">
+    <value>Lv2 Verify Failed</value>
+  </data>
+  <data name="MerchantLv2RejectSubTitle" xml:space="preserve">
+    <value>Lv2 Business license was verified failed, check details</value>
+  </data>
+  <data name="MerchantLv2Verified" xml:space="preserve">
+    <value>Lv2 Verify Passed</value>
+  </data>
+  <data name="MerchantLv2VerifiedSubTitle" xml:space="preserve">
+    <value>Lv2 Business license has been approved, check details</value>
+  </data>
+  <data name="Merchant_KYC_LV1_DefaultBody" xml:space="preserve">
+    <value>Lv1 Identity Verify Passed</value>
+  </data>
+  <data name="Merchant_KYC_LV2_DefaultBody" xml:space="preserve">
+    <value>Lv2 Business license Verify Passed</value>
+  </data>
+  <data name="NewsTemplate" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;style&gt;
+        html,
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            min-width: 320px;
+            font-family: "PingFang SC";
+            font-size: 100%;
+            color: #606266;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 0.375rem 0;
+        }
+
+        .mian {
+            padding: 0 0.825rem;
+        }
+
+        p {
+            padding: 0.825rem;
+            font-size: 0.825rem;
+            line-height: 1.825rem;
+            text-align: left;
+            margin: 0;
+            margin-bottom: 15px;
+            font-weight: 450;
+        }
+
+        h2 {
+            font-size: 0.825rem;
+            text-align: left;
+            color: #cccccc;
+            font-weight: 400;
+            margin: 0.825rem 0;
+        }
+
+        .bg {
+            background-color: #F2F6FC;
+        }
+
+        @@media screen and (min-width: 576px) {
+            html,
+            body {
+                font-size: 150%;
+            }
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="mian"&gt;
+        &lt;h1&gt;[Title]&lt;/h1&gt;
+        &lt;h2 id="time" data-utc="[PublishTime]"&gt;[PublishTime]&lt;/h2&gt;
+        &lt;div class="bg"&gt;[Content]&lt;/div&gt;
+        &lt;script&gt;
+            function formatDateTime(inputTime) {
+                var date = new Date(inputTime);
+                var y = date.getFullYear();
+                var m = date.getMonth() + 1;
+                m = m &lt; 10 ? ('0' + m) : m;
+                var d = date.getDate();
+                d = d &lt; 10 ? ('0' + d) : d;
+                var h = date.getHours();
+                h = h &lt; 10 ? ('0' + h) : h;
+                var minute = date.getMinutes();
+                minute = minute &lt; 10 ? ('0' + minute) : minute;
+                return y + '-' + m + '-' + d + ' ' + h + ':' + minute;
+            }
+            document.onreadystatechange = function () {
+                var el = document.getElementById('time');
+                el.innerText = formatDateTime(el.dataset.utc * 1);
+            }
+        &lt;/script&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
+  </data>
+  <data name="NoBindRelationship" xml:space="preserve">
+    <value>The account does not bind to this POS machine</value>
+    <comment>登录时账号没绑定该POS机</comment>
+  </data>
+  <data name="PIN格式不正确" xml:space="preserve">
+    <value>Invalid PIN format</value>
+  </data>
+  <data name="POSHasBoundOtherAccount" xml:space="preserve">
+    <value>POS has been bound to other Account</value>
+  </data>
+  <data name="ReceiptSubTitle" xml:space="preserve">
+    <value>You have got one payment message, check details</value>
+  </data>
+  <data name="ReceiptTitle" xml:space="preserve">
+    <value>Recieved payment-{0}</value>
+  </data>
+  <data name="SN码不存在" xml:space="preserve">
+    <value>Invalid SN, please contact customer service</value>
+  </data>
+  <data name="StoreReject" xml:space="preserve">
+    <value>Merchant information Verify Failed</value>
+  </data>
+  <data name="StoreVerified" xml:space="preserve">
+    <value>Merchant information Verify Passed</value>
+  </data>
+  <data name="StoreVerifiedSubTitle" xml:space="preserve">
+    <value>Merchant information verification has been approved, check details</value>
+  </data>
+  <data name="Store_DefaultBody" xml:space="preserve">
+    <value>Merchant information Verify Passed</value>
+  </data>
+  <data name="StroeRejectSubTitle" xml:space="preserve">
+    <value>Merchant information verification was failed, check details</value>
+  </data>
+  <data name="Token已失效" xml:space="preserve">
+    <value>Token expired.</value>
+  </data>
+  <data name="WithdrawalEmailContent" xml:space="preserve">
+    <value>You have succesfully withdraw {0} of {1}</value>
+  </data>
+  <data name="WithdrawalEmailTitle" xml:space="preserve">
+    <value>Withdrawal of {0}</value>
+  </data>
+  <data name="WithdrawalRejectEmailContent" xml:space="preserve">
+    <value>You have failed to withdraw {0} of {1}, please contact customer service</value>
+  </data>
+  <data name="WithdrawalRejectEmailTitle" xml:space="preserve">
+    <value>Withdrawal of {0}</value>
+  </data>
+  <data name="WithdrawalRejectSubTitle" xml:space="preserve">
+    <value>You have one withdrawal was failed, check details</value>
+  </data>
+  <data name="WithdrawalRejectTitle" xml:space="preserve">
+    <value>Withdraw-{0}</value>
+  </data>
+  <data name="WithdrawalSubTitle" xml:space="preserve">
+    <value>You have one withdrawal completed, check details</value>
+  </data>
+  <data name="WithdrawalTitle" xml:space="preserve">
+    <value>Withdraw-{0}</value>
+  </data>
+  <data name="上传失败" xml:space="preserve">
+    <value>Upload failed.</value>
+  </data>
+  <data name="不支持的币种" xml:space="preserve">
+    <value>Unsupport cryptocurrency</value>
+  </data>
+  <data name="不能低于最低提币量" xml:space="preserve">
+    <value>Cannot less than the minimal withdrawal amount</value>
+  </data>
+  <data name="不能高于单次提币量" xml:space="preserve">
+    <value>Cannot higher than the maxinum withdrawal amount</value>
+  </data>
+  <data name="今日提币达到限额" xml:space="preserve">
+    <value>Reach the withdrawal limit today</value>
+  </data>
+  <data name="余额不足" xml:space="preserve">
+    <value>Balance not enough.</value>
+  </data>
+  <data name="到账数量不能为零或者负数" xml:space="preserve">
+    <value>Total amount must be greater than zero</value>
+  </data>
+  <data name="原邮箱地址不正确" xml:space="preserve">
+    <value>Incorrect original email addreess</value>
+  </data>
+  <data name="发送成功" xml:space="preserve">
+    <value>Sent successfully.</value>
+  </data>
+  <data name="只能查看自己的订单" xml:space="preserve">
+    <value>Can check your own order only</value>
+  </data>
+  <data name="商户不支持的币种" xml:space="preserve">
+    <value>Merchant account not support this cryptocurrency.</value>
+  </data>
+  <data name="国家不存在" xml:space="preserve">
+    <value>The country not exist.</value>
+  </data>
+  <data name="尚未绑定谷歌验证" xml:space="preserve">
+    <value>Not verify Google authenticator</value>
+  </data>
+  <data name="帐号已存在" xml:space="preserve">
+    <value>Merchant ID already exists, please enter again</value>
+  </data>
+  <data name="帐号已锁定" xml:space="preserve">
+    <value>Account has locked.</value>
+  </data>
+  <data name="当前手机号与账号绑定的手机号不一致" xml:space="preserve">
+    <value>Phone number and account do not match </value>
+  </data>
+  <data name="提币地址不是有效的地址" xml:space="preserve">
+    <value>Invalid withdrawal address</value>
+  </data>
+  <data name="提币失败备注" xml:space="preserve">
+    <value>Order exception, rejected by systerm, please contact customer service</value>
+  </data>
+  <data name="新PIN不能与原PIN一样" xml:space="preserve">
+    <value>The new PIN can't be the same as the original PIN</value>
+  </data>
+  <data name="新手机号码不能与原来的一致" xml:space="preserve">
+    <value>New phone number should be different from the old one</value>
+  </data>
+  <data name="新邮箱不能和原来的邮箱一致" xml:space="preserve">
+    <value>New email address should be different from the old one</value>
+  </data>
+  <data name="无效的用户Token" xml:space="preserve">
+    <value>Invalid payment code.</value>
+  </data>
+  <data name="本月提币达到限额" xml:space="preserve">
+    <value>Withdrawal amount reach the limit of this month</value>
+  </data>
+  <data name="格式不正确" xml:space="preserve">
+    <value>Invalid format.</value>
+  </data>
+  <data name="此邮箱已经绑定到其他邮箱" xml:space="preserve">
+    <value>Email account already exit on FiiiPos, please try with new one</value>
+  </data>
+  <data name="用户不存在" xml:space="preserve">
+    <value>Account not found.</value>
+  </data>
+  <data name="用户不支持的币种" xml:space="preserve">
+    <value>User account not support this cryptocurrency.</value>
+  </data>
+  <data name="禁止提币" xml:space="preserve">
+    <value>Withdraw forbidden</value>
+  </data>
+  <data name="禁止收款" xml:space="preserve">
+    <value>Payment forbidden</value>
+  </data>
+  <data name="网络异常_请重新尝试" xml:space="preserve">
+    <value>Network error, please try again.</value>
+  </data>
+  <data name="订单不存在" xml:space="preserve">
+    <value>The order not exist.</value>
+  </data>
+  <data name="订单状态异常" xml:space="preserve">
+    <value>Order can not be refunded currently</value>
+  </data>
+  <data name="订单超过三天不能退款" xml:space="preserve">
+    <value>Order can not be refuned for more than three days</value>
+  </data>
+  <data name="邀请码不存在" xml:space="preserve">
+    <value>Invalid invitation code, please enter again</value>
+  </data>
+  <data name="需要Lv1认证才能使用相关功能" xml:space="preserve">
+    <value>Please finish LV1 certification first before using this function</value>
+  </data>
+  <data name="验证码已过期" xml:space="preserve">
+    <value>Expired verification code.</value>
+  </data>
+  <data name="验证码有误" xml:space="preserve">
+    <value>Wrong verification code.</value>
+  </data>
+  <data name="验证码邮箱标题" xml:space="preserve">
+    <value>【FiiiPOS】Email verification code</value>
+  </data>
+  <data name="验证码邮箱模版" xml:space="preserve">
+    <value>【FiiiPOS】Email verification code：{0}, please do not use it if you are not the intended recipient, valid within {1} minutes.</value>
+  </data>
+</root>

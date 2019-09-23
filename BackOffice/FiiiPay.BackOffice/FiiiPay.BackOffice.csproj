@@ -1,0 +1,974 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{32F21C09-5B39-406F-B48C-3AA5AA48B746}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FiiiPay.BackOffice</RootNamespace>
+    <AssemblyName>FiiiPay.BackOffice</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <WebGreaseLibPath>..\..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="DnsClient, Version=1.0.7.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DnsClient.1.0.7\lib\net45\DnsClient.dll</HintPath>
+    </Reference>
+    <Reference Include="FiiiPay.Framework, Version=1.0.7074.27146, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FiiiPay.Framework.1.0.7074.27146\lib\net47\FiiiPay.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="FiiiPay.Framework.Cache, Version=1.0.7048.25362, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FiiiPay.Framework.Cache.1.0.7048.25362\lib\net47\FiiiPay.Framework.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="FiiiPay.Framework.MongoDB, Version=1.0.7017.18893, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FiiiPay.Framework.MongoDB.1.0.7017.18893\lib\net47\FiiiPay.Framework.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="FiiiPay.Framework.Push, Version=1.0.6997.19532, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FiiiPay.Framework.Push.1.0.6997.19532\lib\net47\FiiiPay.Framework.Push.dll</HintPath>
+    </Reference>
+    <Reference Include="FiiiPay.Framework.Queue, Version=1.0.7074.19947, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FiiiPay.Framework.Queue.1.0.7074.19947\lib\net47\FiiiPay.Framework.Queue.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.1.0.145, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpZipLib.1.1.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=2.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.2.0.1\lib\net461\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MongoDB.Bson.2.7.2\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MongoDB.Driver.2.7.2\lib\net45\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MongoDB.Driver.Core.2.7.2\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.4.1\lib\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.4.1\lib\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="QRCoder, Version=1.3.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QRCoder.1.3.5\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RabbitMQ.Client.5.1.0\lib\net451\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlSugar, Version=4.9.9.11, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\sqlSugar.4.9.9.11\lib\SqlSugar.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\StackExchange.Redis.1.2.6\lib\net46\StackExchange.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BLL\AccountBLL.cs" />
+    <Compile Include="BLL\ActionLogBLL.cs" />
+    <Compile Include="BLL\AdvanceOrderBLL.cs" />
+    <Compile Include="BLL\AdvertisingsBLL.cs" />
+    <Compile Include="BLL\AgentBLL.cs" />
+    <Compile Include="BLL\AppVersionBLL.cs" />
+    <Compile Include="BLL\AreaBLL.cs" />
+    <Compile Include="BLL\ArticleBLL.cs" />
+    <Compile Include="BLL\BaseBLL.cs" />
+    <Compile Include="BLL\BillerOrderBLL.cs" />
+    <Compile Include="BLL\BlobBLL.cs" />
+    <Compile Include="BLL\BORoleBLL.cs" />
+    <Compile Include="BLL\ChartBLL.cs" />
+    <Compile Include="BLL\CountryAgent.cs" />
+    <Compile Include="BLL\CountryBLL.cs" />
+    <Compile Include="BLL\CryptocurrenciesBLL.cs" />
+    <Compile Include="BLL\CurrencyBLL.cs" />
+    <Compile Include="BLL\CustomerServiceBLL.cs" />
+    <Compile Include="BLL\DepositsBLL.cs" />
+    <Compile Include="BLL\FeedbacksBLL.cs" />
+    <Compile Include="BLL\FiiiFinanceBLL.cs" />
+    <Compile Include="BLL\FiiiPayMerchantBLL.cs" />
+    <Compile Include="BLL\FileBLL.cs" />
+    <Compile Include="BLL\GatewayAccountBLL.cs" />
+    <Compile Include="BLL\InvestorAccountBLL.cs" />
+    <Compile Include="BLL\InvestorWalletStatementBLL.cs" />
+    <Compile Include="BLL\LoginBLL.cs" />
+    <Compile Include="BLL\MasterSettingBLL.cs" />
+    <Compile Include="BLL\MerchantBLL.cs" />
+    <Compile Include="BLL\MerchantProfileBLL.cs" />
+    <Compile Include="BLL\ModuleBLL.cs" />
+    <Compile Include="BLL\POSBLL.cs" />
+    <Compile Include="BLL\PriceInfoAgent.cs" />
+    <Compile Include="BLL\RefundAgent.cs" />
+    <Compile Include="BLL\RegionMagangeBLL.cs" />
+    <Compile Include="BLL\SalespersonBLL.cs" />
+    <Compile Include="BLL\StoreBannerBLL.cs" />
+    <Compile Include="BLL\StoreManageBLL.cs" />
+    <Compile Include="BLL\StoreTypeBLL.cs" />
+    <Compile Include="BLL\UserManageBLL.cs" />
+    <Compile Include="BLL\UserProfileBLL.cs" />
+    <Compile Include="BLL\UserWalletBLL.cs" />
+    <Compile Include="BLL\VerifyRecordBLL.cs" />
+    <Compile Include="BLL\WithdrawalsBLL.cs" />
+    <Compile Include="Common\ApplicationException.cs" />
+    <Compile Include="Common\BOErrorAttribute.cs" />
+    <Compile Include="BLL\OrderBLL.cs" />
+    <Compile Include="Common\DataContext.cs" />
+    <Compile Include="Common\EnumEntity.cs" />
+    <Compile Include="Common\FileUploadModel.cs" />
+    <Compile Include="Common\GeneralPermission.cs" />
+    <Compile Include="Common\GridPager.cs" />
+    <Compile Include="Common\ImageHelper.cs" />
+    <Compile Include="Common\LoginUser.cs" />
+    <Compile Include="Common\SaveResult.cs" />
+    <Compile Include="Common\ValidationFlagComponent.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdvanceOrderController.cs" />
+    <Compile Include="Controllers\AdvertisingController.cs" />
+    <Compile Include="Controllers\AgentController.cs" />
+    <Compile Include="Controllers\AppVersionsController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BillerOrderController.cs" />
+    <Compile Include="Controllers\BORoleController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\CryptoCurController.cs" />
+    <Compile Include="Controllers\CurrencyController.cs" />
+    <Compile Include="Controllers\CustomerManageController.cs" />
+    <Compile Include="Controllers\FiiiPayMerchantController.cs" />
+    <Compile Include="Controllers\FileManageController.cs" />
+    <Compile Include="Controllers\GatewayManageController.cs" />
+    <Compile Include="Controllers\InvestorManageController.cs" />
+    <Compile Include="Controllers\InvestorStatementsController.cs" />
+    <Compile Include="Controllers\MerchantDepositController.cs" />
+    <Compile Include="Controllers\MerchantKYCProfileController.cs" />
+    <Compile Include="Controllers\MerchantSettingController.cs" />
+    <Compile Include="Controllers\POSSNManageController.cs" />
+    <Compile Include="Controllers\PriceInfoController.cs" />
+    <Compile Include="Controllers\RegionManageController.cs" />
+    <Compile Include="Controllers\StoreBannerController.cs" />
+    <Compile Include="Controllers\StoreManageController.cs" />
+    <Compile Include="Controllers\StorePaySettingController.cs" />
+    <Compile Include="Controllers\StoreTypeController.cs" />
+    <Compile Include="Controllers\TelephoneServiceController.cs" />
+    <Compile Include="Controllers\UserDepositController.cs" />
+    <Compile Include="Controllers\UserSettingController.cs" />
+    <Compile Include="Controllers\MasterSettingsController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MerchantProfileController.cs" />
+    <Compile Include="Controllers\MerchantWithdrawalController.cs" />
+    <Compile Include="Controllers\POSAccountManageController.cs" />
+    <Compile Include="Controllers\UserResidenceController.cs" />
+    <Compile Include="Controllers\UserManageController.cs" />
+    <Compile Include="Controllers\UserWithdrawalController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\OperationLogController.cs" />
+    <Compile Include="Controllers\POSInfoManageController.cs" />
+    <Compile Include="Controllers\SalespersonController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
+    <Compile Include="Controllers\VerifyRecordController.cs" />
+    <Compile Include="Extends\ExpressionExtends.cs" />
+    <Compile Include="Controllers\PurchaseHistoryController.cs" />
+    <Compile Include="Extends\GridExtends.cs" />
+    <Compile Include="Extends\QueryExtends.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\BlobHandler.ashx.cs">
+      <DependentUpon>BlobHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\FileUploadHandler.ashx.cs">
+      <DependentUpon>FileUploadHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\GetQRCodeHandler.ashx.cs">
+      <DependentUpon>GetQRCodeHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdvanceOrder.cs" />
+    <Compile Include="Models\FiiiPay\Advertising.cs" />
+    <Compile Include="Models\FiiiPay\AppVersion.cs" />
+    <Compile Include="Models\FiiiPay\BalanceStatement.cs" />
+    <Compile Include="Models\FiiiPay\BillerOrder.cs" />
+    <Compile Include="Models\FiiiPay\BlobRouter.cs" />
+    <Compile Include="Models\FiiiPay\Currency.cs" />
+    <Compile Include="Models\FiiiPay\FiiiFinanceRouter.cs" />
+    <Compile Include="Models\FiiiPay\FiiipayMerchantProfiles.cs" />
+    <Compile Include="Models\FiiiPay\FiiipayMerchantVerifyRecords.cs" />
+    <Compile Include="Models\FiiiPay\GatewayAccount.cs" />
+    <Compile Include="Models\FiiiPay\GatewayProfile.cs" />
+    <Compile Include="Models\FiiiPay\InvestorAccounts.cs" />
+    <Compile Include="Models\FiiiPay\InvestorWalletStatements.cs" />
+    <Compile Include="Models\FiiiPay\InviteRecord.cs" />
+    <Compile Include="Models\FiiiPay\MasterSetting.cs" />
+    <Compile Include="Models\FiiiPay\MerchantCategory.cs" />
+    <Compile Include="Models\FiiiPay\MerchantInformation.cs" />
+    <Compile Include="Models\FiiiPay\MerchantOwnersFigure.cs" />
+    <Compile Include="Models\FiiiPay\MerchantRecommend.cs" />
+    <Compile Include="Models\FiiiPay\MerchantSupportCryptos.cs" />
+    <Compile Include="Models\FiiiPay\PriceInfo.cs" />
+    <Compile Include="Models\FiiiPay\ProfileRouter.cs" />
+    <Compile Include="Models\FiiiPay\ProfitDetail.cs" />
+    <Compile Include="Models\FiiiPay\StoreBanners.cs" />
+    <Compile Include="Models\FiiiPay\StorePaySettings.cs" />
+    <Compile Include="Models\FiiiPay\StoreType.cs" />
+    <Compile Include="Models\FiiiPay\UserTransactions.cs" />
+    <Compile Include="Models\FiiiPay\VerifyRecords.cs" />
+    <Compile Include="Utils\Encrypts.cs" />
+    <Compile Include="Utils\MSMQ.cs" />
+    <Compile Include="Utils\RedisMQ.cs" />
+    <Compile Include="Utils\AjaxAntiForgeryToken.cs" />
+    <Compile Include="Utils\APIRequest.cs" />
+    <Compile Include="Utils\BOAccess.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountRole.cs" />
+    <Compile Include="Models\ActionLog.cs" />
+    <Compile Include="Models\Agent.cs" />
+    <Compile Include="Models\FiiiPay\Article.cs" />
+    <Compile Include="Models\FiiiPay\City.cs" />
+    <Compile Include="Models\FiiiPay\Country.cs" />
+    <Compile Include="Models\FiiiPay\CryptoAddress.cs" />
+    <Compile Include="Models\FiiiPay\Cryptocurrency.cs" />
+    <Compile Include="Models\FiiiPay\CryptoTransaction.cs" />
+    <Compile Include="Models\FiiiPay\Feedback.cs" />
+    <Compile Include="Models\FiiiPay\File.cs" />
+    <Compile Include="Models\FiiiPay\MerchantAccount.cs" />
+    <Compile Include="Models\FiiiPay\MerchantDeposit.cs" />
+    <Compile Include="Models\FiiiPay\MerchantProfile.cs" />
+    <Compile Include="Models\FiiiPay\MerchantWallet.cs" />
+    <Compile Include="Models\FiiiPay\MerchantWalletStatement.cs" />
+    <Compile Include="Models\FiiiPay\MerchantWithdrawal.cs" />
+    <Compile Include="Models\FiiiPay\MerchantWithdrawalFee.cs" />
+    <Compile Include="Models\FiiiPay\Order.cs" />
+    <Compile Include="Models\FiiiPay\OrderStatusTracking.cs" />
+    <Compile Include="Models\FiiiPay\POS.cs" />
+    <Compile Include="Models\FiiiPay\Refund.cs" />
+    <Compile Include="Models\FiiiPay\State.cs" />
+    <Compile Include="Models\FiiiPay\UserAccount.cs" />
+    <Compile Include="Models\FiiiPay\UserDeposit.cs" />
+    <Compile Include="Models\FiiiPay\UserLoginLog.cs" />
+    <Compile Include="Models\FiiiPay\UserProfile.cs" />
+    <Compile Include="Models\FiiiPay\UserWallet.cs" />
+    <Compile Include="Models\FiiiPay\UserWalletStatement.cs" />
+    <Compile Include="Models\FiiiPay\UserWithdrawal.cs" />
+    <Compile Include="Models\FiiiPay\UserWithdrawalFee.cs" />
+    <Compile Include="Models\MemberVerifyRecord.cs" />
+    <Compile Include="Models\MerchantVerifyRecord.cs" />
+    <Compile Include="Models\Module.cs" />
+    <Compile Include="Models\ModulePermission.cs" />
+    <Compile Include="Models\RoleAuthority.cs" />
+    <Compile Include="Models\Salesperson.cs" />
+    <Compile Include="Models\Setting.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\EntityHelper.cs" />
+    <Compile Include="Utils\FileUploader.cs" />
+    <Compile Include="Utils\QueryPager.cs" />
+    <Compile Include="Utils\ReflectionHelper.cs" />
+    <Compile Include="Utils\VerificationCode.cs" />
+    <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\AgentViewModel.cs" />
+    <Compile Include="ViewModels\BillerOrderViewModel.cs" />
+    <Compile Include="ViewModels\ConsumeCountChart.cs" />
+    <Compile Include="ViewModels\CountryViewModel.cs" />
+    <Compile Include="ViewModels\DepositViewModel.cs" />
+    <Compile Include="ViewModels\EditChildRegionModel.cs" />
+    <Compile Include="ViewModels\FeedbackViewModel.cs" />
+    <Compile Include="ViewModels\GatewayAccountViewModel.cs" />
+    <Compile Include="ViewModels\GatewayDeductViewModel.cs" />
+    <Compile Include="ViewModels\ImageMergeEntity.cs" />
+    <Compile Include="ViewModels\InvestorStatementsViewModel.cs" />
+    <Compile Include="ViewModels\InvestorViewModel.cs" />
+    <Compile Include="ViewModels\MasterSettingListModel.cs" />
+    <Compile Include="ViewModels\MemberCountChart.cs" />
+    <Compile Include="ViewModels\MerchantEditInfoModel.cs" />
+    <Compile Include="ViewModels\MerchantInfoListModel.cs" />
+    <Compile Include="ViewModels\MerchantKYCProfileViewModel.cs" />
+    <Compile Include="ViewModels\MerchantProfileAccountViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\POSViewModel.cs" />
+    <Compile Include="ViewModels\PriceInfoViewModel.cs" />
+    <Compile Include="ViewModels\SalespersonViewModel.cs" />
+    <Compile Include="ViewModels\StoreInfoViewModel.cs" />
+    <Compile Include="ViewModels\UserProfileViewModel.cs" />
+    <Compile Include="ViewModels\VerifyRecordViewModel.cs" />
+    <Compile Include="ViewModels\WalletsViewModel.cs" />
+    <Compile Include="ViewModels\WithdrawalViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\bg.png" />
+    <Content Include="Content\Images\Bitmap2x.png" />
+    <Content Include="Content\Images\Bitmap3x.png" />
+    <Content Include="Content\Images\Bitmap.png" />
+    <Content Include="Content\Images\icons.png" />
+    <Content Include="Content\Images\image.png" />
+    <Content Include="Content\Images\loadupbk.png" />
+    <Content Include="Content\Images\login.png" />
+    <Content Include="Content\Images\NoFileFound.png" />
+    <Content Include="Content\Images\progress.png" />
+    <Content Include="Content\Images\Rectangle2x.png" />
+    <Content Include="Content\Images\Rectangle3x.png" />
+    <Content Include="Content\Images\Rectangle4.png" />
+    <Content Include="Content\Images\Shape2x.png" />
+    <Content Include="Content\Images\Shape3x.png" />
+    <Content Include="Content\Images\Shape.png" />
+    <Content Include="Content\page.css" />
+    <Content Include="Content\plugin.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="images\bg-en.jpg" />
+    <Content Include="images\bg-zh.jpg" />
+    <Content Include="images\caret.png" />
+    <Content Include="images\close.png" />
+    <Content Include="images\icons.gif" />
+    <Content Include="images\icons.png" />
+    <Content Include="images\ok.gif" />
+    <Content Include="images\pop-bg.png" />
+    <Content Include="images\spacer.gif" />
+    <Content Include="images\videologo.gif" />
+    <Content Include="Plugins\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Plugins\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Plugins\bootstrap\css\bootstrap.css" />
+    <Content Include="Plugins\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Plugins\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Plugins\bootstrap\js\bootstrap.js" />
+    <Content Include="Plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Plugins\cropper\cropper.common.js" />
+    <Content Include="Plugins\cropper\cropper.css" />
+    <Content Include="Plugins\cropper\cropper.esm.js" />
+    <Content Include="Plugins\cropper\cropper.js" />
+    <Content Include="Plugins\cropper\cropper.min.css" />
+    <Content Include="Plugins\cropper\cropper.min.js" />
+    <Content Include="Plugins\datetimepicker\css\bootstrap-datetimepicker.css" />
+    <Content Include="Plugins\datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Plugins\datetimepicker\js\bootstrap-datetimepicker.js" />
+    <Content Include="Plugins\datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Plugins\echart\echarts.common.min.js" />
+    <Content Include="Plugins\echart\echarts.min.js" />
+    <Content Include="Plugins\echart\echarts.simple.min.js" />
+    <Content Include="Plugins\elektron\elektron-rtl.css" />
+    <Content Include="Plugins\elektron\elektron-rtl.min.css" />
+    <Content Include="Plugins\elektron\elektron.css" />
+    <Content Include="Plugins\elektron\elektron.js" />
+    <Content Include="Plugins\elektron\elektron.min.css" />
+    <Content Include="Plugins\elektron\elektron.min.js" />
+    <Content Include="Plugins\elektron\onoffcanvas.css" />
+    <Content Include="Plugins\elektron\onoffcanvas.js" />
+    <Content Include="Plugins\elektron\onoffcanvas.min.css" />
+    <Content Include="Plugins\elektron\onoffcanvas.min.js" />
+    <Content Include="Plugins\font-awesome\css\font-awesome.css" />
+    <Content Include="Plugins\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Plugins\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Plugins\jqGrid\css\ui.jqgrid-bootstrap-ui.css" />
+    <Content Include="Plugins\jqGrid\css\ui.jqgrid-bootstrap.css" />
+    <Content Include="Plugins\jqGrid\css\ui.jqgrid.css" />
+    <Content Include="Plugins\jqGrid\js\i18n\grid.locale-cn.js" />
+    <Content Include="Plugins\jqGrid\js\i18n\grid.locale-en.js" />
+    <Content Include="Plugins\jqGrid\js\jquery.jqGrid.js" />
+    <Content Include="Plugins\jqGrid\js\jquery.jqGrid.min.js" />
+    <Content Include="Plugins\jsTree\jstree.js" />
+    <Content Include="Plugins\jsTree\jstree.min.js" />
+    <Content Include="Plugins\jsTree\themes\default-dark\32px.png" />
+    <Content Include="Plugins\jsTree\themes\default-dark\40px.png" />
+    <Content Include="Plugins\jsTree\themes\default-dark\style.css" />
+    <Content Include="Plugins\jsTree\themes\default-dark\style.min.css" />
+    <Content Include="Plugins\jsTree\themes\default-dark\throbber.gif" />
+    <Content Include="Plugins\jsTree\themes\default\32px.png" />
+    <Content Include="Plugins\jsTree\themes\default\40px.png" />
+    <Content Include="Plugins\jsTree\themes\default\style.css" />
+    <Content Include="Plugins\jsTree\themes\default\style.min.css" />
+    <Content Include="Plugins\jsTree\themes\default\throbber.gif" />
+    <Content Include="Plugins\mapbox\mapbox-gl-geocoder.css" />
+    <Content Include="Plugins\mapbox\mapbox-gl-geocoder.js" />
+    <Content Include="Plugins\mapbox\mapbox-gl-language.js" />
+    <Content Include="Plugins\mapbox\mapbox-gl.css" />
+    <Content Include="Plugins\mapbox\mapbox-gl.js" />
+    <Content Include="Plugins\metismenu\metisMenu.css" />
+    <Content Include="Plugins\metismenu\metisMenu.js" />
+    <Content Include="Plugins\metismenu\metisMenu.min.css" />
+    <Content Include="Plugins\metismenu\metisMenu.min.js" />
+    <Content Include="Plugins\sweetalert\sweetalert.css" />
+    <Content Include="Plugins\sweetalert\sweetalert.min.js" />
+    <Content Include="Plugins\switch\bootstrap-switch.css" />
+    <Content Include="Plugins\switch\bootstrap-switch.js" />
+    <Content Include="Plugins\switch\bootstrap-switch.min.css" />
+    <Content Include="Plugins\switch\bootstrap-switch.min.js" />
+    <Content Include="Plugins\twbuttons\twbuttons.css" />
+    <Content Include="Plugins\twbuttons\twbuttons.min.css" />
+    <Content Include="Plugins\umeditor\dialogs\emotion\emotion.css" />
+    <Content Include="Plugins\umeditor\dialogs\emotion\emotion.js" />
+    <Content Include="Plugins\umeditor\dialogs\emotion\images\0.gif" />
+    <Content Include="Plugins\umeditor\dialogs\emotion\images\bface.gif" />
+    <Content Include="Plugins\umeditor\dialogs\emotion\images\cface.gif" />
+    <Content Include="Plugins\umeditor\dialogs\emotion\images\fface.gif" />
+    <Content Include="Plugins\umeditor\dialogs\emotion\images\jxface2.gif" />
+    <Content Include="Plugins\umeditor\dialogs\emotion\images\neweditor-tab-bg.png" />
+    <Content Include="Plugins\umeditor\dialogs\emotion\images\tface.gif" />
+    <Content Include="Plugins\umeditor\dialogs\emotion\images\wface.gif" />
+    <Content Include="Plugins\umeditor\dialogs\emotion\images\yface.gif" />
+    <Content Include="Plugins\umeditor\dialogs\formula\formula.css" />
+    <Content Include="Plugins\umeditor\dialogs\formula\formula.html" />
+    <Content Include="Plugins\umeditor\dialogs\formula\formula.js" />
+    <Content Include="Plugins\umeditor\dialogs\formula\images\formula.png" />
+    <Content Include="Plugins\umeditor\dialogs\image\image.css" />
+    <Content Include="Plugins\umeditor\dialogs\image\image.js" />
+    <Content Include="Plugins\umeditor\dialogs\image\images\close.png" />
+    <Content Include="Plugins\umeditor\dialogs\image\images\upload1.png" />
+    <Content Include="Plugins\umeditor\dialogs\image\images\upload2.png" />
+    <Content Include="Plugins\umeditor\dialogs\link\link.js" />
+    <Content Include="Plugins\umeditor\dialogs\map\map.html" />
+    <Content Include="Plugins\umeditor\dialogs\map\map.js" />
+    <Content Include="Plugins\umeditor\dialogs\video\images\center_focus.jpg" />
+    <Content Include="Plugins\umeditor\dialogs\video\images\left_focus.jpg" />
+    <Content Include="Plugins\umeditor\dialogs\video\images\none_focus.jpg" />
+    <Content Include="Plugins\umeditor\dialogs\video\images\right_focus.jpg" />
+    <Content Include="Plugins\umeditor\dialogs\video\video.css" />
+    <Content Include="Plugins\umeditor\dialogs\video\video.js" />
+    <Content Include="Plugins\umeditor\lang\en\en.js" />
+    <Content Include="Plugins\umeditor\lang\en\images\addimage.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\alldeletebtnhoverskin.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\alldeletebtnupskin.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\background.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\button.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\copy.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\deletedisable.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\deleteenable.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\imglabel.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\listbackground.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\localimage.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\music.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\rotateleftdisable.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\rotateleftenable.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\rotaterightdisable.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\rotaterightenable.png" />
+    <Content Include="Plugins\umeditor\lang\en\images\upload.png" />
+    <Content Include="Plugins\umeditor\lang\zh-cn\images\copy.png" />
+    <Content Include="Plugins\umeditor\lang\zh-cn\images\imglabel.png" />
+    <Content Include="Plugins\umeditor\lang\zh-cn\images\localimage.png" />
+    <Content Include="Plugins\umeditor\lang\zh-cn\images\music.png" />
+    <Content Include="Plugins\umeditor\lang\zh-cn\images\upload.png" />
+    <Content Include="Plugins\umeditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="Plugins\umeditor\themes\default\css\umeditor.css" />
+    <Content Include="Plugins\umeditor\themes\default\css\umeditor.min.css" />
+    <Content Include="Plugins\umeditor\themes\default\images\caret.png" />
+    <Content Include="Plugins\umeditor\themes\default\images\close.png" />
+    <Content Include="Plugins\umeditor\themes\default\images\icons.gif" />
+    <Content Include="Plugins\umeditor\themes\default\images\icons.png" />
+    <Content Include="Plugins\umeditor\themes\default\images\ok.gif" />
+    <Content Include="Plugins\umeditor\themes\default\images\pop-bg.png" />
+    <Content Include="Plugins\umeditor\themes\default\images\spacer.gif" />
+    <Content Include="Plugins\umeditor\themes\default\images\videologo.gif" />
+    <Content Include="Plugins\umeditor\third-party\jquery.min.js" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\STIXFontLicense2010.txt" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneral-webfont.svg" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbol-webfont.svg" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbolita-webfont.svg" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralitalic-webfont.svg" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\Symbola.svg" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\mathquill.css" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\mathquill.js" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\mathquill.min.js" />
+    <Content Include="Plugins\umeditor\umeditor.config.js" />
+    <Content Include="Plugins\umeditor\umeditor.js" />
+    <Content Include="Plugins\umeditor\umeditor.min.js" />
+    <Content Include="Plugins\webuploader\Uploader.swf" />
+    <Content Include="Plugins\webuploader\webuploader.css" />
+    <Content Include="Plugins\webuploader\webuploader.custom.js" />
+    <Content Include="Plugins\webuploader\webuploader.custom.min.js" />
+    <Content Include="Plugins\webuploader\webuploader.fis.js" />
+    <Content Include="Plugins\webuploader\webuploader.flashonly.js" />
+    <Content Include="Plugins\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="Plugins\webuploader\webuploader.html5only.js" />
+    <Content Include="Plugins\webuploader\webuploader.html5only.min.js" />
+    <Content Include="Plugins\webuploader\webuploader.js" />
+    <Content Include="Plugins\webuploader\webuploader.min.js" />
+    <Content Include="Plugins\webuploader\webuploader.noimage.js" />
+    <Content Include="Plugins\webuploader\webuploader.noimage.min.js" />
+    <Content Include="Plugins\webuploader\webuploader.nolog.js" />
+    <Content Include="Plugins\webuploader\webuploader.nolog.min.js" />
+    <Content Include="Plugins\webuploader\webuploader.withoutimage.js" />
+    <Content Include="Plugins\webuploader\webuploader.withoutimage.min.js" />
+    <Content Include="Scripts\bo.control.js" />
+    <Content Include="Scripts\bo.fncontrol.js" />
+    <Content Include="Plugins\metismenu\metisMenu.js.map" />
+    <Content Include="Plugins\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Plugins\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Plugins\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Plugins\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Plugins\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Plugins\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Plugins\datetimepicker\less\datetimepicker.less" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneral-webfont.eot" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneral-webfont.ttf" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneral-webfont.woff" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbol-webfont.eot" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbol-webfont.ttf" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbol-webfont.woff" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbolita-webfont.eot" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbolita-webfont.ttf" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralbolita-webfont.woff" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralitalic-webfont.eot" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralitalic-webfont.ttf" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\stixgeneral-bundle\stixgeneralitalic-webfont.woff" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\Symbola.eot" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\Symbola.otf" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\Symbola.ttf" />
+    <Content Include="Plugins\umeditor\third-party\mathquill\font\Symbola.woff" />
+    <Content Include="Plugins\bootstrap\config.json" />
+    <Content Include="Plugins\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Plugins\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Plugins\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Plugins\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Handlers\FileUploadHandler.ashx" />
+    <Content Include="Handlers\BlobHandler.ashx" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Handlers\GetQRCodeHandler.ashx" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Properties\PublishProfiles\Dev.pubxml" />
+    <None Include="Properties\PublishProfiles\HK-Product.pubxml" />
+    <None Include="Properties\PublishProfiles\HK-Test.pubxml" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.messages_zh.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Feedback\Index.cshtml" />
+    <Content Include="Views\Home\LeftMenu.cshtml" />
+    <Content Include="Views\Module\Index.cshtml" />
+    <Content Include="Views\Feedback\Edit.cshtml" />
+    <Content Include="Views\Feedback\Detail.cshtml" />
+    <Content Include="Views\Module\Create.cshtml" />
+    <Content Include="Views\Module\Perimssion.cshtml" />
+    <Content Include="Views\Module\PerimissCreate.cshtml" />
+    <Content Include="Views\Article\Edit.cshtml" />
+    <Content Include="Views\BORole\Index.cshtml" />
+    <Content Include="Views\BORole\Edit.cshtml" />
+    <Content Include="Views\BORole\RolePermission.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\Detail.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\PurchaseHistory\Index.cshtml" />
+    <Content Include="Views\Chart\Index.cshtml" />
+    <Content Include="Views\MasterSettings\Index.cshtml" />
+    <Content Include="Views\OperationLog\Index.cshtml" />
+    <Content Include="Views\UserWithdrawal\Index.cshtml" />
+    <Content Include="Views\UserManage\Index.cshtml" />
+    <Content Include="Views\Salesperson\Index.cshtml" />
+    <Content Include="Views\Salesperson\Edit.cshtml" />
+    <Content Include="Views\POSInfoManage\Index.cshtml" />
+    <Content Include="Views\POSInfoManage\Detail.cshtml" />
+    <Content Include="Views\Agent\Index.cshtml" />
+    <Content Include="Views\POSInfoManage\Edit.cshtml" />
+    <Content Include="Views\POSInfoManage\POSAccount.cshtml" />
+    <Content Include="Views\POSAccountManage\Index.cshtml" />
+    <Content Include="Views\Home\HomePage.cshtml" />
+    <Content Include="Views\Agent\Edit.cshtml" />
+    <Content Include="Views\UserProfile\Index.cshtml" />
+    <Content Include="Views\MerchantWithdrawal\Index.cshtml" />
+    <Content Include="Views\POSAccountManage\Bind.cshtml" />
+    <Content Include="Views\UserProfile\Detail.cshtml" />
+    <Content Include="Views\UserProfile\Verify.cshtml" />
+    <Content Include="Views\UserResidence\Index.cshtml" />
+    <Content Include="Views\UserResidence\Detail.cshtml" />
+    <Content Include="Views\UserResidence\Verify.cshtml" />
+    <Content Include="Views\MerchantProfile\Index.cshtml" />
+    <Content Include="Views\MerchantProfile\Detail.cshtml" />
+    <Content Include="Views\MerchantProfile\Verify.cshtml" />
+    <Content Include="Views\UserManage\UserSet.cshtml" />
+    <Content Include="Views\UserManage\Detail.cshtml" />
+    <Content Include="Views\CryptoCur\Index.cshtml" />
+    <Content Include="Views\CryptoCur\Edit.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\MerchantSetting\Index.cshtml" />
+    <Content Include="Views\UserSetting\Index.cshtml" />
+    <Content Include="Views\UserManage\ResetPassword.cshtml" />
+    <Content Include="Views\MerchantKYCProfile\Index.cshtml" />
+    <Content Include="Views\MerchantKYCProfile\Detail.cshtml" />
+    <Content Include="Views\MerchantKYCProfile\Verify.cshtml" />
+    <Content Include="Views\AppVersions\Index.cshtml" />
+    <Content Include="Views\AppVersions\Edit.cshtml" />
+    <Content Include="Views\POSInfoManage\ResetPIN.cshtml" />
+    <Content Include="Views\POSSNManage\Index.cshtml" />
+    <Content Include="Views\POSSNManage\Create.cshtml" />
+    <Content Include="Views\POSSNManage\Import.cshtml" />
+    <Content Include="Views\UserManage\UserAccount.cshtml" />
+    <Content Include="Views\CustomerManage\Index.cshtml" />
+    <Content Include="Views\TelephoneService\Index.cshtml" />
+    <Content Include="Views\TelephoneService\Edit.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Country\Detail.cshtml" />
+    <Content Include="Views\Country\Edit.cshtml" />
+    <Content Include="Views\InvestorManage\Index.cshtml" />
+    <Content Include="Views\InvestorManage\Edit.cshtml" />
+    <Content Include="Views\InvestorManage\Deposit.cshtml" />
+    <Content Include="Views\InvestorManage\ResetPassword.cshtml" />
+    <Content Include="Views\InvestorManage\ResetPIN.cshtml" />
+    <Content Include="Views\InvestorStatements\Index.cshtml" />
+    <Content Include="Views\Currency\Edit.cshtml" />
+    <Content Include="Views\Currency\Index.cshtml" />
+    <Content Include="Views\Advertising\Edit.cshtml" />
+    <Content Include="Views\Advertising\Index.cshtml" />
+    <Content Include="Views\MerchantDeposit\Index.cshtml" />
+    <Content Include="Views\POSInfoManage\QRCode.cshtml" />
+    <Content Include="Views\UserDeposit\Index.cshtml" />
+    <Content Include="Views\VerifyRecord\Index.cshtml" />
+    <Content Include="Views\POSSNManage\SetWhiteLabel.cshtml" />
+    <Content Include="Views\AdvanceOrder\Index.cshtml" />
+    <Content Include="Views\AdvanceOrder\Edit.cshtml" />
+    <Content Include="Views\POSSNManage\ImportWhiteLabel.cshtml" />
+    <Content Include="Views\BillerOrder\Index.cshtml" />
+    <Content Include="Views\BillerOrder\Edit.cshtml" />
+    <Content Include="Views\FileManage\Index.cshtml" />
+    <Content Include="Views\GatewayManage\Index.cshtml" />
+    <Content Include="Views\GatewayManage\ResetPassword.cshtml" />
+    <Content Include="Views\GatewayManage\Edit.cshtml" />
+    <Content Include="Views\GatewayManage\Detail.cshtml" />
+    <Content Include="Views\GatewayManage\Deduct.cshtml" />
+    <Content Include="Views\GatewayManage\DeductStatements.cshtml" />
+    <Content Include="Views\PriceInfo\Index.cshtml" />
+    <Content Include="Views\PriceInfo\Edit.cshtml" />
+    <Content Include="Views\StoreType\Index.cshtml" />
+    <Content Include="Views\StoreType\Edit.cshtml" />
+    <Content Include="Views\StoreManage\Index.cshtml" />
+    <Content Include="Views\StoreManage\StoreSet.cshtml" />
+    <Content Include="Views\StoreManage\Detail.cshtml" />
+    <Content Include="Views\StoreManage\Verify.cshtml" />
+    <Content Include="Views\FiiiPayMerchant\Setting.cshtml" />
+    <Content Include="Views\FiiiPayMerchant\Index.cshtml" />
+    <Content Include="Views\FiiiPayMerchant\Edit.cshtml" />
+    <Content Include="Views\FiiiPayMerchant\Add.cshtml" />
+    <Content Include="Views\FiiiPayMerchant\UploadIdentity.cshtml" />
+    <Content Include="Views\FiiiPayMerchant\UploadFileId.cshtml" />
+    <Content Include="Views\FiiiPayMerchant\UploadOwnerFigures.cshtml" />
+    <Content Include="Views\StorePaySetting\Index.cshtml" />
+    <Content Include="Views\StorePaySetting\Edit.cshtml" />
+    <Content Include="Views\StoreBanner\Index.cshtml" />
+    <Content Include="Views\StoreBanner\Add.cshtml" />
+    <Content Include="Views\StoreBanner\UploadPicture.cshtml" />
+    <Content Include="Views\StoreBanner\Edit.cshtml" />
+    <Content Include="Views\FiiiPayMerchant\Detail.cshtml" />
+    <Content Include="Views\FiiiPayMerchant\Verify.cshtml" />
+    <Content Include="Views\RegionManage\Index.cshtml" />
+    <Content Include="Views\RegionManage\Add.cshtml" />
+    <Content Include="Views\RegionManage\Edit.cshtml" />
+    <Content Include="Views\RegionManage\Detail.cshtml" />
+    <Content Include="Views\RegionManage\AddChildRegion.cshtml" />
+    <Content Include="Views\RegionManage\_ChildRegions.cshtml" />
+    <Content Include="Views\POSAccountManage\ChangeCellphone.cshtml" />
+    <None Include="Web.Product.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Plugins\metismenu\fonts\" />
+    <Folder Include="Views\Base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Business\FiiiPay.Business\FiiiPay.Business.csproj">
+      <Project>{ced4c341-36c6-4002-801e-d75d4a5357c8}</Project>
+      <Name>FiiiPay.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Business\FiiiPay.Foundation.Business\FiiiPay.Foundation.Business.csproj">
+      <Project>{a5fdb5b0-ad1b-4663-baae-cf51c452f134}</Project>
+      <Name>FiiiPay.Foundation.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Business\FiiiPay.Framework.Component\FiiiPay.Framework.Component.csproj">
+      <Project>{ade6fd04-164f-473b-b2d3-68a9d659be04}</Project>
+      <Name>FiiiPay.Framework.Component</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\FiiiPay.Data\FiiiPay.Data.csproj">
+      <Project>{9BB9BD0B-C126-4C9F-8E29-5BE478A19B2B}</Project>
+      <Name>FiiiPay.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\FiiiPay.Foundation.Data\FiiiPay.Foundation.Data.csproj">
+      <Project>{2355d64f-9036-478c-875a-6b57c8e59705}</Project>
+      <Name>FiiiPay.Foundation.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\FiiiPOS.Data.Agents\FiiiPOS.Data.Agents.csproj">
+      <Project>{d7f56d4e-5041-4d31-8b83-8dc21059a99d}</Project>
+      <Name>FiiiPOS.Data.Agents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\FiiiPay.Entities\FiiiPay.Entities.csproj">
+      <Project>{68b13fba-8c45-450c-9eae-c9fecbce5b84}</Project>
+      <Name>FiiiPay.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\FiiiPay.Foundation.Entities\FiiiPay.Foundation.Entities.csproj">
+      <Project>{32c340cf-f96a-4678-b3a8-c4a850632159}</Project>
+      <Name>FiiiPay.Foundation.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Product|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49379</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49379/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

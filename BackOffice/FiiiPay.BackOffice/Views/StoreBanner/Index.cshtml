@@ -1,0 +1,111 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    bool createPermission = permissionCodeList.Contains("StoreBannerCreate");
+    string updatePermission = permissionCodeList.Contains("StoreBannerUpdate") ? "1" : "0";
+    string deletePermission = permissionCodeList.Contains("StoreBannerDelete") ? "1" : "0";
+    string setTopPermission = permissionCodeList.Contains("StoreBannerUpdate") ? "1" : "0";
+}
+
+<div class="gridSearchTool">
+    @if (createPermission)
+    {
+        <button type="button" class="btn btn-create" onclick="AddBanner()">添加</button>
+    }
+</div>
+<table id="storebannergrid"></table>
+<div id="storebannergridPager"></div>
+
+<script>
+    $(function () {
+        var colModel = new Array({ name: 'Id', index: 'Id', hidden: true },
+            { name: 'Title', index: 'Title', width: 120, align: 'left', sortable: false },
+            { name: 'LinkUrl', index: 'LinkUrl', width: 200, align: 'left', sortable: false },
+            { name: 'CountryName', index: 'CountryName', width: 80, align: 'center', sortable: false },
+            { name: 'AliveTime', index: 'AliveTime', width: 200, align: 'center', sortable: false },
+            { name: 'Status', index: 'Status', width: 60, align: 'center', sortable: false },
+            { name: 'Timestamp', index: 'Timestamp', width: 80, align: 'center', sortable: false },
+            { name: 'Options', index: 'Options', width: 100, align: 'center', sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    var btnHtml = '';
+                    if ("@updatePermission" == "1") {
+                        btnHtml += '<a href="javascript:" class="btn btn-primary btn-xs" onclick="EditBanner(\'' + rowdata.Id + '\')" style="margin-left:8px;">修改</a>';
+                    }
+                    if ("@deletePermission" == "1") {
+                        btnHtml += '<a href="javascript:" class="btn btn-primary btn-xs" onclick="DeleteBanner(\'' + rowdata.Id + '\')" style="margin-left:8px;">删除</a>';
+                    }
+                    if ("@setTopPermission" == "1") {
+                        btnHtml += '<a href="javascript:" class="btn btn-primary btn-xs" onclick="SetTop(\'' + rowdata.Id + '\')" style="margin-left:8px;">置顶</a>';
+                    }
+                    return btnHtml;
+                }});
+
+        $("#storebannergrid").BoGrid({
+            url: '/StoreBanner/LoadData',
+            colNames: ["Id", "标题", "链接", "国家", "生效时间","状态","添加时间","操作"],
+            colModel: colModel,
+            pager: '#storebannergridPager',
+        });
+    });
+
+    function refreshPage() {
+        $("#storebannergrid").trigger("reloadGrid");
+    }
+
+    function AddBanner() {
+        $.opentabpage("/StoreBanner/Add", "添加轮播图", 0);
+    }
+    function EditBanner(id) {
+        $.opentabpage("/StoreBanner/Edit?id=" + id, "修改轮播图", id);
+    }
+    function SetTop(id) {
+        $.ajax({
+            url: '/StoreBanner/SetTop',
+            data: { id: id },
+            dataType: "json",
+            success: function (context) {
+                if (context.Status) {
+                    swal({
+                        title: "设置成功",
+                        type: "success"
+                    }, function () {
+                        $("#storebannergrid").trigger('reloadGrid');
+                    });
+                }
+                else {
+                    swal({
+                        title: "设置失败",
+                        type: "error",
+                        text: context.Message
+                    });
+                }
+            }
+        })
+    }
+    function DeleteBanner(id) {
+        $.swconfirm("确定删除这条记录？", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: '/StoreBanner/Delete',
+                    data: { id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "删除成功",
+                                type: "success"
+                            }, function () {
+                                $("#storebannergrid").trigger('reloadGrid');
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "删除失败",
+                                type: "error",
+                                text: context.Message
+                            });
+                        }
+                    }
+                })
+            }
+        });
+    }
+</script>

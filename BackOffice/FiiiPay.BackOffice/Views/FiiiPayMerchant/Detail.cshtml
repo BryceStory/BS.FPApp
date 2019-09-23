@@ -1,0 +1,320 @@
+﻿@using FiiiPay.BackOffice.Models;
+@model MerchantInformations
+@{
+    List<StoreTypes> storeTypeList = ViewBag.StoreTypeList;
+    List<MerchantCategorys> categoryList = ViewBag.MerchantStoreTypeList;
+    List<MerchantSupportCryptos> supportCryptoList = ViewBag.MerchantSupportCryptoList;
+    FiiipayMerchantProfiles profile = ViewBag.FiiipayMerchantProfile;
+    List<FiiipayMerchantVerifyRecords> recordList = ViewBag.FiiipayMerchantVerifyRecordList;
+    List<MerchantOwnersFigures> figureList = ViewBag.OwnersFigure;
+}
+<div class="pagebody">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="ApplicantName">申请人</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">
+                    @Html.HiddenFor(t => t.Id)
+                    @Html.DisplayTextFor(t => t.ApplicantName)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="FiiiPayAccount">FiiiPay帐号</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">
+                    @ViewBag.FiiiPayAccountName
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="InviteCode">邀请码</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">
+                    @ViewBag.InviteCode
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="ApplicantName">商户名称</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">
+                    @Html.DisplayTextFor(t => t.MerchantName)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="MerchantCategorys">商户类别</label>
+            <div class="col-lg-6 col-sm-8">
+                <ul class="list-inline specialservicelist">
+                    @foreach (var st in storeTypeList)
+                    {
+                        var hadCategory = categoryList.Any(t => t.Category == st.Id);
+                        if (hadCategory)
+                        {
+                            <li>
+                                <span>@st.Name_CN (@st.Name_EN)</span>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="SupportCoins">收款币种</label>
+            <div class="col-lg-6 col-sm-8">
+                <ul class="list-inline specialservicelist">
+                    @foreach (var coin in supportCryptoList)
+                    {
+                        <li>
+                            <span>@coin.CryptoCode</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="WeekTxt">营业时间</label>
+            <div class="col-lg-6 col-sm-8">
+                <pre>@Model.WeekTxt</pre>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="SpecialService">服务/特色/商品</label>
+            <div class="col-lg-6 col-sm-8">
+                <ul class="list-inline specialservicelist">
+                    @if (!string.IsNullOrEmpty(Model.Tags))
+                    {
+                        var tags = Model.Tags.Split(',');
+                        for (int i = 0; i < tags.Length; i++)
+                        {
+                            <li>
+                                <span>@tags[i]</span>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="Phone">商家电话</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">
+                    @Html.DisplayTextFor(t => t.Phone)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label">所在国家</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">@ViewBag.CountryName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="Address">详细地址</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">
+                    @Html.DisplayTextFor(t => t.Address)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label">地图坐标</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">
+                    <span>[@Model.Lat,@Model.Lng]</span>
+                    <span style="margin-left:10px;"><a href="javascript:" onclick="ToggleMap()">查看/隐藏地图</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group hidden">
+            <div class="col-sm-8 col-lg-6 col-sm-offset-2 col-lg-offset-2">
+                <div id='map' style="height:350px;"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="Introduce">商家介绍</label>
+            <div class="col-lg-6 col-sm-8">
+                <pre>@Model.Introduce</pre>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="LicenseNo">营业执照号</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">
+                    @(profile?.LicenseNo)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label">营业执照照片</label>
+            <div class="col-lg-6 col-sm-8">
+                @{
+                    string imgIdentityUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}", profile?.BusinessLicenseImage);
+                }
+                <a href="javascript:" onclick="ShowBigImage(this,'@profile?.BusinessLicenseImage')">
+                    <img src="@imgIdentityUrl" class="imgbordered" />
+                </a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label">店面照片</label>
+            <div class="col-lg-6 col-sm-8">
+                @{
+                    string imgFileIdUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}", Model.FileId);
+                }
+                <a href="javascript:" onclick="ShowBigImage(this,'@Model.FileId')">
+                    <img src="@imgFileIdUrl" class="imgbordered" />
+                </a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label">店铺环境图</label>
+            <div class="col-lg-10 col-sm-10">
+                <ul class="list-inline" id="storeOwnerFigureList">
+                    @if (figureList != null)
+                    {
+                        foreach (var item in figureList)
+                        {
+                            string imgFigureUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}", item.FileId);
+                            <li>
+                                <a href="javascript:" onclick="ShowBigImage(this,'@item.FileId')">
+                                    <img src="@imgFigureUrl" class="imgbordered" />
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <ul class="pageitem">
+            <li>审核记录</li>
+        </ul>
+        <div id="auditList">
+            @if (recordList != null)
+            {
+                foreach (var item in recordList)
+                {
+                    if (item.VerifyStatus == FiiiPay.Entities.Enums.VerifyStatus.Certified)
+                    {
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">@(item.VerifyTime?.ToLocalTime().ToString("yyyy-MM-dd HH:mm"))</label>
+                            <div class="col-lg-6 col-sm-8">
+                                <div class="form-control noborder">
+                                    <p class="text-success">通过</p>
+                                    <p>审核人:@item.Auditor</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else if (item.VerifyStatus == FiiiPay.Entities.Enums.VerifyStatus.Disapproval)
+                    {
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">@(item.VerifyTime?.ToLocalTime().ToString("yyyy-MM-dd HH:mm"))</label>
+                            <div class="col-lg-6 col-sm-8">
+                                <div class="form-control noborder">
+                                    <p class="text-danger">不通过</p>
+                                    <p>审核人: @item.Auditor</p>
+                                    <p>原因: @item.Message</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else if (item.VerifyStatus == FiiiPay.Entities.Enums.VerifyStatus.UnderApproval)
+                    {
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">@item.CreateTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</label>
+                            <div class="col-lg-6 col-sm-8">
+                                <div class="form-control noborder">
+                                    审核中
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </form>
+</div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZmlpaXBheTIwMTkiLCJhIjoiY2pzZmd4OG44MDhxNzN5cHV1YzZpZG85ZCJ9.Dz091UTbErxtERwOXSWTmA';
+    var lng = Number(@Model.Lng);
+    var lat = Number(@Model.Lat);
+    var r = 0;
+    function ToggleMap() {
+        var $map = $('#map').closest('.form-group');
+        var mapload = $map.data("mapload");
+        var mapLoaded = mapload == "1";
+        var mapHidden = $map.hasClass('hidden');
+        if (mapHidden) {
+            $map.removeClass('hidden');
+        }
+        else {
+            $map.addClass("hidden");
+        }
+        if (!mapLoaded) {
+            var map = new mapboxgl.Map({
+                container: 'map', // container id
+                style: 'mapbox://styles/mapbox/streets-v10',
+                center: [lng, lat],
+                zoom: 13 // starting zoom
+            });
+            map.addControl(new MapboxLanguage());
+            var marker = new mapboxgl.Marker({
+                draggable: false
+            });
+            marker.setLngLat([lng, lat]).addTo(map);
+            $map.data("mapload", "1");
+        }
+        setiframeheight();
+    }
+    function ShowBigImage(obj, pageid) {
+        r = 0;
+        var sh = $(window.parent).scrollTop();
+        var modaldiv = $('<div class="modal" id="bootstrap-modal-' + pageid + '" tabindex="-1" role="dialog" aria-labelledby="bootstrap-modal-label"></div>');
+        var modalhtml = '<div class="modal-dialog modal-lg modal-content-page" role="document" style="top:' + sh +'px;">';
+        modalhtml += '<img onclick="Rotate(this)" src=' + $(obj).find("img").attr("src") + ' onclick="Rotate(this)" style="max-width:800px;max-height:600px;" />';
+        modalhtml += '</div>';
+        modaldiv.append(modalhtml);
+        $("body").append(modaldiv);
+        modaldiv.on('hide.bs.modal', function (e) {
+            $(this).remove();
+        });
+        modaldiv.modal({ keyboard: true });
+    }
+
+    function Rotate(obj) {
+        r += 90;
+        $(obj).css('transform', 'rotate(' + r + 'deg)');
+    }
+</script>
+<style>
+    img.imgbordered {
+        height: 200px;
+        border: solid 1px #ddd;
+    }
+    #storeOwnerFigureList > li {
+        width: 300px;
+        height: 200px;
+        padding: 0;
+        margin-right: 15px;
+        position: relative;
+    }
+
+        #storeOwnerFigureList > li img {
+            max-width: 100%;
+            height: 200px;
+        }
+    #auditList {
+        margin-bottom: 40px;
+    }
+        #auditList>.form-group {
+            margin-bottom: 0;
+        }
+        #auditList .noborder {
+            height: auto;
+        }
+        #auditList .noborder p{
+            margin-bottom:5px;
+        }
+</style>

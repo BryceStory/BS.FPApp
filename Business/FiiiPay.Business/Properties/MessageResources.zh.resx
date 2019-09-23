@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountNotExist" xml:space="preserve">
+    <value>账号不存在</value>
+  </data>
+  <data name="CurrencyForbidden" xml:space="preserve">
+    <value>该币异常，相关功能暂不能使用，如有疑问请联系客服</value>
+  </data>
+  <data name="ErrorCryptoCode" xml:space="preserve">
+    <value>错误的加密币种</value>
+  </data>
+  <data name="FiiiExAccountNotExist" xml:space="preserve">
+    <value>FiiiEx帐号找不到</value>
+  </data>
+  <data name="FiiiPayCantWithdrawToFiiiPOS" xml:space="preserve">
+    <value>FiiiPay用户不能提币到FiiiPOS，请使用扫一扫、付款码等功能进行支付、交易</value>
+  </data>
+  <data name="PINMaxError" xml:space="preserve">
+    <value>PIN码已连续错误5次，暂时冻结，请30分钟后再试</value>
+  </data>
+  <data name="PINError" xml:space="preserve">
+    <value>PIN码错误，你还可以输入{0}次</value>
+  </data>
+  <data name="SecurityValidateError" xml:space="preserve">
+    <value>验证信息错误，你还有{0}次机会</value>
+  </data>
+  <data name="SecurityWrongTooManyTimes" xml:space="preserve">
+    <value>验证次数超过限制，请{0}分钟后重试</value>
+  </data>
+  <data name="TransferAmountOverflow" xml:space="preserve">
+    <value>单笔交易额需低于{0}{1}</value>
+  </data>
+  <data name="TransferAmountTooSmall" xml:space="preserve">
+    <value>低于最小转账金额</value>
+  </data>
+  <data name="TransferBalanceLow" xml:space="preserve">
+    <value>输入数额超过余额</value>
+  </data>
+  <data name="TransferForbidden" xml:space="preserve">
+    <value>账号异常，该功能暂不能使用，请联系客服解决</value>
+  </data>
+  <data name="TransferToSelf" xml:space="preserve">
+    <value>不能给自己转账</value>
+  </data>
+  <data name="UploadFailed" xml:space="preserve">
+    <value>上传失败</value>
+  </data>
+  <data name="InvalidDataFormat" xml:space="preserve">
+    <value>不合法的数据格式</value>
+  </data>
+  <data name="MinWidrawalError" xml:space="preserve">
+    <value>不能低于最低提币量</value>
+  </data>
+  <data name="ChangSuccess" xml:space="preserve">
+    <value>修改成功</value>
+  </data>
+  <data name="ArrivalAmountError" xml:space="preserve">
+    <value>到账数量不能为零或者负数</value>
+  </data>
+  <data name="IncorrectOriginalPassword" xml:space="preserve">
+    <value>原密码不正确</value>
+  </data>
+  <data name="IncorrectOriginalEmailAddress" xml:space="preserve">
+    <value>原邮箱地址不正确</value>
+  </data>
+  <data name="MerchantNotSupperCrypto" xml:space="preserve">
+    <value>商家不支持该币种</value>
+  </data>
+  <data name="CountryNotFound" xml:space="preserve">
+    <value>国家不存在</value>
+  </data>
+  <data name="CountryIsRequired" xml:space="preserve">
+    <value>国家不能为空</value>
+  </data>
+  <data name="AddressNotExist" xml:space="preserve">
+    <value>地址不存在</value>
+  </data>
+  <data name="AddAddressSuccess" xml:space="preserve">
+    <value>地址添加成功</value>
+  </data>
+  <data name="LenLimit" xml:space="preserve">
+    <value>备注限制50字符</value>
+  </data>
+  <data name="PasswordIsRequired" xml:space="preserve">
+    <value>密码不能为空</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>密码错误</value>
+  </data>
+  <data name="WrongPassword_Lock" xml:space="preserve">
+    <value>尝试登录次数过多，请{0}分钟后再试登录</value>
+  </data>
+  <data name="NotVerifiyGA" xml:space="preserve">
+    <value>尚未绑定谷歌验证</value>
+  </data>
+  <data name="NotBindMail" xml:space="preserve">
+    <value>尚未设置过邮箱</value>
+  </data>
+  <data name="EmailAlredaySet" xml:space="preserve">
+    <value>已经设置过邮箱</value>
+  </data>
+  <data name="PINHasSet" xml:space="preserve">
+    <value>您已经设置过PIN码</value>
+  </data>
+  <data name="LenLimit1000" xml:space="preserve">
+    <value>意见反馈限制1000个字符以内</value>
+  </data>
+  <data name="PhoneNumberIsRequired" xml:space="preserve">
+    <value>手机号不能为空</value>
+  </data>
+  <data name="SMSVerifCodeError" xml:space="preserve">
+    <value>手机短信验证码错误</value>
+  </data>
+  <data name="InvalidWithdrawalAddress" xml:space="preserve">
+    <value>提币地址不是有效的地址</value>
+  </data>
+  <data name="WithdrawalToSelfError" xml:space="preserve">
+    <value>提币地址不能是自己账户的地址</value>
+  </data>
+  <data name="LenLimit300" xml:space="preserve">
+    <value>提币地址限制300个字符以内</value>
+  </data>
+  <data name="WithdrawalErrorRemark" xml:space="preserve">
+    <value>该订单交易出现异常，已暂被工作人员拒绝，请联系客服</value>
+  </data>
+  <data name="NewPINOldPINDifferent" xml:space="preserve">
+    <value>新PIN码不能与旧PIN码一致</value>
+  </data>
+  <data name="NewPasswordHasUse" xml:space="preserve">
+    <value>新密码不能与旧密码相同</value>
+  </data>
+  <data name="NewMailOldSame" xml:space="preserve">
+    <value>新邮箱不可与旧邮箱相同。</value>
+  </data>
+  <data name="InvalidQRCode" xml:space="preserve">
+    <value>无效二维码，请重新扫描</value>
+  </data>
+  <data name="MobilePhoneHasReg" xml:space="preserve">
+    <value>该手机号已注册过FiiiPay，请重新输入新的手机号。</value>
+  </data>
+  <data name="InvalidFormat" xml:space="preserve">
+    <value>格式不正确</value>
+  </data>
+  <data name="EmailHasBind" xml:space="preserve">
+    <value>该邮箱已绑定过FiiiPay，请重新输入。</value>
+  </data>
+  <data name="RegSuccess" xml:space="preserve">
+    <value>注册成功</value>
+  </data>
+  <data name="AccountNotMatch" xml:space="preserve">
+    <value>用户不匹配</value>
+  </data>
+  <data name="AccountNotFound" xml:space="preserve">
+    <value>用户不存在</value>
+  </data>
+  <data name="WithdrawalDisabled" xml:space="preserve">
+    <value>用户已被禁止提币</value>
+  </data>
+  <data name="PaymentForbidden" xml:space="preserve">
+    <value>用户已被禁止消费</value>
+  </data>
+  <data name="SystemError" xml:space="preserve">
+    <value>系统错误</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>网络异常，请重新尝试</value>
+  </data>
+  <data name="SMSLimit" xml:space="preserve">
+    <value>发送验证码次数超出限制，请明日再试</value>
+  </data>
+  <data name="OrderNotFound" xml:space="preserve">
+    <value>订单不存在</value>
+  </data>
+  <data name="OrderComplated" xml:space="preserve">
+    <value>订单已完成或者已退款，请不要重复支付</value>
+  </data>
+  <data name="OrderHasExpired" xml:space="preserve">
+    <value>订单已过期</value>
+  </data>
+  <data name="OrderRefund" xml:space="preserve">
+    <value>订单退款通知</value>
+  </data>
+  <data name="MerchantExceptionTransClose" xml:space="preserve">
+    <value>该商家异常，暂不支持交易</value>
+  </data>
+  <data name="AccountDisabled" xml:space="preserve">
+    <value>该账号异常，暂不能登录，请联系客服解决</value>
+  </data>
+  <data name="AccountAlreadyExist" xml:space="preserve">
+    <value>账号 {0} 已经存在，无需重复注册</value>
+  </data>
+  <data name="AnotherDeviceLogin" xml:space="preserve">
+    <value>账户已在别的设备登录</value>
+  </data>
+  <data name="AccountLocked" xml:space="preserve">
+    <value>账户已锁定</value>
+  </data>
+  <data name="AccountHasBeenVerification" xml:space="preserve">
+    <value>资料已认证或者正在审核</value>
+  </data>
+  <data name="InvalidInvitation" xml:space="preserve">
+    <value>邀请码错误，请重新输入</value>
+  </data>
+  <data name="EmailVerificationError" xml:space="preserve">
+    <value>邮箱验证码错误</value>
+  </data>
+  <data name="AmountGreater" xml:space="preserve">
+    <value>金额必须大于零</value>
+  </data>
+  <data name="VerificationInfoExpired" xml:space="preserve">
+    <value>验证信息过期</value>
+  </data>
+  <data name="VerificationInfoError" xml:space="preserve">
+    <value>验证信息错误</value>
+  </data>
+  <data name="VerificationCodeRequired" xml:space="preserve">
+    <value>验证码不能为空</value>
+  </data>
+  <data name="VerificationCodeExpired" xml:space="preserve">
+    <value>验证码已过期</value>
+  </data>
+  <data name="VerificationCodeError" xml:space="preserve">
+    <value>验证码错误，请重新输入</value>
+  </data>
+  <data name="VerificationMaxLimit" xml:space="preserve">
+    <value>获取验证码次数达到上限</value>
+  </data>
+  <data name="IdentityUsedOverLimit" xml:space="preserve">
+    <value>证件号使用次数超限</value>
+  </data>
+  <data name="TodayWidrawalLimit" xml:space="preserve">
+    <value>今日提币达到限额</value>
+  </data>
+  <data name="MonthWithdrawalLimit" xml:space="preserve">
+    <value>本月提币达到限额</value>
+  </data>
+  <data name="MerchantAccountDisabled" xml:space="preserve">
+    <value>对方账号异常，交易取消</value>
+  </data>
+  <data name="PINInvalidFormat" xml:space="preserve">
+    <value>PIN格式不正确</value>
+  </data>
+  <data name="ToAccountTransferForbidden" xml:space="preserve">
+    <value>对方账户账号异常，该功能暂不能使用，请联系客服解决</value>
+  </data>
+  <data name="PaytoSelf" xml:space="preserve">
+    <value>不能付款到自己账户</value>
+  </data>
+  <data name="RedPocket_Expired" xml:space="preserve">
+    <value>红包已过期</value>
+  </data>
+  <data name="RedPocket_HasComplet" xml:space="preserve">
+    <value>红包已经领完</value>
+  </data>
+  <data name="RedPocket_HasReceive" xml:space="preserve">
+    <value>你已领取过该红包，不能重复领取</value>
+  </data>
+  <data name="RedPocket_MaxAmount" xml:space="preserve">
+    <value>单个红包数量不可超过{0} {1}</value>
+  </data>
+  <data name="RedPocket_MaxCount" xml:space="preserve">
+    <value>红包个数最多{0}个</value>
+  </data>
+  <data name="RedPocket_MaxError" xml:space="preserve">
+    <value>已错误10次，请(0)后再试</value>
+  </data>
+  <data name="RedPocket_MaxMessage" xml:space="preserve">
+    <value>祝福语最多46个字</value>
+  </data>
+  <data name="RedPocket_MinAmount" xml:space="preserve">
+    <value>数量最少要发{0} {1}</value>
+  </data>
+  <data name="RedPocket_PassCodeError" xml:space="preserve">
+    <value>已错误{0}次，再错{1}次将禁止输入口令6小时</value>
+  </data>
+  <data name="RedPocket_PassCodeErrorMaxCount" xml:space="preserve">
+    <value>已错误10次，请{0}后重试</value>
+  </data>
+  <data name="MerchantExpenseNotAllowed" xml:space="preserve">
+    <value>商家交易功能异常，交易取消</value>
+  </data>
+  <data name="InvalidCellphone" xml:space="preserve">
+    <value>虚拟号不可注册</value>
+  </data>
+  <data name="MerchantFiiipayAbnormal" xml:space="preserve">
+    <value>商家FiiiPay账号异常，交易取消</value>
+  </data>
+  <data name="MerchantReceiveNotAllowed" xml:space="preserve">
+    <value>商家收款功能异常，交易取消</value>
+  </data>
+  <data name="MerchantNotPublic" xml:space="preserve">
+    <value>该商家已下架</value>
+  </data>
+  <data name="InviteCodeCanotInputSelf" xml:space="preserve">
+    <value>你填写的是自己的邀请码，邀请人不可以是自己哦!</value>
+  </data>
+  <data name="RedPocket_ReceiveExpired" xml:space="preserve">
+    <value>您好，非常抱歉，红包口令已过期或失效。</value>
+  </data>
+  <data name="InsufficientBalance" xml:space="preserve">
+    <value>余额不足</value>
+  </data>
+  <data name="CountryRequestForbbiden" xml:space="preserve">
+    <value>您所在的区域正在维护中</value>
+  </data>
+  <data name="InvalidParameters" xml:space="preserve">
+    <value>无效的请求参数</value>
+  </data>
+</root>

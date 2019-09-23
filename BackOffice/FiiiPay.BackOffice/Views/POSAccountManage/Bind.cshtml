@@ -1,0 +1,84 @@
+﻿@using FiiiPay.BackOffice.Models
+@model MerchantAccounts
+
+<div class="pagebody" style="width:500px;">
+    <form id="formEdit" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Username</label>
+            <div class="col-sm-9">
+                <label>@Model.Username</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required" for="POSSN">POS SN</label>
+            <div class="col-sm-9">
+                <input id="POSSN" name="POSSN" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required" for="confirmSN">Confirm SN</label>
+            <div class="col-sm-9">
+                <input id="confirmSN" name="confirmSN" class="form-control" />
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="SaveSN('@Model.Id')">Submit</button>
+    </form>
+</div>
+<script>
+    $(function () {
+        $('#formEdit').jqValidate({
+            errorElement: 'span',
+            errorClass: 'help-inline',
+            focusInvalid: true,
+            rules: {
+                POSSN: { required: true },
+                confirmSN: { required: true, equalTo: "#POSSN" }
+            },
+            messages: {
+                POSSN: {
+                    required: "Please enter SN.",
+                },
+                confirmSN: {
+                    required: "Please enter confirm SN.",
+                    equalTo: "SN are not consistent, please input the SN again!"
+                }
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('info').addClass('has-error');
+            },
+            success: function (e) {
+                $(e).closest('.form-group').removeClass('has-error').addClass('info');
+                $(e).remove();
+            }
+        });
+    });
+
+    function SaveSN(id) {
+        if ($("#POSSN").val() != $("#confirmSN").val()) {
+            swal("User input SN and confirm SN must be consistent");
+            return;
+        }
+        var checkResult = $('#formEdit').valid();
+        if (checkResult) {
+            $.ajax({
+                url: "/POSAccountManage/SaveSN",
+                type: "post",
+                data: { merchantId: id, newSN: $("#confirmSN").val() },
+                dataType: "json",
+                success: function (context) {
+                    if (context.Status) {
+                        $.closemodalpage("bindMerchantpage");
+                    }
+                    else {
+                        swal({
+                            title: "",
+                            text: context.Message,
+                            type: "error"
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+</script>

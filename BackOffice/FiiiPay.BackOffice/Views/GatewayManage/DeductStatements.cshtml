@@ -1,0 +1,61 @@
+﻿<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="POSNo">Username</label>
+            <input type="text" class="form-control" id="Username" placeholder="Input Username to search">
+        </div>
+        <div class="form-group largesearchwidth">
+            <label for="StartDate">Start Date:</label>
+            <input data-val="true" class="form-control" id="StartDate" name="StartDate" type="text" value="@DateTime.UtcNow.AddYears(-1).ToString("yyyy-MM-dd")">
+            <label for="EndDate">End Date:</label>
+            <input data-val="true" class="form-control" id="EndDate" name="EndDate" type="text" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="SearchPOSInfo()">Search</button>
+    </form>
+</div>
+<div>
+    <table id="dtGrid"></table>
+    <div id="dtGridPager"></div>
+</div>
+<script>
+    $(function () {
+        $('#StartDate').add($('#EndDate')).datetimepicker({
+            format: 'yyyy-mm-dd',
+            minView: 'month',
+            autoclose: true
+        });
+
+        var colnames = ["Id", "Username", "Amount", "Timestamp"];
+        var colmodels = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'Username', index: 'Username', width: 40, sortable: false },
+            { name: 'Amount', index: 'Amount', width: 40, sortable: false },
+            { name: 'Timestamp', index: 'Timestamp', width: 40, sortable: false },
+        ];
+        $("#dtGrid").BoGrid({
+            url: '/GatewayManage/LoadDeduct',
+            ExpandColumn: 'PageName',
+            colNames: colnames,
+            colModel: colmodels,
+            pager: '#dtGridPager'
+        });
+    });
+
+    function SearchPOSInfo() {
+        var postData = {
+            username: $.trim($("#Username").val()),
+            startDate: $("#StartDate").val(),
+            endDate: $("#EndDate").val()
+        };
+        $("#dtGrid").jqGrid('setGridParam', { postData: postData, page: 1 }).trigger("reloadGrid");
+    }
+
+    function refreshPage() {
+        var postData = {
+            username: $.trim($("#Username").val()),
+            startDate: $("#StartDate").val(),
+            endDate: $("#EndDate").val()
+        };
+        $("#dtGrid").jqGrid('setGridParam', { postData: postData }).trigger("reloadGrid");
+    }
+</script>

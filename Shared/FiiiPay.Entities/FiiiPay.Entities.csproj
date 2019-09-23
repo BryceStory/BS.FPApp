@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{68B13FBA-8C45-450C-9EAE-C9FECBCE5B84}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FiiiPay.Entities</RootNamespace>
+    <AssemblyName>FiiiPay.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Product|AnyCPU'">
+    <OutputPath>bin\Product\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Advertising.cs" />
+    <Compile Include="Article.cs" />
+    <Compile Include="BillerAddress.cs" />
+    <Compile Include="BillerOrder.cs" />
+    <Compile Include="BillerQuotaUsed.cs" />
+    <Compile Include="CryptoAddress.cs" />
+    <Compile Include="CryptoTransaction.cs" />
+    <Compile Include="EntitySet\Address.cs" />
+    <Compile Include="EntitySet\ArticleES.cs" />
+    <Compile Include="EntitySet\BonusDetailES.cs" />
+    <Compile Include="EntitySet\CryptoAddressIndexES.cs" />
+    <Compile Include="EntitySet\FiiiposBonusRecord.cs" />
+    <Compile Include="EntitySet\Investor\StatementES.cs" />
+    <Compile Include="EntitySet\InviteRankES.cs" />
+    <Compile Include="EntitySet\Lv1Info.cs" />
+    <Compile Include="EntitySet\Lv2Info.cs" />
+    <Compile Include="EntitySet\MerchantBaseInfo.cs" />
+    <Compile Include="EntitySet\MerchantBriefInfomation.cs" />
+    <Compile Include="EntitySet\MerchantDepositES.cs" />
+    <Compile Include="EntitySet\MerchantDetailInfo.cs" />
+    <Compile Include="EntitySet\MerchantLicenseInfo.cs" />
+    <Compile Include="EntitySet\MerchantProfileSet.cs" />
+    <Compile Include="EntitySet\MerchantRegInfo.cs" />
+    <Compile Include="EntitySet\MerchantTransferES.cs" />
+    <Compile Include="EntitySet\MerchantVerifyInfo.cs" />
+    <Compile Include="EntitySet\MerchantWithdrawalES.cs" />
+    <Compile Include="EntitySet\MiningInfo.cs" />
+    <Compile Include="EntitySet\OrderByPage.cs" />
+    <Compile Include="EntitySet\OrderStat.cs" />
+    <Compile Include="EntitySet\ProfitDetailES.cs" />
+    <Compile Include="EntitySet\RedPocketListES.cs" />
+    <Compile Include="EntitySet\RedPocketReceiverES.cs" />
+    <Compile Include="EntitySet\SingleBonusDetailES.cs" />
+    <Compile Include="EntitySet\SystemMessageES.cs" />
+    <Compile Include="EntitySet\UserAccountStatus.cs" />
+    <Compile Include="EntitySet\UserPersonalInfo.cs" />
+    <Compile Include="EntitySet\UserProfileSet.cs" />
+    <Compile Include="EntitySet\UserRegInfo.cs" />
+    <Compile Include="EntitySet\UserSecretES.cs" />
+    <Compile Include="EntitySet\UserVerifiedStatus.cs" />
+    <Compile Include="EntitySet\UserWalletStatementES.cs" />
+    <Compile Include="EntitySet\UserWithdrawalES.cs" />
+    <Compile Include="Enums\AccountStatus.cs" />
+    <Compile Include="Enums\AccountType.cs" />
+    <Compile Include="Enums\CryptoAddressType.cs" />
+    <Compile Include="Enums\DepositFromType.cs" />
+    <Compile Include="Enums\IdentityDocType.cs" />
+    <Compile Include="Enums\InvestorTransactionType.cs" />
+    <Compile Include="Enums\LinkType.cs" />
+    <Compile Include="Enums\PaymentType.cs" />
+    <Compile Include="Enums\StatementEnums.cs" />
+    <Compile Include="Enums\TransactionStatus.cs" />
+    <Compile Include="Enums\TransactionType.cs" />
+    <Compile Include="Enums\VerifyStatus.cs" />
+    <Compile Include="Feedback.cs" />
+    <Compile Include="FiiipayMerchantProfile.cs" />
+    <Compile Include="FiiipayMerchantVerifyRecord.cs" />
+    <Compile Include="InvestorAccount.cs" />
+    <Compile Include="InvestorOrder.cs" />
+    <Compile Include="InvestorWalletStatement.cs" />
+    <Compile Include="InviteRecord.cs" />
+    <Compile Include="MallPaymentOrder.cs" />
+    <Compile Include="MerchantCategory.cs" />
+    <Compile Include="MerchantExTransferOrder.cs" />
+    <Compile Include="MerchantInformation.cs" />
+    <Compile Include="EntitySet\MerchantInformationES.cs" />
+    <Compile Include="MerchantOwnersFigure.cs" />
+    <Compile Include="MerchantRecommend.cs" />
+    <Compile Include="MerchantSupportCrypto.cs" />
+    <Compile Include="OpenAccount.cs" />
+    <Compile Include="MerchantAccount.cs" />
+    <Compile Include="MerchantDeposit.cs" />
+    <Compile Include="MerchantProfile.cs" />
+    <Compile Include="MerchantWallet.cs" />
+    <Compile Include="MerchantWalletStatement.cs" />
+    <Compile Include="MerchantWithdrawal.cs" />
+    <Compile Include="MerchantWithdrawalFee.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderStatusTracking.cs" />
+    <Compile Include="OrderWithdrawalFee.cs" />
+    <Compile Include="POS.cs" />
+    <Compile Include="POSMerchantBindRecords.cs" />
+    <Compile Include="ProfitDetail.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadRecord.cs" />
+    <Compile Include="RedPocket.cs" />
+    <Compile Include="RedPocketReceiver.cs" />
+    <Compile Include="RedPocketRefund.cs" />
+    <Compile Include="Refund.cs" />
+    <Compile Include="GatewayRefundOrder.cs" />
+    <Compile Include="RenewRecord.cs" />
+    <Compile Include="RewardDistributeRecords.cs" />
+    <Compile Include="SendPayOrderModel.cs" />
+    <Compile Include="State.cs" />
+    <Compile Include="GatewayOrder.cs" />
+    <Compile Include="Statements.cs" />
+    <Compile Include="StoreBanner.cs" />
+    <Compile Include="StoreOrder.cs" />
+    <Compile Include="StorePaySetting.cs" />
+    <Compile Include="StoreType.cs" />
+    <Compile Include="UserAccount.cs" />
+    <Compile Include="UserDeposit.cs" />
+    <Compile Include="UserDevice.cs" />
+    <Compile Include="UserExTransferOrder.cs" />
+    <Compile Include="UserLoginLog.cs" />
+    <Compile Include="UserProfile.cs" />
+    <Compile Include="UserTransaction.cs" />
+    <Compile Include="UserTransfer.cs" />
+    <Compile Include="UserWallet.cs" />
+    <Compile Include="UserWalletStatement.cs" />
+    <Compile Include="UserWithdrawal.cs" />
+    <Compile Include="UserWithdrawalFee.cs" />
+    <Compile Include="VerifyRecord.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

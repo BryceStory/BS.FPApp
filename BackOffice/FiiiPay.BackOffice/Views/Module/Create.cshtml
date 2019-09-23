@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Create";
+    FiiiPay.BackOffice.Common.SaveResult sr = ViewBag.SaveReult;
+    List<string> iconList = new List<string>()
+    {
+        "fa fa-list","fa fa-floppy-o","fa fa-file-text-o","fa fa-dollar","fa fa-btc","fa fa-pie-chart","fa fa-line-chart", "fa fa-credit-card",
+        "fa fa-user","fa fa-user-plus","fa fa-sitemap","fa fa-folder","fa fa-file","fa fa-cogs","fa fa-cog","fa fa-book","fa fa-check-circle","fa fa-gavel","fa fa-check"
+    };
+}
+@model FiiiPay.BackOffice.Models.Module
+<div class="pagebody">
+    <form class="form-horizontal" id="createModuleForm">
+        @Html.HiddenFor(t => t.Id)
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="ParentId">ParentId</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(t => t.ParentId, (List<SelectListItem>)ViewBag.ParentList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Icon">Icon</label>
+            <div class="col-sm-8">
+                <ul class="itemlist" id="iconlist">
+                    @foreach (var item in iconList)
+                    {
+                        string classstr = "";
+                        if (Model != null && Model.Icon == item)
+                        {
+                            classstr = "active";
+                        }
+                        <li class="@classstr"><a href="#" data-value="@item"><span class="@item"></span></a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Code</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Code, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="PageName">PageName</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Name, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="PageUrl">Url</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.PathAddress, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Sort">Order</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Sort, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-3">
+                <input type="button" class="btn btn-primary" value="Submit" onclick="SaveData()" />
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $("#createModuleForm").jqValidate({
+            rules: {
+                Code: { required:true, maxlength:50},
+                PageName: { maxlength: 50 },
+                PageUrl: { maxlength: 100 }
+            }
+        });
+        $("#iconlist").off().on("click",">li>a", function () {
+            var $link = $(this);
+            var $li = $link.parent();
+            $li.parent().children(".active").removeClass("active");
+            $li.addClass("active");
+        });
+    })
+</script>

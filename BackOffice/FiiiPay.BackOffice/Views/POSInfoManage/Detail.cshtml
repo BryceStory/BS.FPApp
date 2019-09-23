@@ -1,0 +1,192 @@
+﻿@model FiiiPay.Entities.EntitySet.MerchantProfileSet
+@using FiiiPay.BackOffice.Common;
+@using FiiiPay.Framework.Enums
+
+<div class="modeldetail">
+    <div>
+        <h3>Merchant information</h3>
+        <hr style="margin-bottom:10px; " />
+        <div>
+            <table style="margin-left:140px;" class="table table-modeldetailnoborder">
+                <tr>
+                    <th style="width:170px;">Username:</th>
+                    <td>@Model.Username</td>
+                </tr>
+                <tr>
+                    <th>Sn:</th>
+                    <td>@Model.SN</td>
+                </tr>
+                <tr>
+                    <th>Cellphone:</th>
+                    <td>@Model.Cellphone</td>
+                </tr>
+                <tr>
+                    <th>MerchantName:</th>
+                    <td>@Model.MerchantName</td>
+                </tr>
+                <tr>
+                    <th>CountryName:</th>
+                    <td>@Model.CountryName</td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <th>Address:</th>
+                    <td>@Model.Address1</td>
+                </tr>
+                <tr>
+                    <th>Google Authenticator:</th>
+                    <td>@(ValidationFlagComponent.CheckSecurityOpened(Model.ValidationFlag, ValidationFlag.GooogleAuthenticator) ? "Already opened" : string.IsNullOrEmpty(Model.AuthSecretKey) ? "Unbound" : "Closed")</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modeldetail">
+    <div>
+        <h3>Merchant KYC information</h3>
+        <hr style="margin-bottom:10px; " />
+        <div>
+            <table style="margin-left:130px;" class="table table-modeldetailnoborder">
+                <tr>
+                    <th>Verify Status:</th>
+                    <td>
+                        @{
+                            string colorclass = "";
+                            string iconclass = "";
+                            if (Model.L1VerifyStatus == (FiiiPay.Entities.Enums.VerifyStatus.Certified))
+                            {
+                                colorclass = "text-success";
+                                iconclass = "fa fa-check-circle";
+                            }
+                            else if (Model.L1VerifyStatus == (FiiiPay.Entities.Enums.VerifyStatus.Uncertified))
+                            {
+                                colorclass = "text-muted";
+                                iconclass = "fa fa-circle-o-notch";
+                            }
+                            else if (Model.L1VerifyStatus == (FiiiPay.Entities.Enums.VerifyStatus.Disapproval))
+                            {
+                                colorclass = "text-danger";
+                                iconclass = "fa fa-close";
+                            }
+                            else if (Model.L1VerifyStatus == (FiiiPay.Entities.Enums.VerifyStatus.UnderApproval))
+                            {
+                                colorclass = "text-warning";
+                                iconclass = "fa fa-clock-o";
+                            }
+                        }
+                        <div class="form-control noborder">
+                            <div class="@colorclass">
+                                <span class="@iconclass"></span>
+                                <span>@Model.L1VerifyStatus</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>FirstName:</th>
+                    <td>@Model.FirstName</td>
+                </tr>
+                <tr>
+                    <th>LastName:</th>
+                    <td>@Model.LastName</td>
+                </tr>
+                <tr>
+                    <th>IdentityDocType:</th>
+                    <td>@Model.IdentityDocType</td>
+                </tr>
+                <tr>
+                    <th>IdentityDocNo:</th>
+                    <td>@Model.IdentityDocNo</td>
+                </tr>
+                <tr>
+                    <th>FrontIdentityImage:</th>
+                    <td>
+                        @{
+                            string frontImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.FrontIdentityImage, Model.Country);
+                            string backImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.BackIdentityImage, Model.Country);
+                            string handholdImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.HandHoldWithCard, Model.Country);
+                        }
+                        <div class="pull-left text-center" style="width: 360px; height: 300px;">
+                            <a href="javascript:" onclick="ShowBigImage(this, '@Model.FrontIdentityImage')">
+                                <img src="@frontImageUrl" style="max-width: 100%; max-height: 260px; border: solid 1px #ECECEC;" />
+                            </a>
+                            <div class="text-center">Positive photo of document</div>
+                        </div>
+                        <div class="pull-left text-center" style="width: 360px; height: 300px;">
+                            <a href="javascript:" onclick="ShowBigImage(this, '@Model.BackIdentityImage')">
+                                <img src="@backImageUrl" style="max-width: 100%; max-height: 260px; border: solid 1px #ECECEC;" />
+                            </a>
+                            <div class="text-center">Reverse photo of document</div>
+                        </div>
+                        <div class="pull-left text-center" style="width: 360px; height: 300px;">
+                            <a href="javascript:" onclick="ShowBigImage(this, '@Model.HandHoldWithCard')">
+                                <img src="@handholdImageUrl" style="max-width: 100%; max-height: 260px; border: solid 1px #ECECEC;" />
+                            </a>
+                            <div class="text-center">Positive photo in hand of document</div>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modeldetail">
+    <div>
+        <h3>Merchant information</h3>
+        <hr style="margin-bottom:10px; " />
+        <div>
+            <table style="margin-left:130px;" class="table table-modeldetailnoborder">
+                <tr>
+                    <th>Verify Status:</th>
+                    <td>@Model.L2VerifyStatus.ToString()</td>
+                </tr>
+                <tr>
+                    <th>CompanyName:</th>
+                    <td>@Model.CompanyName</td>
+                </tr>
+                <tr>
+                    <th>LicenseNo:</th>
+                    <td>@Model.LicenseNo</td>
+                </tr>
+                <tr>
+                    <th>BusinessLicenseImage:</th>
+                    <td>
+                        @{
+                            string residentImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.BusinessLicenseImage, Model.Country);
+                        }
+                        <div class="form-control noborder" style="width:360px;height:300px;">
+                            <img src="@residentImageUrl" style="max-width:100%; max-height:260px;border:solid 1px #ECECEC;" />
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function ShowBigImage(obj, pageid) {
+        var modaldiv = $('<div class="modal" id="bootstrap-modal-' + pageid + '" tabindex="-1" role="dialog" aria-labelledby="bootstrap-modal-label"></div>');
+        var modalhtml = '<div class="modal-dialog modal-lg" role="document">';
+        modalhtml += '<img id="img" onclick="Rotate(this)" src=' + $(obj).find("img").attr("src") + ' style="max-width:800px;max-height:600px;position:absolute;left:10%;top:100px;" />';
+        modalhtml += '</div>';
+        modaldiv.append(modalhtml);
+        $("body").append(modaldiv);
+        modaldiv.on('hide.bs.modal', function (e) {
+            $(this).remove();
+        });
+        modaldiv.modal({ keyboard: true });
+    }
+    var r = 0;
+
+    function Rotate(obj) {
+        r += 90;
+        $(obj).css('transform', 'rotate(' + r + 'deg)');
+    }
+</script>

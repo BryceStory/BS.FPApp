@@ -1,0 +1,70 @@
+﻿@model FiiiPay.BackOffice.Models.FiiiPay.AppVersions
+
+<div class="pagebody">
+    <form id="formEdit" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label required" for="Version">Version</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(t => t.Version, new { Class = "form-control", placeholder = "Version" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="ForceToUpdate">ForceToUpdate:</label>
+            <div class="col-sm-9 col-xs-9">
+                @Html.DropDownListFor(t => t.ForceToUpdate, (List<SelectListItem>)ViewBag.IsList, new { Class = "form-control", placeholder = "ForceToUpdate" })
+            </div>
+        </div>
+        @*<div class="form-group">
+            <label class="col-sm-3 control-label required" for="Description">Description</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(t => t.Description, new { Class = "form-control", placeholder = "Description" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            <label class="col-sm-3 control-label required" for="Url">Url</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(t => t.Url, new { Class = "form-control", placeholder = "Url" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <button type="button" class="btn btn-primary" onclick="Save(@Model.Id)">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    function Save(id) {
+        var postdata = getFromData(id);
+        $.ajax({
+            url: "/AppVersions/Save",
+            type: "post",
+            data: postdata,
+            dataType: "json",
+            contentType: "application/json",
+            success: function (context) {
+                if (context.Status) {
+                    $.closemodalpage("editVersionPage");
+                }
+                else {
+                    swal({
+                        title: "Save Failed",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+    }
+
+    function getFromData(id) {
+        var model = new Object();
+        model.Id = id;
+        model.Version = $("#Version").val();
+        //model.Description = $("#Description").val();
+        model.ForceToUpdate = $("#ForceToUpdate").val();
+        model.Url = $("#Url").val();
+        return JSON.stringify({ model: model });
+    }
+</script>

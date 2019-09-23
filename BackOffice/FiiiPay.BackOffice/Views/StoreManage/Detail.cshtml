@@ -1,0 +1,139 @@
+﻿@using FiiiPay.BackOffice.Models;
+@model FiiiPay.BackOffice.Models.MerchantInformations
+
+<div class="modeldetail">
+    <h3>Store information</h3>
+    <hr style="margin-bottom:10px;" />
+    <div>
+        <table class="table table-modeldetailnoborder">
+            <tr>
+                <th style="width:20%">MerchantName:</th>
+                <td style="width:80%">@Model.MerchantName</td>
+            </tr>
+            <tr>
+                <th>StoreType:</th>
+                <td>
+                    @{
+                        @ViewBag.StoreTypeStr
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>Week:</th>
+                <td>
+                    @{
+                        @ViewBag.WeekStr
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>Business Hours:</th>
+                <td>@Model.StartTime - @Model.EndTime</td>
+            </tr>
+            <tr>
+                <th>Tags:</th>
+                <td>@Model.Tags</td>
+            </tr>
+            <tr>
+                <th>CellPhone:</th>
+                <td>@Model.Phone</td>
+            </tr>
+            <tr>
+                <th>Introduce:</th>
+                <td>@Model.Introduce</td>
+            </tr>
+            <tr>
+                <th>Address:</th>
+                <td>@Model.Address</td>
+            </tr>
+            <tr>
+                <th>Lng:</th>
+                <td>@Model.Lng</td>
+            </tr>
+            <tr>
+                <th>Lat:</th>
+                <td>@Model.Lat</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="modeldetail">
+    <h3>Store Album</h3>
+    <hr style="margin-bottom:10px; " />
+    <div>
+        <table style="margin-left:130px;" class="table table-modeldetailnoborder">
+            <tr>
+                <td colspan="2">
+
+                    <div>
+                        @{
+                            List<MerchantOwnersFigures> figureList = ViewBag.FigureList;
+                            foreach (MerchantOwnersFigures item in figureList)
+                            {
+                                string ImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}", @item.FileId);
+                                <div class="pull-left text-center" style="width:360px;height:300px;">
+                                    <a href="javascript:" onclick="ShowBigImage(this,'@ImageUrl')">
+                                        <img src="@ImageUrl" style="max-width:100%; max-height:260px;border:solid 1px #ECECEC;" />
+                                    </a>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="modeldetail">
+    <h3>Merchant Recommendation</h3>
+    <hr style="margin-bottom:10px; " />
+    <div>
+        <table style="margin-left:130px;" class="table table-modeldetailnoborder">
+            <tr>
+                <td colspan="2">
+
+                    <div>
+                        @{
+                            List<MerchantRecommends> RecommendList = ViewBag.RecommendList;
+                            foreach (MerchantRecommends item in RecommendList)
+                            {
+                                string ImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}", @item.RecommendPicture);
+                                <div class="pull-left text-center" style="width:360px;height:300px;">
+                                    <a href="javascript:" onclick="ShowBigImage(this,'@ImageUrl')">
+                                        <img src="@ImageUrl" style="max-width:100%; max-height:260px;border:solid 1px #ECECEC;" />
+                                    </a>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    function ShowBigImage(obj, pageid) {
+        var modaldiv = $('<div class="modal" id="bootstrap-modal-' + pageid + '" tabindex="-1" role="dialog" aria-labelledby="bootstrap-modal-label"></div>');
+        var modalhtml = '<div class="modal-dialog modal-lg" role="document">';
+        modalhtml += '<img id="img" onclick="Rotate(this)" src=' + $(obj).find("img").attr("src") + ' style="max-width:800px;max-height:600px;position:absolute;left:10%;top:100px;" />';
+        modalhtml += '</div>';
+        modaldiv.append(modalhtml);
+        $("body").append(modaldiv);
+        modaldiv.on('hide.bs.modal', function (e) {
+            $(this).remove();
+        });
+        modaldiv.modal({ keyboard: true });
+    }
+    var r = 0;
+
+    function Rotate(obj) {
+        r += 90;
+        $(obj).css('transform', 'rotate(' + r + 'deg)');
+    }
+
+</script>

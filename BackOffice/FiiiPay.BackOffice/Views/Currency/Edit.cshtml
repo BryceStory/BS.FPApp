@@ -1,0 +1,141 @@
+﻿@using FiiiPay.BackOffice.Models;
+@using FiiiPay.BackOffice.ViewModels
+@model Currency
+@{
+    bool isAdd = Model.ID == -1;
+    List<PriceInfoViewModel> PriceList = ViewBag.PriceList;
+}
+<div class="pagebody" style="width:500px;">
+    <form id="formEdit" class="form-horizontal" action="@Url.Action("Save")" enctype="multipart/form-data" method="post">
+        @Html.Hidden("Id", Model.ID)
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label class="col-sm-4 control-label required" for="Name_CN">Name_CN</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Name_CN, new { Class = "form-control", placeholder = "Name_CN" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="Name">Name</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Name, new { Class = "form-control", placeholder = "Name" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="Code">Code</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Code, new { Class = "form-control", placeholder = "Code" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="IsFixedPrice">IsFixedPrice</label>
+            <div class="col-sm-8">
+                @{
+                    string checkedStr = (Model != null && Model.IsFixedPrice ? "checked='checked'" : "");
+                }
+                <div class="checkbox" style="width:250px;">
+                    <label>@Html.CheckBoxFor(t => t.IsFixedPrice) FixedPrice</label>
+                </div>
+            </div>
+        </div>
+        @{
+            string isShow = (Model != null && Model.IsFixedPrice ? "" : "hidden=\"hidden\"");
+        }
+        <div id="showPriceList" @isShow>
+            @{foreach (PriceInfoViewModel item in PriceList)
+                {
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label" for="Name">@item.CryptoName (@item.CryptoCode)</label>
+                        <div class="col-sm-4">
+                            @Html.TextBox(item.CryptoCode, item.Price, new { Class = "form-control" })
+                        </div>
+                    </div>
+                }}
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+    <iframe id="tempframe" name="tempframe" hidden="hidden" style="border:none;width:200px;height:28px; overflow:hidden"></iframe>
+</div>
+<script>
+    $(function () {
+        $("#IsFixedPrice").on("change", function () {
+            var $chk = $(this);
+            if ($chk.is(":checked")) {
+                $("#showPriceList").show();
+            } else {
+                $("#showPriceList").hide();
+            }
+        });
+    });
+
+    $(function () {
+        var validateRules = {
+            Name_CN: "required",
+            Name: "required",
+            Code: "required"
+        }
+        $('#formEdit').jqValidate({
+            errorElement: 'span',
+            errorClass: 'help-inline',
+            focusInvalid: true,
+            rules: validateRules,
+            messages: {
+                Name_CN: "This field is required.",
+                Name: "This field is required.",
+                Code: "This field is required."
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('info').addClass('has-error');
+            },
+            success: function (e) {
+                $(e).closest('.form-group').removeClass('has-error').addClass('info');
+                $(e).remove();
+            }
+        });
+    });
+
+    function SaveCurrency(id) {
+        var checkResult = $('#formEdit').valid();
+        debugger;
+        if (checkResult) {
+            var postdata = getFromData(id);
+            $.ajax({
+                url: "/Currency/Save",
+                type: "post",
+                data: postdata,
+                dataType: "json",
+                contentType: "application/json",
+                success: function (context) {
+                    if (context.Status) {
+                        swal({
+                            title: "Save Success",
+                            text: context.Message,
+                            type: "success"
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Save Failed",
+                            text: context.Message,
+                            type: "error"
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    function getFromData(id) {
+        var currency = new Object();
+        currency.Id = id;
+        currency.Name_CN = $("#Name_CN").val();
+        currency.Name = $("#Name").val();
+        currency.Code = $("#Code").val();
+        currency.IsFixedPrice = $("#IsFixedPrice").val();
+        return JSON.stringify({ oCurrency: currency });
+    }
+</script> 

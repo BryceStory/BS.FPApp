@@ -1,0 +1,85 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Create = permissionCodeList.Contains("CountryCreate"), Update = permissionCodeList.Contains("CountryUpdate"), Delete = permissionCodeList.Contains("CountryDelete") };
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permission);
+}
+<div class="gridSearchTool">
+    <div class="form-group">
+    </div>
+    <form class="form-inline">
+        @if (permission.Create)
+        {
+            <button type="button" class="btn btn-create" onclick="addCountryClick()">&nbsp; Create &nbsp;&nbsp;</button>
+        }
+    </form>
+</div>
+<div>
+    <table id="gridlist"></table>
+    <div id="gridlistpager"></div>
+</div>
+<script>
+    $(function () {
+        var colname = ["Id", "Name", "Name_CN", "PinYin", "FiatCurrency", "Code", "PhoneCode", "CustomerService"];
+        var colmodel = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'Name', index: 'Name', width: 100, align: 'center' },
+            { name: 'Name_CN', index: 'Name_CN', width: 100, align: 'center' },
+            { name: 'PinYin', index: 'PinYin', width: 100, align: 'center' },
+            { name: 'FiatCurrency', index: 'FiatCurrency', width: 100, align: 'center' },
+            { name: 'Code', index: 'Code', width: 100, align: 'center' },
+            { name: 'PhoneCode', index: 'PhoneCode', width: 100, align: 'center' },
+            { name: 'CustomerService', index: 'CustomerService', width: 100, align: 'center' }
+        ];
+
+        $("#gridlist").BoGrid({
+            url: '/Country/LoadData',
+             showBtn: true,
+            permvalue: "@sePermission",
+            colNames: colname,
+            colModel: colmodel,
+            onShowClick: "showCountryClick",
+            onEditClick: "editCountryClick",
+            ondblClickRow: function (rowid) { $.opentabpage("/Country/Detail?CountryId=" + rowid, "Country Information", rowid); },
+            onDeleteClick: "deleteCountryClick",
+            pager: '#gridlistpager'
+        });
+    });
+
+    function refreshPage() {
+        $("#gridlist").trigger('reloadGrid');
+    }
+    function showCountryClick(id) {
+        $.opentabpage("/Country/Detail?CountryId=" + id, "Country Information", id);
+    }
+    function editCountryClick(id) {
+        $.opentabpage("/Country/Edit?CountryId=" + id, "Edit Country","EditCountry"+ id);
+    }
+    function addCountryClick() {
+        $.opentabpage("/Country/Edit?CountryId=-1", "Create Country","CreateCountry");
+    }
+    function deleteCountryClick(id) {
+        $.swconfirm("Are your sure to delete this row?", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: "/Country/Delete",
+                    type: "post",
+                    data: { countryId: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            $("#gridlist").trigger('reloadGrid');
+                            swal("Delete Success");
+                        }
+                        else {
+                            swal({
+                                title: "Delete Failed",
+                                text: context.Message,
+                                type: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+</script>

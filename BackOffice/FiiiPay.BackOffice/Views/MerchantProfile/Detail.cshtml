@@ -1,0 +1,102 @@
+﻿@model FiiiPay.Entities.MerchantProfile
+<div class="pagebody" style="max-width:1125px;">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">账号</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@ViewBag.AccountName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">公司名称</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.CompanyName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">证件号码</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.LicenseNo</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">审核状态</label>
+            <div class="col-sm-10">
+                @{
+                    string colorclass = "";
+                    string iconclass = "";
+                    string statusName = "";
+                    if (Model.L2VerifyStatus == (FiiiPay.Entities.Enums.VerifyStatus.Certified))
+                    {
+                        colorclass = "text-success";
+                        iconclass = "fa fa-check-circle";
+                        statusName = "认证通过";
+                    }
+                    else if (Model.L2VerifyStatus == (FiiiPay.Entities.Enums.VerifyStatus.Uncertified))
+                    {
+                        colorclass = "text-muted";
+                        iconclass = "fa fa-circle-o-notch";
+                        statusName = "未提交认证";
+                    }
+                    else if (Model.L2VerifyStatus == (FiiiPay.Entities.Enums.VerifyStatus.Disapproval))
+                    {
+                        colorclass = "text-danger";
+                        iconclass = "fa fa-close";
+                        statusName = "认证不通过";
+                    }
+                    else if (Model.L2VerifyStatus == (FiiiPay.Entities.Enums.VerifyStatus.UnderApproval))
+                    {
+                        colorclass = "text-warning";
+                        iconclass = "fa fa-clock-o";
+                        statusName = "待审核";
+                    }
+                }
+                <div class="form-control noborder">
+                    <div class="@colorclass">
+                        <span class="@iconclass"></span>
+                        <span>@statusName</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">审核备注</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.L2Remark</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">证件照片</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder" style="height:auto;">
+                    @{
+                        string licenseImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.BusinessLicenseImage, Model.Country);
+                    }
+                    <a href="javascript:" onclick="ShowBigImage(this,'@Model.BusinessLicenseImage')">
+                        <img src="@licenseImageUrl" style="max-width:100%; max-height:260px;border:solid 1px #ECECEC;" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    function ShowBigImage(obj, pageid) {
+        var modaldiv = $('<div class="modal" id="bootstrap-modal-' + pageid + '" tabindex="-1" role="dialog" aria-labelledby="bootstrap-modal-label"></div>');
+        var modalhtml = '<div class="modal-dialog modal-lg" role="document">';
+        modalhtml += '<img id="img" onclick="Rotate(this)" src=' + $(obj).find("img").attr("src") + ' style="max-width:800px;max-height:600px;position:absolute;left:10%;top:100px;" />';
+        modalhtml += '</div>';
+        modaldiv.append(modalhtml);
+        $("body").append(modaldiv);
+        modaldiv.on('hide.bs.modal', function (e) {
+            $(this).remove();
+        });
+        modaldiv.modal({ keyboard: true });
+    }
+    var r = 0;
+
+    function Rotate(obj) {
+        r += 90;
+        $(obj).css('transform', 'rotate(' + r + 'deg)');
+    }
+</script>

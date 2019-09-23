@@ -1,0 +1,70 @@
+﻿@using FiiiPay.BackOffice.Models
+<div class="pagebody" style="width:500px;">
+    <form id="formEdit" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Username</label>
+            <div class="col-sm-9">
+                <label class="control-label">@Model.Username</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required" for="Amount">Amount</label>
+            <div class="col-sm-9">
+                <input id="Amount" name="Amount" class="form-control" />
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="Save('@Model.Id')">Submit</button>
+    </form>
+</div>
+<script>
+    $(function () {
+        $('#formEdit').jqValidate({
+            errorElement: 'span',
+            errorClass: 'help-inline',
+            focusInvalid: true,
+            rules: {
+                Amount: { required: true, number: true }
+            },
+            messages: {
+                POSAmountSN: {
+                    required: "Please enter Amount."
+                }
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('info').addClass('has-error');
+            },
+            success: function (e) {
+                $(e).closest('.form-group').removeClass('has-error').addClass('info');
+                $(e).remove();
+            }
+        });
+    });
+
+
+
+    function Save(id) {
+        var checkResult = $('#formEdit').valid();
+        if (checkResult) {
+            $.ajax({
+                url: "/GatewayManage/SaveDeduct",
+                type: "post",
+                data: { accountId: id, amount: $("#Amount").val() },
+                dataType: "json",
+                success: function (context) {
+                    if (context.Status) {
+                        $("#articleGrid").trigger('reloadGrid');
+                        $.closemodalpage("deductGatewayAccountpage");
+                    }
+                    else {
+                        swal({
+                            title: "",
+                            text: context.Message,
+                            type: "error"
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+</script>

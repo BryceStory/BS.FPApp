@@ -1,0 +1,194 @@
+﻿@model FiiiPay.BackOffice.ViewModels.UserProfileViewModel
+<div class="pagebody" style="max-width:1125px;">
+    <form class="form-horizontal" id="verifyuserresidenceform">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">账号</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@ViewBag.AccountName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Lastname</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.LastName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Firstname</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.FirstName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Country</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.CountryName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">PostCode</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.Postcode</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">State</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.State</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">City</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.City</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Status</label>
+            <div class="col-sm-10">
+                @{
+                    string colorclass = "";
+                    string iconclass = "";
+                    if (Model.L2VerifyStatus == FiiiPay.Entities.Enums.VerifyStatus.Certified)
+                    {
+                        colorclass = "text-success";
+                        iconclass = "fa fa-check-circle";
+                    }
+                    else if (Model.L2VerifyStatus == FiiiPay.Entities.Enums.VerifyStatus.Uncertified)
+                    {
+                        colorclass = "text-muted";
+                        iconclass = "fa fa-circle-o-notch";
+                    }
+                    else if (Model.L2VerifyStatus == FiiiPay.Entities.Enums.VerifyStatus.Disapproval)
+                    {
+                        colorclass = "text-danger";
+                        iconclass = "fa fa-close";
+                    }
+                    else if (Model.L2VerifyStatus == FiiiPay.Entities.Enums.VerifyStatus.UnderApproval)
+                    {
+                        colorclass = "text-warning";
+                        iconclass = "fa fa-clock-o";
+                    }
+                }
+                <div class="form-control noborder">
+                    <div class="@colorclass">
+                        <span class="@iconclass"></span>
+                        <span>@Model.L2VerifyStatusName</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Address1</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.Address1</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Address2</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.Address2</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Photo of residence</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder" style="height:300px;">
+                    @{
+                        string residentImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.ResidentImage, Model.Country);
+                    }
+                    <a href="javascript:" onclick="ShowBigImage(this,'@Model.ResidentImage')">
+                        <img src="@residentImageUrl" style="max-width:100%; max-height:260px;border:solid 1px #ECECEC;" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Verify result</label>
+            <div class="col-sm-10">
+                @Html.Hidden("UserAccountId", Model.UserAccountId)
+                @Html.DropDownList("L2VerifyStatus", (List<SelectListItem>)ViewBag.VerifyStatusList, new { @class = "form-control", style = "width:200px;" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Remark</label>
+            <div class="col-sm-10">
+                @Html.TextArea("L2Remark", Model.L2Remark, new { @class = "form-control", placeholder = "If you Reject, please input remarks!" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">
+                    <input type="button" class="btn btn-primary" value="Submit" onclick="SaveVerify()" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $.autoTextarea($("#L2Remark")[0]);
+        $("#verifyuserresidenceform").jqValidate({
+            rules: {
+                L2Remark: {
+                    required: function () {
+                        return $("#L2VerifyStatus").children(":selected").val() == "@((int)FiiiPay.Entities.Enums.VerifyStatus.Disapproval)";
+                    }, maxlength: 500
+                }
+            }
+        });
+    })
+    function SaveVerify() {
+        var isValid = $("#verifyuserresidenceform").valid();
+        if (isValid) {
+            var accountgid = $("#UserAccountId").val();
+            var status = $("#L2VerifyStatus").children(":selected").val();
+            var remark = $("#L2Remark").val();
+            $.ajax({
+                url: '/UserResidence/SaveVerify',
+                data: { UserAccountId: accountgid, L2VerifyStatus: status, L2Remark: remark },
+                dataType: "json",
+                success: function (context) {
+                    var certifiledstatus = "@((int)FiiiPay.Entities.Enums.VerifyStatus.Certified)";
+                    var disapprovalstatus = "@((int)FiiiPay.Entities.Enums.VerifyStatus.Disapproval)";
+                    if (context.Status) {
+                        swal({
+                            title: "Save Success",
+                            type: "success"
+                        }, function () {
+                            if (status == certifiledstatus || status == disapprovalstatus) {
+                                window.location.href = "/UserResidence/Detail/" + accountgid;
+                            }
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Save Failed",
+                            type: "error",
+                            text: context.Message
+                        });
+                    }
+                }
+            });
+        }
+    }
+    function ShowBigImage(obj, pageid) {
+        var modaldiv = $('<div class="modal" id="bootstrap-modal-' + pageid + '" tabindex="-1" role="dialog" aria-labelledby="bootstrap-modal-label"></div>');
+        var modalhtml = '<div class="modal-dialog modal-lg" role="document">';
+        modalhtml += '<img id="img" onclick="Rotate(this)" src=' + $(obj).find("img").attr("src") + ' style="max-width:800px;max-height:600px;position:absolute;left:10%;top:100px;" />';
+        modalhtml += '</div>';
+        modaldiv.append(modalhtml);
+        $("body").append(modaldiv);
+        modaldiv.on('hide.bs.modal', function (e) {
+            $(this).remove();
+        });
+        modaldiv.modal({ keyboard: true });
+    }
+    var r = 0;
+
+    function Rotate(obj) {
+        r += 90;
+        $(obj).css('transform', 'rotate(' + r + 'deg)');
+    }
+</script>

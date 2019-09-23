@@ -1,0 +1,169 @@
+﻿@model FiiiPay.BackOffice.Models.StoreBanners
+<div class="pagebody" style="max-width:800px;">
+    <form class="form-horizontal" id="editStoreBannerForm">
+        <div class="form-group">
+            <label class="col-sm-2 control-label required" for="Title">标题</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(t => t.Title, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="LinkUrl">链接</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(t => t.LinkUrl, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="LinkUrl">打开方式</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(t => t.OpenByAPP, (List<SelectListItem>)ViewBag.OpenByAppList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="Status">状态</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(t => t.Status, (List<SelectListItem>)ViewBag.BannerStatusList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label required" for="StartTime">开始时间</label>
+            <div class="col-sm-10">
+                @Html.TextBox("StartTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm"), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label required" for="EndTime">结束时间</label>
+            <div class="col-sm-10">
+                @Html.TextBox("EndTime", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd HH:mm"), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label required" for="CountryId">国家</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(t => t.CountryId, (List<SelectListItem>)ViewBag.CountryList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label required" for="ViewPermission">查看权限</label>
+            <div class="col-sm-10">
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(t => t.ViewPermission, "NoNeed", new { id = "ViewPermission0", name = "ViewPermission" })
+                    无限制
+                </label>
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(t => t.ViewPermission, "NeedLogin", new { id = "ViewPermission1", name = "ViewPermission" })
+                    需登录
+                </label>
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(t => t.ViewPermission, "NeedKYC", new { id = "ViewPermission2", name = "ViewPermission" })
+                    需KYC通过
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required">广告图</label>
+            <div class="col-lg-6 col-sm-8" style="padding-top:10px;">
+                <a href="javascript:" onclick="UploadPicture()">
+                    <img src="~/Content/Images/loadupbk.png" id="imgPicture" style="height:300px;" />
+                </a>
+                @Html.HiddenFor(t => t.PictureId)
+                <p>推荐尺寸：670px x 222px</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <input type="button" class="btn btn-primary" onclick="SubmitAddBannerForm()" value="提交" />
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $("#editStoreBannerForm").jqValidate({
+            rules: {
+                Title: { required: true, maxlength: 50 },
+                LinkUrl: { maxlength: 500 },
+                StartTime: { required: true, date: true },
+                EndTime: { required: true, date: true },
+                CountryId: { required: true },
+                ViewPermission: { required: true }
+            }
+        });
+        $('#StartTime').datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            minView: 'hour',
+            autoclose: true
+        }).on('hide', function (ev) {
+            $('#StartTime').valid();
+            $('#EndTime').datetimepicker('setStartDate', ev.date);
+        });
+        $('#EndTime').datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            minView: 'hour',
+            autoclose: true
+        }).on('hide', function () {
+            $('#EndTime').valid();
+        });
+    });
+
+    //上传广告图
+    function UploadPicture() {
+        $.openmodalpage("UploadPicture", "/StoreBanner/UploadPicture", {}, "上传广告图", "big");
+    }
+    function CloseUploadPicturePage() {
+        $.closemodalpage("UploadPicture");
+    }
+    function UploadPictureSuccess(file, response) {
+        var url = response.url;
+        if (url) {
+            $("#imgPicture").removeAttr("src").attr("src", url);
+        }
+        if (response.fileId) {
+            $("#PictureId").val(response.fileId);
+        }
+    }
+
+    function SubmitAddBannerForm() {
+        var vaild = $("#editStoreBannerForm").valid();
+        if (!vaild) {
+            return false;
+        }
+        var pictureId = $("#PictureId").val();
+        if (!pictureId) {
+            swal({
+                title: "",
+                text: "图片不能为空",
+                buttons: false,
+                timer: 3000,
+            });
+            return;
+        }
+        $.ajax({
+            url: '/StoreBanner/SaveAdd',
+            data: $("#editStoreBannerForm").serialize(),
+            dataType: "json",
+            success: function (context) {
+                if (context.Status) {
+                    swal({
+                        title: "保存成功",
+                        type: "success"
+                    }, function () {
+                        ResetForm();
+                    });
+                }
+                else {
+                    swal({
+                        title: "保存失败",
+                        type: "error",
+                        text: context.Message
+                    });
+                }
+            }
+        })
+    }
+            function ResetForm() {
+                document.getElementById('editStoreBannerForm').reset();
+                $("#imgPicture").removeAttr("src").attr("src", "../../Content/Images/loadupbk.png");
+                $("#PictureId").val('');
+            }
+</script>

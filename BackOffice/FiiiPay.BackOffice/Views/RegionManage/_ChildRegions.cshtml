@@ -1,0 +1,43 @@
+﻿@model FiiiPay.Foundation.Entities.Regions
+<ul class="pageitem">
+    <li>下属区域</li>
+    @if ((byte)Model.RegionLevel < (byte)FiiiPay.Foundation.Entities.RegionLevel.Region)
+    {
+        <li class="rightitem"><button class="btn btn-primary" onclick="AddChildRegion()">添加</button></li>
+    }
+</ul>
+<div>
+    <table id="childrenRegionsGrid"></table>
+    <div id="childrenRegionsPager"></div>
+</div>
+<script>
+    $(function () {
+        $("#childrenRegionsGrid").BoGrid({
+            url: '/RegionManage/LoadChildrenData',
+            postData: {parentId:"@Model.Id",parentLevel:"@((int)Model.RegionLevel)"},
+            colNames: ["Id", "英文名称", "中文名称", "编码", "显示顺序", "操作"],
+            colModel: [{ name: 'Id', index: 'Id', hidden: true },
+            { name: 'Name', index: 'Name', width: 120, align: 'center', sortable: false },
+            { name: 'NameCN', index: 'NameCN', width: 120, align: 'center', sortable: false },
+            { name: 'Code', index: 'Code', width: 80, align: 'center', sortable: false },
+            { name: 'Sort', index: 'Sort', width: 80, align: 'center', sortable: false },
+            {
+                name: 'Options', index: 'Options', width: 120, align: 'center', sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    var btnHtml = '<a href="javascript:" class="btn btn-primary btn-xs" onclick="ViewRegion(\'' + rowdata.Id + '\')">查看</a>';
+                    btnHtml += '<a href="javascript:" class="btn btn-primary btn-xs" onclick="EditRegion(\'' + rowdata.Id + '\')" style="margin-left:8px;">修改</a>';
+                    btnHtml += '<a href="javascript:" class="btn btn-primary btn-xs" onclick="DeleteRegion(\'' + rowdata.Id + '\')" style="margin-left:8px;">删除</a>';
+                    return btnHtml;
+                }
+            }],
+            pager: '#childrenRegionsPager'
+        });
+    });
+    function AddChildRegion() {
+        $.openmodalpage("addchildregionpage", "/RegionManage/AddChildRegion", { parentId: "@Model.Id" }, "添加下属区域", "", function () {
+            $("#childrenRegionsGrid").trigger('reloadGrid');
+        });
+    }
+    function EditRegion(id) {
+        $.opentabpage("/RegionManage/Edit?id=" + id, "修改区域", id, "regionedit");
+    }
+</script>

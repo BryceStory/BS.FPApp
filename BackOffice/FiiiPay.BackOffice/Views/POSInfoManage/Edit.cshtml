@@ -1,0 +1,301 @@
+﻿@using FiiiPay.BackOffice.ViewModels;
+@model POSViewModel
+@using FiiiPay.BackOffice.Common;
+@using FiiiPay.Framework.Enums
+
+<div class="pagebody">
+    <form id="formEditInfo" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-4 control-label required" for="Status">Status:</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(t => t.Status, (List<SelectListItem>)ViewBag.StatusList, new { Class = "form-control", placeholder = "Status" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label required" for="IsAllowWithdrawal">IsAllowWithdrawal:</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(t => t.IsAllowWithdrawal, (List<SelectListItem>)ViewBag.FuncList, new { Class = "form-control", placeholder = "IsAllowWithdrawal" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label required" for="IsAllowAcceptPayment">IsAllowAcceptPayment:</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(t => t.IsAllowAcceptPayment, (List<SelectListItem>)ViewBag.FuncList, new { Class = "form-control", placeholder = "IsAllowAcceptPayment" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="Receivables_Tier">TransactionFee:</label>
+            <div class="col-sm-5 col-xs-8">
+                @Html.TextBox("Receivables_Tier", Convert.ToDecimal(Model.Receivables_Tier).ToString("0.00"), new { Class = "form-control", placeholder = "Receivables_Tier" })
+            </div>
+            <div class="col-sm-1">
+                <label class="control-label">%</label>
+            </div>
+            <div class="col-sm-2 col-xs-4">
+                <button type="button" class="btn btn-primary" onclick="GetDefTier()">System</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label required" for="Markup">Markup:</label>
+            <div class="col-sm-5 col-xs-8">
+                @Html.TextBox("Markup", Convert.ToDecimal(Model.Markup).ToString("0.00"), new { Class = "form-control", placeholder = "Markup" })
+            </div>
+            <div class="col-sm-1">
+                <label class="control-label">%</label>
+            </div>
+            <div class="col-sm-2 col-xs-4">
+                <button type="button" class="btn btn-primary" onclick="GetDefMarkup()">System</button>
+            </div>
+        </div>
+        @*<div class="form-group">
+            <label class="col-sm-4 control-label" for="DefaultCrypto">DefaultCrypto </label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(t => t.DefaultCryptoId, (List<SelectListItem>)ViewBag.CURList, new { Class = "form-control", placeholder = "DefaultCrypto" })
+            </div>
+        </div>*@
+        @if ((ValidationFlagComponent.CheckSecurityOpened(Model.ValidationFlag, ValidationFlag.GooogleAuthenticator)))
+        {
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="ValidationFlag">Google Authenticator:</label>
+                <div class="col-sm-6 col-xs-8">
+                    <label class="control-label">Already opened</label>
+                </div>
+                <div class="col-sm-2 col-xs-4">
+                    <button type="button" class="btn btn-primary" onclick="Unbind('@Model.Id')">Unbind</button>
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="button" class="btn btn-primary" onclick="Save('@Model.Id')">Submit</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="button" class="btn btn-primary" onclick="DeleteErrorCount('@Model.Id','PIN')">DeleteErrorCount PIN</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="button" class="btn btn-primary" onclick="DeleteErrorCount('@Model.Id','SMS')">DeleteErrorCount SMS</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="button" class="btn btn-primary" onclick="DeleteErrorCount('@Model.Id','GoogleAuth')">DeleteErrorCount Google Auth </button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="button" class="btn btn-primary" onclick="DeleteErrorCount('@Model.Id','Identity')">DeleteErrorCount Identity</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    $(function () {
+        jQuery.validator.addMethod("positiveinteger", function (value, element) {
+            var aint = parseInt(value);
+            return aint >= 0 && (aint + "") == value;
+        }, "Input can only be an integer.");
+
+        jQuery.validator.addMethod("twoPoints", function (value, element) {
+            var returnVal = true;
+            var inputZ = value;
+            var ArrMen = inputZ.split(".");
+            if (ArrMen.length == 2) {
+                if (ArrMen[1].length > 2) {
+                    returnVal = false;
+                    return false;
+                }
+            }
+            var vzNum = parseFloat(inputZ).toFixed(2);
+            // alert(vzNum);
+            if (isNaN(vzNum)) {
+                returnVal = false;
+                return false;
+            }
+            return returnVal;
+        }, "A maximum of two decimal points");
+
+        var validateRules = {
+            Receivables_Tier: {
+                number: true,
+                twoPoints: true
+            },
+            Markup: {
+                number: true,
+                twoPoints: true
+            }
+        };
+        $('#formEditInfo').validate({
+            errorElement: 'span',
+            errorClass: 'help-inline',
+            focusInvalid: true,
+            rules: validateRules,
+            messages: {
+                Receivables_Tier: "<br />Enter can only be digital, up to two decimal places.",
+                Markup: "<br />Enter can only be digital, up to two decimal places."
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('info').addClass('has-error');
+            },
+            success: function (e) {
+                $(e).closest('.form-group').removeClass('has-error').addClass('info');
+                $(e).remove();
+            }
+        });
+    });
+
+    function Save(id) {
+        var checkResult = $('#formEditInfo').valid();
+        if (checkResult) {
+            var postdata = getFromData(id);
+            $.ajax({
+                url: "/POSInfoManage/Save",
+                type: "post",
+                data: postdata,
+                dataType: "json",
+                contentType: "application/json",
+                success: function (context) {
+                    if (context.Status) {
+                        swal({
+                            title: "Save Success",
+                            text: context.Message,
+                            type: "success"
+                        }, function () {
+                            $.closemodalpage("editMerchantpage");
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Save Failed",
+                            text: context.Message,
+                            type: "error"
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    function GetDefTier() {
+        $.ajax({
+            url: "/POSInfoManage/GetDefTier",
+            type: "get",
+            data: "",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (context) {
+                if (context.Status) {
+                    $("#Receivables_Tier").val(context.Message);
+                }
+                else {
+                    swal({
+                        title: "Failed",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+    }
+
+    function GetDefMarkup() {
+        $.ajax({
+            url: "/POSInfoManage/GetDefMarkup",
+            type: "get",
+            data: "",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (context) {
+                if (context.Status) {
+                    $("#Markup").val(context.Message);
+                }
+                else {
+                    swal({
+                        title: "Failed",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+    }
+
+    function Unbind(id) {
+        $.swconfirm("Are your sure to unbind?", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: "/POSInfoManage/Unbind",
+                    type: "post",
+                    data: { id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "Save Success",
+                                text: context.Message,
+                                type: "success"
+                            }, function () {
+                                $.closemodalpage("editMerchantpage");
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "Failed",
+                                text: context.Message,
+                                type: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+
+
+    function getFromData(id) {
+        var model = new Object();
+        model.Id = id;
+        model.Status = $("#Status").val();
+        model.IsAllowWithdrawal = $("#IsAllowWithdrawal").val();
+        model.IsAllowAcceptPayment = $("#IsAllowAcceptPayment").val();
+        model.Receivables_Tier = $("#Receivables_Tier").val() / 100;
+        model.Markup = $("#Markup").val() / 100;
+        //model.DefaultCryptoId = $("#DefaultCryptoId").val();
+        return JSON.stringify({ oModel: model });
+    }
+
+    function DeleteErrorCount(id, type) {
+        $.swconfirm("Are your sure to Delete?", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: "/POSInfoManage/DeleteErrorCount",
+                    type: "post",
+                    data: { id: id, type: type },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "Save Success",
+                                text: context.Message,
+                                type: "success"
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "Failed",
+                                text: context.Message,
+                                type: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+</script> 

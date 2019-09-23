@@ -1,0 +1,3791 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FiiiPay.DTO</name>
+    </assembly>
+    <members>
+        <member name="T:FiiiPay.DTO.BillerPayIM">
+            <summary>
+            缴费的参数
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayIM.BillerCode">
+            <summary>
+            billercode
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayIM.ReferenceNumber">
+            <summary>
+            referencenumber
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayIM.FiatCurrency">
+            <summary>
+            法币币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayIM.CryptoCode">
+            <summary>
+            所选的加密币简称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayIM.CryptoId">
+            <summary>
+            加密币的唯一键
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayIM.FiatAmount">
+            <summary>
+            法币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayIM.CryptoAmount">
+            <summary>
+            加密币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayIM.ExchangeRate">
+            <summary>
+            当前汇率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayIM.Pin">
+            <summary>
+            pin码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayIM.Discount">
+            <summary>
+            折扣率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayIM.CountryId">
+            <summary>
+            选择国家的id
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.BillerPrePayIM">
+            <summary>
+            缴费的参数
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPrePayIM.FiatCurrency">
+            <summary>
+            法币币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPrePayIM.CryptoCode">
+            <summary>
+            所选的加密币简称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPrePayIM.CryptoId">
+            <summary>
+            加密币的唯一键
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPrePayIM.FiatAmount">
+            <summary>
+            法币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPrePayIM.CryptoAmount">
+            <summary>
+            加密币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPrePayIM.CountryId">
+            <summary>
+            选择国家的id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayOM.OrderId">
+            <summary>
+            订单id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayOM.OrderNo">
+            <summary>
+            订单号显示用
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayOM.Timestamp">
+            <summary>
+            交易时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayOM.CryptoCode">
+            <summary>
+            加密币简称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayOM.CryptoAmount">
+            <summary>
+            加密币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPayOM.SaveAddress">
+            <summary>
+            是否已经保存地址true：已经保存了，false: 未保存
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerDetailIM.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerDetailOM.CurrentExchangeRate">
+            <summary>
+            当前汇率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerDetailOM.IncreaseRate">
+            <summary>
+            涨幅
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerDetailOM.StatusStr">
+            <summary>
+            状态提示语
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerDetailOM.TypeStr">
+            <summary>
+            类型提示语
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.IconInfo.FilePath">
+            <summary>
+            文件路径
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.IconInfo.Id">
+            <summary>
+            文件id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerEditAddressIM.Id">
+            <summary>
+            address唯一主键
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerAddAddressIM.IconIndex">
+            <summary>
+            图标的索引
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerGetAddressIM.IconIndex">
+            <summary>
+            图标筛选的唯一id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerGetAddressIM.PageSize">
+            <summary>
+            每页大小
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerGetAddressIM.PageIndex">
+            <summary>
+            从0开始
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerCryptoIM.FiatCurrency">
+            <summary>
+            法币简称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerCryptoItemOM.Discount">
+            <summary>
+            折扣
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerCryptoItemOM.ExchangeRate">
+            <summary>
+            汇率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerPrePayOM.Status">
+            <summary>
+            0: 可支付 1: 超过单笔的限额 2：超过当天限额 3： 超过当月限额 4：金额计算校验不正确 5：所选国家信息不正确
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerMessageFailOM.Timestamp">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerMessageFailOM.Title">
+            <summary>
+            消息标题
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.BillerMessageFailOM.Content">
+            <summary>
+            消息内容
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.BindNoticeRegIdIM.NoticeRegId">
+            <summary>
+            注册极光推送服务得到的Id
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Account.CellPhoneOM">
+            <summary>
+            返回手机信息参数
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.CellPhoneOM.CellPhone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.CellPhoneOM.PhoneRegion">
+            <summary>
+            手机区域号
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Account.InviteCodeIM">
+            <summary>
+            传入邀请码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.InviteCodeIM.InviteCode">
+            <summary>
+            邀请码
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Account.LoginBySMSCodeIM">
+            <summary>
+            LoginBySMSCode
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.LoginBySMSCodeIM.CountryId">
+            <summary>
+            国家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.LoginBySMSCodeIM.Cellphone">
+            <summary>
+            手机号，不包含地区码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.LoginBySMSCodeIM.SMSCode">
+            <summary>
+            短信验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.LoginIM.CountryId">
+            <summary>
+            CountryId
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.LoginIM.Cellphone">
+            <summary>
+            Cellphone
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.LoginIM.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.BonusMessageOM.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.BonusMessageOM.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.BonusMessageOM.Timestamp">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.GetSMSCodeIM.CountryId">
+            <summary>
+            国家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.GetSMSCodeIM.Cellphone">
+            <summary>
+            手机号，不包含地区码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.FullName">
+            <summary>
+            已经加上*
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.Nickname">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.Cellphone">
+            <summary>
+            用户手机号，已经带上地区码和加上***，比如 86 *******1200
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.Avatar">
+            <summary>
+            用户头像，客户端需要拼接地址下载图片
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.HasSetPin">
+            <summary>
+            是否已经设置过PIN码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.IsBaseProfileComplated">
+            <summary>
+            是否完善了个人基本信息
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.IsLV1Verified">
+            <summary>
+            是否通过了KYC审核
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.SecretKey">
+            <summary>
+            用来生成随机码的Key
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.InvitationCode">
+            <summary>
+            邀请码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.FiatId">
+            <summary>
+            法币id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.SimpleUserInfoOM.FiatCode">
+            <summary>
+            法币简称
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Account.ValidateAuthCodeIM">
+            <summary>
+            validate google authenticator
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.ValidateAuthCodeIM.CountryId">
+            <summary>
+            CountryId
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.ValidateAuthCodeIM.Cellphone">
+            <summary>
+            Cellphone
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.ValidateAuthCodeIM.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.ValidateAuthCodeIM.GoogleCode">
+            <summary>
+            google authenticator code
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.NewDeviceLoginIM.CountryId">
+            <summary>
+            CountryId
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.NewDeviceLoginIM.Cellphone">
+            <summary>
+            Cellphone
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.NewDeviceLoginIM.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.NewDeviceLoginIM.GoogleCode">
+            <summary>
+            google authenticator code
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.NewDeviceLoginIM.Pin">
+            <summary>
+            pin码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.NewDeviceLoginIM.IdentityDocNo">
+            <summary>
+            IdentityDocNo
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Account.ValidateLoginBySMSCodeIM">
+            <summary>
+            ValidateLoginBySMSCode
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.ValidateLoginBySMSCodeIM.CountryId">
+            <summary>
+            国家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.ValidateLoginBySMSCodeIM.Cellphone">
+            <summary>
+            手机号，不包含地区码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.ValidateLoginBySMSCodeIM.GoogleCode">
+            <summary>
+            google authencator code
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.NewDeviceLoginBySMSCodeIM.CountryId">
+            <summary>
+            国家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.NewDeviceLoginBySMSCodeIM.Cellphone">
+            <summary>
+            手机号，不包含地区码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.NewDeviceLoginBySMSCodeIM.GoogleCode">
+            <summary>
+            google authencator code
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.NewDeviceLoginBySMSCodeIM.Pin">
+            <summary>
+            pin码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.NewDeviceLoginBySMSCodeIM.IdentityDocNo">
+            <summary>
+            IdentityDocNo
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Account.VerifyPinIM.Pin">
+            <summary>
+            加密过的Pin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.CountryId">
+            <summary>
+            所在国家ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.FiiiPayAccount">
+            <summary>
+            Fiiipay账号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.SMSCode">
+            <summary>
+            FiiiPay手机验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.MerchantName">
+            <summary>
+            商户名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.WeekTxt">
+            <summary>
+            营业时间描述
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.TagList">
+            <summary>
+            产品/服务
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.MerchantCategorys">
+            <summary>
+            商户类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.SupportCoins">
+            <summary>
+            支持的收款币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.Introduce">
+            <summary>
+            商户介绍
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.Address">
+            <summary>
+            详细地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.Lng">
+            <summary>
+            经度
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.Lat">
+            <summary>
+            纬度
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.ApplicantName">
+            <summary>
+            申请人
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.Phone">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.StorefrontImg">
+            <summary>
+            店面照片
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.FigureImgList">
+            <summary>
+            店铺环境图
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.LicenseNo">
+            <summary>
+            营业执照号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiPayMerchantInfoCreateIM.BusinessLicenseImage">
+            <summary>
+            营业执照图
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.Code">
+            <summary>
+            加密货币币种名称：比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.FiatAmount">
+            <summary>
+            法币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.FiatCurrency">
+            <summary>
+            法币：比如：MRY
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.CryptoAmount">
+            <summary>
+            加密货币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.Status">
+            <summary>
+            比如：已完成
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.MarkUp">
+            <summary>
+            溢价率，比如：10.00%
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.ExchangeRate">
+            <summary>
+            当时的汇率，比如：1BTC = 1670.80MRY
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.RefundTimestamp">
+            <summary>
+            退款时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.Type">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.OrderNo">
+            <summary>
+            交易单号，底部的条形码也使用这个
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.CurrentExchangeRate">
+            <summary>
+            当前加密币对法币汇率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrderDetailOM.IncreaseRate">
+            <summary>
+            涨幅
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetLastActiveCountryOM.IsFirst">
+            <summary>
+            是否是第一次定位
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailIM.Id">
+            <summary>
+            商户id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.AccountType">
+            <summary>
+            门店类型 1Fiiipay门店 2FiiiPos门店
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.ImageUrls">
+            <summary>
+            轮播图片地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.Tags">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.StartDate">
+            <summary>
+            营业开始时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.EndDate">
+            <summary>
+            营业结束时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.Weeks">
+            <summary>
+            营业星期 返回1就代表星期一
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.BussinessHour">
+            <summary>
+            营业时间文本说明，FiiiPay门店显示此文本
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.Location">
+            <summary>
+            商户坐标
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.AvailableCryptoCodeList">
+            <summary>
+            支持的币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.AvailableCryptoIconList">
+            <summary>
+            支持的币种图标
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.RecommendGoods">
+            <summary>
+            推荐商品列表
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.Introduce">
+            <summary>
+            商家介绍
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.Phone">
+            <summary>
+            商家联系电话
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.PhoneCode">
+            <summary>
+            手机区号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantDetailOM.IsAllowExpense">
+            <summary>
+            是否允许消费
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Goods">
+            <summary>
+            商品类
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Goods.Image">
+            <summary>
+            商品图片
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Goods.Content">
+            <summary>
+            商品名称
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.ImageWithCompressImage">
+            <summary>
+            原图和缩略图
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ImageWithCompressImage.Origin">
+            <summary>
+            原图
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ImageWithCompressImage.Compress">
+            <summary>
+            缩略图
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.GetMerchantInfoListByMapIM">
+            <summary>
+            地图搜索入参
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoListByMapIM.LeftTop">
+            <summary>
+            左上方
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoListByMapIM.RightDown">
+            <summary>
+            右下方
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.GetMerchantInfoListByDistanceIM">
+            <summary>
+            地图搜索 当前位置附近所有商家
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoListByDistanceIM.CurrentPlace">
+            <summary>
+            当前位置
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoListByDistanceIM.Distance">
+            <summary>
+            距离范围
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoListIM.PageSize">
+            <summary>
+            数据条数 默认十条
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoListIM.PageIndex">
+            <summary>
+            从0开始
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoListIM.Filter">
+            <summary>
+            筛选
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.GetMerchantInfoListIM.SearchFilter">
+            <summary>
+            搜索筛选类
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoListIM.SearchFilter.KeyWord">
+            <summary>
+            关键词搜索
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoListIM.SearchFilter.CountryId">
+            <summary>
+            通过国家筛选
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoListIM.SearchFilter.Category">
+            <summary>
+            类别搜索 默认为-1 则是搜索全部
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoListIM.SearchFilter.Distance">
+            <summary>
+            距离范围
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Location">
+            <summary>
+            坐标信息类
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Location.Longitude">
+            <summary>
+            经度坐标
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Location.Latitude">
+            <summary>
+            纬度坐标
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoOM.Id">
+            <summary>
+            唯一标识
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoOM.AccountType">
+            <summary>
+            门店类型 1Fiiipay门店 2FiiiPos门店
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoOM.Distance">
+            <summary>
+            距离 单位m
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoOM.Address">
+            <summary>
+            地址信息
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoOM.AvailableCryptoIconList">
+            <summary>
+            可接受的币种列表
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoOM.Tags">
+            <summary>
+            特色标签
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoOM.OriginIconId">
+            <summary>
+            原图下载地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoOM.CompressIconId">
+            <summary>
+            缩略图下载地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoOM.IsAllowExpense">
+            <summary>
+            是否允许消费
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoOM.Title">
+            <summary>
+            商店名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GetMerchantInfoOM.Location">
+            <summary>
+            位置信息
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.ListAllTypeIM">
+            <summary>
+            All type
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListAllTypeIM.CoinId">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListAllTypeIM.MaxType">
+            <summary>
+            需查询类型的最大值(用于兼容旧版本)
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListAllTypeIM.PageIndex">
+            <summary>
+            从0开始
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListAllTypeIM.Mounth">
+            <summary>
+            按月选择，比如：2018-02
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListAllTypeIM.StartDate">
+            <summary>
+            按日选择起始日期，比如：2018-02-01
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListAllTypeIM.EndDate">
+            <summary>
+            按日选择结束日期，比如：2018-02-01
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListAllTypeIM.Keyword">
+            <summary>
+            搜索的关键字：订单号或者商家名
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.ListForDepositOM.FiatCurrency">
+            <summary>
+            法币币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.ListForDepositOMItem.Id">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.ListForDepositOMItem.IconUrl">
+            <summary>
+            图标的地址，客户端需要拼接地址下载图片
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.ListForDepositOMItem.Code">
+            <summary>
+            币的简称，比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.ListForDepositOMItem.NewStatus">
+            <summary>
+            货币的状态 0禁用 1可用
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.ListForDepositOMItem.Name">
+            <summary>
+            币的名称，比如：Bitcoin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.ListForDepositOMItem.UseableBalance">
+            <summary>
+            可用余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.ListForDepositOMItem.FrozenBalance">
+            <summary>
+            冻结的余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.ListForDepositOMItem.FiatBalance">
+            <summary>
+            加密币换算成的法币额度
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.ListForDepositOMItem.DecimalPlace">
+            <summary>
+            小数位数
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.ListForDepositOMItem.CryptoEnable">
+            <summary>
+            0禁用 1可用
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.WalletPreReOrderOMItem.Id">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.WalletPreReOrderOMItem.IconUrl">
+            <summary>
+            图标的地址，客户端需要拼接地址下载图片
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.WalletPreReOrderOMItem.Code">
+            <summary>
+            币的简称，比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.WalletPreReOrderOMItem.Name">
+            <summary>
+            币的名称，比如：Bitcoin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Wallet.WalletPreReOrderOMItem.Fixed">
+            <summary>
+            是否固定到顶端
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.ListSingleTypeIM">
+            <summary>
+            Single type
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListSingleTypeIM.CoinId">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListSingleTypeIM.Type">
+            <summary>
+            0：充币，1：提币，2：消费，3：退款，4：转入，5：转出，6：划入，7：划出， 8：奖励, 必传
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListSingleTypeIM.MaxType">
+            <summary>
+            需查询类型的最大值(用于兼容旧版本)
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListSingleTypeIM.PageIndex">
+            <summary>
+            从0开始
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListSingleTypeIM.Mounth">
+            <summary>
+            按月选择，比如：2018-02
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListSingleTypeIM.StartDate">
+            <summary>
+            按日选择起始日期，比如：2018-02-01
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListSingleTypeIM.EndDate">
+            <summary>
+            按日选择结束日期，比如：2018-02-01
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.ListSingleTypeIM.Keyword">
+            <summary>
+            搜索的关键字：订单号或者商家名
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MerchantStoreTypeOM.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MerchantStoreTypeOM.Name_CN">
+            <summary>
+            中文名
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MerchantStoreTypeOM.Name_EN">
+            <summary>
+            英文名
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.TradeStatus">
+            <summary>
+            交易状态0：已完成，1：已退款
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.MerchantName">
+            <summary>
+            商家名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.PaymentFiatAmount">
+            <summary>
+            消费金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.FiatCode">
+            <summary>
+            法币币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.Markup">
+            <summary>
+            溢价率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.CryptoCode">
+            <summary>
+            支付币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.TradeExchangeRate">
+            <summary>
+            交易汇率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.CurrentExchangeRate">
+            <summary>
+            当前汇率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.IncreaseRate">
+            <summary>
+            汇率涨幅
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.PaymentCryptoAmount">
+            <summary>
+            实付数量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.TradeTime">
+            <summary>
+            交易时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.RefundTime">
+            <summary>
+            退款时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.OrderNo">
+            <summary>
+            交易单号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.MessageGatewayPaymentOM.MerchantOrderNo">
+            <summary>
+            交易单号
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.PushRedPocketListOM">
+            <summary>
+            Class FiiiPay.DTO.PushRedPocketDetailOM
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.PushRedPocketListOM.Total">
+            <summary>
+            共发红包数
+            </summary>
+            <value>
+            The total.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.PushRedPocketListOM.TotalFiatAmount">
+            <summary>
+            收到红包金额
+            </summary>
+            <value>
+            The total fiat amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.PushRedPocketListOM.DetailList">
+            <summary>
+            列表
+            </summary>
+            <value>
+            The detail list.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.PushRedPockDetail.RedPocketId">
+            <summary>
+            红包ID
+            </summary>
+            <value>
+            The red pocket identifier.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.PushRedPockDetail.CryptoCode">
+            <summary>
+            币种
+            </summary>
+            <value>
+            The crypto code.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.PushRedPockDetail.Amount">
+            <summary>
+            数量 
+            </summary>
+            <value>
+            The amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.PushRedPockDetail.RefundAmount">
+            <summary>
+            退回数量
+            </summary>
+            <value>
+            The refund amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.PushRedPockDetail.Timestamp">
+            <summary>
+            时间
+            </summary>
+            <value>
+            The timestamp.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.PushRedPockDetail.Status">
+            <summary>
+            状态(1,进行中2,已领完3,过期已退款)
+            </summary>
+            <value>
+            The status.
+            </value>
+        </member>
+        <member name="T:FiiiPay.DTO.RedPocketDetailOM">
+            <summary>
+            Class FiiiPay.DTO.RedPocketDetailOM
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.Id">
+            <summary>
+            红包Id
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.SnederNickname">
+            <summary>
+            发送者昵称
+            </summary>
+            <value>
+            The sneder nickname.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.Message">
+            <summary>
+            祝福语
+            </summary>
+            <value>
+            The message.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.SelfAmount">
+            <summary>
+            自己领取币数量(为空表示该红包自己并没有领取)
+            </summary>
+            <value>
+            The amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.TotalCount">
+            <summary>
+            红包总数量
+            </summary>
+            <value>
+            The total count.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.CryptoCode">
+            <summary>
+            币种
+            </summary>
+            <value>
+            The crypto code.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.ReceiveCount">
+            <summary>
+            已经领取数量
+            </summary>
+            <value>
+            The receive count.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.TotalAmount">
+            <summary>
+            红包总数量
+            </summary>
+            <value>
+            The total amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.ReceiveAmount">
+            <summary>
+            已经领取数量
+            </summary>
+            <value>
+            The receive amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.PassCode">
+            <summary>
+            口令
+            </summary>
+            <value>
+            The pass code.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.ExpirationDate">
+            <summary>
+            过期时间
+            </summary>
+            <value>
+            The expiration date.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.ReceiveStatus">
+            <summary>
+            是否领取成功
+            </summary>
+            <value>
+              <c>true</c> if this instance has receive; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.HasSelfSned">
+            <summary>
+            是否自己发送
+            </summary>
+            <value>
+              <c>true</c> if this instance has self sned; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.HasExpried">
+            <summary>
+            是否过期
+            </summary>
+            <value>
+              <c>true</c> if this instance has expried; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketDetailOM.FiatAmount">
+            <summary>
+            法币金额
+            </summary>
+            <value>
+            The fiat amount.
+            </value>
+        </member>
+        <member name="F:FiiiPay.DTO.ReceiveStatusEnum.None">
+            <summary>
+            没有获取
+            </summary>
+        </member>
+        <member name="F:FiiiPay.DTO.ReceiveStatusEnum.Receive">
+            <summary>
+            领取成功
+            </summary>
+        </member>
+        <member name="F:FiiiPay.DTO.ReceiveStatusEnum.HasReceive">
+            <summary>
+            已领取
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketListDetailOM.Nickname">
+            <summary>
+            发送者昵称
+            </summary>
+            <value>
+            The nickname.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketListDetailOM.Timestamp">
+            <summary>
+            时间
+            </summary>
+            <value>
+            The timestamp.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketListDetailOM.Amount">
+            <summary>
+            数量
+            </summary>
+            <value>
+            The amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketListDetailOM.CryptoCode">
+            <summary>
+            币种
+            </summary>
+            <value>
+            The crypto code.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketListDetailOM.IsBestLuck">
+            <summary>
+            是否手气最佳
+            </summary>
+            <value>
+              <c>true</c> if this instance is best luck; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:FiiiPay.DTO.RedPocketPushOM">
+            <summary>
+            Class FiiiPay.DTO.RedPocketPushOM
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketPushOM.PassCode">
+            <summary>
+            红包口令
+            </summary>
+            <value>
+            The pass code.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketPushOM.ExpirationDate">
+            <summary>
+            过期时间
+            </summary>
+            <value>
+            The expiration date.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketReceiveListOM.Total">
+            <summary>
+            共发红包数
+            </summary>
+            <value>
+            The total.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketReceiveListOM.TotalFiatAmount">
+            <summary>
+            收到红包金额
+            </summary>
+            <value>
+            The total fiat amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.RedPocketReceiveListOM.DetailList">
+            <summary>
+            列表
+            </summary>
+            <value>
+            The detail list.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.ReceiveRedPockDetail.RedPocketId">
+            <summary>
+            红包ID
+            </summary>
+            <value>
+            The red pocket identifier.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.ReceiveRedPockDetail.Nickname">
+            <summary>
+            领取者昵称
+            </summary>
+            <value>
+            The sender nickname.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.ReceiveRedPockDetail.CryptoCode">
+            <summary>
+            币种
+            </summary>
+            <value>
+            The crypto code.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.ReceiveRedPockDetail.Amount">
+            <summary>
+            数量 
+            </summary>
+            <value>
+            The amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.ReceiveRedPockDetail.Timestamp">
+            <summary>
+            时间
+            </summary>
+            <value>
+            The timestamp.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.StatementDetailOM.Type">
+            <summary>
+            类型 14,收入15,支出
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.StatementDetailOM.Amount">
+            <summary>
+            红包金额
+            </summary>
+            <value>
+            The amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.StatementDetailOM.HasRefund">
+            <summary>
+            是否退款
+            </summary>
+            <value>
+              <c>true</c> if this instance has refund; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.StatementDetailOM.RefundAmount">
+            <summary>
+            退款金额
+            </summary>
+            <value>
+            The refund amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.StatementDetailOM.RefundTimestamp">
+            <summary>
+            退款时间
+            </summary>
+            <value>
+            The refund timestamp.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.StatementDetailOM.PocketId">
+            <summary>
+            红包ID
+            </summary>
+            <value>
+            The pocket identifier.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.StatementDetailOM.Status">
+            <summary>
+            状态  1,活动中2,已经完成3已经退款
+            </summary>
+            <value>
+            The status.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.StatementDetailOM.CryptoCode">
+            <summary>
+            币种
+            </summary>
+            <value>
+            The crypto code.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.StatementDetailOM.Timestamp">
+            <summary>
+            交易时间
+            </summary>
+            <value>
+            The timestamp.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.StatementDetailOM.OrderNo">
+            <summary>
+            交易单号
+            </summary>
+            <value>
+            The order no.
+            </value>
+        </member>
+        <member name="T:FiiiPay.DTO.StoreIncomeDetail">
+            <summary>
+            门店收入详情
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.Id">
+            <summary>
+            交易ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.Type">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.CryptoActualAmount">
+            <summary>
+            订单金额，门店实收数量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.CryptoCode">
+            <summary>
+            币种编码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.Status">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.MerchantName">
+            <summary>
+            门店名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.OrderNo">
+            <summary>
+            交易单号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.UserAccountName">
+            <summary>
+            客户账号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.Timestamp">
+            <summary>
+            消费时间戳
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.FiatCurrency">
+            <summary>
+            法币编码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.FiatAmount">
+            <summary>
+            法币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.MarkUp">
+            <summary>
+            溢价率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.TotalFiatAmount">
+            <summary>
+            法币交易金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.ExchangeRate">
+            <summary>
+            交易时费率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.CurrentExchangeRate">
+            <summary>
+            当前费率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.IncreaseRate">
+            <summary>
+            费率涨幅
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.CryptoAmount">
+            <summary>
+            加密货币数量，用户支付数量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.TransactionFee">
+            <summary>
+            交易手续费
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreIncomeDetail.FeeCryptoCode">
+            <summary>
+            交易手续费币种
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.StoreConsumeDetail">
+            <summary>
+            门店消费详情
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.Id">
+            <summary>
+            交易ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.Type">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.CryptoActualAmount">
+            <summary>
+            订单金额，实际支付数量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.CryptoCode">
+            <summary>
+            币种编码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.Status">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.MerchantName">
+            <summary>
+            门店名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.FiatCurrency">
+            <summary>
+            法币编码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.FiatAmount">
+            <summary>
+            法币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.MarkUp">
+            <summary>
+            溢价率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.ExchangeRate">
+            <summary>
+            交易时费率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.CurrentExchangeRate">
+            <summary>
+            当前费率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.IncreaseRate">
+            <summary>
+            费率涨幅
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.Timestamp">
+            <summary>
+            消费时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.StoreConsumeDetail.OrderNo">
+            <summary>
+            交易单号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.UserDeviceDeleteIM.Id">
+            <summary>
+            设备唯一id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.UserDeviceItemOM.Id">
+            <summary>
+            设备id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.UserDeviceItemOM.DeviceNumber">
+            <summary>
+            设备号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.UserDeviceItemOM.Name">
+            <summary>
+            设备名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.UserDeviceItemOM.IP">
+            <summary>
+            ip地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.UserDeviceItemOM.LastActiveTime">
+            <summary>
+            最近活跃时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.UserDeviceItemOM.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.UserDeviceUpdateIM.DeviceNumber">
+            <summary>
+            唯一标识
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.UserDeviceUpdateIM.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.UserDeviceUpdateIM.Name">
+            <summary>
+            设备名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.AppVersion.VersionIM.Platform">
+            <summary>
+            0：ios，1：android
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.AppVersion.VersionOM.Version">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.AppVersion.VersionOM.ForceToUpdate">
+            <summary>
+            是否强制更新
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.AppVersion.VersionOM.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.AppVersion.VersionOM.Url">
+            <summary>
+            下载地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.AppVersion.VersionOM.ApiAddress">
+            <summary>
+            api地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Article.ArticleListIM.PageIndex">
+            <summary>
+            从0开始
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Article.ArticleListOMItem.Intro">
+            <summary>
+            简介
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Article.ArticleListOMItem.Read">
+            <summary>
+            是否已读
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Article.ArticleListOMItem.Type">
+            <summary>
+            消息的类型，根据这个来调用不同的详情页
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Article.GetFirstTitleAndNotReadCountOM.Title">
+            <summary>
+            第一条的Title
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Article.GetFirstTitleAndNotReadCountOM.Timestamp">
+            <summary>
+            第一条的时间戳
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Article.GetFirstTitleAndNotReadCountOM.SysCount">
+            <summary>
+            未读的系统消息条数
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Article.GetFirstTitleAndNotReadCountOM.Count">
+            <summary>
+            未读的消息条数（不包含系统消息）
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Article.ReadIM.Id">
+            <summary>
+            消息的Id，要与Type一起才能确定唯一性
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Article.ReadIM.Type">
+            <summary>
+            消息类型
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Authenticator.BindUserAuthIM">
+            <summary>
+            用户绑定谷歌验证器
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Authenticator.BindUserAuthIM.SecretKey">
+            <summary>
+            密钥
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Authenticator.GetOpenedSecuritiesOM">
+            <summary>
+            用户开启的密保方式
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Authenticator.GetOpenedSecuritiesOM.IsOpenedAuthencator">
+            <summary>
+            是否开启了谷歌认证
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Authenticator.GetOpenedSecuritiesOM.CellPhone">
+            <summary>
+            用户手机号密文
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Authenticator.GetStatusOfSecurityOM">
+            <summary>
+            GetStatusOfSecurity
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Authenticator.GetStatusOfSecurityOM.GoogleAuthenticator">
+            <summary>
+            google authenticator status
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Authenticator.SecurityStatus">
+            <summary>
+            SecurityStatus
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Authenticator.SecurityStatus.HasBinded">
+            <summary>
+            是否已绑定
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Authenticator.SecurityStatus.HasOpened">
+            <summary>
+            是否已打开
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Authenticator.UserValidateIM">
+            <summary>
+            用户验证谷歌验证器
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Authenticator.UserValidateIM.Code">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Authenticator.ValidateWithSecretIM">
+            <summary>
+            ValidateWithSecret
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Authenticator.ValidateWithSecretIM.SecretKey">
+            <summary>
+            密钥
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Authenticator.ValidateWithSecretIM.Code">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Authenticator.ValidateGoogleAuthIM.GoogleCode">
+            <summary>
+            谷歌验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Deposit.DetailOM.Code">
+            <summary>
+            加密货币币种名称：比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Deposit.DetailOM.FiatAmount">
+            <summary>
+            法币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Deposit.DetailOM.FiatCurrency">
+            <summary>
+            法币：比如：MRY
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Deposit.DetailOM.CryptoAmount">
+            <summary>
+            加密货币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Deposit.DetailOM.Status">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Deposit.DetailOM.StatusStr">
+            <summary>
+            比如：已完成
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Deposit.DetailOM.Type">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Deposit.DetailOM.OrderNo">
+            <summary>
+            交易单号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Deposit.DetailOM.TransactionId">
+            <summary>
+            交易Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Deposit.DetailOM.SelfPlatform">
+            <summary>
+            是否自己平台内充币
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Deposit.DetailOM.CheckTime">
+            <summary>
+            确认次数
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.FiiiEXLogin.FiiiEXLoginIM">
+            <summary>
+            FiiiPay扫码登录FiiiEX
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiEXLogin.FiiiEXLoginIM.Code">
+            <summary>
+            二维码
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.FiiiExTransfer.FiiiExBalanceIM">
+            <summary>
+            查询FiiiEx余额入参
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiExTransfer.FiiiExBalanceIM.CyptoId">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiExTransfer.TransferFiiiExConditionOM.Balance">
+            <summary>
+            可用余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiExTransfer.TransferFiiiExConditionOM.MinQuantity">
+            <summary>
+            最低划转数量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiExTransfer.TransferFiiiExConditionOM.FiiiExBalance">
+            <summary>
+            FiiiEx可用余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiExTransfer.TransferFiiiExConditionOM.FiiiExMinQuantity">
+            <summary>
+            FiiiEx最低划转数量
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.FiiiExTransfer.TransferToExIM">
+            <summary>
+            划转到 Ex Entity
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiExTransfer.TransferToExIM.CryptoId">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiExTransfer.TransferToExIM.Amount">
+            <summary>
+            划转数量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiExTransfer.TransferToExIM.PIN">
+            <summary>
+            PIN
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.FiiiExTransfer.TransferFromExIM">
+            <summary>
+            从 Ex 划转 Entity
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiExTransfer.TransferFromExIM.CryptoId">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiExTransfer.TransferFromExIM.Amount">
+            <summary>
+            划转数量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.FiiiExTransfer.TransferFromExIM.PIN">
+            <summary>
+            校验PIN
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.GatewayOrder.GatewayOrderOM">
+            <summary>
+            三方的交易订单信息
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrder.GatewayOrderOM.Id">
+            <summary>
+            订单id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrder.GatewayOrderOM.MerchantAccountId">
+            <summary>
+            商户id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrder.GatewayOrderOM.MerchantName">
+            <summary>
+            商户名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrder.GatewayOrderOM.ProjectId">
+            <summary>
+            项目id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrder.GatewayOrderOM.OrderNo">
+            <summary>
+            商户订单号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.GatewayOrder.GatewayOrderOM.UserAccountId">
+            <summary>
+            用户id
+            </summary>Class1.cs
+        </member>
+        <member name="T:FiiiPay.DTO.GetDetailByIdIM`1">
+            <summary>
+            用于查询对象详情的泛型类
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:FiiiPay.DTO.GetDetailByIdIM`1.Id">
+            <summary>
+            对象的Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.IndexIM.CurrencyType">
+            <summary>
+            法币类型，用于计算总金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.IndexOM.TotalAmount">
+            <summary>
+            所有加密币换算成当地币种的总金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.IndexOM.FiatCurrency">
+            <summary>
+            法币
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.IndexOM.HasSetPin">
+            <summary>
+            是否已经设置Pin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.IndexOM.IsLV1Verified">
+            <summary>
+            是否通过了KYC审核
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.IndexOM.IsBillerEnable">
+            <summary>
+            生活缴费是否可用
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.CurrencyItem.Id">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.CurrencyItem.IconUrl">
+            <summary>
+            图标的地址，客户端需要拼接地址下载图片
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.CurrencyItem.NewStatus">
+            <summary>
+            货币状态 0禁用 1可用 2禁止充提币
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.CurrencyItem.BackgroundUrl">
+            <summary>
+            背景图的地址，客户端需要拼接地址下载图片
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.CurrencyItem.Code">
+            <summary>
+            币的简称，比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.CurrencyItem.UseableBalance">
+            <summary>
+            可用余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.CurrencyItem.FrozenBalance">
+            <summary>
+            冻结的余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.CurrencyItem.FiatExchangeRate">
+            <summary>
+            法币兑换率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.CurrencyItem.FiatBalance">
+            <summary>
+            加密币换算成的法币额度
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.CurrencyItem.CryptoEnable">
+            <summary>
+            0禁用 1可用
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.PreReOrder1OMItem.Id">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.PreReOrder1OMItem.IconUrl">
+            <summary>
+            图标的地址，客户端需要拼接地址下载图片
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.PreReOrder1OMItem.Code">
+            <summary>
+            币的简称，比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.PreReOrder1OMItem.Name">
+            <summary>
+            币的名称，比如：Bitcoin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.PreReOrder1OMItem.Fixed">
+            <summary>
+            是否固定到顶端
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.PreReOrder1OMItem.ShowInHomePage">
+            <summary>
+            是否显示在首页，客户端根据“不显示在首页”放在“更多币种”
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.HomePage.ToggleShowInHomePageIM.CoinId">
+            <summary>
+            加密货币的Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Image.UploadImageIM.FileName">
+            <summary>
+            文件名，带后缀
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Image.UploadImageIM.Base64Content">
+            <summary>
+            图片的Base64编码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Image.UploadImageWithStreamIM.FileName">
+            <summary>
+            文件名，带后缀
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Image.UploadImageWithStreamIM.Stream">
+            <summary>
+            文件byte数组
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Investor.AccountInfoDTO">
+            <summary>
+            帐号信息实体
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.AccountInfoDTO.Username">
+            <summary>
+            帐号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.AccountInfoDTO.InvestorName">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.AccountInfoDTO.Cellphone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.AccountInfoDTO.IsResetPassword">
+            <summary>
+            是否重设过密码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.AccountInfoDTO.IsResetPIN">
+            <summary>
+            是否重设过PIN码
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Investor.OrderDetailDTO">
+            <summary>
+            订单详情Entity
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.OrderDetailDTO.OrderId">
+            <summary>
+            订单Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.OrderDetailDTO.TransactionType">
+            <summary>
+            订单类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.OrderDetailDTO.Status">
+            <summary>
+            订单状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.OrderDetailDTO.CryptoCode">
+            <summary>
+            币种Code
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.OrderDetailDTO.Amount">
+            <summary>
+            订单金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.OrderDetailDTO.UserAccount">
+            <summary>
+            对方账户
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.OrderDetailDTO.Username">
+            <summary>
+            对方名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.OrderDetailDTO.Timestamp">
+            <summary>
+            交易时间戳
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.OrderDetailDTO.OrderNo">
+            <summary>
+            订单号
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Investor.StatementDetailDTO">
+            <summary>
+            详情
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.StatementDetailDTO.Id">
+            <summary>
+            Statement Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.StatementDetailDTO.TransactionType">
+            <summary>
+            Statement 类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.StatementDetailDTO.Amount">
+            <summary>
+            Statement 金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.StatementDetailDTO.Timestamp">
+            <summary>
+            交易时间戳
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.StatementDetailDTO.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Investor.StatementDTO">
+            <summary>
+            Statement Entity
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.StatementDTO.Id">
+            <summary>
+            Statement Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.StatementDTO.TransactionType">
+            <summary>
+            Statement 类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.StatementDTO.Amount">
+            <summary>
+            Statement 金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.StatementDTO.Timestamp">
+            <summary>
+            交易时间戳
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Investor.SignonDTO">
+            <summary>
+            登录成功实体
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.SignonDTO.AccessToken">
+            <summary>
+            token
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Investor.TargetAccountDTO">
+            <summary>
+            TargetAccountDTO
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.TargetAccountDTO.FullName">
+            <summary>
+            FullName,已经加上*
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.TargetAccountDTO.Cellphone">
+            <summary>
+            用户手机号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.TargetAccountDTO.Avatar">
+            <summary>
+            用户头像Id，客户端需要拼接地址下载图片
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Investor.TransferResult">
+            <summary>
+            Transfer成功结果
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.TransferResult.OrderId">
+            <summary>
+            交易Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.TransferResult.OrderNo">
+            <summary>
+            交易单号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.TransferResult.Timestamp">
+            <summary>
+            交易时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Investor.TransferResult.TargetAccount">
+            <summary>
+            收款方
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.FiiiposBonusRecordIM.MerchantId">
+            <summary>
+            作为下次获取商家分红详情的入参
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.FiiiposBonusRecordOM.MerchantId">
+            <summary>
+            作为下次获取商家分红详情的入参
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.FiiiposProfitDetailRecordOM.BonusDetail.Timestamp">
+            <summary>
+            收益日期
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.FiiiposProfitDetailRecordOM.BonusDetail.CryptoAmount">
+            <summary>
+            具体金额
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Invite.InviteRankIM">
+            <summary>
+            邀请排行榜
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.InviteRankIM.Type">
+            <summary>
+            0:fiiipay 1:fiiipos
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.InviteRankIM.Count">
+            <summary>
+            显示排行榜条数 默认为金银铜三个
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.InviteRecordIM.BeInvitedAccountId">
+            <summary>
+            被邀请人的主键
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.PreFiiiPayProfitOM.InvitationCount">
+            <summary>
+            邀请人数
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.PreFiiiPayProfitOM.TotalProfitAmount">
+            <summary>
+            fiiicoin总收益
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.PreFiiiPosProfitOM.ProfitRate">
+            <summary>
+            收益利率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.PreFiiiPosProfitOM.CryptoAmount">
+            <summary>
+            已经获得fiiicoin数量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.PreFiiiPosProfitOM.InviteCount">
+            <summary>
+            邀请购买fiiipos数量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.ProfitDetailIM.InvitationId">
+            <summary>
+            邀请记录表的唯一主键
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.ProfitDetailIM.AccountId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.SingleBonusDetailIM.Id">
+            <summary>
+            唯一主键
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Invite.SingleBonusDetailOM">
+            <summary>
+            单个的交易详情
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.SingleBonusDetailOM.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.SingleBonusDetailOM.TypeStr">
+            <summary>
+            类型字符串
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.SingleBonusDetailOM.TradeDescription">
+            <summary>
+            交易说明
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.SingleBonusDetailOM.BonusFrom">
+            <summary>
+            来自什么
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.SingleBonusDetailOM.Status">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.SingleBonusDetailOM.StatusStr">
+            <summary>
+            交易状态字符串
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.SingleBonusDetailOM.CryptoCode">
+            <summary>
+            币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.SingleBonusDetailOM.Timestamp">
+            <summary>
+            交易时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.SingleBonusDetailOM.OrderNo">
+            <summary>
+            交易单号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Invite.SingleBonusDetailOM.Amount">
+            <summary>
+            奖励金额
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Invite.SingleBonusDetailOM.BonusType">
+            <summary>
+            奖励类型
+            </summary>
+        </member>
+        <member name="F:FiiiPay.DTO.Invite.SingleBonusDetailOM.BonusType.BonusIncome">
+            <summary>
+            奖励收入
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Merchant.GetListByCodeListIM.CodeList">
+            <summary>
+            15位的随机码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Merchant.GetListByCodeListOMItem.Id">
+            <summary>
+            商家Id，可以用于后面的支付
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Merchant.GetListByCodeListOMItem.MerchantAccount">
+            <summary>
+            已经加上***，客户端直接显示
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Merchant.GetListByCodeListOMItem.L1VerifyStatus">
+            <summary>
+            商家LV1认证状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Merchant.GetListByCodeListOMItem.L2VerifyStatus">
+            <summary>
+            商家LV2认证状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Merchant.GetListByCodeListOMItem.RandomCode">
+            <summary>
+            随机码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Merchant.GetListByCodeListOMItem.IsAllowAcceptPayment">
+            <summary>
+            是否允许收款
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Messages.ReadMessageIM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.ReadMessageIM.Id">
+            <summary>
+            消息Id
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Messages.DeleteMessageIM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.DeleteMessageIM.Id">
+            <summary>
+            消息Id
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Messages.MessageListIM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.MessageListIM.PageSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.MessageListIM.PageIndex">
+            <summary>
+            从0开始
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.MessageListIM.MaxType">
+            <summary>
+            最大可以查询类型值
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Messages.AddMessageIM">
+            <summary>
+            测试准用
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.AddMessageIM.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.AddMessageIM.MsgType">
+            <summary>
+            消息类型[推送类型]
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.AddMessageIM.QueryId">
+            <summary>
+            订单Id相关
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.AddMessageIM.TitleKey">
+            <summary>
+            国际化标题Key
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.AddMessageIM.SubTitleKey">
+            <summary>
+            国际化标题SubKey
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.AddMessageIM.CoinCode">
+            <summary>
+            币种名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.AddMessageIM.Title">
+            <summary>
+            消息标题
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.AddMessageIM.Body">
+            <summary>
+            消息内容
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Messages.MessageListOM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.MessageListOM.List">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Messages.MessageListOMItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.MessageListOMItem.NoticeId">
+            <summary>
+            消息Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.MessageListOMItem.Type">
+            <summary>
+            消息类型[1=收款成功 3=退款成功 5=充币成功 6=提币成功 7=提币失败 
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.MessageListOMItem.QueryId">
+            <summary>
+            订单Id相关
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.MessageListOMItem.Title">
+            <summary>
+            消息标题
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.MessageListOMItem.SubTitle">
+            <summary>
+            消息内容
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.MessageListOMItem.Timestamp">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Messages.MessageListOMItem.Status">
+            <summary>
+            0=未读 1=已读
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.Code">
+            <summary>
+            加密货币币种名称：比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.FiatAmount">
+            <summary>
+            法币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.FiatCurrency">
+            <summary>
+            法币：比如：MRY
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.CryptoAmount">
+            <summary>
+            加密货币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.Status">
+            <summary>
+            比如：已完成
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.MarkUp">
+            <summary>
+            溢价率，比如：10.00%
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.ExchangeRate">
+            <summary>
+            当时的汇率，比如：1BTC = 1670.80MRY
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.Type">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.RefundTimestamp">
+            <summary>
+            退款时间，如果已经退款这个字段会有值，客户端根据这个字段是否有值显示即可
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.OrderNo">
+            <summary>
+            交易单号，底部的条形码也使用这个
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.CurrentExchangeRate">
+            <summary>
+            当前加密币对法币汇率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.OrderDetailOM.IncreaseRate">
+            <summary>
+            涨幅
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PayIM.Amount">
+            <summary>
+            法币的金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PayIM.CoinId">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PayIM.MerchantId">
+            <summary>
+            商家Id，MerchantId与MerchantCode二者必填一个，两个都有值的话使用MerchantId
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PayIM.MerchantCode">
+            <summary>
+            商家15位的随机码，MerchantId与MerchantCode二者必填一个，两个都有值的话使用MerchantId
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PayIM.Pin">
+            <summary>
+            加密过后的Pin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PayIM.PaymentType">
+            <summary>
+            支付类型(蓝牙，NFC，扫码)
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Order.PaymentCodeDTO">
+            <summary>
+            用户支付码实体
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PaymentCodeDTO.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PaymentCodeDTO.PaymentCode">
+            <summary>
+            支付码 （以00开头的17位纯数字字符串, eg：00628130633101607）
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PaymentCodeDTO.ExpireTimestamp">
+            <summary>
+            过期时间戳
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PayOrderIM.Pin">
+            <summary>
+            加密多的Pin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PayOrderOM.Currency">
+            <summary>
+            币种，比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PrePayExistedOrderIM.Type">
+            <summary>
+            订单来源类型
+            </summary>
+        </member>
+        <member name="F:FiiiPay.DTO.Order.PrePayExistedOrderIMType.Push">
+            <summary>
+            推送过来的订单
+            </summary>
+        </member>
+        <member name="F:FiiiPay.DTO.Order.PrePayExistedOrderIMType.ScanCode">
+            <summary>
+            扫码支付
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PrePayExistedOrderOM.Id">
+            <summary>
+            订单Id，跟客户端提供的订单Id一致，原值返回
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PrePayExistedOrderOM.Currency">
+            <summary>
+            币种，比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PrePayExistedOrderOM.CoinId">
+            <summary>
+            用于如果余额不足，跳转到充值页面
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PrePayExistedOrderOM.Amount">
+            <summary>
+            金额，比如：0.01200000
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PrePayExistedOrderOM.MerchantName">
+            <summary>
+            商家名称，比如：星巴克深南店
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PrePayExistedOrderOM.Balance">
+            <summary>
+            用于此币种的余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PrePayIM.MerchantId">
+            <summary>
+            商家Id，MerchantId与MerchantCode二者必填一个，两个都有值的话使用MerchantId
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PrePayIM.MerchantCode">
+            <summary>
+            商家15位的随机码，MerchantId与MerchantCode二者必填一个，两个都有值的话使用MerchantId
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PrePayOM.FiatCurrency">
+            <summary>
+            法币币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.PrePayOM.MarkupRate">
+            <summary>
+            溢价费率，比如，0.1，客户端需要自行转换显示为10%
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.Id">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.IconUrl">
+            <summary>
+            图标的地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.NewStatus">
+            <summary>
+            货币各功能的状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.Status">
+            <summary>
+            货币的状态 0禁用 1可用，兼容旧版本
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.Code">
+            <summary>
+            简称，比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.Name">
+            <summary>
+            名称，比如：Bitcoin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.UseableBalance">
+            <summary>
+            可用余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.FrozenBalance">
+            <summary>
+            冻结的余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.ExchangeRate">
+            <summary>
+            商家法币相对于该加密币的汇率，比如：要支付等值人民币的BTC，那么此值为0.00002013
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.FiatBalance">
+            <summary>
+            加密币换算成的法币额度
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.MerchantSupported">
+            <summary>
+            商家是否支持
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.DecimalPlace">
+            <summary>
+            小数点的位数
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.WalletItem.CryptoEnable">
+            <summary>
+            0禁用 1可用
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Order.ScanMerchantQRCodeOM">
+            <summary>
+            扫描商家固态二维码返回信息
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.ScanMerchantQRCodeOM.MerchantId">
+            <summary>
+            商家ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.ScanMerchantQRCodeOM.MerchantName">
+            <summary>
+            商家名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.ScanMerchantQRCodeOM.Avatar">
+            <summary>
+            商家头像ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.ScanMerchantQRCodeOM.L1VerifyStatus">
+            <summary>
+            商家LV1认证状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.ScanMerchantQRCodeOM.L2VerifyStatus">
+            <summary>
+            商家LV2认证状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.ScanMerchantQRCodeOM.FiatCurrency">
+            <summary>
+            法币币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.ScanMerchantQRCodeOM.MarkupRate">
+            <summary>
+            溢价费率，比如，0.1，客户端需要自行转换显示为10%
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Order.ScanMerchantQRCodeOM.WaletInfoList">
+            <summary>
+            加密币钱包详细列表
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.InfoOM.FullName">
+            <summary>
+            已经加上*
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.InfoOM.VerifiedStatus">
+            <summary>
+            字符串，客户端直接显示即可
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.InfoOM.Avatar">
+            <summary>
+            用户头像
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.InfoOM.Cellphone">
+            <summary>
+            用户手机号，已经带上地区码和加上***，比如 86 *******1200
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.InfoOM.Email">
+            <summary>
+            已经加上****
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.InfoOM.Gender">
+            <summary>
+            1：男，0：女
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.InfoOM.Birthday">
+            <summary>
+            生日，Unix时间戳
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.InfoOM.Nickname">
+            <summary>
+            昵称
+            </summary>
+            <value>
+            The nickname.
+            </value>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.UpdateAvatarIM.Avatar">
+            <summary>
+            图片Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.UpdateEmailIM.Email">
+            <summary>
+            新的邮箱
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Profile.OriginalEmailIM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.OriginalEmailIM.Email">
+            <summary>
+            邮箱地址
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Profile.VerifyOriginalEmailIM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.VerifyOriginalEmailIM.Email">
+            <summary>
+            邮箱地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.VerifyOriginalEmailIM.Code">
+            <summary>
+            邮箱验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.UpdateGenderIM.Gender">
+            <summary>
+            1：男，0：女
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.UpdateLv1InfoIM.IdentityDocType">
+            <summary>
+            证件类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.UpdateLv1InfoIM.IdentityDocNo">
+            <summary>
+            证件号码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.UpdateLv1InfoIM.FrontIdentityImage">
+            <summary>
+            证件正面照
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.UpdateLv1InfoIM.BackIdentityImage">
+            <summary>
+            证件反面照
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.UpdateLv1InfoIM.HandHoldWithCard">
+            <summary>
+            手持证件照
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.PreVerifyLv1OM.IdentityDocType">
+            <summary>
+            证件类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.PreVerifyLv1OM.IdentityDocNo">
+            <summary>
+            证件号码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.PreVerifyLv1OM.FrontIdentityImage">
+            <summary>
+            证件正面照
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.PreVerifyLv1OM.BackIdentityImage">
+            <summary>
+            证件反面照
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.PreVerifyLv1OM.HandHoldWithCard">
+            <summary>
+            手持证件照
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Profile.UpdateBirthdayIM.Date">
+            <summary>
+            精确到天的日期，比如：1986-08-12
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.GetUpdateCellphoneCodeIM.Pin">
+            <summary>
+            加密过的Pin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.GetUpdatePinCodeIM.Pin">
+            <summary>
+            加密过的Pin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.GetVerifyNewCellphoneCodeIM.NewCellphone">
+            <summary>
+            不要带上地区码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.PreFindPinBackOM.IsLv1Verified">
+            <summary>
+            Lv1是否已经认证
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.PreGetVerifyNewCellphoneCodeOM.PhoneCode">
+            <summary>
+            地区码，已经带上+，比如：+86
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.PreGetVerifyNewCellphoneCodeOM.CountryName">
+            <summary>
+            国家名，已经做多语言处理
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.SetPinIM.Pin">
+            <summary>
+            所有Pin都需要加密传到服务端
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Security.UpdateCellphoneIM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.UpdateCellphoneIM.NewCellphone">
+            <summary>
+            新手机，不要带上地区码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.UpdatePinIM.OldPin">
+            <summary>
+            加密过的Pin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.UpdatePinIM.NewPin">
+            <summary>
+            加密过的Pin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.VerifyFindPinBackIdNoIM.Code">
+            <summary>
+            上一步拿到的短信验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.VerifyFindPinBackIdNoIM.IdNo">
+            <summary>
+            证件号码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.VerifyForgotPasswordCodeIM.CountryId">
+            <summary>
+            国家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Security.VerifyForgotPasswordCodeIM.Cellphone">
+            <summary>
+            手机号，不包含地区码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListIM.CoinId">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListIM.PageIndex">
+            <summary>
+            从0开始
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListIM.Mounth">
+            <summary>
+            按月选择，比如：2018-02
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListIM.StartDate">
+            <summary>
+            按日选择起始日期，比如：2018-02-01
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListIM.EndDate">
+            <summary>
+            按日选择结束日期，比如：2018-02-01
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListIM.Keyword">
+            <summary>
+            搜索的关键字：订单号或者商家名
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListIM.Type">
+            <summary>
+            0：充币，1：提币，2：消费，3：退款，4：转入，5：转出，6：划入，7：划出， 8：奖励 不传表示查询全部
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListOMItem.Code">
+            <summary>
+            加密货币币种名称：比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListOMItem.StatusStr">
+            <summary>
+            状态字符串，比如：已完成
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListOMItem.Status">
+            <summary>
+            状态，比如：1
+            Order 1:Pending, 2:Completed, 3:Refunded
+            Deposit 以及 WithDraw 1:Confirmed, 2:Pendin, 3:Cancelled
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListOMItem.RefundStatus">
+            <summary>
+            红包退款状态 0无退款 1部分退款 2全额退款
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListOMItem.RefundStatusStr">
+            <summary>
+            红包退款状态名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListOMItem.CryptoAmount">
+            <summary>
+            加密货币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Statement.ListOMItem.Type">
+            <summary>
+            0：充币，1：提币，2：消费，3：退款，4：转账转出，5：转账转入 客户端根据这个调用对应的接口查询详情，消费和退款都调用Order/Detail接口查询详情
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Transfer.TransferDetailOM">
+            <summary>
+            转账详情
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferDetailOM.Status">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferDetailOM.StatusStr">
+            <summary>
+            交易状态文本
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferDetailOM.TradeType">
+            <summary>
+            交易类型，转账
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferDetailOM.TransferType">
+            <summary>
+            转账类型，转入或转出
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferDetailOM.CoinCode">
+            <summary>
+            币种编码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferDetailOM.Amount">
+            <summary>
+            转账金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferDetailOM.AccountName">
+            <summary>
+            目标账号名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferDetailOM.Fullname">
+            <summary>
+            目标全名
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferDetailOM.Timestamp">
+            <summary>
+            转账时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferDetailOM.OrderNo">
+            <summary>
+            交易单号
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Transfer.PreTransferIM">
+            <summary>
+            转账准备请求
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferIM.CoinId">
+            <summary>
+            币种ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferIM.ToCountryId">
+            <summary>
+            国家ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferIM.ToCellphone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Transfer.PreTransferOM">
+            <summary>
+            转账准备返回
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.ToAvatar">
+            <summary>
+            目标用户头像
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.ToAccountName">
+            <summary>
+            目标用户名
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.ToFullname">
+            <summary>
+            目标姓名
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.IsTransferAbled">
+            <summary>
+            是否允许转账
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.IsProfileVerified">
+            <summary>
+            是否已实名认证
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.CoinId">
+            <summary>
+            转账加密币币种ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.CoinCode">
+            <summary>
+            转账加密币币种编码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.MinCount">
+            <summary>
+            加密币最小转账金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.CoinDecimalPlace">
+            <summary>
+            加密币小数最大位数
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.CoinBalance">
+            <summary>
+            加密币可用余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.FiatCurrency">
+            <summary>
+            法币编码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.Price">
+            <summary>
+            加密币兑法币汇率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.PreTransferOM.ChargeFee">
+            <summary>
+            手续费
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Transfer.TransferIM">
+            <summary>
+            转账请求
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferIM.ToCountryId">
+            <summary>
+            国家ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferIM.ToCellphone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferIM.CoinId">
+            <summary>
+            转账加密币币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferIM.Amount">
+            <summary>
+            转账金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferIM.Pin">
+            <summary>
+            Pin
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Transfer.TransferOM">
+            <summary>
+            转账返回
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferOM.Timestamp">
+            <summary>
+            转账时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferOM.TracingId">
+            <summary>
+            交易Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferOM.TracingNo">
+            <summary>
+            交易单号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Transfer.TransferOM.AccountName">
+            <summary>
+            账号名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.AddAddressOM.Id">
+            <summary>
+            添加地址成功后生成的Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.AddressListOMItem.Alias">
+            <summary>
+            别名
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.AddressListOMItem.Address">
+            <summary>
+            地址，提交提币的时候，提交这个值，不要提交Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.AddressListOMItem.Tag">
+            <summary>
+            tag
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.Code">
+            <summary>
+            加密货币币种名称：比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.NeedTag">
+            <summary>
+            是否需要Tag
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.FiatAmount">
+            <summary>
+            法币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.FiatCurrency">
+            <summary>
+            法币：比如：MRY
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.CryptoAmount">
+            <summary>
+            加密货币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.Status">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.StatusStr">
+            <summary>
+            比如：已完成
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.Type">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.OrderNo">
+            <summary>
+            交易单号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.TransactionId">
+            <summary>
+            交易Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.TransactionFee">
+            <summary>
+            手续费
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.CheckTime">
+            <summary>
+            确认次数
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.SelfPlatform">
+            <summary>
+            是否自己平台内充币
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.WithdrawDetailOM.Remark">
+            <summary>
+            提币失败的Remark
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.ListForManageWithdrawalAddressOMItem.Id">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.ListForManageWithdrawalAddressOMItem.Code">
+            <summary>
+            币的简称，比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.ListForManageWithdrawalAddressOMItem.AddressCount">
+            <summary>
+            地址的数量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.ListForManageWithdrawalAddressOMItem.NeedTag">
+            <summary>
+            是否需要Tag
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.UseableBalance">
+            <summary>
+            可用余额（=总余额-被冻结的）
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.MinAmount">
+            <summary>
+            最小提币数量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerTxLimit">
+            <summary>
+            单次限额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerDayLimit">
+            <summary>
+            当日限额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerTxUsable">
+            <summary>
+            当次可用
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerDayUsable">
+            <summary>
+            当日可用
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerMonthLimit">
+            <summary>
+            当月限额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerMonthUsable">
+            <summary>
+            当月可用
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.Lv1Verified">
+            <summary>
+            是否已经Lv1认证
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.Lv2Verified">
+            <summary>
+            是否已经Lv2认证
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerTxLimitIfLv1Veried">
+            <summary>
+            如果Lv1已认证的每次限额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerDayLimitIfLv1Veried">
+            <summary>
+            如果Lv1已认证的每天限额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerMonthLimitIfLv1Veried">
+            <summary>
+            如果Lv1已认证的每月限额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerTxLimitIfLv2Veried">
+            <summary>
+            如果Lv2已认证的每次限额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerDayLimitIfLv2Veried">
+            <summary>
+            如果Lv2已认证的每天限额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.PerMonthLimitIfLv2Veried">
+            <summary>
+            如果Lv2已认证的每月限额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.DecimalPlace">
+            <summary>
+            数字币小数点位数
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.PreWithdrawOM.ToFiiiPayMinWithdrawalAmount">
+            <summary>
+            提币到FiiiPay最小提币量
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.TransactionFeeRateIM.CoinId">
+            <summary>
+            提币的币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.TransactionFeeRateIM.TargetAddress">
+            <summary>
+            提币到的地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.TransactionFeeRateIM.TargetTag">
+            <summary>
+            Tag
+            </summary>
+        </member>
+        <member name="T:FiiiPay.DTO.Withdraw.TransactionFeeRateOM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.TransactionFeeRateOM.TransactionFeeRate">
+            <summary>
+            手续费率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.TransactionFeeRateOM.TransactionFee">
+            <summary>
+            手续费
+            </summary>
+        </member>
+        <member name="P:FiiiPay.DTO.Withdraw.TransactionFeeRateOM.CryptoAddressType">
+            <summary>
+            地址类型
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,169 @@
+﻿@using FiiiPay.BackOffice.Models;
+@using FiiiPay.BackOffice.ViewModels
+@model GatewayAccountViewModel
+
+<div class="pagebody">
+    <form id="formEdit" class="form-horizontal" action="@Url.Action("Save")" enctype="multipart/form-data" method="post">
+        @Html.Hidden("Id", Model.Id)
+        @Html.AntiForgeryToken()
+        <h3>User information</h3>
+        <hr style="margin-bottom:10px; " />
+        <div class="form-group">
+            <label class="col-sm-3 control-label required" for="Username">Username</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(t => t.Username, new { Class = "form-control", placeholder = "Username" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Password">Password</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(t => t.Password, new { Class = "form-control", placeholder = "Password" })
+            </div>
+        </div>
+        <h3>License information</h3>
+        <hr style="margin-bottom:10px; " />
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="CompanyName">CompanyName</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(t => t.CompanyName, new { Class = "form-control", placeholder = "CompanyName" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="LicenseNo">LicenseNo</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(t => t.LicenseNo, new { Class = "form-control", placeholder = "LicenseNo" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">License Image</label>
+            <div class="col-sm-4">
+                <input type="file" name="LicenseUrl" value="@Model.BusinessLicenseImage" accept="image/*" onchange="imgPreviewURL(this,'License')" />
+                <img id="previewLicense" src="~/Handlers/BlobHandler.ashx?id=@Model.BusinessLicenseImage" style="border:solid 1px #ddd;height:150px;width:150px; padding:1px; margin-top:10px; max-width:100%;" />
+            </div>
+        </div>
+        <h3>Profile information</h3>
+        <hr style="margin-bottom:10px; " />
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="FirstName">FirstName</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(t => t.FirstName, new { Class = "form-control", placeholder = "FirstName" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="LastName">LastName</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(t => t.LastName, new { Class = "form-control", placeholder = "LastName" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="IdentityDocType">IdentityDocType</label>
+            <div class="col-sm-4">
+                @Html.DropDownList("IdentityDocType", (List<SelectListItem>)ViewBag.IdentityDocTypeList, new { Class = "form-control", placeholder = "IdentityDocType" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="IdentityDocNo">IdentityDocNo</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(t => t.IdentityDocNo, new { Class = "form-control", placeholder = "IdentityDocNo" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">FrontIdentity Image</label>
+            <div class="col-sm-4">
+                <input type="file" name="FrontIdentityUrl" value="@Model.FrontIdentityImage" accept="image/*" onchange="imgPreviewURL(this,'FrontIdentity')" />
+                <img id="previewFrontIdentity" src="~/Handlers/BlobHandler.ashx?id=@Model.FrontIdentityImage" style="border:solid 1px #ddd;height:150px;width:150px; padding:1px; margin-top:10px; max-width:100%;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">BackIdentity Image</label>
+            <div class="col-sm-4">
+                <input type="file" name="BackIdentityUrl" value="@Model.BackIdentityImage" accept="image/*" onchange="imgPreviewURL(this,'BackIdentity')" />
+                <img id="previewBackIdentity" src="~/Handlers/BlobHandler.ashx?id=@Model.BackIdentityImage" style="border:solid 1px #ddd;height:150px;width:150px; padding:1px; margin-top:10px; max-width:100%;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">HandHoldWithCard Image</label>
+            <div class="col-sm-4">
+                <input type="file" name="HandHoldWithCardUrl" value="@Model.HandHoldWithCard" accept="image/*" onchange="imgPreviewURL(this,'HandHoldWithCard')" />
+                <img id="previewHandHoldWithCard" src="~/Handlers/BlobHandler.ashx?id=@Model.HandHoldWithCard" style="border:solid 1px #ddd;height:150px;width:150px; padding:1px; margin-top:10px; max-width:100%;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+    <iframe id="tempframe" name="tempframe" hidden="hidden" style="border:none;width:200px;height:28px; overflow:hidden"></iframe>
+</div>
+<script>
+    $(function () {
+        var validateRules = {
+            Username: "required",
+            Password: {
+                required: function () {
+                    return @(Model.Id==Guid.Empty)
+                }
+            },
+            CompanyName: "required",
+            LicenseNo: "required",
+            FirstName: "required",
+            LastName: "required",
+            IdentityDocNo: "required"
+        };
+        if (@Model.Id == @Guid.Empty) {
+            validateRules.Password = { required: true, rangelength: [6, 16]};
+        }
+        $('#formEdit').jqValidate({
+            errorElement: 'span',
+            errorClass: 'help-inline',
+            focusInvalid: true,
+            rules: validateRules,
+            messages: {
+                Username: "This field is required.",
+                Password: {
+                    required: "Ask users for a password.",
+                    rangelength: "At least 6 to 16 alphanumeric or symbol characters and case sensitive."
+                },
+                CompanyName: "This field is required.",
+                LicenseNo: "This field is required.",
+                FirstName: "This field is required.",
+                LastName: "This field is required.",
+                IdentityDocNo: "This field is required."
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('info').addClass('has-error');
+            },
+            success: function (e) {
+                $(e).closest('.form-group').removeClass('has-error').addClass('info');
+                $(e).remove();
+            }
+        });
+    });
+
+    function imgPreviewURL(fileDom, type) {
+        //判断是否支持FileReader
+        if (window.FileReader) {
+            var reader = new FileReader();
+        } else {
+            alert("Your browser does not support image preview. If you need this function, please upgrade your browser!");
+        }
+
+        //获取文件
+        var file = fileDom.files[0];
+        var imageType = /^image\//;
+        //是否是图片
+        if (!imageType.test(file.type)) {
+            alert("Please select pictures!");
+            return;
+        }
+        //读取完成
+        reader.onload = function (e) {
+            //获取图片dom
+            var img = document.getElementById("preview" + type);
+            //图片路径设置为读取的图片
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+</script> 

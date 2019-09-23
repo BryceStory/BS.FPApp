@@ -1,0 +1,273 @@
+﻿@using FiiiPay.BackOffice.Models;
+
+@model List<MasterSettings>
+@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    List<MasterSettings> withdrawalList = ViewBag.WithdrawalList;
+    var permission = new GeneralPermission { Update = permissionCodeList.Contains("UserSettingUpdate") };
+}
+
+<div class="pagebody">
+    <form id="formEdit" class="form-horizontal" style="height:1000px;">
+        <h3>Inner Platform Withdrawal Setting</h3>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="UserWithdrawal_ToUser">UserWithdrawal_ToUser:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("UserWithdrawal_ToUser", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("UserWithdrawal_ToUser")).Value) * 100, new { Class = "form-control", placeholder = "UserWithdrawal_ToUser" })</label>
+            </div>
+            <label class="control-label">
+                %
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="UserWithdrawal_ToUser_MinAmount">UserWithdrawal_ToUser_MinAmount:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("UserWithdrawal_ToUser_MinAmount", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("UserWithdrawal_ToUser_MinAmount")).Value), new { Class = "form-control", placeholder = "UserWithdrawal_ToUser_MinAmount" })</label>
+            </div>
+            <label class="control-label">
+                USD
+            </label>
+        </div>
+        <hr style="margin-bottom:10px; " />
+        <h3>External Platform Withdrawal Setting</h3>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="Withdrawal_MinAmount">Withdrawal_MinAmount:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("Withdrawal_MinAmount", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("Withdrawal_MinAmount")).Value), new { Class = "form-control", placeholder = "Withdrawal_MinAmount" })</label>
+            </div>
+            <label class="control-label">
+                USD
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="Withdrawal_PerTx_Limit_User_NotVerified">Withdrawal_PerTx_Limit_User_NotVerified:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("Withdrawal_PerTx_Limit_User_NotVerified", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("Withdrawal_PerTx_Limit_User_NotVerified")).Value), new { Class = "form-control", placeholder = "Withdrawal_PerTx_Limit_User_NotVerified" })</label>
+            </div>
+            <label class="control-label">
+                USD
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="Withdrawal_PerDay_Limit_User_NotVerified">Withdrawal_PerDay_Limit_User_NotVerified:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("Withdrawal_PerDay_Limit_User_NotVerified", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("Withdrawal_PerDay_Limit_User_NotVerified")).Value), new { Class = "form-control", placeholder = "Withdrawal_PerDay_Limit_User_NotVerified" })</label>
+            </div>
+            <label class="control-label">
+                USD
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="Withdrawal_PerMonth_Limit_User_NotVerified">Withdrawal_PerMonth_Limit_User_NotVerified:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("Withdrawal_PerMonth_Limit_User_NotVerified", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("Withdrawal_PerMonth_Limit_User_NotVerified")).Value), new { Class = "form-control", placeholder = "Withdrawal_PerMonth_Limit_User_NotVerified" })</label>
+            </div>
+            <label class="control-label">
+                USD
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="Withdrawal_PerTx_Limit_User_Lv1Verified">Withdrawal_PerTx_Limit_User_Lv1Verified:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("Withdrawal_PerTx_Limit_User_Lv1Verified", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("Withdrawal_PerTx_Limit_User_Lv1Verified")).Value), new { Class = "form-control", placeholder = "Withdrawal_PerTx_Limit_User_Lv1Verified" })</label>
+            </div>
+            <label class="control-label">
+                USD
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="Withdrawal_PerDay_Limit_User_Lv1Verified">Withdrawal_PerDay_Limit_User_Lv1Verified:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("Withdrawal_PerDay_Limit_User_Lv1Verified", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("Withdrawal_PerDay_Limit_User_Lv1Verified")).Value), new { Class = "form-control", placeholder = "Withdrawal_PerDay_Limit_User_Lv1Verified" })</label>
+            </div>
+            <label class="control-label">
+                USD
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="Withdrawal_PerMonth_Limit_User_Lv1Verified">Withdrawal_PerMonth_Limit_User_Lv1Verified:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("Withdrawal_PerMonth_Limit_User_Lv1Verified", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("Withdrawal_PerMonth_Limit_User_Lv1Verified")).Value), new { Class = "form-control", placeholder = "Withdrawal_PerMonth_Limit_User_Lv1Verified" })</label>
+            </div>
+            <label class="control-label">
+                USD
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="Withdrawal_PerTx_Limit_User_Lv2Verified">Withdrawal_PerTx_Limit_User_Lv2Verified:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("Withdrawal_PerTx_Limit_User_Lv2Verified", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("Withdrawal_PerTx_Limit_User_Lv2Verified")).Value), new { Class = "form-control", placeholder = "Withdrawal_PerTx_Limit_User_Lv2Verified" })</label>
+            </div>
+            <label class="control-label">
+                USD
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="Withdrawal_PerDay_Limit_User_Lv2Verified">Withdrawal_PerDay_Limit_User_Lv2Verified:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("Withdrawal_PerDay_Limit_User_Lv2Verified", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("Withdrawal_PerDay_Limit_User_Lv2Verified")).Value), new { Class = "form-control", placeholder = "Withdrawal_PerDay_Limit_User_Lv2Verified" })</label>
+            </div>
+            <label class="control-label">
+                USD
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="Withdrawal_PerMonth_Limit_User_Lv2Verified">Withdrawal_PerMonth_Limit_User_Lv2Verified:</label>
+            <div class="col-sm-2">
+                <label>@Html.TextBox("Withdrawal_PerMonth_Limit_User_Lv2Verified", Convert.ToDecimal(@withdrawalList.Find(c => c.Name.Equals("Withdrawal_PerMonth_Limit_User_Lv2Verified")).Value), new { Class = "form-control", placeholder = "Withdrawal_PerMonth_Limit_User_Lv2Verified" })</label>
+            </div>
+            <label class="control-label">
+                USD
+            </label>
+        </div>
+        @if (permission.Update)
+        {
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button type="button" class="btn btn-primary" onclick="Save()">Confirm</button>
+                </div>
+            </div>
+        }
+    </form>
+</div>
+
+<script>
+    $(function () {
+        var validateRules = {
+            UserWithdrawal_ToUser: { number: true, min: 0 },
+            UserWithdrawal_ToUser_MinAmount: { number: true, min: 0 },
+            UserWithdrawal_ToMerchant: { number: true, min: 0 },
+            Withdrawal_MinAmount: { number: true, min: 0 },
+            Withdrawal_PerTx_Limit_User_NotVerified: {
+                number: true, min: 0 
+            },
+            Withdrawal_PerDay_Limit_User_NotVerified: {
+                number: true, min: function () {
+                    return Number($.trim($("#Withdrawal_PerTx_Limit_User_NotVerified").val()));
+                }
+            },
+            Withdrawal_PerMonth_Limit_User_NotVerified: {
+                number: true, min: function () {
+                    return Number($.trim($("#Withdrawal_PerDay_Limit_User_NotVerified").val()));
+                }
+            },
+            Withdrawal_PerTx_Limit_User_Lv1Verified: {
+                number: true, min: function () {
+                    return Number($.trim($("#Withdrawal_PerTx_Limit_User_NotVerified").val()));
+                }
+            },
+            Withdrawal_PerDay_Limit_User_Lv1Verified: {
+                number: true, min: function () {
+                    return Number($.trim($("#Withdrawal_PerDay_Limit_User_NotVerified").val()));
+                }
+            },
+            Withdrawal_PerMonth_Limit_User_Lv1Verified: {
+                number: true, min: function () {
+                    return Number($.trim($("#Withdrawal_PerMonth_Limit_User_NotVerified").val()));
+                }
+            },
+            Withdrawal_PerTx_Limit_User_Lv2Verified: {
+                number: true, min: function () {
+                    return Number($.trim($("#Withdrawal_PerTx_Limit_User_Lv1Verified").val()));
+                }
+            },
+            Withdrawal_PerDay_Limit_User_Lv2Verified: {
+                number: true, min: function () {
+                    return Number($.trim($("#Withdrawal_PerDay_Limit_User_Lv1Verified").val()));
+                }
+            },
+            Withdrawal_PerMonth_Limit_User_Lv2Verified: {
+                number: true, min: function () {
+                    return Number($.trim($("#Withdrawal_PerMonth_Limit_User_Lv1Verified").val()));
+                }
+            }
+        }
+        $('#formEdit').validate({
+            errorElement: 'span',
+            errorClass: 'help-inline',
+            focusInvalid: true,
+            rules: validateRules,
+            messages: {
+                UserWithdrawal_ToUser: "<br />Please enter the correct value.",
+                UserWithdrawal_ToUser_MinAmount: "<br />Please enter the correct value.",
+                UserWithdrawal_ToMerchant: "<br />Please enter the correct value.",
+                //Withdrawal_Tier: "<br />Please enter the correct value.",
+                Withdrawal_MinAmount: "<br />Please enter the correct value.",
+                Withdrawal_PerTx_Limit_User_NotVerified: "<br />Please enter the correct value.",
+                Withdrawal_PerDay_Limit_User_NotVerified: "<br />Please enter the correct value.",
+                Withdrawal_PerMonth_Limit_User_NotVerified: "<br />Please enter the correct value.",
+                Withdrawal_PerTx_Limit_User_Lv1Verified: "<br />Please enter the correct value.",
+                Withdrawal_PerDay_Limit_User_Lv1Verified: "<br />Please enter the correct value.",
+                Withdrawal_PerMonth_Limit_User_Lv1Verified: "<br />Please enter the correct value.",
+                Withdrawal_PerTx_Limit_User_Lv2Verified: "<br />Please enter the correct value.",
+                Withdrawal_PerDay_Limit_User_Lv2Verified: "<br />Please enter the correct value.",
+                Withdrawal_PerMonth_Limit_User_Lv2Verified: "<br />Please enter the correct value."
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('info').addClass('has-error');
+            },
+            success: function (e) {
+                $(e).closest('.form-group').removeClass('has-error').addClass('info');
+                $(e).remove();
+            }
+        });
+    });
+
+    function Save() {
+        var checkResult = $('#formEdit').valid();
+        if (checkResult) {
+            var postdata = getFromData();
+            $.ajax({
+                url: "/UserSetting/Save",
+                type: "post",
+                data: postdata,
+                dataType: "json",
+                contentType: "application/json",
+                success: function (context) {
+                    if (context.Status) {
+                        swal("Save Success");
+                    }
+                    else {
+                        swal({
+                            title: "Query Failed",
+                            text: context.Message,
+                            type: "error"
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    function getFromData() {
+        var UserWithdrawal_ToUser = $("#UserWithdrawal_ToUser").val() / 100;
+        var UserWithdrawal_ToUser_MinAmount = $("#UserWithdrawal_ToUser_MinAmount").val();
+        //var Withdrawal_Tier = $("#Withdrawal_Tier").val() / 100;
+        var Withdrawal_MinAmount = $("#Withdrawal_MinAmount").val();
+        var Withdrawal_PerTx_Limit_User_NotVerified = $("#Withdrawal_PerTx_Limit_User_NotVerified").val();
+        var Withdrawal_PerDay_Limit_User_NotVerified = $("#Withdrawal_PerDay_Limit_User_NotVerified").val();
+        var Withdrawal_PerMonth_Limit_User_NotVerified = $("#Withdrawal_PerMonth_Limit_User_NotVerified").val();
+        var Withdrawal_PerTx_Limit_User_Lv1Verified = $("#Withdrawal_PerTx_Limit_User_Lv1Verified").val();
+        var Withdrawal_PerDay_Limit_User_Lv1Verified = $("#Withdrawal_PerDay_Limit_User_Lv1Verified").val();
+        var Withdrawal_PerMonth_Limit_User_Lv1Verified = $("#Withdrawal_PerMonth_Limit_User_Lv1Verified").val();
+        var Withdrawal_PerTx_Limit_User_Lv2Verified = $("#Withdrawal_PerTx_Limit_User_Lv2Verified").val();
+        var Withdrawal_PerDay_Limit_User_Lv2Verified = $("#Withdrawal_PerDay_Limit_User_Lv2Verified").val();
+        var Withdrawal_PerMonth_Limit_User_Lv2Verified = $("#Withdrawal_PerMonth_Limit_User_Lv2Verified").val();
+        var list = new Array(
+            "UserWithdrawal_ToUser," + UserWithdrawal_ToUser,
+            "UserWithdrawal_ToUser_MinAmount," + UserWithdrawal_ToUser_MinAmount,
+            //"Withdrawal_Tier," + Withdrawal_Tier,
+            "Withdrawal_MinAmount," + Withdrawal_MinAmount,
+            "Withdrawal_PerTx_Limit_User_NotVerified," + Withdrawal_PerTx_Limit_User_NotVerified,
+            "Withdrawal_PerDay_Limit_User_NotVerified," + Withdrawal_PerDay_Limit_User_NotVerified,
+            "Withdrawal_PerMonth_Limit_User_NotVerified," + Withdrawal_PerMonth_Limit_User_NotVerified,
+            "Withdrawal_PerTx_Limit_User_Lv1Verified," + Withdrawal_PerTx_Limit_User_Lv1Verified,
+            "Withdrawal_PerDay_Limit_User_Lv1Verified," + Withdrawal_PerDay_Limit_User_Lv1Verified,
+            "Withdrawal_PerMonth_Limit_User_Lv1Verified," + Withdrawal_PerMonth_Limit_User_Lv1Verified,
+            "Withdrawal_PerTx_Limit_User_Lv2Verified," + Withdrawal_PerTx_Limit_User_Lv2Verified,
+            "Withdrawal_PerDay_Limit_User_Lv2Verified," + Withdrawal_PerDay_Limit_User_Lv2Verified,
+            "Withdrawal_PerMonth_Limit_User_Lv2Verified," + Withdrawal_PerMonth_Limit_User_Lv2Verified
+        );
+        return JSON.stringify({ olist: list });
+    }
+</script>

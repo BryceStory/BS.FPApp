@@ -1,0 +1,104 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var canVerify = permissionCodeList.Contains("MerchantProfileApprove");
+    var canVerifyStatus = (int)FiiiPay.Entities.Enums.VerifyStatus.UnderApproval;
+}
+<div>
+    <div class="gridSearchTool">
+        <form class="form-inline" id="formSearchGrid" onkeypress="return ExecuteSearch()">
+            <div class="form-group">
+                <label>注册手机</label>
+                <input type="text" id="SearchKeyword" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>POS SN</label>
+                <input type="text" id="POSSN" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>国家</label>
+                @Html.DropDownList("SearchCountryId", (List<SelectListItem>)ViewBag.CountryList, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>审核状态</label>
+                @Html.DropDownList("SearchStatus", (List<SelectListItem>)ViewBag.StatusList, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-primary btn-sm" value="搜索" onclick="DoSearch()" />
+                <button type="button" class="btn btn-outline-primary btn-sm" onclick="ResetGrid()">重置</button>
+            </div>
+            <div class="form-group">
+                <div class="form-control noborder">
+                    今日审核数量： @ViewBag.VerifyCount
+                </div>
+            </div>
+        </form>
+    </div>
+    <table id="gridlist"></table>
+    <div id="gridlistpager"></div>
+</div>
+<script>
+    $(function () {
+        var colname = ["Id", "用户名","注册手机", "POS SN", "商家名称", "国家", "审核状态", "提交时间","审核备注","操作"];
+        var colmodel = [
+            { name: 'MerchantId', index: 'MerchantId', hidden: true },
+            { name: 'Username', index: 'Username', width: 100, align: 'center', sortable: false },
+            { name: 'Cellphone', index: 'Cellphone', width: 100, align: 'center', sortable: false },
+            { name: 'SN', index: 'SN', width: 60, align: 'center', sortable: false },
+            { name: 'MerchantName', index: 'MerchantName', width: 60, align: 'center', sortable: false },
+            { name: 'CountryName', index: 'CountryName', width: 60, align: 'center', sortable: false },
+            { name: 'VerifyStatus', index: 'VerifyStatus', width: 60, align: 'center', sortable: false },
+            { name: 'SubmissionDate', index: 'SubmissionDate', width: 80, align: 'center' },
+            { name: 'Remark', index: 'Remark', width: 120, align: 'center', sortable: false },
+            {
+                name: 'Options', index: 'Options', width: 60, align: 'center', sortable: false, formatter: function (cellvalue, rowdata) {
+                    var id = rowdata.rowId;
+                    var htmlstr = '';
+                    htmlstr += '<input type="button" class="btn btn-primary btn-xs" value="查看" onclick="GoDetailPage(\'' + id + '\')" />';
+                    if ("@canVerify".toLowerCase() === "true") {
+                        htmlstr += '<input type="button" class="btn btn-primary btn-xs" value="审核" onclick="GoVerifyPage(\'' + id + '\')" style="margin-left:5px;" />';
+                    }
+                    return htmlstr;
+                }
+            }
+        ];
+        $("#gridlist").BoGrid({
+            url: '/MerchantProfile/LoadData',
+            colNames: colname,
+            colModel: colmodel,
+            sortname: "L2SubmissionDate",
+            sortorder: "desc",
+            postData: GetSearchConditions(),
+            pager: '#gridlistpager'
+        });
+    })
+    function ExecuteSearch(e) {
+        if (event.keyCode == 13) {
+            DoSearch();
+            return false;
+        }
+        return true;
+    }
+    function ResetGrid() {
+        document.getElementById('formSearchGrid').reset();
+        DoSearch();
+    }
+    function DoSearch() {
+        $("#gridlist").jqGrid('setGridParam', { postData: GetSearchConditions(), page: 1 }).trigger("reloadGrid");
+    }
+    function GetSearchConditions() {
+        var keyword = $.trim($("#SearchKeyword").val());
+        var sn = $.trim($("#POSSN").val());
+        var countryId = $("#SearchCountryId").children(":selected").val();
+        var status = $("#SearchStatus").children(":selected").val();
+        return { keyword: keyword, sn:sn, countryId: countryId, status: status };
+    }
+    function refreshPage() {
+        $("#gridlist").jqGrid('setGridParam', { postData: GetSearchConditions() }).trigger("reloadGrid");
+    }
+    function GoVerifyPage(id) {
+        $.opentabpage("/MerchantProfile/Verify?id=" + id, "Verify Merchant Profile", "verifymerchantprofile"+id);
+    }
+    function GoDetailPage(id) {
+        $.opentabpage("/MerchantProfile/Detail?id=" + id, "Merchant Profile Detail", "merchantprofiledetail" + id);
+    }
+</script>

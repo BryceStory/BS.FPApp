@@ -1,0 +1,139 @@
+﻿
+@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permobj = new GeneralPermission {  Update = permissionCodeList.Contains("POSAdvanceOrderUpdate") };
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permobj);
+}
+
+<div>
+    <div class="gridSearchTool">
+        <form class="form-inline" onkeypress="return ExecuteSearch()">
+            <div class="form-group">
+                <label for="OrderName">OrderName</label>
+                <input type="text" class="form-control" id="OrderName" placeholder="Input OrderName to search">
+            </div>
+            @*<div class="form-group">
+            <label for="Paymentstatus">Paymentstatus</label>
+            <input type="text" class="form-control" id="Paymentstatus" placeholder="Input Paymentstatus to search">
+        </div>*@
+            <div class="form-group">
+                <label for="Paymentstatus">Paymentstatus</label>
+                <select id="Paymentstatus" class="form-control">
+                    <option></option>
+                    <option>未付款</option>
+                    <option>已付预付款</option>
+                    <option>已付全款</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Shippingstatus">Shippingstatus</label>
+                <select id="Shippingstatus" class="form-control">
+                    <option></option>
+                    <option>已发货</option>
+                    <option>未发货</option>
+                </select>
+            </div>
+            @*<div class="form-group">
+                <label for="Shippingstatus">Shippingstatus</label>
+                <input type="text" class="form-control" id="Shippingstatus" placeholder="Input Shippingstatus to search">
+            </div>*@
+            <div class="form-group">
+                <input type="button" class="btn btn-primary btn-sm" value="搜索" onclick="DoSearch()" />
+            </div>
+        </form>
+    </div>
+    <table id="AdvanceOrderList"></table>
+    <div id="AdvanceOrderListpager"></div>
+</div>
+
+<script>
+    $(function () {
+        var colname = ["Id", "OrderName", "Phone", "Amount", "Price", "Totalpayment", "Advance(>=50%)", "TransferName", "TransferNumber", "Paymentstatus", "Shippingstatus", "Time", "Salesperson", "Amountpaid", "Remark"];
+        var colmodel = [
+            { name: 'Id', index: 'Id', width: 50, hidden: true },
+            { name: 'OrderName', index: 'OrderName', width: 50, align: 'center' },
+            { name: 'Phone', index: 'Phone', width: 50, align: 'center' },
+            { name: 'Amount', index: 'Amount', width: 50, align: 'center' },
+            { name: 'Price', index: 'Price', width: 50, align: 'center' },
+            { name: 'Totalpayment', index: 'Totalpayment', width: 50, align: 'center' },
+            { name: 'Advance', index: 'Advance', width: 50, align: 'center' },
+            { name: 'TransferName', index: 'TransferName', width: 50, align: 'center' },
+            { name: 'TransferNumber', index: 'TransferNumber', width: 50, align: 'center' },
+            { name: 'Paymentstatus', index: 'Paymentstatus', width: 50, align: 'center' },
+            { name: 'Shippingstatus', index: 'Shippingstatus', width: 50, align: 'center' },
+            { name: 'Time', index: 'Time', width: 50, align: 'center' },
+            { name: 'Salesperson', index: 'Salesperson', width: 50, align: 'center' },
+            { name: 'Amountpaid', index: 'Amountpaid', width: 50, align: 'center' },
+            { name: 'Remark', index: 'Remark', width: 50, align: 'center' }
+        ];
+        $("#AdvanceOrderList").BoGrid({
+            url: '/AdvanceOrder/LoadData',
+            showBtn: true,
+            permvalue: "@sePermission",
+            colNames: colname,
+            colModel: colmodel,
+            onEditClick: "GoEditPage",
+            postData: GetSystemnotice(),
+            pager: '#AdvanceOrderListpager'
+        });
+
+    });
+    function DoSearch() {
+        $("#AdvanceOrderList").jqGrid('setGridParam', { postData: GetSystemnotice(), page: 1 }).trigger("reloadGrid");
+    }
+
+    function GetSystemnotice() {
+        var OrderName = $.trim($("#OrderName").val());
+        var Paymentstatus = $.trim($("#Paymentstatus").val());
+        var Shippingstatus = $.trim($("#Shippingstatus").val());
+        return { OrderName: OrderName, Paymentstatus: Paymentstatus, Shippingstatus: Shippingstatus };
+    }
+    function GoEditPage(id) {
+        $.openmodalpage("EditSalespersonPage", "/AdvanceOrder/Edit", { id: id }, "修改POS机预订单");
+    }
+
+    function ExecuteSearch(e) {
+        if (event.keyCode == 13) {
+            DoSearch();
+            return false;
+        }
+        return true;
+    }
+
+    function SubmitEditCoinForm() {
+        var vaild = $("#editCoinForm").valid();
+        console.info(vaild);
+        if (!vaild) {
+            return false;
+        }
+        $.ajax({
+            url: '/AdvanceOrder/Save',
+            data: $("#editCoinForm").serialize(),
+            dataType: "json",
+            success: function (context) {
+                if (context.Status) {
+                    swal({
+                        title: "保存成功",
+                        type: "success"
+                    }, function () {
+                        $.closemodalpage("EditSalespersonPage");
+                        refreshPage();
+                    });
+                }
+                else {
+                    swal({
+                        title: "保存失败",
+                        type: "error",
+                        text: context.Message
+                    });
+                }
+            }
+        })
+    }
+
+    function refreshPage() {
+        $("#AdvanceOrderList").jqGrid('setGridParam', { postData: GetSystemnotice() }).trigger("reloadGrid");
+    }
+
+</script>

@@ -1,0 +1,556 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BackOfficeRefundOrderSubTitle" xml:space="preserve">
+    <value>客户退款申诉已通过，系统将退还该订单</value>
+  </data>
+  <data name="BackOfficeRefundOrderTitle" xml:space="preserve">
+    <value>退款申诉-{0}</value>
+  </data>
+  <data name="BonusComeFrom" xml:space="preserve">
+    <value>系统</value>
+  </data>
+  <data name="BonusDescription" xml:space="preserve">
+    <value>收到邀请有奖活动奖励</value>
+  </data>
+  <data name="BonusIncome" xml:space="preserve">
+    <value>奖励-收入</value>
+  </data>
+  <data name="DepositCancelled" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="DepositCancelSubTitle" xml:space="preserve">
+    <value>{0}充币失败，查看详情</value>
+  </data>
+  <data name="DepositCancelTitle" xml:space="preserve">
+    <value>充币-{0}</value>
+  </data>
+  <data name="DepositConfirmed" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="DepositEmailContent" xml:space="preserve">
+    <value>{0} {1}已经充币至您的账户，请查收</value>
+  </data>
+  <data name="DepositEmailTitle" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="DepositPending" xml:space="preserve">
+    <value>确认中</value>
+  </data>
+  <data name="DepositSubTitle" xml:space="preserve">
+    <value>你有1笔充币已到账，查看详情</value>
+  </data>
+  <data name="DepositTitle" xml:space="preserve">
+    <value>充币-{0}</value>
+  </data>
+  <data name="EMNotSupportWithdrawl" xml:space="preserve">
+    <value>FiiiCoin的充币、提币暂未开放，开放时间以官方通知为准</value>
+  </data>
+  <data name="KYC_LV1_REJECTTitle" xml:space="preserve">
+    <value>Lv1审核不通过</value>
+  </data>
+  <data name="KYC_LV1_VERIFIEDTitle" xml:space="preserve">
+    <value>Lv1审核通过</value>
+  </data>
+  <data name="KYC_LV2_REJECTTitle" xml:space="preserve">
+    <value>Lv2审核不通过</value>
+  </data>
+  <data name="KYC_LV2_VERIFIEDTitle" xml:space="preserve">
+    <value>Lv2审核通过</value>
+  </data>
+  <data name="OrderClosed" xml:space="preserve">
+    <value>已关闭</value>
+  </data>
+  <data name="OrderCompleted" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="OrderPending" xml:space="preserve">
+    <value>待支付</value>
+  </data>
+  <data name="OrderRefunded" xml:space="preserve">
+    <value>已退款</value>
+  </data>
+  <data name="RefundSubTitle" xml:space="preserve">
+    <value>退款已完成，查看详情</value>
+  </data>
+  <data name="RefundTitle" xml:space="preserve">
+    <value>退款-{0}</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>转账</value>
+  </data>
+  <data name="TransferFromFiiiExSubTitle" xml:space="preserve">
+    <value>你有1笔钱划入，查看详情</value>
+  </data>
+  <data name="TransferFromFiiiExTitle" xml:space="preserve">
+    <value>划转(划入)-{0}</value>
+  </data>
+  <data name="TransferInto" xml:space="preserve">
+    <value>转账-转入</value>
+  </data>
+  <data name="TransferOut" xml:space="preserve">
+    <value>转账-转出</value>
+  </data>
+  <data name="TransferToFiiiExSubTitle" xml:space="preserve">
+    <value>你有1笔钱划出，查看详情</value>
+  </data>
+  <data name="TransferToFiiiExTitle" xml:space="preserve">
+    <value>划转(划出)-{0}</value>
+  </data>
+  <data name="User_KYC_LV1_DefaultBody" xml:space="preserve">
+    <value>身份认证Lv1审核通过</value>
+  </data>
+  <data name="User_KYC_LV2_DefaultBody" xml:space="preserve">
+    <value>地址信息Lv2审核通过</value>
+  </data>
+  <data name="WithdrawalEmailContent" xml:space="preserve">
+    <value>您已经成功提币： {0} {1}到您指定的账户，请查收</value>
+  </data>
+  <data name="WithdrawalEmailTitle" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="WithdrawalRejectEmailContent" xml:space="preserve">
+    <value>您发起的提币： {0} {1}，申请失败，请联系客服</value>
+  </data>
+  <data name="WithdrawalRejectEmailTitle" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="WithdrawalRejectSubTitle" xml:space="preserve">
+    <value>你有1笔提币失败，查看详情</value>
+  </data>
+  <data name="WithdrawalRejectTitle" xml:space="preserve">
+    <value>提币-{0}</value>
+  </data>
+  <data name="WithdrawalSubTitle" xml:space="preserve">
+    <value>你有1笔提币已完成，查看详情</value>
+  </data>
+  <data name="WithdrawalTitle" xml:space="preserve">
+    <value>提币-{0}</value>
+  </data>
+  <data name="Deposit" xml:space="preserve">
+    <value>充币</value>
+  </data>
+  <data name="UnderReview" xml:space="preserve">
+    <value>审核中</value>
+  </data>
+  <data name="Verified" xml:space="preserve">
+    <value>已认证</value>
+  </data>
+  <data name="Lv1_Lv2" xml:space="preserve">
+    <value>已认证Lv1，待认证Lv2</value>
+  </data>
+  <data name="ToBeVerification" xml:space="preserve">
+    <value>待认证</value>
+  </data>
+  <data name="Withdrawal" xml:space="preserve">
+    <value>提币</value>
+  </data>
+  <data name="VerificationLv1First" xml:space="preserve">
+    <value>请先认证Lv1</value>
+  </data>
+  <data name="Recertification" xml:space="preserve">
+    <value>请重新认证{0}</value>
+  </data>
+  <data name="SMS_Template" xml:space="preserve">
+    <value>手机校验码：{0},如非本人请勿操作,{1}分钟之内有效 --FiiiPay</value>
+  </data>
+  <data name="VerificationCodoEmailTitle" xml:space="preserve">
+    <value>【FiiiPay】邮箱验证码</value>
+  </data>
+  <data name="Email_Template" xml:space="preserve">
+    <value>【FiiiPay】邮箱验证码：{0}，如非本人请勿操作，{1}分钟之内有效。</value>
+  </data>
+  <data name="ConsumeSubTitle" xml:space="preserve">
+    <value>你有1笔消费支出，查看详情</value>
+  </data>
+  <data name="ConsumeTitle" xml:space="preserve">
+    <value>消费-{0}</value>
+  </data>
+  <data name="FiiiExTransferIntoSubTitle" xml:space="preserve">
+    <value>划入已完成，查看详情</value>
+  </data>
+  <data name="FiiiExTransferIntoTitle" xml:space="preserve">
+    <value>划转(划入)-{0}</value>
+  </data>
+  <data name="KYC_LV1_REJECTSubTitle" xml:space="preserve">
+    <value>身份认证Lv1审核不通过，查看详情</value>
+  </data>
+  <data name="KYC_LV1_VERIFIEDSubTitle" xml:space="preserve">
+    <value>身份认证Lv1审核通过，查看详情</value>
+  </data>
+  <data name="KYC_LV2_REJECTSubTitle" xml:space="preserve">
+    <value>地址信息Lv2审核不通过，查看详情</value>
+  </data>
+  <data name="KYC_LV2_VERIFIEDSubTitle" xml:space="preserve">
+    <value>地址信息Lv2审核通过，查看详情</value>
+  </data>
+  <data name="TransferIntoSubTitle" xml:space="preserve">
+    <value>{0}已成功给你转1笔钱，查看详情</value>
+  </data>
+  <data name="TransferIntoTitle" xml:space="preserve">
+    <value>转账(转入)-{0}</value>
+  </data>
+  <data name="TransferOutSubTitle" xml:space="preserve">
+    <value>转账转出已完成，查看详情</value>
+  </data>
+  <data name="TransferOutTitle" xml:space="preserve">
+    <value>转账(转出)-{0}</value>
+  </data>
+  <data name="FailedGenerateAddress" xml:space="preserve">
+    <value>生成地址失败</value>
+  </data>
+  <data name="BonusFIII" xml:space="preserve">
+    <value>奖励-FIII</value>
+  </data>
+  <data name="BonusSubTitle" xml:space="preserve">
+    <value>你的奖励金已到账，查看详情</value>
+  </data>
+  <data name="NewsTemplate" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;style&gt;
+            html,
+            body {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                min-width: 320px;
+                font-family: "PingFang SC";
+                font-size: 100%;
+                color: #606266;
+                font-weight: 600;
+                overflow-x: hidden;
+                overflow-y: scroll;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+                text-align: center;
+                margin: 0.375rem 0;
+            }
+
+            .mian {
+                padding: 0 0.825rem;
+            }
+
+            .mian p span{
+                white-space: normal !important;
+            }
+
+            p {
+                white-space: normal !important;
+                padding: 0.25rem 0;
+                font-size: 0.825rem;
+                line-height: 1.2rem;
+                text-align: left;
+                margin: 0;
+                margin-bottom: 0px;
+                font-weight: 500;
+            }
+
+            h2 {
+                font-size: 0.825rem;
+                text-align: left;
+                color: #cccccc;
+                font-weight: 400;
+                margin: 0.825rem 0;
+            }
+
+            .bg {
+                background-color: #F2F6FC;
+                word-break: break-word;
+                padding: 0.5rem 0.75rem;
+            }
+
+            .bg:last-child {
+                padding-bottom: 2rem;
+            }
+
+            @media screen and (min-width: 576px) {
+                html,
+                body {
+                    font-size: 150%;
+                }
+            }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="mian"&gt;
+            &lt;h1&gt;[Title]&lt;/h1&gt;
+            &lt;h2 id="time" data-utc="[PublishTime]"&gt;[PublishTime]&lt;/h2&gt;
+            &lt;div class="bg"&gt;[Content]&lt;/div&gt;
+            &lt;script&gt;
+                function formatDateTime(inputTime) {
+                    var date = new Date(inputTime);
+                    var y = date.getFullYear();
+                    var m = date.getMonth() + 1;
+                    m = m &lt; 10 ? ('0' + m) : m;
+                    var d = date.getDate();
+                    d = d &lt; 10 ? ('0' + d) : d;
+                    var h = date.getHours();
+                    h = h &lt; 10 ? ('0' + h) : h;
+                    var minute = date.getMinutes();
+                    minute = minute &lt; 10 ? ('0' + minute) : minute;
+                    return y + '-' + m + '-' + d + ' ' + h + ':' + minute;
+                }
+                document.onreadystatechange = function () {
+                    var el = document.getElementById('time');
+                    el.innerText = formatDateTime(el.dataset.utc * 1);
+                }
+            &lt;/script&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</value>
+  </data>
+  <data name="FiiiposInviteSuccessContent" xml:space="preserve">
+    <value>POS机接受了邀请，商家名称：{0}</value>
+  </data>
+  <data name="FiiiposInviteSuccessTitle" xml:space="preserve">
+    <value>奖励-POS机邀请成功</value>
+  </data>
+  <data name="FiiiposUnbindContent" xml:space="preserve">
+    <value>POS机解除关联，商家名称：{0}</value>
+  </data>
+  <data name="FiiiposUnbindTitle" xml:space="preserve">
+    <value>奖励-POS机解除关联</value>
+  </data>
+  <data name="InviteFiiiposSuccessSubTitle" xml:space="preserve">
+    <value>POS机接受了邀请，商家名称：{0}</value>
+  </data>
+  <data name="InviteFiiiposSuccessTitle" xml:space="preserve">
+    <value>奖励-POS机邀请成功</value>
+  </data>
+  <data name="RewardUnbindFiiiposSubTitle" xml:space="preserve">
+    <value>POS机解除关联，商家名称：{0}</value>
+  </data>
+  <data name="RewardUnbindFiiiposTitle" xml:space="preserve">
+    <value>奖励-POS机解除关联</value>
+  </data>
+  <data name="BillTypeNetOrder" xml:space="preserve">
+    <value>网购</value>
+  </data>
+  <data name="GatewayOrderPaymentRefundSubTitle" xml:space="preserve">
+    <value>你有1笔退款已完成，查看详情</value>
+  </data>
+  <data name="GatewayOrderPaymentRefundTitle" xml:space="preserve">
+    <value>退款-{0}</value>
+  </data>
+  <data name="GatewayOrderPaymentSubTitle" xml:space="preserve">
+    <value>你有1笔网购支出，查看详情</value>
+  </data>
+  <data name="GatewayOrderPaymentTitle" xml:space="preserve">
+    <value>网购-{0}</value>
+  </data>
+  <data name="EMNeedLV1Verfied" xml:space="preserve">
+    <value>使用该功能需先完成LV1身份认证</value>
+  </data>
+  <data name="BillerOrderComplete" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="BillerOrderFail" xml:space="preserve">
+    <value>失败，已退款</value>
+  </data>
+  <data name="BillerOrderPending" xml:space="preserve">
+    <value>确认中</value>
+  </data>
+  <data name="BillerCompleteSubTitle" xml:space="preserve">
+    <value>你有1笔缴费已完成，查看详情</value>
+  </data>
+  <data name="BillerDetailType" xml:space="preserve">
+    <value>缴费</value>
+  </data>
+  <data name="BillerFailSubTitle" xml:space="preserve">
+    <value>你有1笔缴费失败，查看详情</value>
+  </data>
+  <data name="BillerTitle" xml:space="preserve">
+    <value>缴费-{0}</value>
+  </data>
+  <data name="BillerOverAddressMaxCount" xml:space="preserve">
+    <value>最多添加500条</value>
+  </data>
+  <data name="BillerAddressExisted" xml:space="preserve">
+    <value>该Biller信息已存在</value>
+  </data>
+  <data name="BillerMessageFailTitle" xml:space="preserve">
+    <value>缴费失败</value>
+  </data>
+  <data name="BillerFailTitle" xml:space="preserve">
+    <value>缴费失败-{0}</value>
+  </data>
+  <data name="BillerOverDayMaxAmount" xml:space="preserve">
+    <value>今日平台可缴费额度已达上限，请明天再试</value>
+  </data>
+  <data name="BillerOverMaxAmount" xml:space="preserve">
+    <value>单笔支付不可超过 {0}</value>
+  </data>
+  <data name="BillerOverMonthMaxAmount" xml:space="preserve">
+    <value>本月平台可缴费额度已达上限，请下个月再试</value>
+  </data>
+  <data name="BillerExchangeRateError" xml:space="preserve">
+    <value>因汇率实时更新，实际支出数量有变动，请确认后重新支付</value>
+  </data>
+  <data name="BillerForbidden" xml:space="preserve">
+    <value>该功能咱不能使用，请联系客服解决</value>
+  </data>
+  <data name="StoreOrderIncome" xml:space="preserve">
+    <value>门店收入</value>
+  </data>
+  <data name="RedPocketStatus" xml:space="preserve">
+    <value>进行中,已完成,已部分退款,已全额退款</value>
+  </data>
+  <data name="StoreOrderConsumeSubTitle" xml:space="preserve">
+    <value>你有一笔线下消费支出，查看详情</value>
+  </data>
+  <data name="StoreOrderConsumeTitle" xml:space="preserve">
+    <value>线下消费-{0}</value>
+  </data>
+  <data name="StoreOrderIncomeSubTitle" xml:space="preserve">
+    <value>你有1笔门店收入，查看详情</value>
+  </data>
+  <data name="StoreOrderIncomeTitle" xml:space="preserve">
+    <value>门店收入-{0}</value>
+  </data>
+  <data name="FiiipayMerchantCertifiedSubTitle" xml:space="preserve">
+    <value>审核通过，查看详情</value>
+  </data>
+  <data name="FiiipayMerchantCertifiedTitle" xml:space="preserve">
+    <value>门店审核-通过</value>
+  </data>
+  <data name="FiiipayMerchantDisapprovalSubTitle" xml:space="preserve">
+    <value>审核不通过，查看详情</value>
+  </data>
+  <data name="FiiipayMerchantDisapprovalTitle" xml:space="preserve">
+    <value>门店审核-不通过</value>
+  </data>
+  <data name="FiiipayMerchantDisapprovalDetail" xml:space="preserve">
+    <value>门店资格审核不通过\n\n非常抱歉，您提交的商家申请入驻资料审核未通过。\n原因：{0}</value>
+  </data>
+  <data name="FiiipayMerchantVerifyDetail" xml:space="preserve">
+    <value>门店资格审核通过\n\n恭喜您提交的商家申请入驻信息已通过审核，您提交的商店信息将展示在商家模块</value>
+  </data>
+  <data name="Payment" xml:space="preserve">
+    <value>线下消费</value>
+  </data>
+</root>

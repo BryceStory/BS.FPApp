@@ -1,0 +1,67 @@
+﻿@{
+    var permobj = new { Create = true, Update = true, Delete = true };
+    var definePerm = true;// permList.ContainsKey("ModulePermission");
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permobj);
+}
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="Username">Username</label>
+            <input type="text" class="form-control" id="Username" placeholder="Input Username to search">
+        </div>
+        <div class="form-group largesearchwidth">
+            <label for="StartDate">Start Date:</label>
+            <input data-val="true" class="form-control" id="StartDate" name="StartDate" type="text" value="@DateTime.UtcNow.AddMonths(-1).ToString("yyyy-MM-dd")">
+            <label for="EndDate">End Date:</label>
+            <input data-val="true" class="form-control" id="EndDate" name="EndDate" type="text" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="SearchOrder()">Search</button>
+    </form>
+</div>
+
+<table id="dtGrid"></table>
+<div id="dtGridPager"></div>
+<script>
+    $(function() {
+        $('#StartDate').add($('#EndDate')).datetimepicker({
+            format: 'yyyy-mm-dd',
+            minView: 'month',
+            autoclose: true
+        });
+
+        var colnames = ["Id", "CreateTime", "Username", "LogContent", "IPAddress"];
+        var colmodels = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'CreateTime', index: 'CreateTime', align: 'center', width: 60 },
+            { name: 'Username', align: 'center', index: 'Username', width: 60 },
+            { name: 'LogContent', index: 'LogContent', width: 40, align: 'center', sortable: false },
+            { name: 'IPAddress', index: 'IPAddress', width: 40, align: 'center', sortable: false }
+        ];
+
+        $("#dtGrid").BoGrid({
+            url: '/OperationLog/LoadData',
+            ExpandColumn: 'PageName',
+            colNames: colnames,
+            colModel: colmodels,
+            sortname: "CreateTime",
+            sortorder: "desc",
+            pager: '#dtGridPager'
+        });
+    });
+    function SearchOrder() {
+        var postdata = GetSearchCondition();
+        $("#dtGrid").jqGrid('setGridParam', { postData: postdata, page: 1 }).trigger("reloadGrid");
+    }
+    function refreshPage() {
+        var postdata = GetSearchCondition();
+        $("#dtGrid").jqGrid('setGridParam', { postData: postdata }).trigger("reloadGrid");
+    }
+    function GetSearchCondition() {
+        var postData = {
+            Username: $.trim($("#Username").val()),
+            StartDate: $("#StartDate").val(),
+            EndDate: $("#EndDate").val()
+        };
+        return postData;
+    }
+</script>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C1F9F507-9109-4009-B93C-E5D2D4E7763A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FiiiPay.Data</RootNamespace>
+    <AssemblyName>FiiiPay.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dapper.1.50.5\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FiiiPay.Framework, Version=1.0.7074.27146, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FiiiPay.Framework.1.0.7074.27146\lib\net47\FiiiPay.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdvertisingDAC.cs" />
+    <Compile Include="ArticleDAC.cs" />
+    <Compile Include="BaseDataAccess.cs" />
+    <Compile Include="BillerAddressDAC.cs" />
+    <Compile Include="BillerOrderDAC.cs" />
+    <Compile Include="CryptoAddressDAC.cs" />
+    <Compile Include="CryptoTransactionDAC.cs" />
+    <Compile Include="FeedBackDAC.cs" />
+    <Compile Include="FiiiPayMerchantProfileDAC.cs" />
+    <Compile Include="FiiipayMerchantVerifyRecordDAC.cs" />
+    <Compile Include="GatewayOrderDAC.cs" />
+    <Compile Include="InvestorAccountDAC.cs" />
+    <Compile Include="InvestorOrderDAC.cs" />
+    <Compile Include="InvestorWalletStatementDAC.cs" />
+    <Compile Include="InviteRecordDAC.cs" />
+    <Compile Include="MallPaymentOrderDAC.cs" />
+    <Compile Include="MerchantAccountDAC.cs" />
+    <Compile Include="MerchantCategoryDAC.cs" />
+    <Compile Include="MerchantDepositDAC.cs" />
+    <Compile Include="MerchantExTransferOrderDAC.cs" />
+    <Compile Include="MerchantInformationDAC.cs" />
+    <Compile Include="MerchantOwnersFigureDAC.cs" />
+    <Compile Include="MerchantProfileDAC.cs" />
+    <Compile Include="MerchantProfilesDAC.cs" />
+    <Compile Include="MerchantRecommendDAC.cs" />
+    <Compile Include="MerchantSupportCryptoDAC.cs" />
+    <Compile Include="MerchantWalletDAC.cs" />
+    <Compile Include="MerchantWalletStatementDAC.cs" />
+    <Compile Include="MerchantWithdrawalDAC.cs" />
+    <Compile Include="MerchantWithdrawalFeeDAC.cs" />
+    <Compile Include="OpenAccountDAC.cs" />
+    <Compile Include="OrderDAC.cs" />
+    <Compile Include="OrderWithdrawalFeeDAC.cs" />
+    <Compile Include="POSDAC.cs" />
+    <Compile Include="POSMerchantBindRecordDAC.cs" />
+    <Compile Include="ProfitDetailDAC.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadRecordDAC.cs" />
+    <Compile Include="RedPocketDAC.cs" />
+    <Compile Include="RedPocketReceiverDAC.cs" />
+    <Compile Include="RedPocketRefundDAC.cs" />
+    <Compile Include="RefundDAC.cs" />
+    <Compile Include="GatewayRefundOrderDAC.cs" />
+    <Compile Include="RewardDistributeRecordDAC.cs" />
+    <Compile Include="StateDAC.cs" />
+    <Compile Include="StoreBannerDAC.cs" />
+    <Compile Include="StoreOrderDAC.cs" />
+    <Compile Include="StorePaySettingDAC.cs" />
+    <Compile Include="StoreTypeDAC.cs" />
+    <Compile Include="UserAccountDAC.cs" />
+    <Compile Include="UserDepositDAC.cs" />
+    <Compile Include="UserDeviceDAC.cs" />
+    <Compile Include="UserExTransferOrderDAC.cs" />
+    <Compile Include="UserLoginLogDAC.cs" />
+    <Compile Include="UserProfileDAC.cs" />
+    <Compile Include="UserTransactionDAC.cs" />
+    <Compile Include="UserTransferDAC.cs" />
+    <Compile Include="UserWalletDAC.cs" />
+    <Compile Include="UserWalletStatementDAC.cs" />
+    <Compile Include="UserWithdrawalDAC.cs" />
+    <Compile Include="UserWithdrawalFeeDAC.cs" />
+    <Compile Include="VerifyRecordDAC.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\FiiiPay.Entities\FiiiPay.Entities.csproj">
+      <Project>{68b13fba-8c45-450c-9eae-c9fecbce5b84}</Project>
+      <Name>FiiiPay.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

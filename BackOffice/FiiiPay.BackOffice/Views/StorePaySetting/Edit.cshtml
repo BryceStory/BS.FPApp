@@ -1,0 +1,63 @@
+﻿@{
+    List<FiiiPay.BackOffice.Models.Countries> countryList = ViewBag.CountryList;
+}
+@model FiiiPay.BackOffice.Models.StorePaySettings
+<div class="pagebody">
+    <form class="form-horizontal" id="editStorePaySettingForm">
+        @Html.HiddenFor(t => t.Id)
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="CountryId">国家</label>
+            <div class="col-sm-10">
+                <select id="CountryId" name="CountryId" class="form-control">
+                    <option value="" data-fiatcurrency="">请选择</option>
+                    @if (countryList != null)
+                    {
+                        foreach (var item in countryList)
+                        {
+                            string selectedStr = "";
+                            if (Model != null && item.Id == Model.CountryId)
+                            {
+                                selectedStr = "selected";
+                            }
+                            <option value="@item.Id" @selectedStr data-fiatcurrency="@item.FiatCurrency">@item.Name_CN (@item.Name)</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="FiatCurrency">法币</label>
+            <div class="col-sm-10">
+                @Html.HiddenFor(t => t.FiatCurrency)
+                @Html.TextBox("FiatCurrencyTxt", Model?.FiatCurrency, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="LimitAmount">限额</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(t => t.LimitAmount, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <input type="button" class="btn btn-primary" onclick="SubmitPaySettingForm()" value="提交" />
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $("#editStorePaySettingForm").jqValidate({
+            rules: {
+                CountryId: { required: true },
+                LimitAmount: { min: 0.01, number: true }
+            }
+        });
+        $("#CountryId").on("change", function () {
+            var $selectedItem = $(this).children(":selected");
+            var currency = $selectedItem.data("fiatcurrency");
+            $("#FiatCurrency").val(currency);
+            $("#FiatCurrencyTxt").val(currency);
+        });
+    })
+</script>

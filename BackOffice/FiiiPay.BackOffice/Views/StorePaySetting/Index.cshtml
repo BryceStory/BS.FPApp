@@ -1,0 +1,100 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permobj = new GeneralPermission { Create = permissionCodeList.Contains("StorePaySettingCreate"), Update = permissionCodeList.Contains("StorePaySettingUpdate"), Delete = permissionCodeList.Contains("StorePaySettingDelete") };
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permobj);
+    bool createPermission = permissionCodeList.Contains("StorePaySettingCreate");
+}
+
+<div class="gridSearchTool">
+    @if (createPermission)
+    {
+        <button type="button" class="btn btn-create" onclick="AddPaySetting()">添加</button>
+    }
+</div>
+<table id="paysettingGrid"></table>
+<div id="paysettingGridPager"></div>
+
+<script>
+    $(function () {
+        var colModel = new Array({ name: 'Id', index: 'Id', hidden: true },
+            { name: 'NameEN', index: 'NameEN', width: 100, align: 'center', sortable: false },
+            { name: 'NameCN', index: 'NameCN', width: 100, align: 'center', sortable: false },
+            { name: 'FiatCurrency', index: 'FiatCurrency', width: 100, align: 'center', sortable: false },
+            { name: 'LimitAmount', index: 'LimitAmount', width: 100, align: 'center', sortable: false });
+
+        $("#paysettingGrid").BoGrid({
+            url: '/StorePaySetting/LoadData',
+            colNames: ["Id", "名称", "中文名", "法币", "单笔最高限额"],
+            colModel: colModel,
+            pager: '#paysettingGridPager',
+            showBtn: true,
+            permvalue: "@sePermission",
+            onEditClick: "EditPaySetting",
+            onDeleteClick: "DeletePaySetting"
+        });
+    });
+
+    function AddPaySetting() {
+        $.openmodalpage("EditPaySettingPage", "/StorePaySetting/Add", null, "添加支付设置");
+    }
+    function EditPaySetting(id) {
+        $.openmodalpage("EditPaySettingPage", "/StorePaySetting/Edit", { id: id }, "修改支付设置");
+    }
+    function DeletePaySetting(id) {
+        $.swconfirm("确定删除这条设置？", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: '/StorePaySetting/Delete',
+                    data: { id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "删除成功",
+                                type: "success"
+                            }, function () {
+                                $("#paysettingGrid").trigger('reloadGrid');
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "删除失败",
+                                type: "error",
+                                text: context.Message
+                            });
+                        }
+                    }
+                })
+            }
+        });
+    }
+    function SubmitPaySettingForm() {
+        var vaild = $("#editStorePaySettingForm").valid();
+        if (!vaild) {
+            return false;
+        }
+        $.ajax({
+            url: '/StorePaySetting/Save',
+            data: $("#editStorePaySettingForm").serialize(),
+            dataType: "json",
+            success: function (context) {
+                if (context.Status) {
+                    swal({
+                        title: "保存成功",
+                        type: "success"
+                    }, function () {
+                        $.closemodalpage("EditPaySettingPage");
+                        $("#paysettingGrid").trigger('reloadGrid');
+                    });
+                }
+                else {
+                    swal({
+                        title: "保存失败",
+                        type: "error",
+                        text: context.Message
+                    });
+                }
+            }
+        })
+    }
+</script>

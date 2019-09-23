@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="col-sm-3">
+        <ul class="rowlist" id="chartlist">
+            <li>Report list</li>
+            <li>
+                <a href="#chart1">
+                    <div class="listitemtext">会员和POS机商家数量统计</div>
+                    <div class="listitemtext listitemtexttitle"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#chart2">
+                    <div class="listitemtext">平台消费次数</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-9">
+        <div id="chart1" class="hidden" style="margin-top:50px;">
+            <div class="chartseachtool">
+                <select id="chart1TimeType">
+                    <option value="1">周统计</option>
+                    <option value="2">月统计</option>
+                    <option value="3">年统计</option>
+                </select>
+            </div>
+            <div class="chartcontent" style="width:100%;height:400px;"></div>
+        </div>
+        <div id="chart2" class="hidden" style="margin-top:50px;">
+            <div class="chartseachtool">
+                <select id="chart2TimeType">
+                    <option value="1">周统计</option>
+                    <option value="2">月统计</option>
+                    <option value="3">年统计</option>
+                </select>
+            </div>
+            <div class="chartcontent" style="width:100%;height:400px;"></div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#chartlist").on("click", "a", function () {
+            var $link = $(this);
+            $link.closest("ul").children("li.active").removeClass("active");
+            $link.closest("li").addClass("active");
+            var titletext = $link.children().first().text();
+            var chartid = $link.attr("href");
+            var $chart = $(chartid);
+            $chart.data("title", titletext);
+            $chart.parent().children().each(function () {
+                $(this).addClass("hidden");
+            })
+            $chart.removeClass("hidden");
+            initchart(chartid, false);
+        });
+        initevents();
+
+        $("#chartlist").find("a").first().click();
+    });
+    function initevents() {
+        $("#chart1TimeType").on("change", function () {
+            initchart("#chart1",true);
+        });
+        $("#chart2TimeType").on("change", function () {
+            initchart("#chart2", true);
+        });
+    }
+    function initchart(elementId,isrefresh) {
+        var $chart = $(elementId);
+        var titletext = $chart.data("title");
+        var chartobj = $chart.children(".chartcontent")[0];
+        var myChart = echarts.getInstanceByDom(chartobj);
+        if (myChart) {
+            if (!isrefresh) {
+                return;
+            }
+        }
+        else {
+            myChart = echarts.init(chartobj);    
+        }
+        var option = {
+            title: { text: titletext, top: 0,left:'center', textStyle: { fontWeight: 'normal' } },
+            color: ["#4FB2FF","#FFAE3A"],
+            legend: { bottom: 0, left: 'center'},
+            tooltip: {},
+            toolbox: { show: true, right: 30, feature: { saveAsImage: { title: 'Save as picture' } } },
+            dataset: {},
+            xAxis: { type: 'category' },
+            yAxis: {}
+        };
+        switch (elementId) {
+            case '#chart1':
+                GetMemberCount(option, myChart);
+                break;
+            case '#chart2':
+                GetConsumeCount(option, myChart);
+                break;
+        }
+    }
+    function GetMemberCount(option, myChart) {
+        var timetype = $("#chart1TimeType").find(":selected").val();
+        $.get('/Chart/GetMemberCount?timeType=' + timetype).done(function (context) {
+            if (context && context.Data && context.Data.length) {
+                myChart.hideLoading();
+                option.dataset.source = context.Data;
+                option.legend.formatter = function (params) {
+                    if (params === "MerchantCount") {
+                        return params + "    " + "User total count: " + context.UserTotal + "    " + "Merchant total count: " + context.MerchantTotal;
+                    }
+                    return params;
+                }
+            }
+            option.series = [
+                { type: 'bar' },
+                { type: 'bar' }
+            ];
+            myChart.setOption(option);
+        });
+    }
+    function GetConsumeCount(option, myChart) {
+        var timetype = $("#chart2TimeType").find(":selected").val();
+        $.get('/Chart/GetConsumeCount?timeType=' + timetype).done(function (context) {
+            if (context && context.Data && context.Data.length) {
+                myChart.hideLoading();
+                option.dataset.source = context.Data;
+                option.legend.formatter = function (params) {
+                    return params + "    " + "Total consumecount: " + context.TotalCount;
+                }
+            }
+            option.series = [
+                { type: 'bar' }
+            ];
+            myChart.setOption(option);
+        });
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/Plugins/echart/echarts.min.js")
+}
+<style>
+    .chartseachtool{
+        padding:10px 50px;
+    }
+</style>

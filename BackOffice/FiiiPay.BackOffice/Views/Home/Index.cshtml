@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = null;
+}
+@model Dictionary<FiiiPay.BackOffice.Models.Module,List<FiiiPay.BackOffice.Models.Module>>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>FiiiPay BackOffice</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/js")
+        @Scripts.Render("~/bundles/plugins")
+    </head>
+    <body>
+        <div class="app">
+            <div class="app-wrap">
+                <header class="app-heading">
+                    <div style="display:table;height:60px;line-height:60px;width:100%;">
+                        <div style="display:table-cell;width:356px;text-align:center;color:#fff;">
+                            <ul class="list-inline" style="margin:0;">
+                                <li><img src="~/Content/Images/Rectangle4.png" style="height:40px;" /></li>
+                                <li><span style="font-size: 20px;">FiiiPOS &#38; FiiiPay Back Office</span></li>
+                            </ul>
+                        </div>
+                        <div style="display:table-cell;width:80px;">
+                            <a class="onoffcanvas-toggler is-animated" href="#app-side" data-toggle="onoffcanvas"></a>
+                        </div>
+                        <div style="display:table-cell;text-align:right;">
+                            <ul class="list-inline" style="margin:0; margin-right:80px;">
+                                <li><a href="#"><img src="~/Content/Images/Shape.png" style="height:40px;" /></a></li>
+                                <li class="dropdown">
+                                    <a href="#" id="profileinfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">@ViewBag.RoleName<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" aria-labelledby="profileinfo" style="left:-50px;">
+                                        <li><a href="javascript:" onclick="GoChangePassword()">Change password</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="javascript:" onclick="SignOut()">Log out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+                <div class="app-container">
+                    <aside class="app-side" id="app-side" aria-expanded=false>
+                        <div class="side-heading" style="margin-top:10px;height:35px;line-height:35px;color:#dadada;text-align:center;"></div>
+                        <div class="side-content">
+                            <nav class="side-nav">
+                                @{Html.RenderPartial("LeftMenu", Model);}
+                            </nav>
+                        </div>
+                        @*<footer class="side-footer">
+                            <a class="has-icon" href="#" id="app-side-hoverable-toggler">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </footer>*@
+                    </aside>
+                    <div class="app-main">
+                        <header class="main-heading">
+                            <div class="currentPageTitle">
+                                Current page: <span id="currentPageTitle"></span>
+                            </div>
+                            <div id="main-heading"></div>
+                        </header>
+                        <div class="main-content" id="main-content"></div>
+                        @*<footer class="main-footer">
+                            main footer
+                        </footer>*@
+                    </div>
+                </div>
+                @*<footer class="app-footer">
+                    <p>app footer</p>
+                </footer>*@
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("#main-content").botabs({ url: "/Home/HomePage", title: "Homepage", closeable: false, pagename: "homepage", path: "Homepage", pageid: 1 });
+                $("#metismenu").on("click", ">li>ul>li>a", function () {
+                    $("#metismenu").find("li.opened").removeClass("opened");
+                    var $link = $(this);
+                    var liindex = $link.data("pageid");
+                    $link.closest("li").addClass("opened");
+                    var pagetitle = $link.text();
+                    var pagepath = $.trim($link.closest("ul").prev().text()) + " / " + pagetitle;
+                    var pagename = $link.data("pagename");
+                    var pageid = $link.data("pageid");
+                    var url = $link.data("url");
+                    if (!pagename) {
+                        pagename = "newtab";
+                    }
+                    if (!url) {
+                        url = "/Home/HomePage";
+                    }
+                    url += "/" + pageid;
+                    openNewPage(url, pagetitle, pagename, pagepath, liindex);
+                });
+                $(window).resize(function () {
+                    $("#main-content").botabs('resettab');
+                });
+            })
+            function openNewPage(url, title, pagename, path, pageid) {
+                $("#main-content").botabs("addtab", {
+                    url: url, title: title, pagename: pagename, path: path, pageid: pageid, ontabshow: function () {
+                        $("#metismenu").find("li.opened").removeClass("opened");
+                        var menuid = $(this).attr("menuid");
+                        if (menuid) {
+                            $("#metismenu").find('[data-pageid="' + menuid + '"]').closest("li").addClass("opened");
+                        }
+                    }
+                });
+            }
+            function addNewPage(url, title, pagename, path, pageid) {
+                var currentpath = $("#main-content").botabs("getcurrentpath");
+                $("#main-content").botabs("addtab", { url: url, title: title, pagename: pagename, path: currentpath + " / " + path, pageid: pageid });
+            }
+            function refreshPage(btn) {
+                var id = $(btn).attr("framename");
+                var refreshfun = window.frames[id].refreshPage;
+                if (refreshfun) {
+                    new refreshfun();
+                }
+            }
+            function SignOut() {
+                $.openloadding();
+                $.post("/Login/SignOut", {}, function (context) {
+                    $.closeloadding();
+                    if (context.Status) {
+                        window.location.href = "/Login/Index";
+                    }
+                });
+            }
+            function GoChangePassword() {
+                $.openmodalpage("changepassword", "/Account/ChangePassword", null, "Change Password");
+            }
+            function getIframeByElement(element) {
+                var iframe;
+                $("iframe").each(function () {
+                    if (element.ownerDocument === this.contentWindow.document) {
+                        iframe = this;
+                    }
+                    return !iframe;
+                });
+                return iframe;
+            }
+        </script>
+    </body>
+</html>

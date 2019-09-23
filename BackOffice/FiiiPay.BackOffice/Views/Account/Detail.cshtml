@@ -1,0 +1,30 @@
+﻿@using FiiiPay.BackOffice.ViewModels;
+@model AccountViewModel
+
+<div class="pagebody">
+    <br />
+    <dl class="dl-horizontal">
+        <dt>UserName：</dt>
+        <dd>@Html.DisplayTextFor(t => t.Username)</dd>
+        <br />
+        <dt>RoleName：</dt>
+        <dd>@Html.DisplayTextFor(t => t.Rolename)</dd>
+        <br />
+        <dt>CellPhone：</dt>
+        <dd>@Html.DisplayTextFor(t => t.Cellphone)</dd>
+        <br />
+        <dt>Email：</dt>
+        <dd>@Html.DisplayTextFor(t => t.Email)</dd>
+    </dl>
+</div>
+<script>
+    function SignOut() {
+        $.openloadding();
+        $.post("/Login/SignOut", {}, function (context) {
+            $.closeloadding();
+            if (context.Status) {
+                window.location.href = "/Login/Index";
+            }
+        });
+    }
+</script>

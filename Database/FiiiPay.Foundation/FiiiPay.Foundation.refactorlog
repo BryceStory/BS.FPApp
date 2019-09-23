@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="114d106e-bd9c-4179-8777-c6735fbcc154" ChangeDateTime="12/28/2018 09:03:06">
+    <Property Name="ElementName" Value="[dbo].[Files].[[GroupName]]]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Files]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="GroupName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2dd80172-b0a6-4f06-bb0d-c4c8e410890b" ChangeDateTime="03/05/2019 02:12:31">
+    <Property Name="ElementName" Value="[dbo].[Countries].[Is]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Countries]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsSupport" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="097143b6-388b-4f72-a492-94e32c61008f" ChangeDateTime="03/05/2019 02:15:10">
+    <Property Name="ElementName" Value="[dbo].[Countries].[IsSupport]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Countries]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsSupportStore" />
+  </Operation>
+</Operations>

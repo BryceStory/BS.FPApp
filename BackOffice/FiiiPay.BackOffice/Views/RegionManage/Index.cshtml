@@ -1,0 +1,84 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    bool createPermission = permissionCodeList.Contains("RegionManageCreate");
+    string updatePermission = permissionCodeList.Contains("RegionManageUpdate") ? "1" : "0";
+    string deletePermission = permissionCodeList.Contains("RegionManageDelete") ? "1" : "0";
+}
+<div class="gridSearchTool">
+    <form class="form-inline" onkeypress="return ExecuteSearch()" id="formSearchGrid">
+        <div class="form-group">
+            <label for="searchCountryId">国家</label>
+            @Html.DropDownList("searchCountryId", (List<SelectListItem>)ViewBag.CountryList, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary btn-sm" onclick="SearchMerchant()">搜索</button>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="ResetGrid()">重置</button>
+        </div>
+        @if (createPermission)
+        {
+            <button type="button" class="btn btn-create" onclick="AddRegion()">新增</button>
+        }
+    </form>
+</div>
+<table id="regionsGrid"></table>
+<div id="regionsGridPager"></div>
+<script>
+    $(function () {
+        $("#regionsGrid").BoGrid({
+            url: '/RegionManage/LoadData',
+            colNames: ["Id", "所在国家", "英文名称", "中文名称", "编码", "显示顺序", "操作"],
+            colModel: [{ name: 'Id', index: 'Id', hidden: true },
+            { name: 'CountryName', index: 'CountryName', width: 100, align: 'center', sortable: false },
+            { name: 'Name', index: 'Name', width: 120, align: 'center', sortable: false },
+            { name: 'NameCN', index: 'NameCN', width: 120, align: 'center', sortable: false },
+            { name: 'Code', index: 'Code', width: 80, align: 'center', sortable: false },
+            { name: 'Sort', index: 'Sort', width: 80, align: 'center', sortable: false },
+            {
+                name: 'Options', index: 'Options', width: 120, align: 'center', sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    var btnHtml = '<a href="javascript:" class="btn btn-primary btn-xs" onclick="ViewRegion(\'' + rowdata.Id + '\')">查看</a>';
+                    if ("@updatePermission" == "1") {
+                        btnHtml += '<a href="javascript:" class="btn btn-primary btn-xs" onclick="EditRegion(\'' + rowdata.Id + '\')" style="margin-left:8px;">修改</a>';
+                    }
+                    if ("@updatePermission" == "1") {
+                        btnHtml += '<a href="javascript:" class="btn btn-primary btn-xs" onclick="DeleteRegion(\'' + rowdata.Id + '\')" style="margin-left:8px;">删除</a>';
+                    }
+
+                    return btnHtml;
+                }
+            }],
+            pager: '#regionsGridPager'
+        });
+    });
+    function ExecuteSearch(e) {
+        if (event.keyCode == 13) {
+            SearchRegions();
+            return false;
+        }
+        return true;
+    }
+    function SearchRegions() {
+        var countryId = $("#searchCountryId").children(":selected").val();
+        $("#regionsGrid").jqGrid('setGridParam', {
+            postData: {
+                countryId: countryId
+            },
+            page: 1
+        }).trigger("reloadGrid");
+    }
+    function ResetGrid() {
+        document.getElementById('formSearchGrid').reset();
+        SearchRegions();
+    }
+    function refreshPage() {
+        $("#regionsGrid").trigger('reloadGrid');
+    }
+    function AddRegion(id) {
+        $.opentabpage("/RegionManage/Add", "添加区域", 0, "regionadd");
+    }
+    function EditRegion(id) {
+        $.opentabpage("/RegionManage/Edit?id=" + id, "修改区域", id,"regionedit");
+    }
+    function ViewRegion(id) {
+        $.opentabpage("/RegionManage/Detail?id=" + id, "查看区域", id, "regionview");
+    }
+</script>

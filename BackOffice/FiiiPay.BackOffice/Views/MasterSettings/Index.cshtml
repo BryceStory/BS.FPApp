@@ -1,0 +1,233 @@
+﻿@model FiiiPay.BackOffice.ViewModels.MasterSettingListModel
+@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Update = permissionCodeList.Contains("MasterSettingsUpdate") };
+}
+
+<div class="pagebody">
+    <form id="formEdit" class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-sm-3" for="Merchant_TransactionFee">FiiiPos交易手续费</label>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    @Html.TextBox("Merchant_TransactionFee", (Convert.ToDecimal(Model.Merchant_TransactionFee) * 100).ToString("0.00"), new { Class = "form-control" })
+                    <span class="input-group-addon">%</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-sm-3" for="Merchant_Markup">交易溢价率</label>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    @Html.TextBox("Merchant_Markup", (Convert.ToDecimal(Model.Merchant_Markup) * 100).ToString("0.00"), new { Class = "form-control" })
+                    <span class="input-group-addon">%</span>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-sm-3" for="BillerEnable">是否上架生活缴费功能</label>
+            <div class="col-sm-2">
+                @Html.DropDownList("BillerEnable", (List<SelectListItem>)ViewBag.StatusList, new { Class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-sm-3" for="DiscountRate">生活缴费折扣</label>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    @Html.TextBox("DiscountRate", (Convert.ToDecimal(Model.DiscountRate) * 100).ToString("0.00"), new { Class = "form-control" })
+                    <span class="input-group-addon">%</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-sm-3" for="Error_Tolerant_Rate">汇率变动阈值</label>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    @Html.TextBox("Error_Tolerant_Rate", (Convert.ToDecimal(Model.Error_Tolerant_Rate) * 100).ToString("0.00"), new { Class = "form-control" })
+                    <span class="input-group-addon">%</span>
+                </div>
+                <p>若用户下单时和账单实际支付时汇率变化超过此阈值，则不能支付此账单</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-sm-3" for="Biller_MaxAmount">生活缴费单笔最大限额</label>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    @Html.TextBox("Biller_MaxAmount", (Convert.ToDecimal(Model.Biller_MaxAmount)).ToString("0.00"), new { Class = "form-control" })
+                    <span class="input-group-addon">USD</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-sm-3" for="Biller_Day_MaxAmount">生活缴费每日最大限额</label>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    @Html.TextBox("Biller_Day_MaxAmount", (Convert.ToDecimal(Model.Biller_Day_MaxAmount)).ToString("0.00"), new { Class = "form-control" })
+                    <span class="input-group-addon">USD</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-sm-3" for="Biller_Month_MaxAmount">生活缴费每月最大限额</label>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    @Html.TextBox("Biller_Month_MaxAmount", (Convert.ToDecimal(Model.Biller_Month_MaxAmount)).ToString("0.00"), new { Class = "form-control" })
+                    <span class="input-group-addon">USD</span>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-sm-3" for="RedPocket_AmountLimit">单个红包最高限额</label>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    @Html.TextBox("RedPocket_AmountLimit", (Convert.ToDecimal(Model.RedPocket_AmountLimit)).ToString("0.00"), new { Class = "form-control" })
+                    <span class="input-group-addon">USD</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-sm-3" for="RedPocket_CountLimit">单个红包最高人数</label>
+            <div class="col-sm-2">
+                @Html.TextBox("RedPocket_CountLimit", (Convert.ToInt32(Model.RedPocket_CountLimit)), new { Class = "form-control" })
+            </div>
+        </div>
+        <hr />
+        @if (permission.Update)
+        {
+            <div class="form-group">
+                <div class="col-sm-10 col-lg-offset-2 col-sm-offset-3">
+                    <button type="button" class="btn btn-primary" onclick="Save()">Confirm</button>
+                </div>
+            </div>
+        }
+    </form>
+</div>
+
+<script>
+    $(function () {
+        jQuery.validator.addMethod("twoPoints", function (value, element) {
+            var returnVal = true;
+            var inputZ = value;
+            var ArrMen = inputZ.split(".");
+            if (ArrMen.length === 2) {
+                if (ArrMen[1].length > 2) {
+                    returnVal = false;
+                    return false;
+                }
+            }
+            var vzNum = parseFloat(inputZ).toFixed(2);
+            // alert(vzNum);
+            if (isNaN(vzNum)) {
+                returnVal = false;
+                return false;
+            }
+            return returnVal;
+        }, "最多支持两位小数");
+        
+        $('#formEdit').jqValidate({
+            rules: {
+                Merchant_TransactionFee: {
+                    required:true,
+                    number: true,
+                    twoPoints: true
+                }, Merchant_Markup: {
+                    required: true,
+                    number: true,
+                    twoPoints: true
+                },
+                DiscountRate: {
+                    required: true,
+                    number: true,
+                    twoPoints: true
+                },
+                Error_Tolerant_Rate: {
+                    required: true,
+                    number: true,
+                    twoPoints: true
+                },
+                Biller_MaxAmount: {
+                    required: true,
+                    number: true,
+                    twoPoints: true
+                },
+                Biller_Day_MaxAmount: {
+                    required: true,
+                    number: true,
+                    twoPoints: true
+                },
+                Biller_Month_MaxAmount: {
+                    required: true,
+                    number: true,
+                    twoPoints: true
+                },
+                RedPocket_AmountLimit: {
+                    required: true,
+                    number: true,
+                    twoPoints: true
+                },
+                RedPocket_CountLimit: {
+                    required: true,
+                    digits: true
+                }
+            },
+            errorPlacement: function (error, element) {
+                var parantelement = element.closest('.form-group').children("div");
+                error.appendTo(parantelement);
+            }
+        });
+    });
+
+    function Save() {
+        var checkResult = $('#formEdit').valid();
+        if (checkResult) {
+            var postdata = getFromData();
+            $.ajax({
+                url: "/MasterSettings/Save",
+                type: "post",
+                data: postdata,
+                dataType: "json",
+                contentType: "application/json",
+                success: function (context) {
+                    if (context.Status) {
+                        swal("Save Success");
+                    }
+                    else {
+                        swal({
+                            title: "Query Failed",
+                            text: context.Message,
+                            type: "error"
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    function getFromData() {
+        var Merchant_TransactionFee = $("#Merchant_TransactionFee").val() / 100;
+        var Merchant_Markup = $("#Merchant_Markup").val() / 100;
+        var RedPocket_AmountLimit = $("#RedPocket_AmountLimit").val();
+        var RedPocket_CountLimit = $("#RedPocket_CountLimit").val();
+        var DiscountRate = $("#DiscountRate").val() / 100;
+        var Error_Tolerant_Rate = $("#Error_Tolerant_Rate").val() / 100;
+        var Biller_MaxAmount = $("#Biller_MaxAmount").val();
+        var Biller_Day_MaxAmount = $("#Biller_Day_MaxAmount").val();
+        var Biller_Month_MaxAmount = $("#Biller_Month_MaxAmount").val();
+        var BillerEnable = $("#BillerEnable").val();
+        var list = {
+            "Merchant_TransactionFee": Merchant_TransactionFee,
+            "Merchant_Markup": Merchant_Markup,
+            "DiscountRate": DiscountRate,
+            "Error_Tolerant_Rate": Error_Tolerant_Rate,
+            "Biller_MaxAmount": Biller_MaxAmount,
+            "Biller_Day_MaxAmount": Biller_Day_MaxAmount,
+            "Biller_Month_MaxAmount": Biller_Month_MaxAmount,
+            "BillerEnable": BillerEnable,
+            "RedPocket_AmountLimit": RedPocket_AmountLimit,
+            "RedPocket_CountLimit": RedPocket_CountLimit,
+        };
+        return JSON.stringify({ model: list });
+    }
+</script>

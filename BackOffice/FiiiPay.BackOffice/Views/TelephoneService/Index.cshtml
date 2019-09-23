@@ -1,0 +1,39 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var rolePerm = permissionCodeList.Contains("TelephoneServiceUpdate");
+}
+<div>
+    <table id="gridlist"></table>
+    <div id="gridlistpager"></div>
+</div>
+<script>
+    $(function () {
+        var colname = ["Id", "Name","PhoneCode", "CustomerService"];
+        var colmodel = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'Name', index: 'Name', width: 100, align: 'center' },
+            { name: 'PhoneCode', index: 'PhoneCode', width: 100, align: 'center' },
+            { name: 'CustomerService', index: 'CustomerService', width: 100, align: 'center' }
+        ];
+        if ("@rolePerm".toLowerCase() === "true") {
+            colname.push("Options");
+            colmodel.push({
+                name: 'Edit', index: 'Edit', width: 50, align: 'center', sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    return '<a href="javascript:" class="btn btn-primary btn-xs" onclick="GoEditPage(\'' + rowdata.Id + '\')">Edit</a>';;
+                }
+            });
+        }
+        $("#gridlist").BoGrid({
+            url: '/TelephoneService/LoadData',
+            colNames: colname,
+            colModel: colmodel,
+            pager: '#gridlistpager'
+        });
+    });
+
+    function GoEditPage(id) {
+        $.openmodalpage("editTelephoneService", "/TelephoneService/Edit", { id: id }, "Edit TelephoneService","", function () {
+            $("#gridlist").trigger('reloadGrid');
+        });
+    }
+</script>

@@ -1,0 +1,57 @@
+﻿
+<div class="pagebody" style="width:500px;">
+    <iframe id="downloadtraget" name="downloadtraget" class="hidden"></iframe>
+    <form method="post" action="@Url.Action("Download")" class="form-horizontal" target="downloadtraget">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Download Template</label>
+            <div class="col-sm-8">
+                <input type="submit" class="btn btn-primary" value="Download" />
+            </div>
+        </div>
+    </form>
+    <form id="formImportSN" class="form-horizontal" action="@Url.Action("ImportPOSSN")" enctype="multipart/form-data" method="post">
+        @Html.Hidden("PageId", (int)ViewBag.PageId)
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="Excel">Excel</label>
+            <div class="col-sm-8">
+                <input type="file" name="importSN" onchange="addFile(this)" class="btn" accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-4">
+                <input type="button" class="btn btn-primary" value="Import" onclick="ImportSN()" />
+            </div>
+        </div>
+    </form>
+    <iframe id="tempframe" name="tempframe" hidden="hidden" style="border:none;width:200px;height:28px; overflow:hidden"></iframe>
+</div>
+
+<script>
+    var file;
+    //$(function () {
+    //    fileList = new Dictionary();
+    //});
+    function addFile(fileDom) {
+        var fileDomList = fileDom.files;
+        var $ul = $("#imgPhotoList");
+        if (fileDomList) {
+            file = fileDomList[0];
+        }
+    }
+
+    function ImportSN() {
+        var formpostdata = new FormData($("#formImportSN")[0]);
+        if (file) {
+            formpostdata.append("file", file);
+        } else {
+            swal({
+                title: "Import Failed",
+                text: "Please select the file",
+                type: "error"
+            });
+            return;
+        }
+        $("#formImportSN").submit();       
+    }
+</script>

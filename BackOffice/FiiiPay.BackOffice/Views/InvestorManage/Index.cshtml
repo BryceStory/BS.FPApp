@@ -1,0 +1,145 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Create = permissionCodeList.Contains("InvestorCreate"), Update = permissionCodeList.Contains("InvestorUpdate") };
+    var canDeposit = permissionCodeList.Contains("InvestorDeposit");
+    var canWithhold = permissionCodeList.Contains("InvestorWithhold");
+    var canResetPassword = permissionCodeList.Contains("InvestorResetPassword");
+    var canResetPIN = permissionCodeList.Contains("InvestorResetPIN");
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permission);
+}
+<div class="gridSearchTool" style="padding-right:200px">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="Username">Username</label>
+            <input type="text" class="form-control" id="txtUsername" placeholder="Input Username to search">
+        </div>
+        <div class="form-group">
+            <label for="InvestorName">InvestorName</label>
+            <input type="text" class="form-control" id="txtInvestorName" placeholder="Input InvestorName to search">
+        </div>
+        <div class="form-group">
+            <label for="CellPhone">CellPhone</label>
+            <input type="text" class="form-control" id="CellPhone" placeholder="Input CellPhone to search">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="Search()">Search</button>
+        @if (permission.Create)
+        {
+            <button type="button" class="btn btn-create" onclick="Create()">&nbsp; Create &nbsp;&nbsp;</button>
+        }
+    </form>
+</div>
+<table id="dtGrid"></table>
+<div id="dtGridPager"></div>
+<script>
+    $(function () {
+        var colModels = new Array({ name: 'Id', index: 'Id', hidden: true },
+            { name: 'Username', index: 'Username', width: 100, align: 'center' },
+            { name: 'InvestorName', index: 'InvestorName', width: 100, align: 'center' },
+            { name: 'CellPhone', index: 'CellPhone', width: 100, align: 'center' },
+            { name: 'Balance', index: 'Balance', width: 100, align: 'center' },
+            { name: 'Status', index: 'Status', width: 100, align: 'center' },
+            { name: 'RegistrationDate', index: 'RegistrationDate', width: 100, align: 'center' }
+        );
+        var colNames = new Array("Id", "Username", "InvestorName", "CellPhone", "FiiiCoin Balance", "Status", "RegistrationDate");
+        if ("@canDeposit".toLowerCase() === "true") {
+            colNames.push("Deposit");
+            colModels.push({
+                name: 'Deposit', index: 'Deposit', width: 60, align: 'center', hideinxs: true, sortable: false, formatter: function (cell, options, rowdata) {
+                    return '<a href="javascript:" onclick="Deposit(\'' + rowdata[0] + '\',' + rowdata[4] +')">Deposit</a>';
+                }
+            });
+        }
+
+        if ("@canWithhold".toLowerCase() === "true") {
+            colNames.push("Withhold");
+            colModels.push({
+                name: 'Withhold', index: 'Withhold', width: 60, align: 'center', hideinxs: true, sortable: false, formatter: function (cell, options, rowdata) {
+                    return '<a href="javascript:" onclick="Withhold(\'' + rowdata[0] + '\',' + rowdata[4]+')">Withhold</a>';
+                }
+            });
+        }
+
+        if ("@permission.Update".toLowerCase() === "true") {
+            colNames.push("Option");
+            colModels.push({
+                name: 'Option', index: 'Option', width: 60, align: 'center', hideinxs: true, sortable: false, formatter: function (cell, options, rowdata) {
+                    return '<a href="javascript:" onclick="Edit(\'' + rowdata[0] + '\')">Edit</a>';
+                }
+            });
+        }
+
+        if ("@canResetPassword".toLowerCase() === "true") {
+            colNames.push("ResetPassword");
+            colModels.push({
+                name: 'ResetPassword', index: 'ResetPassword', width: 60, align: 'center', hideinxs: true, sortable: false, formatter: function (cell, options, rowdata) {
+                    return '<a href="javascript:" onclick="ResetPassword(\'' + rowdata[0] + '\')">ResetPassword</a>';
+                }
+            });
+        }
+
+        if ("@canResetPIN".toLowerCase() === "true") {
+            colNames.push("ResetPIN");
+            colModels.push({
+                name: 'ResetPIN', index: 'ResetPIN', width: 60, align: 'center', hideinxs: true, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    return '<a href="javascript:" onclick="ResetPIN(\'' + rowdata[0] + '\')">ResetPIN</a>';
+                }
+            });
+        }
+
+        $("#dtGrid").BoGrid({
+            url: '/InvestorManage/LoadData',
+            colName: colNames,
+            colModel: colModels,
+            postData: GetSearchCondition(),
+            pager: '#dtGridPager'
+        });
+    });
+
+    function GetSearchCondition() {
+        var postData = {
+            Username: $.trim($("#txtUsername").val()),
+            InvestorName: $("#txtInvestorName").val(),
+            CellPhone: $("#CellPhone").val()
+        };
+        return postData;
+    }
+
+    function Search() {
+        var postdata = GetSearchCondition();
+        $("#dtGrid").jqGrid('setGridParam', { postData: postdata, page: 1 }).trigger("reloadGrid");
+    }
+
+    function refreshPage() {
+        var postdata = GetSearchCondition();
+        $("#dtGrid").jqGrid('setGridParam', { postData: postdata }).trigger("reloadGrid");
+    }
+
+    function Create() {
+        $.openmodalpage("editInvestorpage", "/InvestorManage/Edit", { InvestorId: -1 }, "Create Investor", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+
+    function Edit(id) {
+        $.openmodalpage("editInvestorpage", "/InvestorManage/Edit", { InvestorId: id }, "Edit Investor", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+
+    function Deposit(id, balance) {        
+        $.openmodalpage("editInvestorpage", "/InvestorManage/Deposit", { Type: "Deposit", InvestorId: id, Balance: balance}, "Edit Investor", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+    function Withhold(id, balance) {
+        $.openmodalpage("editInvestorpage", "/InvestorManage/Deposit", { Type: "Withhold", InvestorId: id, Balance: balance }, "Edit Investor", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+    function ResetPassword(id) {
+        $.openmodalpage("resetPasswordpage", "/InvestorManage/ResetPassword", { InvestorId: id }, "Reset Password", "");
+    }
+    function ResetPIN(id) {
+        $.openmodalpage("resetPINpage", "/InvestorManage/ResetPIN", { InvestorId: id }, "Reset PIN", "");
+    }
+</script>

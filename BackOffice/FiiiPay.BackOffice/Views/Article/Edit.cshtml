@@ -1,0 +1,133 @@
+﻿@using FiiiPay.BackOffice.Models;
+@model Articles
+@{
+    bool isAdd = Model.Id == -1;
+}
+<div class="pagebody" style="width:750px;">
+    <form id="formEdit" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label required" for="Title">Title</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(t => t.Title, new { Class = "form-control", placeholder = "Title" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label required" for="Descdescription">Descdescription</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(t => t.Descdescription, new { Class = "form-control", placeholder = "Descdescription" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label required" for="ShouldPop">ShouldPop </label>
+            @{
+                string isChecked = Model.ShouldPop && Model.ShouldPop ? "checked=\"checked\"" : "";
+            }
+            <div class="col-sm-10">
+                <div class="checkbox checkbox-inline">
+                    <label><input type="checkbox" id="ShouldPop" @isChecked></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label required" for="Type">Type</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(t => t.AccountType, (List<SelectListItem>)ViewBag.TypeList, new { Class = "form-control", placeholder = "Type" })
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="hidden" id="hdContent" value="@Model.Body" />
+            <label class="col-sm-2 control-label required" for="ArticleContent">Content</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder" style="height:auto;">
+                    <div id="ArticleContent" style="max-height:500px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <button type="button" class="btn btn-primary" onclick="Save(@Model.Id)">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    $(function () {
+        var um = UM.getEditor('ArticleContent');
+        um.ready(function () {
+            var h = $(window).height();
+            h = h - 350;
+            if (h < 300) {
+                h = 300;
+            }
+            um.setHeight(h);
+            var emailcontent = $("#hdContent").val();
+            if (emailcontent) {
+                um.setContent(emailcontent);
+            }
+        });
+    })
+
+
+    function Save(id) {
+        if ($("#Title").val().trim().length == 0) {
+            swal({
+                title: "",
+                text: "Title is required",
+                type: "warning"
+            });
+            return;
+        }
+        if ($("#Descdescription").val().trim().length == 0) {
+            swal({
+                title: "",
+                text: "Descdescription is required",
+                type: "warning"
+            });
+            return;
+        }
+        if (UM.getEditor('ArticleContent').getContent().trim().length == 0) {
+            swal({
+                title: "",
+                text: "Article Content is required",
+                type: "warning"
+            });
+            return;
+        }
+        var postdata = getFromData(id);
+        $.ajax({
+            url: "/Article/Save",
+            type: "post",
+            data: postdata,
+            dataType: "json",
+            contentType: "application/json",
+            success: function (context) {
+                if (context.Status) {
+                    swal("Save Success");
+                }
+                else {
+                    swal({
+                        title: "Save Failed",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+
+    }
+    function getFromData(id) {
+        var article = new Object();
+        article.Id = id;
+        article.Title = $("#Title").val();
+        article.Descdescription = $("#Descdescription").val();
+        article.AccountType = $("#AccountType").val();
+        article.ShouldPop = $("#ShouldPop").is(":checked");
+        article.Body = UM.getEditor('ArticleContent').getContent();
+        return JSON.stringify({ oarticle: article });
+    }
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/Plugins/umeditor/umeditor.config.js", "~/Plugins/umeditor/umeditor.min.js", "~/Plugins/umeditor/lang/zh-cn/zh-cn.js")
+}

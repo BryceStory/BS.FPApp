@@ -1,0 +1,206 @@
+﻿@using FiiiPay.BackOffice.Models;
+@model FiiiPay.BackOffice.Models.MerchantInformations
+
+<form class="form-horizontal" id="verifystoremanageform">
+    <div class="modeldetail">
+        <h3>Store information</h3>
+        <hr style="margin-bottom:10px; " />
+        <div>
+            <table class="table table-modeldetailnoborder">
+                <tr>
+                    <th style="width:20%">MerchantName:</th>
+                    <td style="width:80%">@Model.MerchantName</td>
+                </tr>
+                <tr>
+                    <th>StoreType:</th>
+                    <td>
+                        @{
+                            @ViewBag.StoreTypeStr
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>Week:</th>
+                    <td>
+                        @{
+                            @ViewBag.WeekStr
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>Business Hours:</th>
+                    <td>@Model.StartTime - @Model.EndTime</td>
+                </tr>
+                <tr>
+                    <th>Tags:</th>
+                    <td>@Model.Tags</td>
+                </tr>
+                <tr>
+                    <th>CellPhone:</th>
+                    <td>@Model.Phone</td>
+                </tr>
+                <tr>
+                    <th>Introduce:</th>
+                    <td>@Model.Introduce</td>
+                </tr>
+                <tr>
+                    <th>Address:</th>
+                    <td>@Model.Address</td>
+                </tr>
+                <tr>
+                    <th>Lng:</th>
+                    <td>@Model.Lng</td>
+                </tr>
+                <tr>
+                    <th>Lat:</th>
+                    <td>@Model.Lat</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="modeldetail">
+        <h3>Store Album</h3>
+        <hr style="margin-bottom:10px; " />
+        <div>
+            <table style="margin-left:130px;" class="table table-modeldetailnoborder">
+                <tr>
+                    <td colspan="2">
+
+                        <div>
+                            @{
+                                List<MerchantOwnersFigures> figureList = ViewBag.FigureList;
+                                foreach (MerchantOwnersFigures item in figureList)
+                                {
+                                    string ImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}", @item.FileId);
+                                    <div class="pull-left text-center" style="width:360px;height:300px;">
+                                        <a href="javascript:" onclick="ShowBigImage(this,'@ImageUrl')">
+                                            <img src="@ImageUrl" style="max-width:100%; max-height:260px;border:solid 1px #ECECEC;" />
+                                        </a>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="modeldetail">
+        <h3>Merchant Recommendation</h3>
+        <hr style="margin-bottom:10px; " />
+        <div>
+            <table style="margin-left:130px;" class="table table-modeldetailnoborder">
+                <tr>
+                    <td colspan="2">
+
+                        <div>
+                            @{
+                                List<MerchantRecommends> RecommendList = ViewBag.RecommendList;
+                                foreach (MerchantRecommends item in RecommendList)
+                                {
+                                    string ImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}", @item.RecommendPicture);
+                                    <div class="pull-left text-center" style="width:360px;height:300px;">
+                                        <a href="javascript:" onclick="ShowBigImage(this,'@ImageUrl')">
+                                            <img src="@ImageUrl" style="max-width:100%; max-height:260px;border:solid 1px #ECECEC;" />
+                                        </a>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Verify result</label>
+        <div class="col-sm-10">
+            @Html.Hidden("Id", Model.Id)
+            @Html.DropDownList("VerifyStatus", (List<SelectListItem>)ViewBag.VerifyStatusList, new { @class = "form-control", style = "width:200px;" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Remark</label>
+        <div class="col-sm-10">
+            @Html.TextArea("Remark", Model.Remark, new { @class = "form-control", placeholder = "If you Reject, please input remarks!" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+            <div class="form-control noborder">
+                <input type="button" class="btn btn-primary" value="Submit" onclick="SaveVerify()" />
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(function () {
+        $.autoTextarea($("#Remark")[0]);
+        $("#verifystoremanageform").jqValidate({
+            rules: {
+                Remark: {
+                    required: function () {
+                        return $("#VerifyStatus").children(":selected").val() ==
+                            "@((int)FiiiPay.Entities.Enums.VerifyStatus.Disapproval)";
+                    },
+                    maxlength: 500
+                }
+            }
+        });
+    });
+    function SaveVerify() {
+        var isValid = $("#verifystoremanageform").valid();
+        if (isValid) {
+            var id = $("#Id").val();
+            var status = $("#VerifyStatus").children(":selected").val();
+            var remark = $("#Remark").val();
+            $.ajax({
+                url: '/StoreManage/SaveVerify',
+                data: { Id: id, VerifyStatus: status, Remark: remark },
+                dataType: "json",
+                success: function (context) {
+                    var certifiledstatus = "@((int)FiiiPay.Entities.Enums.VerifyStatus.Certified)";
+                    var disapprovalstatus = "@((int)FiiiPay.Entities.Enums.VerifyStatus.Disapproval)";
+                    if (context.Status) {
+                        swal({
+                            title: "Save Success",
+                            type: "success"
+                        }, function () {
+                            if (status == certifiledstatus || status == disapprovalstatus) {
+                                window.location.href = "/StoreManage/Detail/" + id;
+                            }
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Save Failed",
+                            type: "error",
+                            text: context.Message
+                        });
+                    }
+                }
+            });
+        }
+    }
+    function ShowBigImage(obj, pageid) {
+        var modaldiv = $('<div class="modal" id="bootstrap-modal-' + pageid + '" tabindex="-1" role="dialog" aria-labelledby="bootstrap-modal-label"></div>');
+        var modalhtml = '<div class="modal-dialog modal-lg" role="document">';
+        modalhtml += '<img id="img" onclick="Rotate(this)" src=' + $(obj).find("img").attr("src") + ' style="max-width:800px;max-height:600px;position:absolute;left:10%;top:100px;" />';
+        modalhtml += '</div>';
+        modaldiv.append(modalhtml);
+        $("body").append(modaldiv);
+        modaldiv.on('hide.bs.modal', function (e) {
+            $(this).remove();
+        });
+        modaldiv.modal({ keyboard: true });
+    }
+    var r = 0;
+
+    function Rotate(obj) {
+        r += 90;
+        $(obj).css('transform', 'rotate(' + r + 'deg)');
+    }
+</script>

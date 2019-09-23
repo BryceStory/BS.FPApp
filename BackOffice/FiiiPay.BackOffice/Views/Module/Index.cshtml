@@ -1,0 +1,161 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permobj = new GeneralPermission { Create = permissionCodeList.Contains("ModuleCreate"), Update = permissionCodeList.Contains("ModuleUpdate"), Delete = permissionCodeList.Contains("ModuleDelete") };
+    var definePerm = permissionCodeList.Contains("ModulePermission");
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permobj);
+}
+<div class="gridSearchTool search-singlerow">
+    @if (permobj.Create)
+    {
+        <a href="javascript:" class="btn btn-create" onclick="CreateModule()" style="bottom:10px;">Create</a>
+    }
+</div>
+<div>
+    <table id="gridlist"></table>
+    <div id="gridlistpager"></div>
+</div>
+<script>
+    $(function () {
+        var colnames = ["Id", "PageName", "Name", "Icon", "Url", "Order"];
+        var colmodels = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'PageName', index: 'PageName', width: 80, sortable: false },
+            { name: 'Code', index: 'Code', width: 80, sortable: false },
+            {
+                name: 'Icon', index: 'Icon', width: 40, align: 'center', sortable: false, formatter: function (cellvalue) {
+                    if (cellvalue) {
+                        return '<span class="' + cellvalue + '"></span>';
+                    }
+                    return '';
+                }
+            },
+            { name: 'PageUrl', index: 'PageUrl', width: 80, sortable: false },
+            { name: 'Sort', index: 'Sort', width: 40, align: 'center', sortable: false }
+        ]
+        if ("@definePerm".toLowerCase() === "true") {
+            colnames.push("Permission");
+            colmodels.push({
+                name: 'Permission', index: 'Permission', width: 60, align: 'center',hideinxs:true, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    if (rowdata.level == 1) {
+                        var btnhtml = '<a href="javascript:" class="btn btn-xs btn-primary" onclick="GoPermissionPage(\'' + rowdata.Id + '\')">Permission</a>';
+                        return btnhtml;
+                    }
+                    return '';
+                }
+            });
+        }
+        $("#gridlist").BoGrid({
+            url: '/Module/LoadData',
+            treeGrid: true,
+            ExpandColumn: 'PageName',
+            treeGridModel: "adjacency",
+            showBtn: true,
+            permvalue: "@sePermission",
+            ExpandColClick: true,
+            colNames: colnames,
+            colModel: colmodels,
+            onEditClick: "GoEditPage",
+            onDeleteClick:"DeleteModule",
+            pager: '#gridlistpager'
+        });
+    })
+    function refreshPage() {
+        $("#gridlist").jqGrid('setGridParam', { postData: GetExpandRowIds() }).trigger("reloadGrid");
+    }
+    function CreateModule() {
+        $.openmodalpage("EditModulePage", "/Module/Create", {}, "Create Module");
+    }
+    function GoEditPage(id) {
+        $.openmodalpage("EditModulePage", "/Module/Edit", { id: id }, "Edit Module");
+    }
+    function GoPermissionPage(id) {
+        $.opentabpage("/Module/Perimssion?moduleId=" + id, "Perimssion Info", id);
+    }
+    function DeleteModule(id) {
+        $.swconfirm("Sure to delete this module？", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: '/Module/Delete',
+                    type:'post',
+                    data: { Id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "Delete Success",
+                                type: "success"
+                            }, function () {
+                                refreshPage();
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "Delete Failed",
+                                type: "error",
+                                text: context.Message
+                            });
+                        }
+                    }
+                })
+            }
+        });
+    }
+    function SaveData() {
+        var vaild = $("#createModuleForm").valid();
+        if (!vaild) {
+            return false;
+        }
+        $.ajax({
+            url: '/Module/Save',
+            data: GetEditModelData(),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (context) {
+                if (context.Status) {
+                    swal({
+                        title: "Save Success",
+                        type: "success"
+                    }, function () {
+                        refreshPage();
+                        $.closemodalpage('EditModulePage');
+                    });
+                }
+                else {
+                    swal({
+                        title: "Save Failed",
+                        type: "error",
+                        text: context.Message
+                    });
+                }
+            }
+        })
+    }
+    function GetEditModelData() {
+        var postdata = new Object();
+        var $form = $("#createModuleForm");
+        postdata.Id = $form.find("#Id").val();
+        postdata.ParentId = $form.find("#ParentId").val();
+        postdata.Code = $form.find("#Code").val();
+        postdata.Name = $form.find("#Name").val();
+        postdata.PathAddress = $form.find("#PathAddress").val();
+        postdata.Sort = $form.find("#Sort").val();
+        postdata.Icon = $("#iconlist").children(".active").children("a").data("value");
+        return JSON.stringify({ module: postdata })
+    }
+    function GetExpandRowIds() {
+        var $table = $("#gridlist");
+        var expandIcon = $table.find(".treeclick").filter(".glyphicon-triangle-bottom");
+        var expandIds = "";
+        if (expandIcon.length > 0) {
+            expandIcon.each(function () {
+                var id = $(this).closest("tr").attr("id");
+                if (expandIds.length > 0) {
+                    expandIds += "," + id;
+                } else {
+                    expandIds += id;
+                }
+            });
+        }
+        return { expandIds: expandIds };
+    }
+</script>

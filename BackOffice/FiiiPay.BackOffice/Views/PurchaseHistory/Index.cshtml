@@ -1,0 +1,119 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var canRefund = permissionCodeList.Contains("CanRefund");
+}
+
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="orderNo">OrderNo</label>
+            <input type="text" class="form-control" id="orderNo" placeholder="Input OrderNo to search">
+        </div>
+        <div class="form-group">
+            <label for="POSSN">POS SN</label>
+            <input type="text" class="form-control" id="POSSN" placeholder="Input POSSN to search">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="SearchOrder()">Search</button>
+    </form>
+</div>
+
+<table id="orderGrid"></table>
+<div id="orderGridPager"></div>
+<script>
+    $(function () {
+        var colnames = ["Id", "OrderNo", "MerchantName", "PostSN", "UserAccountNO", "FiatAmount", "Markup", "ActualFiatAmount", "CryptoName", "ExchangeRate", "CryptoAmount", "TransactionFee", "ActualCryptoAmount", "Status", "Timestamp", "Options"];
+        var colmodels = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'OrderNo', index: 'OrderNo', width: 220 },
+            { name: 'MerchantName', index: 'MerchantName', width: 100 },
+            { name: 'PostSN', index: 'PostSN', width: 120, align: 'center', sortable: false },
+            { name: 'Cellphone', index: 'Cellphone', width: 100, sortable: false },
+            { name: 'FiatAmount', index: 'FiatAmount', width: 100, align: 'center' },
+            { name: 'Markup', index: 'Markup', width: 60, align: 'center' },
+            { name: 'ActualFiatAmount', index: 'ActualFiatAmount', width: 120, align: 'center' },
+            { name: 'CryptoName', index: 'CryptoName', width: 100, align: 'center' },
+            { name: 'ExchangeRate', index: 'ExchangeRate', width: 100, align: 'center' },
+            { name: 'CryptoAmount', index: 'CryptoAmount', width: 100, align: 'center' },
+            { name: 'TransactionFee', index: 'TransactionFee', width: 100, align: 'center' },
+            { name: 'ActualCryptoAmount', index: 'ActualCryptoAmount', width: 100, align: 'center' },
+            { name: 'Status', index: 'Status', width: 100, align: 'center' },
+            { name: 'Timestamp', index: 'Timestamp', width: 100, align: 'center' },
+            {
+                name: 'Options', index: 'Options', width: 120, align: 'center', sortable: false, formatter: function (cellvalue, rowdata, data) {
+                    var id = rowdata.rowId;
+                    var amount = data.CryptoAmount;
+                    var cur = data.CryptoName;
+                    var status = data.Status;
+                    var orderNo = data.OrderNo;
+                    var timestamp = new Date(data.Timestamp);
+                    var date = Date.parse(new Date());
+                    var htmlstr = '';
+                    if ("@canRefund".toLowerCase() === "true" && status != "Refunded" && status != "Pending" && date < timestamp.setDate(timestamp.getDate() + 3)) {
+                        htmlstr += '<input type="button" class="btn btn-primary btn-xs" value="Refund" onclick="GoRefund(\'' + orderNo + '\',' + amount + ',\'' + cur + '\')" style="margin-left:5px;" />';
+                    } else {
+                        htmlstr += '<input type="button" class="btn btn-primary btn-xs" value="Refund" disabled="disabled" onclick="GoRefund(\'' + orderNo + '\',' + amount + ',\'' + cur + '\')" style="margin-left:5px;" />';
+                    }
+                    return htmlstr;
+                }
+            }
+        ];
+        $("#orderGrid").BoGrid({
+            url: '/PurchaseHistory/LoadData',
+            ExpandColumn: 'PageName',
+            colNames: colnames,
+            sortname: "Timestamp",
+            sortorder: "desc",
+            colModel: colmodels,
+            pager: '#orderGridPager'
+        });
+    });
+    function GoRefund(orderNo,amount,cur) {
+        swal({
+            title: "Refund",
+            text: "<p><lable style=\"color:#111111\">OrderNo</lable>:" + orderNo + "</p><br /><p><lable style=\"color:#111111\">Amount</lable>:    " + amount +"   "+ cur + "</p>",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Confirm",
+            closeOnConfirm: false,
+            html: true
+        },
+            function () {
+                $.ajax({
+                    url: "/PurchaseHistory/Refund",
+                    type: "post",
+                    data: { orderNo: orderNo},
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "Save Success",
+                                text: context.Message,
+                                type: "success"
+                            }, function () {
+                                refreshPage();
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "Refund Failed",
+                                text: context.Message,
+                                type: "error"
+                            });
+                        }
+                    }
+                });
+            });
+    }
+
+    function SearchOrder() {
+        var orderNo = $.trim($("#orderNo").val());
+        var possn = $.trim($("#POSSN").val());
+        $("#orderGrid").jqGrid('setGridParam', { postData: { orderNo: orderNo, possn: possn }, page: 1 }).trigger("reloadGrid");
+    }
+    function refreshPage() {
+        var orderNo = $.trim($("#orderNo").val());
+        var possn = $.trim($("#POSSN").val());
+        $("#orderGrid").jqGrid('setGridParam', { postData: { orderNo: orderNo, possn: possn } }).trigger("reloadGrid");
+    }
+
+</script>

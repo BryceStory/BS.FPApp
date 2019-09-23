@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiiiPay.Profile.API", "Services\FiiiPay.Profile.API\FiiiPay.Profile.API.csproj", "{E303BA8B-9163-403F-A315-1065A34920B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{2C782F4F-8126-4ABA-8B36-293DE9E272A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{DA7143FF-FED3-479D-B8E8-BD1EAD3006CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{14E3956F-BF87-483E-B68D-8DD246E25479}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiiiPay.Profile.Entities", "Shared\FiiiPay.Profile.Entities\FiiiPay.Profile.Entities.csproj", "{A3AEAB1A-E263-4008-ACE1-541F4E88B819}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiiiPay.Profile.Data", "Data\FiiiPay.Profile.Data\FiiiPay.Profile.Data.csproj", "{42FF5705-2BC2-49BE-BEA9-C82B0777F30B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Global|Any CPU = Global|Any CPU
+		Product|Any CPU = Product|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E303BA8B-9163-403F-A315-1065A34920B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E303BA8B-9163-403F-A315-1065A34920B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E303BA8B-9163-403F-A315-1065A34920B7}.Global|Any CPU.ActiveCfg = Release|Any CPU
+		{E303BA8B-9163-403F-A315-1065A34920B7}.Global|Any CPU.Build.0 = Release|Any CPU
+		{E303BA8B-9163-403F-A315-1065A34920B7}.Product|Any CPU.ActiveCfg = Product|Any CPU
+		{E303BA8B-9163-403F-A315-1065A34920B7}.Product|Any CPU.Build.0 = Product|Any CPU
+		{E303BA8B-9163-403F-A315-1065A34920B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E303BA8B-9163-403F-A315-1065A34920B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3AEAB1A-E263-4008-ACE1-541F4E88B819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3AEAB1A-E263-4008-ACE1-541F4E88B819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3AEAB1A-E263-4008-ACE1-541F4E88B819}.Global|Any CPU.ActiveCfg = Release|Any CPU
+		{A3AEAB1A-E263-4008-ACE1-541F4E88B819}.Global|Any CPU.Build.0 = Release|Any CPU
+		{A3AEAB1A-E263-4008-ACE1-541F4E88B819}.Product|Any CPU.ActiveCfg = Release|Any CPU
+		{A3AEAB1A-E263-4008-ACE1-541F4E88B819}.Product|Any CPU.Build.0 = Release|Any CPU
+		{A3AEAB1A-E263-4008-ACE1-541F4E88B819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3AEAB1A-E263-4008-ACE1-541F4E88B819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42FF5705-2BC2-49BE-BEA9-C82B0777F30B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42FF5705-2BC2-49BE-BEA9-C82B0777F30B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42FF5705-2BC2-49BE-BEA9-C82B0777F30B}.Global|Any CPU.ActiveCfg = Release|Any CPU
+		{42FF5705-2BC2-49BE-BEA9-C82B0777F30B}.Global|Any CPU.Build.0 = Release|Any CPU
+		{42FF5705-2BC2-49BE-BEA9-C82B0777F30B}.Product|Any CPU.ActiveCfg = Release|Any CPU
+		{42FF5705-2BC2-49BE-BEA9-C82B0777F30B}.Product|Any CPU.Build.0 = Release|Any CPU
+		{42FF5705-2BC2-49BE-BEA9-C82B0777F30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42FF5705-2BC2-49BE-BEA9-C82B0777F30B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E303BA8B-9163-403F-A315-1065A34920B7} = {14E3956F-BF87-483E-B68D-8DD246E25479}
+		{A3AEAB1A-E263-4008-ACE1-541F4E88B819} = {DA7143FF-FED3-479D-B8E8-BD1EAD3006CF}
+		{42FF5705-2BC2-49BE-BEA9-C82B0777F30B} = {2C782F4F-8126-4ABA-8B36-293DE9E272A5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CB6BCCB-7E10-4D1C-955D-BA04FADEC57F}
+	EndGlobalSection
+EndGlobal

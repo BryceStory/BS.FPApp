@@ -1,0 +1,590 @@
+﻿@using FiiiPay.BackOffice.Models;
+@model MerchantInformations
+@{
+    List<StoreTypes> storeTypeList = ViewBag.StoreTypeList;
+    List<MerchantCategorys> categoryList = ViewBag.MerchantStoreTypeList;
+    List<MerchantSupportCryptos> supportCryptoList = ViewBag.MerchantSupportCryptoList;
+    List<Cryptocurrencies> coinList = ViewBag.CryptoList;
+    FiiipayMerchantProfiles profile = ViewBag.FiiipayMerchantProfile;
+    List<MerchantOwnersFigures> figureList = ViewBag.OwnersFigure;
+    Countries country = ViewBag.Country;
+}
+<div class="pagebody">
+    <form class="form-horizontal" id="merchantInfoAddForm">
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="ApplicantName">申请人</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">
+                    @Html.HiddenFor(t => t.Id)
+                    @Html.DisplayTextFor(t => t.ApplicantName)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required" for="FiiiPayAccount">FiiiPay帐号</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">
+                    @ViewBag.FiiiPayAccountName
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="InviteCode">邀请码</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control noborder">
+                    @ViewBag.InviteCode
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required" for="ApplicantName">商户名称</label>
+            <div class="col-lg-6 col-sm-8">
+                @Html.TextBoxFor(t => t.MerchantName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required" for="MerchantCategorys">商户类别</label>
+            <div class="col-lg-6 col-sm-8">
+                <ul class="list-inline">
+                    @foreach (var st in storeTypeList)
+                    {
+                        string checkedStr = "";
+                        var hadCategory = categoryList.Any(t => t.Category == st.Id);
+                        if (hadCategory)
+                        {
+                            checkedStr = "checked='checked'";
+                        }
+                        <li>
+                            <div class="checkbox" style="width:250px;">
+                                <label>
+                                    <input type="checkbox" name="MerchantCategorys" data-typeid="@st.Id" value="@st.Id" @checkedStr> @st.Name_CN (@st.Name_EN)
+                                </label>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required" for="SupportCoins">收款币种</label>
+            <div class="col-lg-6 col-sm-8">
+                <ul class="list-inline">
+                    @foreach (var coin in coinList)
+                    {
+                        string checkedStr = "";
+                        var hadCoin = supportCryptoList.Any(t => t.CryptoCode == coin.Code);
+                        if (hadCoin)
+                        {
+                            checkedStr = "checked='checked'";
+                        }
+                        <li>
+                            <div class="checkbox" style="width:120px;">
+                                <label>
+                                    <input type="checkbox" name="SupportCoins" data-coinid="@coin.Id" value="@coin.Id" @checkedStr> @coin.Code
+                                </label>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required" for="WeekTxt">营业时间</label>
+            <div class="col-lg-6 col-sm-8">
+                @Html.TextAreaFor(t => t.WeekTxt, new { @class = "form-control", rows = 3 })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required" for="SpecialService">服务/特色/商品</label>
+            <div class="col-lg-2 col-sm-3">
+                <div class="input-group">
+                    @Html.TextBox("SpecialService", "", new { @class = "form-control" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="border:1px solid #cccccc;" onclick="AddServiceInPage()">添加</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-8 col-sm-7">
+                <ul id="SpecialServiceList" class="list-inline specialservicelist">
+                    @if (!string.IsNullOrEmpty(Model.Tags))
+                    {
+                        var tags = Model.Tags.Split(',');
+                        for (int i = 0; i < tags.Length; i++)
+                        {
+                            <li>
+                                <span>@tags[i]</span>
+                                <input type="hidden" name="TagList" value="@tags[i]" />
+                                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required" for="Phone">商家电话</label>
+            <div class="col-lg-6 col-sm-8">
+                @Html.TextBoxFor(t => t.Phone, new { @class = "form-control" })
+            </div>
+        </div>
+        @*<div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required">所在国家</label>
+            <div class="col-lg-6 col-sm-8">
+                <div class="form-control" id="CountryCodeTxt" style="background-color:#f1f1f1;">@(country.Code.ToUpper() == "CN" ? country.Name_CN : country.Name)</div>
+                @Html.Hidden("CountryCode", country.Code)
+            </div>
+        </div>*@
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required">所在国家</label>
+            <div class="col-lg-6 col-sm-8">
+                @Html.DropDownList("CountryCode", (SelectList)ViewBag.CountryCodeList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required" for="Address">详细地址</label>
+            <div class="col-lg-6 col-sm-8">
+                @Html.TextBoxFor(t => t.Address, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required">地图坐标</label>
+            <div class="col-lg-6 col-sm-8">
+                <table>
+                    <tr>
+                        <td style="width:60px;text-align:right;padding-right:8px;">经度</td>
+                        <td style="width:120px;">@Html.TextBoxFor(t => t.Lng, new { @class = "form-control" })</td>
+                        <td style="width:60px;text-align:right;padding-right:8px;">纬度</td>
+                        <td style="width:120px;">@Html.TextBoxFor(t => t.Lat, new { @class = "form-control" })</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-8 col-lg-6 col-sm-offset-2 col-lg-offset-2">
+                <div id='map' style="height:350px;"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label" for="Introduce">商家介绍</label>
+            <div class="col-lg-6 col-sm-8">
+                @Html.TextAreaFor(t => t.Introduce, new { @class = "form-control", rows = 5 })
+            </div>
+        </div>
+        @if (Model.VerifyStatus != FiiiPay.Entities.Enums.VerifyStatus.Certified)
+        {
+            <div class="form-group">
+                <label class="col-lg-2 col-sm-2 control-label" for="LicenseNo">营业执照号</label>
+                <div class="col-lg-6 col-sm-8">
+                    @Html.TextBox("LicenseNo", profile?.LicenseNo, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-sm-2 control-label">营业执照照片</label>
+                <div class="col-lg-6 col-sm-8">
+                    @{
+                        string imgIdentityUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}", profile?.BusinessLicenseImage);
+                    }
+                    <a href="javascript:" onclick="UploadIdentity()">
+                        <img src="@imgIdentityUrl" class="imgbordered" id="imgIdentity" />
+                    </a>
+                    @Html.Hidden("BusinessLicenseImage", profile?.BusinessLicenseImage)
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <label class="col-lg-2 col-sm-2 control-label required" for="LicenseNo">营业执照号</label>
+                <div class="col-lg-6 col-sm-8">
+                    <div class="form-control noborder">
+                        @(profile?.LicenseNo)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-sm-2 control-label required">营业执照照片</label>
+                <div class="col-lg-6 col-sm-8">
+                    @{
+                        string imgIdentityUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}", profile?.BusinessLicenseImage);
+                    }
+                    <img src="@imgIdentityUrl" class="imgbordered" id="imgIdentity" />
+                    @Html.Hidden("BusinessLicenseImage", profile?.BusinessLicenseImage)
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required">店面照片</label>
+            <div class="col-lg-6 col-sm-8">
+                @{
+                    string imgFileIdUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}", Model.FileId);
+                }
+                <a href="javascript:" onclick="UploadFileId()">
+                    <img src="@imgFileIdUrl" class="imgbordered" id="imgFileId" />
+                </a>
+                @Html.HiddenFor(t => t.FileId)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label required">店铺环境图</label>
+            <div class="col-lg-10 col-sm-10">
+                <ul class="list-inline" id="storeOwnerFigureList">
+                    @if (figureList != null)
+                    {
+                        foreach (var item in figureList)
+                        {
+                            string imgFigureUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}", item.FileId);
+                            <li>
+                                <img src="@imgFigureUrl" />
+                                <input type="hidden" name="FigureImgIdList" value="@item.FileId" />
+                                <div class="figureimgcover"></div>
+                                <button type="button" class="close" aria-label="Close" title="删除"><span aria-hidden="true">&times;</span></button>
+                            </li>
+                        }
+                    }
+                </ul>
+                <div>
+                    <a href="javascript:" onclick="UploadOwnerFigures()">
+                        <img src="~/Content/Images/loadupbk.png" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="margin-bottom:200px;">
+            <div class="col-sm-8 col-lg-6 col-sm-offset-2 col-lg-offset-2">
+                <input type="button" class="btn btn-primary" onclick="SubmitMerchantInfoAddForm()" value="提交" />
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $("#merchantInfoAddForm").jqValidate({
+            rules: {
+                MerchantCategorys: { required: true },
+                MerchantName: { required: true, maxlength: 75 },
+                SupportCoins: { required: true },
+                WeekTxt: { required: true, maxlength:200 },
+                SpecialService: { maxlength: 20 },
+                Phone: { required: true, maxlength: 20 },
+                Address: { required: true, maxlength: 100 },
+                Lng: { required: true, number: true },
+                Lat: { required: true, number: true }
+                //LicenseNo: { required: true, maxlength: 50 }
+            },
+            errorPlacement: function (error, element) {
+                var parantelement = element.closest('.form-group').children("div").first();
+                error.appendTo(parantelement);
+            }
+        });
+        $("#SpecialServiceList").on("click", ">li>.close", function () {
+            $(this).parent().remove();
+        });
+        $("#storeOwnerFigureList").on("click", ">li .close", function () {
+            $(this).closest("li").remove();
+        });
+    });
+    function SubmitMerchantInfoAddForm() {
+        var vaild = $("#merchantInfoEditForm").valid();
+        if (!vaild) {
+            return false;
+        }
+    }
+    function AddServiceInPage() {
+        if (!$("#SpecialService").valid()) {
+            return;
+        }
+        var txt = $.trim($("#SpecialService").val());
+        if (!txt) {
+            return;
+        }
+        $("#SpecialService").val('');
+        var $specialList = $("#SpecialServiceList");
+        if ($specialList.children().length >= 5) {
+            return;
+        }
+        if (!CheckServiceExist(txt)) {
+            return;
+        }
+        $specialList.append(GetSpecialServiceHtml(txt));
+    }
+    function GetSpecialServiceHtml(txt) {
+        var htmlstr = '<li>';
+        htmlstr += "<span>" + txt + "</span>";
+        htmlstr += '<input type="hidden" name="TagList" value="' + txt + '" />';
+        htmlstr += '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        htmlstr += "</li>";
+        return htmlstr;
+    }
+    function CheckServiceExist(txt) {
+        var $specialList = $("#SpecialServiceList");
+        var $existli = $specialList.children(":contains('" + txt + "')");
+        if ($existli && $existli.length > 0) {
+            for (var i = 0; i <= $existli.length; i++) {
+                var spantxt = $existli.eq(i).children("span").text();
+                if (spantxt == txt)
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    //上传营业执照
+    function UploadIdentity() {
+        $.openmodalpage("UploadIdentity", "/FiiiPayMerchant/UploadIdentity", {}, "上传营业执照", "big");
+    }
+    function CloseUploadIdentityPage() {
+        $.closemodalpage("UploadIdentity");
+    }
+    function UploadIdentitySuccess(file, response) {
+        var url = response.url;
+        if (url) {
+            $("#imgIdentity").removeAttr("src").attr("src", url);
+        }
+        if (response.fileId) {
+            $("#BusinessLicenseImage").val(response.fileId);
+        }
+    }
+
+    //上传店面图
+    function UploadFileId() {
+        $.openmodalpage("UploadFileId", "/FiiiPayMerchant/UploadFileId", {}, "上传店面图", "big");
+    }
+    function CloseUploadFileIdPage() {
+        $.closemodalpage("UploadFileId");
+    }
+    function UploadFileIdSuccess(file, response) {
+        var url = response.url;
+        if (url) {
+            $("#imgFileId").removeAttr("src").attr("src", url);
+        }
+        if (response.fileId) {
+            $("#FileId").val(response.fileId);
+        }
+    }
+
+    //上传店铺环境图
+    function UploadOwnerFigures() {
+        $.openmodalpage("UploadOwnerFigures", "/FiiiPayMerchant/UploadOwnerFigures", {}, "上传店铺环境图", "big");
+    }
+    function CloseUploadOwnerFiguresPage() {
+        $.closemodalpage("UploadOwnerFigures");
+    }
+    function GetFigureImageCount() {
+        return $("#storeOwnerFigureList").children().length;
+    }
+    function UploadOwnerFiguresSuccess(file, response) {
+        $li = $('<li></li>');
+        $img = $('<img />').appendTo($li);
+        $idtxt = $('<input type="hidden" name="FigureImgIdList" />').appendTo($li);
+        var specialtitlehtml = '<div class="figureimgcover"></div>';
+        specialtitlehtml += '<button type="button" class="close" aria-label="Close" title="删除"><span aria-hidden="true">&times;</span></button>';
+        $li.append(specialtitlehtml);
+
+        $img.removeAttr("src").attr("src", response.url);
+        $idtxt.val(response.fileId);
+
+        $("#storeOwnerFigureList").append($li);
+        setiframeheight();
+    }
+
+    function SubmitMerchantInfoAddForm() {
+        var vaild = $("#merchantInfoAddForm").valid();
+        if (!vaild) {
+            return false;
+        }
+        if (!CheckPictureRequired()) {
+            return false;
+        }
+        $.ajax({
+            url: '/FiiiPayMerchant/SaveEdit',
+            data: $("#merchantInfoAddForm").serialize(),
+            dataType: "json",
+            success: function (context) {
+                if (context.Status) {
+                    swal({
+                        title: "保存成功",
+                        type: "success"
+                    }, function () {
+
+                    });
+                }
+                else {
+                    swal({
+                        title: "保存失败",
+                        type: "error",
+                        text: context.Message
+                    });
+                }
+            }
+        })
+    }
+    function CheckPictureRequired() {
+        //if (!$("#BusinessLicenseImage").val()) {
+        //    swal({
+        //        title: "",
+        //        text: "请上传营业执照",
+        //        buttons: false,
+        //        timer: 3000,
+        //    });
+        //    return false;
+        //}
+        if (!$("#FileId").val()) {
+            swal({
+                title: "",
+                text: "请上传店面图",
+                buttons: false,
+                timer: 3000,
+            });
+            return false;
+        }
+        if ($("#storeOwnerFigureList").children().length <= 0) {
+            swal({
+                title: "",
+                text: "请上传店铺环境图",
+                buttons: false,
+                timer: 3000,
+            });
+            return false;
+        }
+        if ($("#SpecialServiceList").children().length <= 0) {
+            swal({
+                title: "",
+                text: "请填写服务或特色",
+                buttons: false,
+                timer: 3000
+            });
+            return false;
+        }
+        return true;
+    }
+</script>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZmlpaXBheTIwMTkiLCJhIjoiY2pzZmd4OG44MDhxNzN5cHV1YzZpZG85ZCJ9.Dz091UTbErxtERwOXSWTmA';
+    var lng = Number($("#Lng").val());
+    var lat = Number($("#Lat").val());
+    var map = new mapboxgl.Map({
+        container: 'map', // container id
+        style: 'mapbox://styles/mapbox/streets-v10',
+        center: [lng, lat],
+        zoom: 13 // starting zoom
+    });
+    var mapGeocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        marker: false,
+        bbox: Getbbox(),
+        zoom: 16,
+        mapboxgl: mapboxgl
+    });
+    map.addControl(new MapboxLanguage());
+    map.addControl(mapGeocoder);
+    map.addControl(new mapboxgl.FullscreenControl({ container: document.querySelector('map') }));
+    var marker = new mapboxgl.Marker({
+        draggable: false
+    });
+    marker.setLngLat([lng, lat]).addTo(map);
+    map.on('click', function (e) {
+        marker.setLngLat([e.lngLat.lng, e.lngLat.lat]).addTo(map);
+        GetAddress();
+
+        $("#Lng").val(e.lngLat.lng);
+        $("#Lat").val(e.lngLat.lat);
+    });
+    map.on('moveend', function (e) {
+        mapGeocoder.setBbox(Getbbox());
+    });
+
+    function GetAddress() {
+        var pos = marker.getLngLat();
+
+        $.ajax({
+            type: 'get',
+            url: "/FiiiPayMerchant/GetAddress",
+            data: { lat: pos.lat, lng: pos.lng, lang: 'zh' },
+            dataType: 'json',
+            success: function (data) {
+                if (data && data.features) {
+                    SetAddress(data.features);
+                }
+            }
+        })
+    }
+
+    function SetAddress(aObj) {
+        var locality = '', place = '', region = '', country = '', countryCode = '';//区,市,省,国家,国家标准编码
+        for (var i = 0; i < aObj.length; i++) {
+            var obj = aObj[i];
+            if (JsStartWith(obj.id, "locality.")) {
+                locality = obj.text;
+            }
+            else if (JsStartWith(obj.id, "place.")) {
+                place = obj.text;
+            }
+            else if (JsStartWith(obj.id, "region.")) {
+                region = obj.text;
+            }
+            else if (JsStartWith(obj.id, "country.")) {
+                country = obj.text;
+                countryCode = obj.properties.short_code.toUpperCase();
+            }
+        }
+        $("#Address").val(region + " " + place + " " + locality);
+        $("#CountryCode").val(countryCode);
+    }
+
+    function JsStartWith(str, s) {
+        if (s == null || s == "" || str.length == 0 || s.length > str.length)
+            return false;
+        if (str.substr(0, s.length) == s)
+            return true;
+        else
+            return false;
+        return true;
+    }
+
+    function Getbbox() {
+        var center = map.getCenter();
+        return [center.lng - 0.2, center.lat - 0.2, center.lng + 0.2, center.lat + 0.2];
+    }
+</script>
+<style>
+    img.imgbordered {
+        height:300px;
+        border: solid 1px #ddd;
+    }
+    #storeOwnerFigureList > li {
+        width: 420px;
+        height: 315px;
+        padding: 0;
+        margin-right: 15px;
+        position: relative;
+    }
+
+        #storeOwnerFigureList > li img {
+            max-width: 100%;
+            height: 300px;
+            border: solid 1px #ddd;
+        }
+
+        #storeOwnerFigureList > li .close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: #f00;
+            z-index: 100;
+            opacity: 0.8;
+            filter: Alpha(opacity=80);
+        }
+
+        #storeOwnerFigureList > li .figureimgcover {
+            position: absolute;
+            right: 0;
+            top: 0;
+            margin: 0;
+            height: 35px;
+            background-color: #fff;
+            opacity: 0.5;
+            filter: Alpha(opacity=50);
+            z-index: 99;
+            width: 100%;
+        }
+</style>

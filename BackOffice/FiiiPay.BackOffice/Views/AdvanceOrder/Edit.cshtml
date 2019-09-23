@@ -1,0 +1,142 @@
+﻿@using FiiiPay.BackOffice.Models
+@model AdvanceOrders
+<div class="pagebody">
+    <form class="form-horizontal" id="editCoinForm">
+        @Html.HiddenFor(t => t.Id)
+        <div class="form-group">
+            <label class="col-sm-3 control-label">OrderName：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.OrderName, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+                <label class="control-label">@Model.OrderName </label>
+            </div>*@
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Phone：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Phone, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+                <label class="control-label">@Model.Phone </label>
+            </div>*@
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Amount：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Amount, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+                <label class="control-label">@Model.Amount </label>
+            </div>*@
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Price：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Price, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+                <label class="control-label">@Model.Price </label>
+            </div>*@
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Totalpayment：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Totalpayment, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+                <label class="control-label">@Model.Totalpayment </label>
+            </div>*@
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Advance：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Advance, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+                <label class="control-label">@Model.Advance </label>
+            </div>*@
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">TransferName：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.TransferName, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+                <label class="control-label">@Model.TransferName </label>
+            </div>*@
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">TransferNumber：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.TransferNumber, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+                <label class="control-label">@Model.TransferNumber </label>
+            </div>*@
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Paymentstatus：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Paymentstatus, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Shippingstatus：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Shippingstatus, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Time：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Time, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+                <label class="control-label">@Model.Time </label>
+            </div>*@
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Salesperson：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Salesperson, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+                <label class="control-label">@Model.Salesperson </label>
+            </div>*@
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Remark：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Remark, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+            <label class="control-label">@Model.Remark </label>
+        </div>*@
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Amountpaid：</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(t => t.Amountpaid, new { @class = "form-control" })
+            </div>
+            @*<div class="col-sm-9">
+                <label class="control-label">@Model.Amountpaid </label>
+            </div>*@
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <input type="button" class="btn btn-primary" onclick="SubmitEditCoinForm()" value="提交" />
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $("#editCoinForm").jqValidate({
+            rules: {
+                Name: { required: true, maxlength: 50 },
+                Description: { maxlength: 100 }
+            }
+        });
+    })
+</script>

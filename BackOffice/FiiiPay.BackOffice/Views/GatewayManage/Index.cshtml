@@ -1,0 +1,109 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permobj = new GeneralPermission { Create = permissionCodeList.Contains("GatewayAccountCreate"), Update = permissionCodeList.Contains("GatewayAccountUpdate") };
+    var canResetPwd = permissionCodeList.Contains("ResetGatewayAccountPassword");
+    var canDeduct = permissionCodeList.Contains("GatewayAccountDeduct");
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permobj);
+}
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="POSNo">Username</label>
+            <input type="text" class="form-control" id="POSNo" placeholder="Input Username to search">
+        </div>
+        <div class="form-group">
+            <label for="Status">Status</label>
+            @Html.DropDownList("Status", (List<SelectListItem>)ViewBag.StatusList, new { @class = "form-control" })
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="Search()">Search</button>
+        @if (permobj.Create)
+        {
+        <button type="button" class="btn btn-primary btn-sm" onclick="CreateGatewayAccountClick()">Create</button>
+        }
+    </form>
+</div>
+<div>
+    <table id="dtGrid"></table>
+    <div id="dtGridPager"></div>
+</div>
+<script>
+    $(function () {
+        var colnames = ["Id", "Username", "MerchantName", "Email", "Balance", "Status", "RegistrationDate"];
+        var colmodels = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'Username', index: 'Username', align: 'center', width: 40, sortable: false },
+            { name: 'MerchantName', index: 'MerchantName', align: 'center', width: 40, sortable: false },
+            { name: 'Email', index: 'Email', align: 'center', width: 40, sortable: false },
+            { name: 'Balance', index: 'Balance', width: 40, align: 'center', sortable: false },
+            { name: 'Status', index: 'Status', width: 40, align: 'center', sortable: false },
+            { name: 'RegistrationDate', index: 'RegistrationDate', width: 40, align: 'center', sortable: false }
+        ];
+        colnames.push("View");
+        colmodels.push({
+            name: 'View', index: 'View', width: 40, align: 'center', hideinxs: true, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                return '<a href="javascript:" class="btn btn-primary btn-xs" onclick="GoViewPage(\'' + rowdata.Id + '\')">View</a>';
+            }
+        });
+        if ("@canResetPwd".toLowerCase() === "true")
+                        {
+            colmodels.push({
+                name: 'ResetPassword', index: 'ResetPassword', align: 'center', width: 40, sortable: false, formatter: function (cellvalue, options, rowdata) {
+
+                    return '<a href="javascript:" class="btn btn-primary btn-xs" onclick="ResetPassword(\'' + rowdata.Id + '\')">Reset Password</a>';
+                }
+            });
+            colnames.push("Reset Password");
+        }
+        if ("@canDeduct".toLowerCase() === "true")
+        {
+            colmodels.push({
+                name: 'Deduct', index: 'Deduct', align: 'center', width: 40, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    return '<a href="javascript:" class="btn btn-primary btn-xs" onclick="Deduct(\'' + rowdata.Id + '\')">Deduct</a>';
+                }
+            });
+            colnames.push("Deduct");
+        }
+        $("#dtGrid").BoGrid({
+            url: '/GatewayManage/LoadData',
+            ExpandColumn: 'PageName',
+            showBtn: true,
+            permvalue: "@sePermission",
+            colNames: colnames,
+            colModel: colmodels,
+            onEditClick: "EditGatewayAccountClick",
+            ondblClickRow: function (rowid) { $.opentabpage("/GatewayManage/Detail?Id=" + rowid, "Gateway Account Information", "GatewayAccountInformation"+ rowid); },
+            pager: '#dtGridPager'
+        });
+    });
+
+    function Search() {
+        var username = $.trim($("#Username").val());
+        var status = $.trim($("#Status").val());
+        $("#dtGrid").jqGrid('setGridParam', { postData: { username: username, status: status}, page: 1 }).trigger("reloadGrid");
+    }
+
+    function refreshPage() {
+        var username = $.trim($("#Username").val());
+        var status = $.trim($("#Status").val());
+        $("#dtGrid").jqGrid('setGridParam', { postData: { username: username, status: status} }).trigger("reloadGrid");
+    }
+    function EditGatewayAccountClick(id) {
+        $.opentabpage("/GatewayManage/Edit?id=" + id, "Edit Gateway Account Information", "EditGatewayAccountInformation" + id);
+    }
+    function CreateGatewayAccountClick() {
+        $.opentabpage("/GatewayManage/Edit?id=" +"00000000-0000-0000-0000-000000000000", "Create Gateway Account Information", "CreateGatewayAccountInformation");
+    }
+    function GoViewPage(id) {
+        $.opentabpage("/GatewayManage/Detail?id=" + id, "Gateway Account Information", "GatewayAccountInformation" + id);
+    }
+
+    function ResetPassword(id) {
+        $.openmodalpage("resetGatewayPasswordpage", "/GatewayManage/ResetPassword", { Id: id }, "Reset Password", "");
+    }
+
+    function Deduct(id) {
+        $.openmodalpage("deductGatewayAccountpage", "/GatewayManage/Deduct", { Id: id }, "Deduct Money", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+</script>

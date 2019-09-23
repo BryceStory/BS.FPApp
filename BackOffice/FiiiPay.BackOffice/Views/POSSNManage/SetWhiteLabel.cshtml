@@ -1,0 +1,87 @@
+﻿
+<div class="pagebody" style="width:500px;">
+    <form id="formEdit" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="WhiteLabel">White Label</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="WhiteLabel" placeholder="WhiteLabel">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required" for="FirstCrypto">FirstCrypto</label>
+            <div class="col-sm-9">
+                @Html.DropDownList("FirstCrypto", (List<SelectListItem>)ViewBag.CURList, new { Class = "form-control", placeholder = "FirstCrypto" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="button" class="btn btn-primary" onclick="Save()">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(function () {
+        $('#formEdit').jqValidate({
+            errorElement: 'span',
+            errorClass: 'help-inline',
+            focusInvalid: true,
+            rules: {
+                WhiteLabel: { required: true }
+            },
+            messages: {
+                WhiteLabel: {
+                    required: "This field is required."
+                }
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('info').addClass('has-error');
+            },
+            success: function (e) {
+                $(e).closest('.form-group').removeClass('has-error').addClass('info');
+                $(e).remove();
+            }
+        });
+    });
+    function Save() {
+        var ids = $("#dtGrid").jqGrid('getGridParam', 'selarrrow');
+        if (ids.length <= 0) {
+            swal({
+                title: "",
+                text: "Please select one row first",
+                type: "error"
+            });
+            return;
+        }
+        var whiteLabel = $("#WhiteLabel").val();
+        var firstCrypto = $("#FirstCrypto").val();
+        var checkResult = $('#formEdit').valid();
+        if (checkResult) {
+            $.ajax({
+                url: "/POSSNManage/MarkWhiteLabel",
+                type: "post",
+                data: { ids: ids, whiteLabel: whiteLabel, firstCrypto: firstCrypto },
+                dataType: "json",
+                success: function (context) {
+                    if (context.Status) {
+                        swal({
+                            title: "Save Success",
+                            text: context.Message,
+                            type: "success"
+                        }, function () {
+                            $.closemodalpage("setWhiteLabelPage");
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Save Failed",
+                            text: context.Message,
+                            type: "error"
+                        });
+                    }
+                }
+            });
+        }
+    }
+</script>

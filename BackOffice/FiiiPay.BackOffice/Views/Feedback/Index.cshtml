@@ -1,0 +1,149 @@
+﻿
+@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Create = permissionCodeList.Contains("FeedbackCreate"), Update = permissionCodeList.Contains("FeedbackUpdate"), Delete = permissionCodeList.Contains("FeedbackDelete") };
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permission);
+}
+
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="ddlHasProcessor">HasProcessor</label>
+            <select id="ddlHasProcessor" class="form-control">
+                <option value="">全部</option>
+                <option value="true">已处理</option>
+                <option value="false">未处理</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="ddlType">Type</label>
+            <select id="ddlType" class="form-control">
+                <option value="">全部</option>
+                <option value="FiiiPos">FiiiPos</option>
+                <option value="FiiiPay IOS">FiiiPay IOS</option>
+                <option value="FiiiPay Android">FiiiPay Android</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="SearchFeedbacks()">Search</button>
+    </form>
+</div>
+
+<div style="width:100%; overflow-x:auto;">
+    <table id="dtGrid"></table>
+    <div id="dtGridPager"></div>
+</div>
+@if (permission.Delete) {
+<button type="button" class="btn btn-primary btn-sm" onclick="BatchDelete()">Batch Delete</button>
+}
+<script>
+    $(function() {
+        $("#dtGrid").BoGrid({
+            url: '/Feedback/LoadData',
+            colNames: ["Id", "Timestamp", "Type", "AccountId", "Country", "Context", "HasProcessor"],
+            showBtn: true,
+            colModel: [
+                { name: 'Id', index: 'Id', align: 'center', hidden: true },
+                { name: 'Date', index: 'Date', align: 'center', width: 120, },
+                { name: 'Type', index: 'Type', align: 'center', width: 80, sortable: false },
+                { name: 'AccountId', index: 'AccountId', align: 'center', width: 80, sortable: false },
+                { name: 'Country', index: 'Country', align: 'center', width: 80, sortable: false },
+                { name: 'Context', index: 'Context', align: 'center', width: 80, sortable: false },
+                { name: 'HasProcessor', index: 'HasProcessor', align: 'center', width: 60, sortable: false }
+            ],
+            onEditClick: "editFeedbacksClick",
+            onDeleteClick: "delFeedbacksClick",
+            multiselect: true,
+            sortname: "Timestamp",
+            sortorder: "desc",
+            permvalue: "@sePermission",
+            postData: { type: $.trim($("#ddlType").val()), hasProcessor: $.trim($("#ddlHasProcessor").val()) },
+            ondblClickRow: function(rowid) { showFeedbacksClick(rowid) },
+            pager: '#dtGridPager'
+        });
+    });
+    function refreshPage() {
+        $("#dtGrid").jqGrid('setGridParam', { postData: { type: $.trim($("#ddlType").val()), hasProcessor: $.trim($("#ddlHasProcessor").val()) } }).trigger("reloadGrid");
+    }
+
+    function editFeedbacksClick(id) {
+        $.openmodalpage("editFeedbackspage", "/Feedback/Edit", { Id: id }, "Edit Feedback", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+    function SearchFeedbacks() {
+        var type = $.trim($("#ddlType").val());
+        var hasProcessor = $.trim($("#ddlHasProcessor").val());
+        $("#dtGrid").jqGrid('setGridParam', { postData: { type: type, hasProcessor: hasProcessor }, page: 1 }).trigger("reloadGrid");
+    }
+    function delFeedbacksClick(id) {
+        $.swconfirm("Are your sure to delete this row?", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: '/Feedback/Delete',
+                    data: { id: id },
+                    dataType: "json",
+                    success: function(context) {
+                        if (context.Status) {
+                            swal({
+                                    title: "Delete Success",
+                                    type: "success"
+                                },
+                                function() {
+                                    refreshPage();
+                                });
+                        } else {
+                            swal({
+                                title: "Delete Failed",
+                                type: "error",
+                                text: context.Message
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function BatchDelete() {
+        var ids = $("#dtGrid").jqGrid('getGridParam', 'selarrrow');
+        if (ids.length <= 0) {
+            swal({
+                title: "",
+                text: "Please select one row first",
+                type: "error"
+            });
+            return;
+        }
+        else {
+            $.swconfirm("Are you sure you want to Batch Delete ", function (isconfirm) {
+                if (isconfirm) {
+                    $.ajax({
+                        url: "/Feedback/BatchDelete",
+                        type: "post",
+                        data: JSON.stringify({ ids: ids.join(",") }),
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (context) {
+                            if (context.Status) {
+                                swal({
+                                    title:"Verify Success!",
+                                    text: context.Message,
+                                    type: ""
+                                });
+                                refreshPage();
+                            }
+                            else {
+                                swal({
+                                    title: "Save Failed",
+                                    text: context.Message,
+                                    type: "error"
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    }
+</script>

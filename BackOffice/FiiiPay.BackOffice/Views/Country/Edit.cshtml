@@ -1,0 +1,218 @@
+﻿@model FiiiPay.BackOffice.ViewModels.CountryViewModel
+<div class="pagebody">
+    <form id="formEdit" class="form-horizontal" action="@Url.Action("Save")" enctype="multipart/form-data" method="post">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(t => t.Id)
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Name">Name</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(t => t.Name, new { Class = "form-control", placeholder = "Name" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Name_CN">Name_CN</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(t => t.Name_CN, new { Class = "form-control", placeholder = "Name_CN" })
+            </div>
+        </div>
+        @*<div class="form-group">
+            <label class="col-sm-3 control-label" for="IsHot">IsHot</label>
+            <div class="col-sm-3">
+                @{
+                    string checkedStr = (Model != null && Model.IsHot ? "checked='checked'" : "");
+                }
+                <div class="checkbox" style="width:250px;">
+                    <label>
+                        <input type="checkbox" name="IsHot" id="IsHot" @checkedStr> IsHot
+                    </label>
+                </div>
+            </div>
+        </div>*@
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="IsSupportStore">IsSupportStore</label>
+            <div class="col-sm-3">
+                @{
+                    checkedStr = (Model != null && Model.IsSupportStore ? "checked='checked'" : "");
+                }
+                <div class="checkbox" style="width:250px;">
+                    <label>
+                        <input type="checkbox" name="IsSupportStore" id="IsSupportStore" @checkedStr> IsSupportStore
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="PhoneCode">PhoneCode</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(t => t.PhoneCode, new { Class = "form-control", placeholder = "PhoneCode" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Status">Status</label>
+            <div class="col-sm-3">
+                @Html.DropDownListFor(t => t.Status, (List<SelectListItem>)ViewBag.FuncList, new { Class = "form-control", placeholder = "Status" })
+            </div>
+        </div>
+        @*<div class="form-group">
+            <label class="col-sm-3 control-label" for="CustomerService">CustomerService</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(t => t.CustomerService, new { Class = "form-control", placeholder = "CustomerService" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="PinYin">PinYin</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(t => t.PinYin, new { Class = "form-control", placeholder = "PinYin" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="FiatCurrency">FiatCurrency</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(t => t.FiatCurrency, new { Class = "form-control", placeholder = "FiatCurrency" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Code">Code</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(t => t.Code, new { Class = "form-control", placeholder = "Code" })
+            </div>
+        </div>
+        @*<div class="form-group">
+            <label class="col-sm-3 control-label" for="Symbol">Symbol</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(t => t.FiatCurrencySymbol, new { Class = "form-control", placeholder = "Symbol" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            <label class="col-sm-3 control-label">NationalFlagURL</label>
+            <div class="col-sm-9">
+                <input type="file" name="NationalFlagURL" value="@Model.NationalFlagURL" accept="image/*" onchange="imgPreviewIconURL(this)" />
+                <img id="previewIcon" src="~/Handlers/BlobHandler.ashx?id=@Model.NationalFlagURL" style="border:solid 1px #ddd;height:150px;width:150px; padding:1px; margin-top:10px; max-width:100%;" />
+            </div>
+        </div>
+        <hr style="margin-bottom:10px; " />
+        <h3>Profiles</h3>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="ProfileServerAddress">ProfileServerAddress</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(t => t.ProfileServerAddress, new { Class = "form-control", placeholder = "ProfileServerAddress" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="ProfileClientKey">ProfileClientKey</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(t => t.ProfileClientKey, new { Class = "form-control", placeholder = "ProfileClientKey" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="ProfileSecretKey">ProfileSecretKey</label>
+            <div class="col-sm-5">
+                @Html.TextBoxFor(t => t.ProfileSecretKey, new { Class = "form-control", placeholder = "ProfileSecretKey" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-3">
+                <input type="button" class="btn btn-primary" onclick="Check('Profile')" value="Check" />
+            </div>
+        </div>
+        <hr style="margin-bottom:10px; " />
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-3">
+                <input type="submit" class="btn btn-primary" value="Submit" />
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    function imgPreviewIconURL(fileDom) {
+        //判断是否支持FileReader
+        if (window.FileReader) {
+            var reader = new FileReader();
+        } else {
+            alert("Your browser does not support image preview. If you need this function, please upgrade your browser!");
+        }
+
+        //获取文件
+        var file = fileDom.files[0];
+        var imageType = /^image\//;
+        //是否是图片
+        if (!imageType.test(file.type)) {
+            alert("Please select pictures!");
+            return;
+        }
+        //读取完成
+        reader.onload = function (e) {
+            //获取图片dom
+            var img = document.getElementById("previewIcon");
+            //图片路径设置为读取的图片
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function Save(id) {
+        var postdata = getFromData(id);
+        $.ajax({
+            url: "/Country/Save",
+            type: "post",
+            data: postdata,
+            dataType: "json",
+            contentType: "application/json",
+            success: function (context) {
+                if (context.Status) {
+                    swal({
+                        title: "Save Success",
+                        text: context.Message,
+                        type: "success"
+                    });
+                }
+                else {
+                    swal({
+                        title: "Save Failed",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+    }
+
+    function Check(type) {
+        var ServerAddress;
+        var ClientKey;
+        var SecretKey; if (type === "FiiiFinance") {
+            ServerAddress = $("#FiiiFinanceServerAddress").val();
+            ClientKey = $("#FiiiFinanceClientKey").val();
+            SecretKey = $("#FiiiFinanceSecretKey").val();
+        }
+        else if (type === "Profile") {
+            ServerAddress = $("#ProfileServerAddress").val();
+            ClientKey = $("#ProfileClientKey").val();
+            SecretKey = $("#ProfileSecretKey").val();
+        }
+        $.ajax({
+            url: "/Country/CheckRouters",
+            type: "post",
+            data: { Type: type, ServerAddress: ServerAddress, ClientKey: ClientKey, SecretKey: SecretKey },
+
+            success: function (context) {
+                if (context.Status) {
+                    swal({
+                        title: "Check Success",
+                        text: context.Message,
+                        type: "success"
+                    });
+                }
+                else {
+                    swal({
+                        title: "Check Failed",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+    }
+</script>

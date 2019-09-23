@@ -1,0 +1,79 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;}
+
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="VerifyAccount">Code</label>
+            <input type="text" class="form-control" id="VerifyAccount" placeholder="Input VerifyAccount to search">
+        </div>
+        @*<div class="form-group">
+            <label for="Type">Type</label>
+            <select id="Type" class="form-control">
+                <option>All</option>
+                <option value="SaveProfileVerify">User Profile</option>
+                <option value="SaveResidenceVerify">User Residence</option>
+                <option value="SaveMerchantProfileVerifyL1">Merchant Profile</option>
+                <option value="SaveMerchantProfileVerifyL2">Merchant Business License</option>
+            </select>
+        </div>*@
+        <div class="form-group">
+            <label>Type</label>
+            @Html.DropDownList("Type", (List<SelectListItem>)ViewBag.TypeList, new { @class = "form-control" })
+        </div>
+        <div class="form-group largesearchwidth">
+            <label for="StartDate">Start Date:</label>
+            <input data-val="true" class="form-control" id="StartDate" name="StartDate" type="text" value="@DateTime.UtcNow.AddMonths(-1).ToString("yyyy-MM-dd")">
+            <label for="EndDate">End Date:</label>
+            <input data-val="true" class="form-control" id="EndDate" name="EndDate" type="text" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="Search()">Search</button>
+
+
+    </form>
+</div>
+
+<table id="dtGrid"></table>
+<div id="dtGridPager"></div>
+<script>
+    $(function () {
+        $('#StartDate').add($('#EndDate')).datetimepicker({
+            format: 'yyyy-mm-dd',
+            minView: 'month',
+            autoclose: true
+        });
+        var colnames = ["VerifyAccount", "VerifyCount"];
+        var colmodels = [
+            { name: 'VerifyAccount', index: 'VerifyAccount', align: 'center', width: 60 },
+            { name: 'VerifyCount', index: 'VerifyCount', align: 'center', width: 60 }
+        ];
+        $("#dtGrid").BoGrid({
+            url: '/VerifyRecord/LoadData',
+            colNames: colnames,
+            colModel: colmodels,
+            sortname: "AccountId",
+            postData: GetSearchCondition(),
+            pager: '#dtGridPager'
+        });
+    });
+
+    function Search() {
+        var postdata = GetSearchCondition();
+        $("#dtGrid").jqGrid('setGridParam', { postData: postdata, page: 1 }).trigger("reloadGrid");
+    }
+    function refreshPage() {
+        var postdata = GetSearchCondition();
+        $("#dtGrid").jqGrid('setGridParam', { postData: postdata }).trigger("reloadGrid");
+    }
+
+    function GetSearchCondition() {
+        var postData = {
+            VerifyAccount: $.trim($("#VerifyAccount").val()),
+            Type: $("#Type").children(":selected").val(),
+            StartDate: $("#StartDate").val(),
+            EndDate: $("#EndDate").val()
+        };
+        return postData;
+    }
+
+</script>

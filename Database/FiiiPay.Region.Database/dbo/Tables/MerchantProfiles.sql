@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[MerchantProfiles] (
+    [MerchantId]           UNIQUEIDENTIFIER NOT NULL,
+    [Address1]             NVARCHAR (200)   NULL,
+    [Address2]             NVARCHAR (200)   NULL,
+    [City]                 NVARCHAR (50)    NULL,
+    [State]                NVARCHAR (50)    NULL,
+    [Postcode]             NVARCHAR(50)     NULL,
+    [Country]              INT              NOT NULL,
+    [BusinessLicenseImage] UNIQUEIDENTIFIER NULL,
+    [LicenseNo]            VARCHAR (64)     NULL,
+    [L2VerifyStatus]       TINYINT          CONSTRAINT [L1VerifyStatus_Default] DEFAULT ((0)) NULL,
+    [L2SubmissionDate]     DATETIME         NULL,
+    [CompanyName]          NVARCHAR (50)    NULL,
+    [L2Remark]             NVARCHAR (50)    NULL,
+    [Cellphone]            VARCHAR (50)     NULL,
+    [LastName]             NVARCHAR (100)   NULL,
+    [FirstName]            NVARCHAR (100)   NULL,
+    [IdentityDocNo]        NVARCHAR (50)    NULL,
+    [IdentityDocType]      TINYINT          NULL,
+    [IdentityExpiryDate]   DATETIME         NULL,
+    [FrontIdentityImage]   UNIQUEIDENTIFIER NULL,
+    [BackIdentityImage]    UNIQUEIDENTIFIER NULL,
+    [HandHoldWithCard]     UNIQUEIDENTIFIER NULL,
+    [L1Remark]             NVARCHAR (50)    NULL,
+    [L1SubmissionDate]     DATETIME         NULL,
+    [L1VerifyStatus]       TINYINT          DEFAULT ((0)) NULL
+);
+

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+	<title>$title$</title>
+    <authors>Martin</authors>
+    <owners>Martin</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <projectUrl>http://fiii.io</projectUrl>
+    <iconUrl>http://nuget.fiiipay.com/favicon.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$id$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright FiiiPay 2017</copyright>
+    <tags>Framework</tags>
+  </metadata>
+</package>

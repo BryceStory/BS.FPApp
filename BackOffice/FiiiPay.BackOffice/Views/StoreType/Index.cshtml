@@ -1,0 +1,97 @@
+﻿
+@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Create = permissionCodeList.Contains("StoreTypeCreate"), Update = permissionCodeList.Contains("StoreTypeUpdate"), Delete = permissionCodeList.Contains("StoreTypeDelete") };
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permission);
+}
+
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="Name_CN">Name_CN</label>
+            <input type="text" class="form-control" id="searchName_CN" placeholder="Input Name_CN to search">
+        </div>
+        <div class="form-group">
+            <label for="Name_EN">Name_EN</label>
+            <input type="text" class="form-control" id="searchName_EN" placeholder="Input Name_EN to search">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="SearchStoreTypes()">Search</button>
+        @if (permission.Create)
+        {
+            <button type="button" class="btn btn-create" onclick="addStoreTypeClick()">&nbsp; Create &nbsp;&nbsp;</button>
+        }
+    </form>
+</div>
+<div style="width:100%; overflow-x:auto;">
+    <table id="dtGrid"></table>
+    <div id="dtGridPager"></div>
+</div>
+<script>
+    $(function() {
+        $("#dtGrid").BoGrid({
+            url: '/StoreType/LoadData',
+            colNames: ["Id", "Name_CN", "Name_EN"],
+            showBtn: true,
+            colModel: [
+                { name: 'Id', index: 'Id', align: 'center', hidden: true },
+                { name: 'Name_CN', index: 'Name_CN', align: 'center', width: 120 },
+                { name: 'Name_EN', index: 'Name_EN', align: 'center', width: 80, sortable: false }              
+            ],
+            onEditClick: "editStoreTypeClick",
+            onDeleteClick: "delStoreTypeClick",
+            permvalue: "@sePermission",
+            postData: { type: $.trim($("#ddlType").val()), hasProcessor: $.trim($("#ddlHasProcessor").val()) },
+            ondblClickRow: function(rowid) { showStoreTypesClick(rowid) },
+            pager: '#dtGridPager'
+        });
+    });
+
+    function addStoreTypeClick() {
+        $.openmodalpage("editStoreTypepage", "/StoreType/Edit", { Id: 0 }, "Create StoreType", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+
+    function refreshPage() {
+        $("#dtGrid").jqGrid('setGridParam', { postData: { type: $.trim($("#ddlType").val()), hasProcessor: $.trim($("#ddlHasProcessor").val()) } }).trigger("reloadGrid");
+    }
+
+    function editStoreTypeClick(id) {
+        $.openmodalpage("editStoreTypepage", "/StoreType/Edit", { Id: id }, "Edit StoreType", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+    function SearchStoreTypes() {
+        var name_cn = $.trim($("#searchName_CN").val());
+        var name_en = $.trim($("#searchName_EN").val());
+        $("#dtGrid").jqGrid('setGridParam', { postData: { name_cn: name_cn, name_en: name_en }, page: 1 }).trigger("reloadGrid");
+    }
+    function delStoreTypeClick(id) {
+        $.swconfirm("Are your sure to delete this row?", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: '/StoreType/Delete',
+                    data: { id: id },
+                    dataType: "json",
+                    success: function(context) {
+                        if (context.Status) {
+                            swal({
+                                    title: "Delete Success",
+                                    type: "success"
+                                },
+                                function() {
+                                    refreshPage();
+                                });
+                        } else {
+                            swal({
+                                title: "Delete Failed",
+                                type: "error",
+                                text: context.Message
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }    
+</script>

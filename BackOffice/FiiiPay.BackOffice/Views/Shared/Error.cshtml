@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+    FiiiPay.BackOffice.Common.ErrorMessage msg = Model ?? new FiiiPay.BackOffice.Common.ErrorMessage();
+}
+@model FiiiPay.BackOffice.Common.ErrorMessage
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <!--[if IE 8]><script type="text/javascript">location.href='/Base/IE';</script><![endif]-->
+    @Styles.Render("~/Content/logincss")
+</head>
+<body>
+    <div style="padding:5px;">
+        <div>
+            <h3 class="text-danger">It seems to be in trouble，please get the screenshot to IT</h3>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th style="width:160px;">Request path</th>
+                <td>@msg.Path</td>
+            </tr>
+            <tr>
+                <th>Error type</th>
+                <td>@msg.MsgType</td>
+            </tr>
+            @if (msg.ShowException)
+            {
+                <tr>
+                    <th>Message</th>
+                    <td>@msg.Message</td>
+                </tr>
+            }
+            <tr>
+                <th>Http method</th>
+                <td>@msg.HttpMethod</td>
+            </tr>
+            <tr>
+                <th>UserAgent</th>
+                <td>@msg.UserAgent</td>
+            </tr>
+            @if (msg.ShowException)
+            {
+                <tr>
+                    <th>StackTrace</th>
+                    <td>@msg.StackTrace</td>
+                </tr>
+            }
+            <tr>
+                <th>Time</th>
+                <td>@msg.Time</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

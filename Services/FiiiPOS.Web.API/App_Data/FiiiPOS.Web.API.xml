@@ -1,0 +1,1876 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FiiiPOS.Web.API</name>
+    </assembly>
+    <members>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:FiiiPOS.Web.API.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,FiiiPOS.Web.API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,FiiiPOS.Web.API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},FiiiPOS.Web.API.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.#ctor(FiiiPOS.Web.API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,FiiiPOS.Web.API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:FiiiPOS.Web.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FiiiPOS.Web.API.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Base.APIControllerActionInvoker">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Base.APIControllerActionInvoker.InvokeActionAsync(System.Web.Http.Controllers.HttpActionContext,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="actionContext"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Base.APIExceptionFilterAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Base.APIExceptionFilterAttribute.OnException(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+            统一对调用异常信息进行处理，返回自定义的异常信息
+            </summary>
+            <param name="actionExecutedContext">HTTP上下文对象</param>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Base.BaseApiController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Base.BaseApiController.WorkContext">
+            <summary>
+            上下文属性
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Base.BaseApiController.Result_OK``1(``0,System.String)">
+            <summary>
+            返回成功数据
+            </summary>
+            <param name="data"></param>
+            <param name="message">默认null</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Base.BaseApiController.Result_Fail(System.Int32,System.String)">
+            <summary>
+            返回失败数据
+            </summary>
+            <param name="code"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Base.BaseApiController.Result_Fail``1(``0,System.Int32,System.String)">
+            <summary>
+            返回失败数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <param name="code"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Base.TokenAuthenticationFilter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiiiPOS.Web.API.Base.TokenAuthenticationFilter._authenticationType">
+            <summary>
+            默认为 Bearer
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Base.TokenAuthenticationFilter.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="authenticationType"></param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Base.TokenAuthenticationFilter.AuthenticateAsync(System.Web.Http.Filters.HttpAuthenticationContext,System.Threading.CancellationToken)">
+            <summary>Asynchronously authenticates the request.</summary>
+            <returns>The task that completes the authentication.</returns>
+            <param name="context">The authentication context.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Base.TokenAuthenticationFilter.ChallengeAsync(System.Web.Http.Filters.HttpAuthenticationChallengeContext,System.Threading.CancellationToken)">
+            <summary>Asynchronously challenges an authentication.</summary>
+            <returns>The task that completes the challenge.</returns>
+            <param name="context">The context.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Base.WebIdentity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Base.WebIdentity.#ctor(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="claims"></param>
+            <param name="authenticationType"></param>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Base.WebWorkContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Base.WebWorkContext.MerchantId">
+            <summary>
+            商家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Base.WebWorkContext.Username">
+            <summary>
+            商家账户
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Base.WebWorkContext.CountryId">
+            <summary>
+            所在国家Id
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Controllers.AccountController">
+            <summary>
+            登录相关接口
+            </summary>
+        </member>
+        <member name="F:FiiiPOS.Web.API.Controllers.AccountController.Logger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.AccountController.GetLoginQRcode">
+            <summary>
+            获取登录二维码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.AccountController.Login(FiiiPOS.Web.API.Models.Input.LoginInModel)">
+            <summary>
+            登录
+            </summary>
+            <returns>0=还没有扫码 -1=qrcode已失效 -2=创建token失败 -3=用户信息不存在  1=成功</returns>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Controllers.ImageController">
+            <summary>
+            上传图片
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.ImageController.Download(System.String)">
+            <summary>
+            获取图片
+            </summary>
+            <param name="id">图片guid</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.ImageController.Upload(FiiiPOS.Web.API.Models.Input.UploadImageInModel)">
+            <summary>
+            上传图片
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.ImageController.UploadFundation(FiiiPOS.Web.API.Models.Input.UploadImageInModel)">
+            <summary>
+            上传Fundation图片
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.ImageController.DownloadFundation(System.String)">
+            <summary>
+            下载Fundation图片
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Controllers.MerchantController">
+            <summary>
+            商户相关接口
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.GetMerchantProfile">
+            <summary>
+            获取商家个人Profile资料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.GetMerchantBaseInfo">
+            <summary>
+            获取商家基本信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.GetMerchantSimpleInfo">
+            <summary>
+            获取商家简要信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.UpdateMerchantLicense(FiiiPOS.Web.API.Models.Input.UpdateLicenseInModel)">
+            <summary>
+            修改认证信息
+            </summary>
+            <returns>0=有属性为空  -1=修改失败 1=修改成功</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.UpdateMerchantHeadImage(FiiiPOS.Web.API.Models.Input.HeadImageInModel)">
+            <summary>
+            修改商家头像
+            </summary>
+            <returns>大于0修改成功 小于等于0=修改失败</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.UpdateMerchantName(FiiiPOS.Web.API.Models.Input.UpdateMerchantNameModel)">
+            <summary>
+            修改商家名称
+            </summary>
+            <returns>-1=有属性为空 -2 修改失败 1=修改成功</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.UpdateEmail(FiiiPOS.Web.API.Models.Input.UpdateEmailModel)">
+            <summary>
+            修改邮箱
+            </summary>
+            <returns>-1=有属性为空 -2 修改失败 1=修改成功</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.UpdateAddress(FiiiPOS.Web.API.Models.Input.UpdateAddressModel)">
+            <summary>
+            修改地址
+            </summary>
+            <returns>-1=有属性为空 -2 修改失败 1=修改成功</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.UpdateInviterCode(FiiiPOS.Web.API.Models.Input.UpdateInviterCodeModel)">
+            <summary>
+            修改邀请码
+            </summary>
+            <returns>-1=有属性为空 -2 修改失败 1=修改成功</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.CommitIdentityImage(FiiiPOS.Web.API.Models.Input.CommitIdentityModel)">
+            <summary>
+            提交商家个人信息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.CommitBusinessLicense(FiiiPOS.Web.API.Models.Input.CommitBusinessLicenseModel)">
+            <summary>
+            提交营业执照
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.SendVerifyEmail(FiiiPOS.Web.API.Models.Input.SendVerifyEmailModel)">
+            <summary>
+            发送邮件验证码
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.ModifyEmail(FiiiPOS.Web.API.Models.Input.ModifyEmailModel)">
+            <summary>
+            验证验证码，修改邮箱
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.SendVerifyOriginalEmail(FiiiPOS.Web.API.Models.Input.SendVerifyEmailModel)">
+            <summary>
+            发送邮件验证码[原邮箱]
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.VerifyOriginalEmail(FiiiPOS.Web.API.Models.Input.VerifyOriginalEmailIM)">
+            <summary>
+            验证邮箱
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.GetPOSInfo">
+            <summary>
+            获取商家个人资料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantController.SelectId">
+            <summary>
+            查询商家是否已认证
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Controllers.MerchantInfomationController">
+            <summary>
+            门店管理
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantInfomationController.MerchantInfomationSubmit(FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel)">
+            <summary>
+            增加门店信息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantInfomationController.GetMerchantInformation">
+            <summary>
+            查询门店信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantInfomationController.MerchantInfomationUpdate(FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel)">
+            <summary>
+            修改门店信息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantInfomationController.StoreTypeQuerAll">
+            <summary>
+            查询商家类别
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantInfomationController.GetStatusId">
+            <summary>
+            查询商家门店状态是否停用
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantInfomationController.UpdateStatus">
+            <summary>
+            修改商家门店按钮是否停用
+            </summary>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.MerchantInfomationController.CauseFailure">
+            <summary>
+            查询单商家门店审核失败原因
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Controllers.OrderController">
+            <summary>
+            订单相关接口
+            </summary>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.OrderController.GetOrderRecordList(FiiiPOS.Web.API.Models.Input.OrderRecordListInModel)">
+            <summary>
+            获取收款记录列表
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.OrderController.RefundOrder(FiiiPOS.Web.API.Models.Input.RefundOrderInModel)">
+            <summary>
+            退款
+            </summary>
+            <param name="model"></param>
+            <returns>-1=账号不存在 -2=PIN码错误 -3=订单不存在 -4=商家账户不对 -5=订单状态不符合要求 -6=商家不支持的币种 -7=商家金额不够 -8=用户钱包不支持币种 -9=退款失败 -10=日期超过3天</returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.OrderController.GetOrderStatInWeek">
+            <summary>
+            统计周返回日统计
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.OrderController.GetOrderStatInMonth">
+            <summary>
+            统计月返回日统计
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.OrderController.GetOrderStatInYear">
+            <summary>
+            统计年返回月份统计
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPOS.Web.API.Controllers.OrderController.GetOrderStat">
+            <summary>
+            获取订单统计
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.CommitBusinessLicenseModel.Name">
+            <summary>
+            营业执照名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.CommitBusinessLicenseModel.Number">
+            <summary>
+            营业执照注册号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.CommitBusinessLicenseModel.Image">
+            <summary>
+            上传营业执照获得的GUID
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.CommitIdentityModel.IdentityDocType">
+            <summary>
+            证件类型
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.CommitIdentityModel.IdentityDocNo">
+            <summary>
+            证件号码
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.CommitIdentityModel.FrontIdentityImage">
+            <summary>
+            证件正面照
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.CommitIdentityModel.BackIdentityImage">
+            <summary>
+            证件反面照
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.CommitIdentityModel.HandHoldWithCard">
+            <summary>
+            手持证件照
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Input.HeadImageInModel">
+            <summary>
+            商家头像
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.HeadImageInModel.PhotoId">
+            <summary>
+            PhotoId
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Input.LoginInModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.LoginInModel.QRCode">
+            <summary>
+            二维码
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Input.ScanQRLoginInModel">
+            <summary>
+            测试专用
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.ScanQRLoginInModel.MerchantId">
+            <summary>
+            商家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.ScanQRLoginInModel.QRCode">
+            <summary>
+            二维码
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Input.TestLoginInModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.TestLoginInModel.MerchantId">
+            <summary>
+            测试用
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.ModifyEmailModel.Code">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.ModifyEmailModel.Token">
+            <summary>
+            验证PIN时产生的Token
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Input.OrderRecordListInModel">
+            <summary>
+            收款记录输入参数
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.OrderRecordListInModel.OrderNo">
+            <summary>
+            订单编号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.OrderRecordListInModel.States">
+            <summary>
+            交易状态 0= 1= 2=
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.OrderRecordListInModel.StartDate">
+            <summary>
+            开始日期
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.OrderRecordListInModel.EndDate">
+            <summary>
+            结束日期
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.OrderRecordListInModel.PageIndex">
+            <summary>
+            当前页面
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.OrderRecordListInModel.PageSize">
+            <summary>
+            页大小
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Input.RefundOrderInModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.RefundOrderInModel.OrderNo">
+            <summary>
+            OrderNo
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.RefundOrderInModel.PinPassword">
+            <summary>
+            PIN码
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.SendVerifyEmailModel.EmailAddress">
+            <summary>
+            邮箱地址
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateAddressModel.Postcode">
+            <summary>
+            邮编
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateAddressModel.State">
+            <summary>
+            州/省
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateAddressModel.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateAddressModel.Address">
+            <summary>
+            详细地址
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateEmailModel.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateInviterCodeModel.InviterCode">
+            <summary>
+            邀请码
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Input.UpdateLicenseInModel">
+            <summary>
+            修改认证信息
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateLicenseInModel.CompanyName">
+            <summary>
+            营业执照名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateLicenseInModel.LicenseNo">
+            <summary>
+            营业执照注册号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateLicenseInModel.BusinessLicense">
+            <summary>
+            营业执照
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateMerchantNameModel.MerchantName">
+            <summary>
+            商家名称
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Input.UpdateProfilesInModel">
+            <summary>
+            修改商家信息
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateProfilesInModel.MerchantName">
+            <summary>
+            商家名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateProfilesInModel.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateProfilesInModel.CityId">
+            <summary>
+            所在城市
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateProfilesInModel.Postcode">
+            <summary>
+            邮编
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UpdateProfilesInModel.Address1">
+            <summary>
+            地址1
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Input.UploadImageInModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UploadImageInModel.FileName">
+            <summary>
+            文件名，带后缀
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.UploadImageInModel.Base64Content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.VerifyOriginalEmailIM.Email">
+            <summary>
+            邮箱地址
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Input.VerifyOriginalEmailIM.Code">
+            <summary>
+            邮箱验证码
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel">
+            <summary>
+            门店信息
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.MerchantName">
+            <summary>
+            商户名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.Categorys">
+            <summary>
+            商户类别
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.Week">
+            <summary>
+            营业日期
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.StartTime">
+            <summary>
+            营业开始时间
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.EndTime">
+            <summary>
+            营业结束时间
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.Tags">
+            <summary>
+            产品/服务
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.Phone">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.Introduce">
+            <summary>
+            商家介绍
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.Address">
+            <summary>
+            详细地址
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.Lng">
+            <summary>
+            经度
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.Lat">
+            <summary>
+            纬度
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.OwnersFigures">
+            <summary>
+            门店主图列表
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.MerchantInfomationsModel.Recommends">
+            <summary>
+            商家推荐图列表
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Models.Input.Recommend">
+            <summary>
+            商家推荐主图
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.Recommend.Content">
+            <summary>
+            推荐主图文字
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Input.Recommend.Picture">
+            <summary>
+            推荐主图ID
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel">
+            <summary>
+            传出门店信息
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.MerchantName">
+            <summary>
+            商户名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.Categorys">
+            <summary>
+            商户类别
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.Week">
+            <summary>
+            营业日期
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.StartTime">
+            <summary>
+            营业开始时间
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.EndTime">
+            <summary>
+            营业结束时间
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.Tags">
+            <summary>
+            产品/服务
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.Phone">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.Introduce">
+            <summary>
+            商家介绍
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.Address">
+            <summary>
+            详细地址
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.Lng">
+            <summary>
+            经度
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.VerifyStatus">
+            <summary>
+            商家审核状态
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.Status">
+            <summary>
+            商家停用状态
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.Lat">
+            <summary>
+            纬度
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.OwnersFigures">
+            <summary>
+            门店主图列表
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.Recommends">
+            <summary>
+            商家推荐图列表
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOutModel.Countrys">
+            <summary>
+            国家信息
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.MerchantName">
+            <summary>
+            商户名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.Categorys">
+            <summary>
+            商户类别
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.Week">
+            <summary>
+            营业日期
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.StartTime">
+            <summary>
+            营业开始时间
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.EndTime">
+            <summary>
+            营业结束时间
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.Tags">
+            <summary>
+            产品/服务
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.Phone">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.Introduce">
+            <summary>
+            商家介绍
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.Address">
+            <summary>
+            详细地址
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.Lng">
+            <summary>
+            经度
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.Lat">
+            <summary>
+            纬度
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.OwnersFigures">
+            <summary>
+            门店主图列表
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Models.Output.MerchantInfomationsOM.Recommends">
+            <summary>
+            商家推荐图列表
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Output.DataListWithPageResultModel`1">
+            <summary>
+            带总记录数、带分页
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.DataListWithPageResultModel`1.TotalCount">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.DataListWithPageResultModel`1.DataList">
+            <summary>
+            数据记录
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM.Id">
+            <summary>
+            商户Id
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM.Username">
+            <summary>
+            商户账号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM.PosSN">
+            <summary>
+            POS机序列号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM.Cellphone">
+            <summary>
+            商户手机
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM.CountryName">
+            <summary>
+            国家名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM.CountryName_CN">
+            <summary>
+            国家名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM.MerchantName">
+            <summary>
+            商户名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM.Photo">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM.Email">
+            <summary>
+            邮箱地址
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM.IsVerifiedEmail">
+            <summary>
+            邮箱是否验证
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantBaseInfoOM.InviterCode">
+            <summary>
+            邀请码
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel">
+            <summary>
+            商户详情信息
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.Id">
+            <summary>
+            商户Id
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.Username">
+            <summary>
+            商户账号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.POSId">
+            <summary>
+            POS序列号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.Cellphone">
+            <summary>
+            商户手机
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.CountryName">
+            <summary>
+            国家名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.MerchantName">
+            <summary>
+            商户名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.CityName">
+            <summary>
+            所在城市
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.Postcode">
+            <summary>
+            邮编
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.Address1">
+            <summary>
+            地址1
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.Address2">
+            <summary>
+            地址2
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.Email">
+            <summary>
+            邮箱地址
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.BusinessLicenseImage">
+            <summary>
+            营业执照图片Id
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.CompanyName">
+            <summary>
+            营业执照名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.LicenseNo">
+            <summary>
+            营业执照SN
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.VerifyStatus">
+            <summary>
+            营业执照状态 0=未认证 1=已认证 2=认证失败 3=审核中
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantDetailInfoOutModel.Remark">
+            <summary>
+            审核失败的原因
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Output.MerchantProfileOM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.MerchantId">
+            <summary>
+            商家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.FirstName">
+            <summary>
+            姓
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.LastName">
+            <summary>
+            名
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.IdentityDocType">
+            <summary>
+            证件类型
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.IdentityDocNo">
+            <summary>
+            证件号码
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.Postcode">
+            <summary>
+            邮编
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.Address1">
+            <summary>
+            地址1
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.Country">
+            <summary>
+            国家
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.State">
+            <summary>
+            州/省
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.CompanyName">
+            <summary>
+            营业执照名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.LicenseNo">
+            <summary>
+            营业执照SN
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.L1VerifyStatus">
+            <summary>
+            商家个人信息状态 0=未认证 1=已认证 2=认证失败 3=审核中
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.L2VerifyStatus">
+            <summary>
+            营业执照状态 0=未认证 1=已认证 2=认证失败 3=审核中
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.L1Remark">
+            <summary>
+            审核失败的原因
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.L2Remark">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.FrontIdentityImage">
+            <summary>
+            证件照（正面）
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.BackIdentityImage">
+            <summary>
+            证件照（反面）
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.HandHoldWithCard">
+            <summary>
+            证件照（手持）
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantProfileOM.BusinessLicenseImage">
+            <summary>
+            营业执照图片Id
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Output.MerchantSimpleInfoOutModel">
+            <summary>
+            获取商家简单信息
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantSimpleInfoOutModel.Id">
+            <summary>
+            商户Id
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantSimpleInfoOutModel.Username">
+            <summary>
+            商户账号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantSimpleInfoOutModel.MerchantName">
+            <summary>
+            商户名称
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.MerchantSimpleInfoOutModel.PhotoId">
+            <summary>
+            头像Id
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Output.OrderStatOutModel">
+             <summary>
+            统计
+             </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderStatOutModel.TotalCount">
+            <summary>
+            总交易量
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderStatOutModel.TotalMoney">
+            <summary>
+            总交易金额
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderStatOutModel.TodayCount">
+            <summary>
+            今日交易量
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderStatOutModel.TodayMoney">
+            <summary>
+            今日交易金额
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderStatOutModel.FiatCurrency">
+            <summary>
+            法币币种
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Output.OrderDayStatDataOutModel">
+            <summary>
+            数据统计
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderDayStatDataOutModel.OrderDay">
+            <summary>
+            订单日期
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderDayStatDataOutModel.OrderCount">
+            <summary>
+            订单数量
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderDayStatDataOutModel.OrderAmount">
+            <summary>
+            订单金额
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderDayStatDataOutModel.FiatCurrency">
+            <summary>
+            法币币种
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Output.OrderMonthStatDataOutModel">
+            <summary>
+            数据统计
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderMonthStatDataOutModel.OrderYear">
+            <summary>
+            订单年份
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderMonthStatDataOutModel.OrderMonth">
+            <summary>
+            订单月份
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderMonthStatDataOutModel.OrderCount">
+            <summary>
+            订单数量
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderMonthStatDataOutModel.OrderAmount">
+            <summary>
+            订单金额
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderMonthStatDataOutModel.FiatCurrency">
+            <summary>
+            法币币种
+            </summary>
+        </member>
+        <member name="T:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel">
+            <summary>
+            订单实体
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.Id">
+            <summary>
+            订单Id
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.OrderNo">
+            <summary>
+            订单编号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.PostSN">
+            <summary>
+            POS机序列号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.Cellphone">
+            <summary>
+            客户手机号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.FiatCurrency">
+            <summary>
+            法币类型
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.FiatAmount">
+            <summary>
+            法定货币金额[消费金额、实收金额]
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.Markup">
+            <summary>
+            溢价率
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.ActualFiatAmount">
+            <summary>
+            订单金额（FiatAmount + Markup）
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.CryptoName">
+            <summary>
+            交易币种
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.ExchangeRate">
+            <summary>
+            交易汇率
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.CryptoAmount">
+            <summary>
+            加密币金额[交易数量]
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.TransactionFee">
+            <summary>
+            手续费
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.ActualCryptoAmount">
+            <summary>
+            商家实际收款（CryptoAmount - TransactionFee）
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.Status">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.Timestamp">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.CurrentExchangeRate">
+            <summary>
+            当前汇率
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.IncreaseRate">
+            <summary>
+            汇率涨幅
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.WithdrawalFee">
+            <summary>
+            手续费
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.OrderRecordListOutModel.WithdrawalCryptoCode">
+            <summary>
+            手续费币种
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.POSInfoOM.POSSN">
+            <summary>
+            POS机序列号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.POSInfoOM.ModelNumber">
+            <summary>
+            型号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.POSInfoOM.ProcessorInfo">
+            <summary>
+            处理器信息
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.POSInfoOM.ResolutionRatio">
+            <summary>
+            屏幕分辨率
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.POSInfoOM.AndroidVersion">
+            <summary>
+            Android版本
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.POSInfoOM.FirmwareVersion">
+            <summary>
+            固件版本号
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.POSInfoOM.FactoryDate">
+            <summary>
+            出厂日期
+            </summary>
+        </member>
+        <member name="P:FiiiPOS.Web.API.Models.Output.POSInfoOM.BasebandVersion">
+            <summary>
+            基带版本
+            </summary>
+        </member>
+    </members>
+</doc>

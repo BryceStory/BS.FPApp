@@ -1,0 +1,79 @@
+﻿
+@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Update = permissionCodeList.Contains("AppVersionUpdate") };
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permission);
+}
+<div class="gridSearchTool">
+    <form class="form-inline">
+        @if (permission.Update)
+        {
+            <button type="button" class="btn btn-primary btn-sm" onclick="EditAPIStatus('OpenFiiiPay')">&nbsp; Open FiiiPay API &nbsp;&nbsp;</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="EditAPIStatus('CloseFiiiPay')">&nbsp; Close FiiiPay API &nbsp;&nbsp;</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="EditAPIStatus('OpenFiiiPos')">&nbsp; Open FiiiPos API &nbsp;&nbsp;</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="EditAPIStatus('CloseFiiiPos')">&nbsp; Close FiiiPos API &nbsp;&nbsp;</button>
+        }
+    </form>
+</div>
+<div style="width:100%; overflow-x:auto;">
+    <table id="dtGrid"></table>
+    <div id="dtGridPager"></div>
+</div>
+<script>
+    $(function() {
+        $("#dtGrid").BoGrid({
+            url: '/AppVersions/LoadData',
+            colNames: ["Id", "Platform", "Version", "ForceToUpdate", "Description", "Url","App"],
+            showBtn: true,
+            colModel: [
+                { name: 'Id', index: 'Id', align: 'center', hidden: true },
+                { name: 'Platform', index: 'Platform', align: 'center', width: 120 },
+                { name: 'Version', index: 'Version', align: 'center', width: 80, sortable: false },
+                { name: 'ForceToUpdate', index: 'ForceToUpdate', align: 'center', width: 80, sortable: false },
+                { name: 'Description', index: 'Description', align: 'center', width: 80, sortable: false },
+                { name: 'Url', index: 'Url', align: 'center', width: 80, sortable: false },
+                { name: 'App', index: 'App', align: 'center', width: 60, sortable: false }
+            ],
+            onEditClick: "editVersionClick",
+            permvalue: "@sePermission",
+            postData: {},
+            ondblClickRow: function(rowid) { editVersionClick(rowid) },
+            pager: '#dtGridPager'
+        });
+    });
+    function refreshPage() {
+        $("#dtGrid").jqGrid('setGridParam', { postData: {  } }).trigger("reloadGrid");
+    }
+
+    function editVersionClick(id) {
+        $.openmodalpage("editVersionPage", "/AppVersions/Edit", { Id: id }, "Edit Version", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+
+    function EditAPIStatus(type)
+    {
+        $.ajax({
+            url: "/AppVersions/EditAPIStatus",
+            type: "post",
+            data: { type: type },
+            dataType: "json",
+            success: function (context) {
+                if (context.Status) {
+                    swal({
+                        title: "Save Success",
+                        text: context.Message,
+                        type: "success"
+                    });
+                }
+                else {
+                    swal({
+                        title: "Save Failed",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,28 @@
+﻿<ul class="metismenu" id="metismenu">
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach(var dic in Model)
+        {
+            var pModule = dic.Key;
+            <li>
+                <a href="#" class="has-arrow" aria-expanded=false>
+                    <span class="has-icon">
+                        <i class="@pModule.Icon"></i>
+                    </span>
+                    <span class="nav-title">@pModule.Name</span>
+                </a>
+                @if (dic.Value != null && dic.Value.Count > 0)
+                {
+                    <ul aria-expanded=false>
+                        @foreach(var module in dic.Value)
+                        {
+                            <li>
+                                <a href="#" data-pagename="@module.Code" data-pageid="@module.Id" data-url="@module.PathAddress">@module.Name</a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    }
+</ul>

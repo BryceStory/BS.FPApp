@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountNotExist" xml:space="preserve">
+    <value>Account does not exist</value>
+  </data>
+  <data name="CurrencyForbidden" xml:space="preserve">
+    <value>The cryptocurrency cannot be used currently, please contact customer service if any question</value>
+  </data>
+  <data name="ErrorCryptoCode" xml:space="preserve">
+    <value>error crypto code</value>
+  </data>
+  <data name="FiiiExAccountNotExist" xml:space="preserve">
+    <value>FiiiEx account not found</value>
+  </data>
+  <data name="FiiiPayCantWithdrawToFiiiPOS" xml:space="preserve">
+    <value>FiiiPay user cannot withdraw to FiiiPOS, please use Scan, Payment Code to finish payment and transaction.</value>
+  </data>
+  <data name="IdentityUsedOverLimit" xml:space="preserve">
+    <value>Excessive use of this ID number</value>
+  </data>
+  <data name="MerchantAccountDisabled" xml:space="preserve">
+    <value>Account exception, the transaction has been canceled</value>
+  </data>
+  <data name="PaytoSelf" xml:space="preserve">
+    <value>Unable to pay to your own account</value>
+  </data>
+  <data name="PINInvalidFormat" xml:space="preserve">
+    <value>PIN Invalid format.</value>
+  </data>
+  <data name="PINMaxError" xml:space="preserve">
+    <value>PIN enter error for 5 times, frozen temporary, please try again  in 30 minutes</value>
+  </data>
+  <data name="PINError" xml:space="preserve">
+    <value>PIN error, {0} time left to enter</value>
+  </data>
+  <data name="SecurityValidateError" xml:space="preserve">
+    <value>Verification message error, {0} attempt left</value>
+  </data>
+  <data name="SecurityWrongTooManyTimes" xml:space="preserve">
+    <value>Verification time reach limit, please try again in {0} minutes</value>
+  </data>
+  <data name="ToAccountTransferForbidden" xml:space="preserve">
+    <value>Payee's FiiiPay account is abnormal, unable to transfer. Please contact our customer service.</value>
+  </data>
+  <data name="TransferAmountOverflow" xml:space="preserve">
+    <value>Single transaction amount shall not exceed {0} {1}</value>
+  </data>
+  <data name="TransferAmountTooSmall" xml:space="preserve">
+    <value>Lower than minimal transfer amount</value>
+  </data>
+  <data name="TransferBalanceLow" xml:space="preserve">
+    <value>Enter amount exceed balance</value>
+  </data>
+  <data name="TransferForbidden" xml:space="preserve">
+    <value>Account exception, this function cannot be used currently, please contact customer service</value>
+  </data>
+  <data name="TransferToSelf" xml:space="preserve">
+    <value>Cannot transfer to yourself</value>
+  </data>
+  <data name="UploadFailed" xml:space="preserve">
+    <value>Upload failed.</value>
+  </data>
+  <data name="InvalidDataFormat" xml:space="preserve">
+    <value>Invalid data format.</value>
+  </data>
+  <data name="MinWidrawalError" xml:space="preserve">
+    <value>Cannot less than the minimal withdrawal amount</value>
+  </data>
+  <data name="TodayWidrawalLimit" xml:space="preserve">
+    <value>Reach the withdrawal limit today</value>
+  </data>
+  <data name="ChangSuccess" xml:space="preserve">
+    <value>Change success</value>
+  </data>
+  <data name="ArrivalAmountError" xml:space="preserve">
+    <value>Arrival amount cannot be zero or minus</value>
+  </data>
+  <data name="IncorrectOriginalPassword" xml:space="preserve">
+    <value>Incorrect original password</value>
+  </data>
+  <data name="IncorrectOriginalEmailAddress" xml:space="preserve">
+    <value>Incorrect original email addreess</value>
+  </data>
+  <data name="MerchantNotSupperCrypto" xml:space="preserve">
+    <value>Merchant does not support this cryptocurrency </value>
+  </data>
+  <data name="CountryNotFound" xml:space="preserve">
+    <value>Country not found.</value>
+  </data>
+  <data name="CountryIsRequired" xml:space="preserve">
+    <value>Country is required.</value>
+  </data>
+  <data name="AddressNotExist" xml:space="preserve">
+    <value>Address not exist</value>
+  </data>
+  <data name="AddAddressSuccess" xml:space="preserve">
+    <value>Add address successfully</value>
+  </data>
+  <data name="LenLimit" xml:space="preserve">
+    <value>50 letters limit</value>
+  </data>
+  <data name="PasswordIsRequired" xml:space="preserve">
+    <value>Password is required.</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Wrong password enterred.</value>
+  </data>
+  <data name="WrongPassword_Lock" xml:space="preserve">
+    <value>Password error,account is disabled,try again in {0} minutes</value>
+  </data>
+  <data name="NotVerifiyGA" xml:space="preserve">
+    <value>Not verify Google authenticator</value>
+  </data>
+  <data name="NotBindMail" xml:space="preserve">
+    <value>Account have not fill in email address</value>
+  </data>
+  <data name="EmailAlredaySet" xml:space="preserve">
+    <value>Email already set</value>
+  </data>
+  <data name="PINHasSet" xml:space="preserve">
+    <value>PIN was set, please do not set again</value>
+  </data>
+  <data name="LenLimit1000" xml:space="preserve">
+    <value>1000 letters limit</value>
+  </data>
+  <data name="PhoneNumberIsRequired" xml:space="preserve">
+    <value>Phone number is required.</value>
+  </data>
+  <data name="SMSVerifCodeError" xml:space="preserve">
+    <value>SMS verification code error</value>
+  </data>
+  <data name="InvalidWithdrawalAddress" xml:space="preserve">
+    <value>Invalid withdrawal address</value>
+  </data>
+  <data name="WithdrawalToSelfError" xml:space="preserve">
+    <value>Withdrawal address cannot be your own address</value>
+  </data>
+  <data name="LenLimit300" xml:space="preserve">
+    <value>300 letters limit</value>
+  </data>
+  <data name="WithdrawalErrorRemark" xml:space="preserve">
+    <value>Order exception, rejected by system, please contact customer service</value>
+  </data>
+  <data name="NewPINOldPINDifferent" xml:space="preserve">
+    <value>New PIN should be different from old PIN</value>
+  </data>
+  <data name="NewPasswordHasUse" xml:space="preserve">
+    <value>New and old password can not be the same</value>
+  </data>
+  <data name="NewMailOldSame" xml:space="preserve">
+    <value>New and old email address can not be the same</value>
+  </data>
+  <data name="InvalidQRCode" xml:space="preserve">
+    <value>Invalid QR code, please scan again</value>
+  </data>
+  <data name="MobilePhoneHasReg" xml:space="preserve">
+    <value>Account already exist, please try with a new phone number</value>
+  </data>
+  <data name="MonthWithdrawalLimit" xml:space="preserve">
+    <value>Withdrawal amount reach the limit of this month</value>
+  </data>
+  <data name="InvalidFormat" xml:space="preserve">
+    <value>Invalid format.</value>
+  </data>
+  <data name="EmailHasBind" xml:space="preserve">
+    <value>Email account already exit on FiiiPay, please try with new one</value>
+  </data>
+  <data name="RegSuccess" xml:space="preserve">
+    <value>Registration success.</value>
+  </data>
+  <data name="AccountNotMatch" xml:space="preserve">
+    <value>The user does not match.</value>
+  </data>
+  <data name="AccountNotFound" xml:space="preserve">
+    <value>Account not found.</value>
+  </data>
+  <data name="WithdrawalDisabled" xml:space="preserve">
+    <value>Account exception, please contact customer service</value>
+  </data>
+  <data name="PaymentForbidden" xml:space="preserve">
+    <value>Payment forbidden</value>
+  </data>
+  <data name="SystemError" xml:space="preserve">
+    <value>System error.</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>Network error, please try again.</value>
+  </data>
+  <data name="SMSLimit" xml:space="preserve">
+    <value>Verification times exceed limit, please try again tomorrow</value>
+  </data>
+  <data name="OrderNotFound" xml:space="preserve">
+    <value>Order not found.</value>
+  </data>
+  <data name="OrderComplated" xml:space="preserve">
+    <value>The order is paied or refunded, please do not pay again</value>
+  </data>
+  <data name="OrderHasExpired" xml:space="preserve">
+    <value>The order has expired.</value>
+  </data>
+  <data name="OrderRefund" xml:space="preserve">
+    <value>Order to be refund.</value>
+  </data>
+  <data name="MerchantExceptionTransClose" xml:space="preserve">
+    <value>Merchant account exception, does not support trading now </value>
+  </data>
+  <data name="AccountDisabled" xml:space="preserve">
+    <value>System has disabled the account, please contact customer service</value>
+  </data>
+  <data name="AccountAlreadyExist" xml:space="preserve">
+    <value>Account {0} already exist.</value>
+  </data>
+  <data name="AnotherDeviceLogin" xml:space="preserve">
+    <value>The account has been logged in from another device.</value>
+  </data>
+  <data name="AccountLocked" xml:space="preserve">
+    <value>The account is locked.</value>
+  </data>
+  <data name="AccountHasBeenVerification" xml:space="preserve">
+    <value>Account has been verified or under review</value>
+  </data>
+  <data name="InvalidInvitation" xml:space="preserve">
+    <value>Invalid invitation code, please enter again</value>
+  </data>
+  <data name="EmailVerificationError" xml:space="preserve">
+    <value>Email verification code error</value>
+  </data>
+  <data name="AmountGreater" xml:space="preserve">
+    <value>Amount need to be greater than 0</value>
+  </data>
+  <data name="VerificationInfoExpired" xml:space="preserve">
+    <value>Verification information expired</value>
+  </data>
+  <data name="VerificationInfoError" xml:space="preserve">
+    <value>Verification information error</value>
+  </data>
+  <data name="VerificationCodeRequired" xml:space="preserve">
+    <value>Verification code is required.</value>
+  </data>
+  <data name="VerificationCodeExpired" xml:space="preserve">
+    <value>Verification code is invalid or has expired.</value>
+  </data>
+  <data name="VerificationCodeError" xml:space="preserve">
+    <value>Verification code error, please try it again.</value>
+  </data>
+  <data name="VerificationMaxLimit" xml:space="preserve">
+    <value>Verification code request reached the limit</value>
+  </data>
+  <data name="RedPocket_Expired" xml:space="preserve">
+    <value>This red packet is expired</value>
+  </data>
+  <data name="RedPocket_HasComplet" xml:space="preserve">
+    <value>All red packets have been claimed</value>
+  </data>
+  <data name="RedPocket_HasReceive" xml:space="preserve">
+    <value>You have already claimed this red packet</value>
+  </data>
+  <data name="RedPocket_MaxAmount" xml:space="preserve">
+    <value>Single red packet amount shall not exceed {0} {1}</value>
+  </data>
+  <data name="RedPocket_MaxCount" xml:space="preserve">
+    <value>Maximum quantity of red packet is 100</value>
+  </data>
+  <data name="RedPocket_MaxError" xml:space="preserve">
+    <value>You have entered wrong password for {0} times, please retry after {1} minutes.</value>
+  </data>
+  <data name="RedPocket_MaxMessage" xml:space="preserve">
+    <value>Wishes shall not exceed 46 words</value>
+  </data>
+  <data name="RedPocket_MinAmount" xml:space="preserve">
+    <value>Minimum amount is {0} {1}</value>
+  </data>
+  <data name="RedPocket_PassCodeError" xml:space="preserve">
+    <value>Wrong password for {0} time(s), if {1} more failure(s) occured, you are forbidden to enter password for 6 hours</value>
+  </data>
+  <data name="RedPocket_PassCodeErrorMaxCount" xml:space="preserve">
+    <value>You have entered wrong password for 10 times, please retry after {0}.</value>
+  </data>
+  <data name="MerchantExpenseNotAllowed" xml:space="preserve">
+    <value>Transaction function error, payment cancel</value>
+  </data>
+  <data name="InvalidCellphone" xml:space="preserve">
+    <value>Virtual number is not registrable</value>
+  </data>
+  <data name="MerchantFiiipayAbnormal" xml:space="preserve">
+    <value>Shop's FiiiPay account is abnormal, payment is cancelled</value>
+  </data>
+  <data name="MerchantReceiveNotAllowed" xml:space="preserve">
+    <value>Shop's FiiiPay function is abnormal, payment is cancelled</value>
+  </data>
+  <data name="MerchantNotPublic" xml:space="preserve">
+    <value>The shop has been removed</value>
+  </data>
+  <data name="InviteCodeCanotInputSelf" xml:space="preserve">
+    <value>Please input a invite code which is not your own</value>
+  </data>
+  <data name="RedPocket_ReceiveExpired" xml:space="preserve">
+    <value>Sorry, your red packet password has expired.</value>
+  </data>
+  <data name="InsufficientBalance" xml:space="preserve">
+    <value>Insufficient balance</value>
+  </data>
+  <data name="CountryRequestForbbiden" xml:space="preserve">
+    <value>System is under maintenance in your area</value>
+  </data>
+  <data name="InvalidParameters" xml:space="preserve">
+    <value>Invalid request parameters</value>
+  </data>
+</root>

@@ -1,0 +1,90 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Delete = permissionCodeList.Contains("FileDelete") };
+    var canDownload = permissionCodeList.Contains("FileDownload");
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permission);
+}
+
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="searchId">Id</label>
+            <input type="text" class="form-control" id="searchId" placeholder="Input Id to search">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="Search()">Search</button>
+    </form>
+</div>
+<iframe id="tempframe" name="tempframe" hidden="hidden" style="border:none;width:200px;height:28px; overflow:hidden"></iframe>
+<table id="dtGrid"></table>
+<div id="dtGridPager"></div>
+<script>
+    $(function () {
+        var colnames = ["Id", "FileName", "FileType", "MimeType", "FilePath", "Timestamp"];
+        var colmodels = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'FileName', index: 'FileName', align: 'center', width: 40 },
+            { name: 'FileType', index: 'FileType', align: 'center', width: 40 },
+            { name: 'MimeType', index: 'MimeType', align: 'center', width: 40 },
+            { name: 'FilePath', index: 'FilePath', align: 'center', width: 40 },
+            { name: 'Timestamp', index: 'Timestamp', align: 'center', width: 40 }
+        ];
+        if ("@canDownload".toLowerCase() == "true") {
+            colmodels.push({
+                name: 'Delete', index: 'Delete', align: 'center', width: 40, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    return '<form class="form-horizontal" target="tempframe" action="@Url.Action("Download")" enctype="multipart/form-data" method="post"> <input type="hidden" id="id" name="id" value=' + rowdata[0] +'><button type="submit" class="btn btn-primary btn-xs">Download</button></form>';
+                }
+            });
+            colnames.push("Opiton");
+        }
+
+        $("#dtGrid").BoGrid({
+            url: '/FileManage/LoadData',
+            ExpandColumn: 'PageName',
+            permvalue: "@sePermission",
+            showBtn: true,
+            colNames: colnames,
+            onDeleteClick: "deleteFileClick",
+            colModel: colmodels,
+            pager: '#dtGridPager'
+        });
+    });
+
+    function Search() {
+        var searchId = $.trim($("#searchId").val());
+        $("#dtGrid").jqGrid('setGridParam', { postData:{ Id: searchId },page: 1 }).trigger("reloadGrid");
+    }
+    function refreshPage() {
+        var searchId = $.trim($("#searchId").val());
+        $("#dtGrid").jqGrid('setGridParam', { postData: { Id: searchId }  }).trigger("reloadGrid");
+    }
+
+    function deleteFileClick(id) {
+        $.swconfirm("Sure to delete this file？", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: '/FileManage/Delete',
+                    type: 'post',
+                    data: { Id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "Delete Success",
+                                type: "success"
+                            }, function () {
+                                refreshPage();
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "Delete Failed",
+                                type: "error",
+                                text: context.Message
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+</script>

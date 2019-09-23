@@ -1,0 +1,60 @@
+﻿
+@using FiiiPay.BackOffice.Models;
+@using FiiiPay.BackOffice.Common;
+@model MerchantInformations
+
+
+<div class="pagebody" style="width:500px;">
+    <form id="formEdit" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">MerchantName:</label>
+            <div class="col-sm-8">
+                <label class="control-label">@Model.MerchantName</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label required" for="Status">Status:</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(t => t.Status, (List<SelectListItem>)ViewBag.StatusList, new { Class = "form-control", placeholder = "Status" })
+            </div>
+        </div>        
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <button type="button" class="btn btn-primary" onclick="Save('@Model.Id')">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function Save(id) {
+        var postdata = getFromData(id);
+        $.ajax({
+            url: "/StoreManage/SaveSet",
+            type: "post",
+            data: postdata,
+            dataType: "json",
+            contentType: "application/json",
+            success: function (context) {
+                if (context.Status) {
+                    $.closemodalpage("setuserprofile");
+                }
+                else {
+                    swal({
+                        title: "Save Failed",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+
+    }
+
+    function getFromData(id) {
+        var model = new Object();
+        model.Id = id;
+        model.Status = $("#Status").val();
+        return JSON.stringify({ oModel: model });
+    }
+</script>

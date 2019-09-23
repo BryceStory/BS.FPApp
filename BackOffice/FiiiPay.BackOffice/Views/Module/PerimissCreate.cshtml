@@ -1,0 +1,46 @@
+﻿@model FiiiPay.BackOffice.Models.ModulePermission
+<div class="pagebody" style="max-width:750px;">
+    <form class="form-horizontal" id="formEditPerimisson">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="Code">Code</label>
+            <div class="col-sm-9">
+                @Html.Hidden("PermId", Model.Id)
+                @Html.Hidden("ModelModuleGid", Model.ModuleId)
+                @Html.TextBoxFor(t => t.Code, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="Description">Name</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(t => t.Description, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="Name">Remark</label>
+            <div class="col-sm-9">
+                @Html.TextAreaFor(t => t.Remark, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-2">
+                @if (Model.Id == 0)
+                {
+                    <input type="button" class="btn btn-primary" value="Submit" onclick="SavePerimission(1)" />
+                }
+                else
+                {
+                    <input type="button" class="btn btn-primary" value="Submit" onclick="SavePerimission(0)" />
+                }
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $('#formEditPerimisson').jqValidate({
+        rules: {
+            Code: { required: true, maxlength: 50 },
+            Description: { required: true, maxlength: 50 },
+            Remark: { maxlength: 256 }
+        }
+    });
+</script>

@@ -1,0 +1,103 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Create = permissionCodeList.Contains("AccountCreate"), Update = permissionCodeList.Contains("AccountUpdate"), Delete = permissionCodeList.Contains("AccountDelete") };
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permission);
+}
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="searchName">Name</label>
+            <input type="text" class="form-control" id="searchName" placeholder="Input Account name to search">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="SearchAccount()">Search</button>
+        @if (permission.Create)
+        {
+            <button type="button" class="btn btn-create"  onclick="addAccount()">&nbsp; Create &nbsp;&nbsp;</button>
+        }
+    </form>
+</div>
+<table id="accountGrid"></table>
+<div id="accountGridPager"></div>
+<script>
+    $(function () {
+        var colModel = new Array({ name: 'Id', index: 'Id', hidden: true },
+            { name: 'UserName', index: 'UserName', width: 100, align: 'center' },
+            { name: 'RoleName', index: 'RoleName', width: 100, align: 'center' },
+            { name: 'Cellphone', index: 'Cellphone', width: 100, align: 'center', sortable: false },
+            { name: 'Email', index: 'Email', width: 100, align: 'center', sortable: false });
+
+        var colNames = new Array("Id", "UserName", "RoleName", "Cellphone", "Email");
+
+        if ("@permission.Update".toLowerCase() == "true") {
+            colModel.push({
+                name: 'Reset Password', index: 'ResetPassword', align: 'center', width: 100, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    return '<a href="javascript:" class="btn btn-primary btn-xs" onclick="ResetPassword(\'' + rowdata[0] + '\')">Reset Password</a>';
+                }
+            });
+
+            colNames = new Array("Id", "UserName", "RoleName", "Cellphone", "Email", "Reset Password");
+        }
+
+        $("#accountGrid").BoGrid({
+            url: '/Account/LoadData',
+            colNames: colNames,
+            showBtn: true,
+            permvalue: "@sePermission",
+            colModel: colModel,
+            onShowClick: "showAccountClick",
+            onEditClick: "editAccountClick",
+            ondblClickRow: function (rowid) { $.opentabpage("/Account/Detail?AccountId=" + rowid, "Account Information", rowid); },
+            onDeleteClick: "deleteAccountClick",
+            pager: '#accountGridPager'
+        });
+    });
+
+    function SearchAccount() {
+        var username = $.trim($("#searchName").val());
+        $("#accountGrid").jqGrid('setGridParam', { postData: { Username: username }, page: 1 }).trigger("reloadGrid");
+    }
+    function refreshPage() {
+        $("#accountGrid").trigger('reloadGrid');
+    }
+    function showAccountClick(id) {
+        $.opentabpage("/Account/Detail?AccountId=" + id, "Account Information", id);
+    }
+    function editAccountClick(id) {
+        $.openmodalpage("editAccountpage","/Account/Edit", { AccountId: id }, "Edit Account","", function () {
+            $("#accountGrid").trigger('reloadGrid');
+        });
+    }
+    function addAccount() {
+        $.openmodalpage("editAccountpage","/Account/Edit", { AccountId: -1 }, "Create Account","", function () {
+            $("#accountGrid").trigger('reloadGrid');
+        });
+    }
+    function ResetPassword(id) {
+        $.openmodalpage("resetPasswordpage", "/Account/ResetPassword", { AccountId: id },"Reset Password", "");
+    }
+    function deleteAccountClick(id) {
+        $.swconfirm("Are your sure to delete this row?", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: "/Account/Delete",
+                    type: "post",
+                    data: { accountId: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            $("#accountGrid").trigger('reloadGrid');
+                            swal("Delete Success");
+                        }
+                        else {
+                            swal({
+                                title: "Delete Failed",
+                                text: context.Message,
+                                type: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+</script>

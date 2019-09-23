@@ -1,0 +1,62 @@
+﻿@{ 
+    List<SelectListItem> genderList = new List<SelectListItem>()
+    {
+        new SelectListItem(){ Text="Male",Value="0" },
+        new SelectListItem(){ Text="Famale",Value="1" }
+    };
+}
+@model FiiiPay.BackOffice.Models.Salesperson
+<div class="pagebody">
+    <form class="form-horizontal" id="editSalespersonForm">
+        @Html.HiddenFor(t => t.Id)
+        @if (!string.IsNullOrEmpty(Model.SaleCode))
+        {
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Code</label>
+                <div class="col-sm-10">
+                    <div class="form-control noborder">@Model.SaleCode</div>
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="SaleName">Fullname</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(t => t.SaleName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="Gender">Description</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(t=>t.Gender, genderList, new { @class= "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="Position">Position</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(t => t.Position, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="Mobile">Mobile</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(t => t.Mobile, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <input type="button" class="btn btn-primary" onclick="SubmitSalespersonForm()" value="Submit" />
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $("#editSalespersonForm").jqValidate({
+            rules: {
+                SaleName: { required:true, maxlength:100},
+                Position: { maxlength: 50 },
+                Mobile: { maxlength: 50 }
+            }
+        });
+    })
+</script>

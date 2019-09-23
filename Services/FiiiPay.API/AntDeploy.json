@@ -1,0 +1,29 @@
+﻿{
+  "Env": [
+    {
+      "Name": "dev",
+      "ServerList": [],
+      "LinuxServerList": [],
+      "IgnoreList": [],
+      "WindowsBackUpIgnoreList": []
+    }
+  ],
+  "IIsConfig": {
+    "SdkType": null,
+    "WebSiteName": "",
+    "LastEnvName": null,
+    "FireWebSiteUrl": ""
+  },
+  "WindowsServiveConfig": {
+    "ServiceName": "",
+    "SdkType": null,
+    "LastEnvName": null
+  },
+  "DockerConfig": {
+    "Prot": "",
+    "AspNetCoreEnv": "",
+    "LastEnvName": null,
+    "RemoveDaysFromPublished": "10",
+    "Volume": ""
+  }
+}

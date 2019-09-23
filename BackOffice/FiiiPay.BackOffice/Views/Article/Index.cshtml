@@ -1,0 +1,106 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Create = permissionCodeList.Contains("ArticleCreate") };
+    var canDelete = permissionCodeList.Contains("ArticleDelete");
+    var canUpdate = permissionCodeList.Contains("ArticleUpdate");
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permission);
+}
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="searchName">Title</label>
+            <input type="text" class="form-control" id="searchName" placeholder="Input Title to search">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="SearchArticle()">Search</button>
+        @if (permission.Create)
+        {
+            <button type="button" class="btn btn-create" onclick="CreateArticle()">&nbsp; Create &nbsp;&nbsp;</button>
+        }
+    </form>
+</div>
+<table id="articleGrid"></table>
+<div id="articleGridPager"></div>
+<script>
+    $(function () {
+        var colModel = new Array({ name: 'Id', index: 'Id', width: 100, align: 'center' },
+            { name: 'Title', index: 'Title', width: 100, align: 'center' },
+            { name: 'Type', index: 'Type', width: 100, align: 'center' },
+            { name: 'ShouldPop', index: 'ShouldPop', width: 100, align: 'center', sortable: false },
+            { name: 'HasPushed', index: 'HasPushed', width: 100, align: 'center', sortable: false },
+            { name: 'CreateTime', index: 'CreateTime', width: 100, align: 'center' });
+
+        var colNames = new Array("Id", "Title", "AccountType", "ShouldPop", "HasPushed", "CreateTime");
+
+        if ("@canUpdate".toLowerCase() == "true") {
+            colModel.push({
+                name: 'Edit', index: 'Edit', align: 'center', width: 100, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                        return '<a href="javascript:" class="btn btn-primary btn-xs" onclick="EditArticleClick(\'' + rowdata.Id + '\')">Edit</a>';
+                }
+            });
+
+            colNames.push("Opiton");
+        }
+        if ("@canDelete".toLowerCase() == "true") {
+            colModel.push({
+                name: 'Delete', index: 'Delete', align: 'center', width: 100, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                        return '<a href="javascript:" class="btn btn-primary btn-xs" onclick="DelArticleClick(\'' + rowdata.Id + '\')">Delete</a>';
+                }
+            });
+
+            colNames.push("Opiton");
+        }
+        $("#articleGrid").BoGrid({
+            url: '/Article/LoadData',
+            colNames: colNames,
+            onEditClick: "EditArticleClick",
+            onShowClick: "ShowArticleClick",
+            onDeleteClick: "DelArticleClick",
+            colModel: colModel,
+            sortname: "CreateTime",
+            sortorder: "desc",
+            permvalue: "@sePermission",
+            pager: '#articleGridPager'
+        });
+    });
+
+    function SearchArticle() {
+        var title = $.trim($("#searchName").val());
+        $("#articleGrid").jqGrid('setGridParam', { postData: { title: title }, page: 1 }).trigger("reloadGrid");
+    }
+
+    function EditArticleClick(id) {
+        $.opentabpage("/Article/Edit?Id=" + id, "Edit Article", "editArticle" + id);
+    }
+
+    function refreshPage() {
+        $("#articleGrid").trigger('reloadGrid');
+    }
+    function CreateArticle() {
+        $.opentabpage("/Article/Edit?Id=-1", "Create Article", "createArticle");
+    }
+    function DelArticleClick(id) {
+        $.swconfirm("Are your sure to delete this row?", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: "/Article/Delete",
+                    type: "post",
+                    data: { id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            $("#articleGrid").trigger('reloadGrid');
+                            swal("Delete Success");
+                        }
+                        else {
+                            swal({
+                                title: "Delete Failed",
+                                text: context.Message,
+                                type: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+</script>

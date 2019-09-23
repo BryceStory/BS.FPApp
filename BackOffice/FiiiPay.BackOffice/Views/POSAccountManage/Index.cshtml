@@ -1,0 +1,134 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var bind = permissionCodeList.Contains("POSBind");
+    var unbind = permissionCodeList.Contains("POSUnBind");
+    var changePermission = permissionCodeList.Contains("POSAccountManageChangeCellphone");
+}
+<div class="gridSearchTool">
+    <form class="form-inline" onkeypress="return ExecuteSearch()">
+        <div class="form-group">
+            <label for="userName">UserName</label>
+            <input type="text" class="form-control" id="userName" placeholder="Input UserName to search">
+        </div>
+        <div class="form-group">
+            <label for="cellPhone">CellPhone</label>
+            <input type="text" class="form-control" id="cellPhone" placeholder="Input CellPhone to search">
+        </div>
+        <div class="form-group">
+            <label for="SN">SN</label>
+            <input type="text" class="form-control" id="SN" placeholder="Input SN to search">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="SearchPOSInfo()">Search</button>
+    </form>
+</div>
+<div>
+    <table id="dtGrid"></table>
+    <div id="dtGridPager"></div>
+</div>
+<script>
+    $(function () {
+        var colnames = ["Id", "Username", "Sn", "MerchantName", "Cellphone", "CountryName"];
+        var colmodels = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'Username', index: 'Username', width: 40, sortable: false },
+            { name: 'Sn', index: 'Sn', width: 40, sortable: false },
+            { name: 'MerchantName', index: 'MerchantName', width: 40, sortable: false },
+            { name: 'Cellphone', index: 'Cellphone', width: 40, align: 'center', sortable: false },
+            { name: 'CountryName', index: 'CountryName', width: 40, align: 'center' }
+        ]
+            colnames.push("Operator");
+                colmodels.push({
+                    name: 'Operator', index: 'Operator', width: 60, align: 'center', hideinxs: true, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                        var btnstr = '';
+                        if (rowdata.Sn == null) {
+                            if ("@bind".toLowerCase() === "true") {
+                                btnstr += '<a href="javascript:" class="btn btn-xs btn-primary" onclick="GoBind(\'' + rowdata.Id + '\')">Binding</a>';
+                            }
+                        } else {
+                            if ("@unbind".toLowerCase() === "true") {
+                                btnstr += '<a href="javascript:" class="btn btn-xs btn-primary" onclick="GoUnbind(\'' + rowdata.Id + '\')">Unbind</a>';
+                            }
+                        }
+                        if ("@changePermission".toLowerCase()==="true") {
+                            btnstr += '<a href="javascript:" class="btn btn-xs btn-warning" onclick="GoChangeCellphone(\'' + rowdata.Id + '\')" style="margin-left:8px;">修改手机号</a>';
+                        }
+                        return btnstr;
+                    }
+                });
+
+        $("#dtGrid").BoGrid({
+            url: '/POSAccountManage/LoadData',
+            ExpandColumn: 'PageName',
+            colNames: colnames,
+            colModel: colmodels,
+            onEditClick: "EditPOSInfoClick",
+            ondblClickRow: function (rowid) { $.opentabpage("/POSInfoManage/Detail?Id=" + rowid, "POS Information", rowid); },
+            onDeleteClick: "DeletePOSInfoClick",
+            pager: '#dtGridPager'
+                });
+    });
+    function ExecuteSearch(e) {
+        if (event.keyCode == 13) {
+            SearchPOSInfo();
+            return false;
+        }
+        return true;
+    }
+    function SearchPOSInfo() {
+        var userName = $.trim($("#userName").val());
+        var cellPhone = $.trim($("#cellPhone").val());
+        var sn = $.trim($("#SN").val());
+        $("#dtGrid").jqGrid('setGridParam', { postData: { userName: userName, cellPhone: cellPhone, sn:sn }, page: 1 }).trigger("reloadGrid");
+    }
+
+    function refreshPage() {
+        var userName = $.trim($("#UserName").val());
+        var cellPhone = $.trim($("#CellPhone").val());
+        var sn = $.trim($("#SN").val());
+        $("#dtGrid").jqGrid('setGridParam', { postData: { userName: userName, cellPhone: cellPhone, sn: sn } }).trigger("reloadGrid");
+    }
+
+    function GoPOSAccountPage(id) {
+        $.opentabpage("/POSInfoManage/POSAccount?id=" + id, "POS Account Info", id);
+    }
+    function GoUnbind(id) {
+        $.swconfirm("Are you sure to unbind？", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: '/POSAccountManage/Unbind',
+                    type: 'post',
+                    data: { Id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "Unbind Success",
+                                type: "success"
+                            }, function () {
+                                refreshPage();
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "Unbind Failed",
+                                type: "error",
+                                text: context.Message
+                            });
+                        }
+                    }
+                })
+            }
+        });
+    }
+
+    function GoBind(id) {
+        $.openmodalpage("bindMerchantpage", "/POSAccountManage/Bind", { id: id }, "Bind POS", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+    function GoChangeCellphone(id) {
+        $.openmodalpage("changeCellphoneview", "/POSAccountManage/ChangeCellphone", { id: id }, "修改手机号", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+</script>

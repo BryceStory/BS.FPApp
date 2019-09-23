@@ -1,0 +1,109 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Create = permissionCodeList.Contains("PriceInfoCreate"), Update = permissionCodeList.Contains("PriceInfoUpdate"), Delete = permissionCodeList.Contains("PriceInfoDelete") };
+}
+
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="CryptoCode">CryptoCode</label>
+            <input type="text" class="form-control" id="CryptoCode" placeholder="Input CryptoCode to search">
+        </div>
+        <div class="form-group">
+            <label for="CurrencyCode">CurrencyCode</label>
+            <input type="text" class="form-control" id="CurrencyCode" placeholder="Input CurrencyCode to search">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="Search()">Search</button>
+        @if (permission.Create)
+        {
+            <button type="button" class="btn btn-create" onclick="GoCreate()">&nbsp; Create &nbsp;&nbsp;</button>
+        }
+    </form>
+</div>
+
+<table id="dtGrid"></table>
+<div id="dtGridPager"></div>
+<script>
+    $(function () {
+        var colnames = ["Id", "CryptoCode", "CryptoName", "CurrencyCode", "CurrencyName", "Price", "Markup","MarkupPrice", "Options"];
+        var colmodels = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'CryptoCode', index: 'CryptoCode', align: 'center', width: 60 },
+            { name: 'CryptoName', index: 'CryptoName', align: 'center', width: 60 },
+            { name: 'CurrencyCode', index: 'CurrencyCode', align: 'center', width: 60 },
+            { name: 'CurrencyName', index: 'CurrencyName', align: 'center', width: 60 },
+            { name: 'Price', index: 'Price', align: 'center', width: 60 },
+            { name: 'Markup', index: 'Markup', align: 'center', width: 60 },
+            { name: 'MarkupPrice', index: 'MarkupPrice', align: 'center', width: 60 },
+            {
+                name: 'Options', index: 'Options', width: 60, align: 'center', sortable: false, formatter: function (cellvalue, rowdata, data) {
+                    var id = rowdata.rowId;
+                    var htmlstr = '';
+                    if ("@permission.Update".toLowerCase() === "true") {
+                        htmlstr += '<input type="button" class="btn btn-primary btn-xs" value="Edit" onclick="GoUpdate(' + id + ')" style="margin-left:5px;" />';
+                    }
+                    if ("@permission.Delete".toLowerCase() === "true") {
+                        htmlstr += '<input type="button" class="btn btn-primary btn-xs" value="Delete" onclick="GoDelete(' + id + ')" style="margin-left:5px;" />';
+                    }
+                    return htmlstr;
+                }
+            }
+        ];
+        $("#dtGrid").BoGrid({
+            url: '/PriceInfo/LoadData',
+            colNames: colnames,
+            colModel: colmodels,
+            sortname: "ID",
+            pager: '#dtGridPager'
+        });
+    });
+
+    function GoUpdate(id) {
+        $.openmodalpage("editPriceInfo", "/PriceInfo/Edit", { Id: id }, "Edit PriceInfo", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+
+    function GoCreate() {
+        $.openmodalpage("editPriceInfo", "/PriceInfo/Edit", { Id: -1 }, "Create PriceInfo", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+
+    function Search() {
+        var CryptoCode = $("#CryptoCode").val();
+        var CurrencyCode = $("#CurrencyCode").val();
+        $("#dtGrid").jqGrid('setGridParam', { postData: { cryptoCode: CryptoCode,currencyCode: CurrencyCode }, page: 1 }).trigger("reloadGrid");
+    }
+    function refreshPage() {
+        var CryptoCode = $("#CryptoCode").val();
+        var CurrencyCode = $("#CurrencyCode").val();
+        $("#dtGrid").jqGrid('setGridParam', { postData: { CryptoCode: CryptoCode,currencyCode: CurrencyCode } }).trigger("reloadGrid");
+    }
+
+    function GoDelete(id) {
+        $.swconfirm("Are your sure to delete this row?", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: "/PriceInfo/Delete",
+                    type: "post",
+                    data: { Id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            $("#dtGrid").trigger('reloadGrid');
+                            swal("Delete Success");
+                        }
+                        else {
+                            swal({
+                                title: "Delete Failed",
+                                text: context.Message,
+                                type: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+</script>

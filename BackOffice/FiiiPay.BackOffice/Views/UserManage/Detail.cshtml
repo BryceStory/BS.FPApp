@@ -1,0 +1,145 @@
+﻿@model FiiiPay.Entities.EntitySet.UserProfileSet
+@using FiiiPay.BackOffice.Common;
+
+<div class="modeldetail">
+    <h3>User information</h3>
+    <hr style="margin-bottom:10px; " />
+    <div>
+        <table style="margin-left:130px;" class="table table-modeldetailnoborder">
+            <tr>
+                <th style="width:220px;">Username:</th>
+                <td>@Model.Cellphone</td>
+            </tr>
+            <tr>
+                <th>Country:</th>
+                <td>@Model.CountryName</td>
+            </tr>
+            <tr>
+                <th>Lastname:</th>
+                <td>@Model.LastName</td>
+            </tr>
+            <tr>
+                <th>Firstname:</th>
+                <td>@Model.FirstName</td>
+            </tr>
+            <tr>
+                <th>InvitationCode:</th>
+                <td>@Model.InvitationCode</td>
+            </tr>
+            <tr>
+                <th>InviterCode:</th>
+                <td>@Model.InviterCode</td>
+            </tr>
+            <tr>
+                <th>Gender:</th>
+                <td>@(Model.Gender == 0 ? "Male" : "Female")</td>
+            </tr>
+            <tr>
+                <th>DateOfBirth:</th>
+                <td>@(Model.DateOfBirth.HasValue ? Model.DateOfBirth.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm") : "")</td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <th>Google Authenticator:</th>
+                <td>@(ValidationFlagComponent.CheckSecurityOpened(Model.ValidationFlag, FiiiPay.Framework.Enums.ValidationFlag.GooogleAuthenticator) ? "Already opened" : string.IsNullOrEmpty(Model.AuthSecretKey) ? "Unbound" : "Closed")</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="modeldetail">
+    <h3>Profile information</h3>
+    <hr style="margin-bottom:10px; " />
+    <div>
+        <table style="margin-left:130px;" class="table table-modeldetailnoborder">
+            <tr>
+                <th style="width:220px;">Identity type:</th>
+                <td>@Model.IdentityDocType.ToString()</td>
+            </tr>
+            <tr>
+                <th>IdentityNo:</th>
+                <td>@Model.IdentityDocNo</td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td>@Model.L1VerifyStatus.ToString()</td>
+            </tr>
+            <tr>
+                <th>DateOfBirth:</th>
+                <td>@(Model.DateOfBirth.HasValue ? Model.DateOfBirth.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm") : "")</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @{
+                        string frontImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.FrontIdentityImage, Model.Country);
+                        string backImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.BackIdentityImage, Model.Country);
+                        string handholdImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.HandHoldWithCard, Model.Country);
+                    }
+                    <div>
+                        <div class="pull-left text-center" style="width:360px;height:300px;">
+                            <img src="@frontImageUrl" style="max-width:100%; max-height:260px;border:solid 1px #ECECEC;" />
+                            <div class="text-center">Positive photo of document</div>
+                        </div>
+                        <div class="pull-left text-center" style="width:360px;height:300px;">
+                            <img src="@backImageUrl" style="max-width:100%;max-height:260px;border:solid 1px #ECECEC;" />
+                            <div class="text-center">Reverse photo of document</div>
+                        </div>
+                        <div class="pull-left text-center" style="width:360px;height:300px;">
+                            <img src="@handholdImageUrl" style="max-width:100%;max-height:260px;border:solid 1px #ECECEC;" />
+                            <div class="text-center">Positive photo in hand of document</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<div class="modeldetail">
+    <h3>Residence information</h3>
+    <hr style="margin-bottom:10px; " />
+
+    <div>
+        <table style="margin-left:130px;" class="table table-modeldetailnoborder">
+            <tr>
+                <th style="width:220px;">Country:</th>
+                <td>@Model.CountryName</td>
+            </tr>
+            <tr>
+                <th>State:</th>
+                <td>@Model.State</td>
+            </tr>
+            <tr>
+                <th>City:</th>
+                <td>@Model.City</td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td>@Model.L2VerifyStatus.ToString()</td>
+            </tr>
+            <tr>
+                <th>Address1:</th>
+                <td>@Model.Address1</td>
+            </tr>
+            <tr>
+                <th>Address2:</th>
+                <td>@Model.Address2</td>
+            </tr>
+            <tr>
+                <th>Photo of residence:</th>
+                <td>
+                    @{
+                        string residentImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.ResidentImage, Model.Country);
+                    }
+                    <div class="form-control noborder" style="width:360px;height:300px;">
+                        <img src="@residentImageUrl" style="max-width:100%; max-height:260px;border:solid 1px #ECECEC;" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿@using FiiiPay.BackOffice.Models;
+
+@model BillerOrders
+
+<div class="pagebody">
+    <form id="formEdit" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Status:</label>
+            <div class="col-sm-9">
+                @Html.DropDownListFor(t => t.Status, (List<SelectListItem>)ViewBag.StatusList, new { Class = "form-control", placeholder = "Status" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Remark:</label>
+            <div class="col-sm-9">
+                @Html.TextAreaFor(t => t.Remark, new { Class = "form-control", placeholder = "Remark" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <button type="button" class="btn btn-primary" onclick="Save('@Model.Id')">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function() {
+            $.autoTextarea($("#Remark")[0]);
+            $("#formEdit").jqValidate({
+            rules: {
+                Remark: {
+                    required: function () {
+                        return $("#Status").children(":selected").val() ==
+                            "@((int)FiiiPay.Entities.BillerOrderStatus.Fail)";
+                    },
+                    maxlength: 500
+                }
+            }
+        });
+    });
+    function Save(id) {
+        var postdata = getFromData(id);
+        var isValid = $("#formEdit").valid();
+        if (isValid) {
+            $.ajax({
+                url: "/BillerOrder/Save",
+                type: "post",
+                data: postdata,
+                dataType: "json",
+                contentType: "application/json",
+                success: function (context) {
+                    if (context.Status) {
+                        $.closemodalpage("editBillerOrderpage");
+                    }
+                    else {
+                        swal({
+                            title: "Save Failed",
+                            text: context.Message,
+                            type: "error"
+                        });
+                    }
+                }
+            });
+        }
+    }
+    function getFromData(id) {
+        var order = new Object();
+        order.Id = id;
+        order.Remark = $("#Remark").val();
+        order.Status = $("#Status").children(":selected").val();
+        return JSON.stringify({ orders: order });
+    }
+</script>

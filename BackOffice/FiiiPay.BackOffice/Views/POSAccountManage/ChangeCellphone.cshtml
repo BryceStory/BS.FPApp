@@ -1,0 +1,110 @@
+﻿
+@using FiiiPay.BackOffice.Models
+@model MerchantAccounts
+
+<div class="pagebody" style="width:500px;">
+    <form id="changeCellphoneForm" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">商家名称</label>
+            <div class="col-sm-9">
+                @Html.Hidden("MerchantId", Model.Id)
+                <div class="form-control noborder">@Model.MerchantName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">SN</label>
+            <div class="col-sm-9">
+                <div class="form-control noborder">@ViewBag.SNNo</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">原手机号</label>
+            <div class="col-sm-9">
+                <div class="form-control noborder">@Model.PhoneCode &nbsp; @Model.Cellphone</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required" for="POSSN">新手机国家</label>
+            <div class="col-sm-9">
+                @Html.DropDownList("NewCountryId", (List<SelectListItem>)ViewBag.CountryList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label required" for="confirmSN">新手机号</label>
+            <div class="col-sm-9">
+                <input id="NewCellphone" name="NewCellphone" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <button type="button" class="btn btn-primary" onclick="SaveNewCellphone()">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $('#changeCellphoneForm').jqValidate({
+            errorElement: 'span',
+            errorClass: 'help-inline',
+            focusInvalid: true,
+            rules: {
+                POSSN: { required: true },
+                confirmSN: { required: true, equalTo: "#POSSN" }
+            },
+            messages: {
+                POSSN: {
+                    required: "Please enter SN.",
+                },
+                confirmSN: {
+                    required: "Please enter confirm SN.",
+                    equalTo: "SN are not consistent, please input the SN again!"
+                }
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('info').addClass('has-error');
+            },
+            success: function (e) {
+                $(e).closest('.form-group').removeClass('has-error').addClass('info');
+                $(e).remove();
+            }
+        });
+    });
+
+    function SaveNewCellphone() {
+        if (!$("#changeCellphoneForm").valid()) {
+            return false;
+        }
+        var postdata = {
+            MerchantId: $("#MerchantId").val(),
+            NewCountryId: $("#NewCountryId").val(),
+            NewCellphone: $("#NewCellphone").val()
+        }
+        $.ajax({
+            url: "/POSAccountManage/SaveNewCellphone",
+            type: "post",
+            data: postdata,
+            dataType: "json",
+            success: function (context) {
+                if (context.Status) {
+                    swal({
+                        title: "",
+                        type:"success",
+                        text: "保存成功",
+                        buttons: false
+                    }, function () {
+                        $.closemodalpage("changeCellphoneview");
+                    });
+                }
+                else {
+                    swal({
+                        title: "",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+    }
+
+</script>

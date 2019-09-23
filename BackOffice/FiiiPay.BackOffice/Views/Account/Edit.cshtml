@@ -1,0 +1,123 @@
+﻿@using FiiiPay.BackOffice.ViewModels;
+@model AccountViewModel
+@{
+    bool isAdd = Model.Id == -1;
+}
+<div class="pagebody" style="width:500px;">
+    <form id="formEditAccount" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label required" for="UserName">UserName</label>
+            @if (Model.Id == -1)
+            {
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(t => t.Username, new { Class = "form-control", placeholder = "UserName" })
+                </div>
+            }
+            else
+            {
+                <div class="col-sm-9">
+                    <label class="control-label" for="UserName" id="Username">@Model.Username</label>
+                </div>
+            }
+        </div>
+        @if (Model.Id == -1)
+        {
+            <div class="form-group">
+                <label class="col-sm-3 control-label required" for="Password">PassWord</label>
+                <div class="col-sm-9">
+                    @Html.PasswordFor(t => t.Password, new { Class = "form-control", placeholder = "Password" })
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <label class="col-sm-3 control-label required" for="RoleId">RoleName</label>
+            <div class="col-sm-9">
+                @Html.DropDownListFor(t => t.RoleId, (List<SelectListItem>)ViewBag.RoleList, new { Class = "form-control", placeholder = "RoleName" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Cellphone">Cellphone</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(t => t.Cellphone, new { Class = "form-control", placeholder = "Cellphone" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Email">Email</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(t => t.Email, new { Class = "form-control", placeholder = "Email" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <button type="button" class="btn btn-primary" onclick="SaveAccount(@Model.Id)">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        var validateRules = {
+            Username: "required",
+            Email: {
+                email: true
+            }
+        }
+        if ("@Model.Id" < 0) {
+            validateRules.Password = { required: true, rangelength: [6, 16]};
+        }
+        $('#formEditAccount').jqValidate({
+            errorElement: 'span',
+            errorClass: 'help-inline',
+            focusInvalid: true,
+            rules: validateRules,
+            messages: {
+                Username: "This field is required.",
+                Email: "Please enter a valid email."
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('info').addClass('has-error');
+            },
+            success: function (e) {
+                $(e).closest('.form-group').removeClass('has-error').addClass('info');
+                $(e).remove();
+            }
+        });
+    });
+
+    function SaveAccount(id) {
+        var checkResult = $('#formEditAccount').valid();
+        if (checkResult) {
+            var postdata = getFromData(id);
+            $.ajax({
+                url: "/Account/Save",
+                type: "post",
+                data: postdata,
+                dataType: "json",
+                contentType: "application/json",
+                success: function (context) {
+                    if (context.Status) {
+                        $.closemodalpage("editAccountpage");
+                    }
+                    else {
+                        swal({
+                            title: "Save Failed",
+                            text: context.Message,
+                            type: "error"
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    function getFromData(id) {
+        var account = new Object();
+        account.Id = id;
+        account.Username = $("#Username").val() == "" ? $("#Username").html() : $("#Username").val();
+        account.Password = $("#Password").val();
+        account.RoleId = $("#RoleId").children(":selected").val();
+        account.Cellphone = $("#Cellphone").val();
+        account.Email = $("#Email").val();
+        return JSON.stringify({ oAccount: account });
+    }
+</script> 

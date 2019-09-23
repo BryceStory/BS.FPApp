@@ -1,0 +1,77 @@
+﻿
+<div class="pagebody" style="width:500px;">
+    <form id="formEdit" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Cellphone">POSSN</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="POSSN" placeholder="POSSN">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <button type="button" class="btn btn-primary" onclick="Save()">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        var validateRules = {
+            POSSN: "required"
+        }
+        $('#formEdit').jqValidate({
+            errorElement: 'span',
+            errorClass: 'help-inline',
+            focusInvalid: true,
+            rules: validateRules,
+            messages: {
+                POSSN: "This field is required."               
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('info').addClass('has-error');
+            },
+            success: function (e) {
+                $(e).closest('.form-group').removeClass('has-error').addClass('info');
+                $(e).remove();
+            }
+        });
+    });
+
+    function Save() {
+        var checkResult = $('#formEdit').valid();
+        if (checkResult) {
+            var postdata = getFromData();
+            $.ajax({
+                url: "/POSSNManage/Save",
+                type: "post",
+                data: postdata,
+                dataType: "json",
+                contentType: "application/json",
+                success: function (context) {
+                    if (context.Status) {
+                        swal({
+                            title: "Save Success",
+                            text: context.Message,
+                            type: "success"
+                        }, function () {
+                            $.closemodalpage("addSNpage");
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "The SN code has already existed",
+                            text: context.Message,
+                            type: "error"
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    function getFromData() {
+        var pos = new Object();
+        pos.SN = $("#POSSN").val();
+        return JSON.stringify({ oPos: pos });
+    }
+</script> 

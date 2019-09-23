@@ -1,0 +1,2727 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FiiiPay.API</name>
+    </assembly>
+    <members>
+        <member name="M:FiiiPay.API.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:FiiiPay.API.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:FiiiPay.API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:FiiiPay.API.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:FiiiPay.API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:FiiiPay.API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:FiiiPay.API.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,FiiiPay.API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,FiiiPay.API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:FiiiPay.API.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},FiiiPay.API.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.#ctor(FiiiPay.API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,FiiiPay.API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:FiiiPay.API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FiiiPay.API.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FiiiPay.API.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.AccountController">
+            <summary>
+            Class FiiiPay.API.Controllers.AccountController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.SendRegisterSMSCode(FiiiPay.API.Models.GetRegisterSMSCodeModel)">
+            <summary>
+            发送注册验证码
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.CheckRegisterSMSCode(FiiiPay.API.Models.ChekRegisterSMSCodeModel)">
+            <summary>
+            验证注册验证码
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.Register(FiiiPay.API.Models.RegisterModel)">
+            <summary>
+            注册
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.H5Register(FiiiPay.API.Models.RegisterModel)">
+            <summary>
+            H5注册
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.GetInvitationCode">
+            <summary>
+            返回邀请码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.Login(FiiiPay.DTO.Account.LoginIM)">
+            <summary>
+            登录
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.ValidateLogin(FiiiPay.DTO.Account.ValidateAuthCodeIM)">
+            <summary>
+            登录-二级验证
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.NewDeviceLogin(FiiiPay.DTO.Account.NewDeviceLoginIM)">
+            <summary>
+            新设备登录
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.BindNoticeRegId(FiiiPay.DTO.Account.BindNoticeRegIdIM)">
+            <summary>
+            绑定设备到推送服务
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.UnBindNoticeRegId">
+            <summary>
+            解除推送服务绑定，此操作成功后，客户端将不再受到推送
+            想要收到推送的话需要重新调用BindNoticeRegId接口
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.Logout">
+            <summary>
+            退出登录接口，此接口将解除设备的推送服务绑定
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.Info">
+            <summary>
+            提供一个单独的接口获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.GetLoginSMSCode(FiiiPay.DTO.Account.GetSMSCodeIM)">
+            <summary>
+            获取登录验证码
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.LoginBySMSCode(FiiiPay.DTO.Account.LoginBySMSCodeIM)">
+            <summary>
+            通过短信验证码登录，如果用户未注册，code = 10012，此时客户端应该提示用户注册
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.ValidateLoginBySMSCode(FiiiPay.DTO.Account.ValidateLoginBySMSCodeIM)">
+            <summary>
+            通过短信验证码登录第二步，验证google authencator
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.NewDeviceLoginBySMSCode(FiiiPay.DTO.Account.NewDeviceLoginBySMSCodeIM)">
+            <summary>
+            通过短信验证码登录，新设备登录
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.VerifyPin(FiiiPay.DTO.Account.VerifyPinIM)">
+            <summary>
+            验证Pin码，超过五次错误会锁定30分钟，此时code = 10013
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.GetPhoneNumByInviteCode(FiiiPay.DTO.Account.InviteCodeIM)">
+            <summary>
+            通过邀请码返回手机号码和区域号
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.SettingFiatCurrency(FiiiPay.API.Models.SettingFiatCurrencyModel)">
+            <summary>
+            设置法币
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.UnBindingMerchantMessage(System.Int64)">
+            <summary>
+            查看解绑信息
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.InviteFiiiposSuccessMessage(System.Int64)">
+            <summary>
+            查看解绑信息
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.ChangeLanguage(FiiiPay.API.Models.ChangeLanguageModel)">
+            <summary>
+            Changes the language.
+            </summary>
+            <param name="im">The im.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.GetLastActiveCountry">
+            <summary>
+            获取上一次活跃的国家地点
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AccountController.SetActiveCountry(FiiiPay.DTO.SetActiveCountryIM)">
+            <summary>
+            设置当前的活跃国家
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.AdvertisingController">
+            <summary>
+            闪屏广告
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AdvertisingController.Get">
+            <summary>
+            获取当前闪屏广告信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AdvertisingController.GetStoreBanners">
+            <summary>
+            获取当前闪屏广告信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.ArticleController">
+            <summary>
+            Class FiiiPay.API.Controllers.ArticleController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ArticleController.List(FiiiPay.DTO.Article.ArticleListIM)">
+            <summary>
+            文章列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ArticleController.Read(FiiiPay.DTO.Article.ReadIM)">
+            <summary>
+            将新闻状态设置为已读
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ArticleController.GetFirstTitleAndNotReadCount">
+            <summary>
+            获取第一条文章的Title以及未读条数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.AuthenticatorController">
+            <summary>
+            谷歌验证器
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.GenerateSecretKey">
+            <summary>
+            生成密钥
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.VerifyBindPin(FiiiPay.API.Models.VerifyPinModel)">
+            <summary>
+            绑定验证谷歌验证码到用户,验证PIN
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.VerifyBindGoogleAuth(FiiiPay.DTO.Authenticator.ValidateWithSecretIM)">
+            <summary>
+            绑定验证谷歌验证码到用户,验证谷歌验证码
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.VerifyBindCombine(FiiiPay.API.Models.BaseCombineVerifyModel)">
+            <summary>
+            绑定验证谷歌验证码到用户,综合验证
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.Bind(FiiiPay.DTO.Authenticator.BindUserAuthIM)">
+            <summary>
+            绑定验证谷歌验证码到用户
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.VerifyUnBindPin(FiiiPay.API.Models.VerifyPinModel)">
+            <summary>
+            解绑谷歌验证,验证PIN
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.VerifyUnBindCombine(FiiiPay.API.Models.BaseCombineVerifyModel)">
+            <summary>
+            解绑谷歌验证,综合验证
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.UnBind">
+            <summary>
+            解绑用户的验证谷歌验证码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.VerifyOpenGoogleAuth(FiiiPay.DTO.Authenticator.ValidateGoogleAuthIM)">
+            <summary>
+            开启谷歌验证,验证谷歌验证码
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.Open">
+            <summary>
+            open google authencator
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.VerifyClosePin(FiiiPay.API.Models.VerifyPinModel)">
+            <summary>
+            关闭谷歌验证,验证PIN
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.VerifyCloseCombine(FiiiPay.API.Models.BaseCombineVerifyModel)">
+            <summary>
+            关闭谷歌验证,综合验证
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.Close">
+            <summary>
+            close google authencator
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.Validate(FiiiPay.DTO.Authenticator.UserValidateIM)">
+            <summary>
+            验证谷歌验证码
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.GetStatusOfSecurity">
+            <summary>
+            获取密保状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.AuthenticatorController.GetOpenedSecurities">
+            <summary>
+            获取用户开启的密保方式
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.BillerController">
+            <summary>
+            生活缴费
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.BillerController.Pay(FiiiPay.DTO.BillerPayIM)">
+            <summary>
+            付款
+            </summary>
+            <param name="im"></param>
+            10401: 超过单笔 10402: 超过当日 10403: 超过当月 10404: 金额有误 10405: 国家信息不对
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.BillerController.Detail(FiiiPay.DTO.BillerDetailIM)">
+            <summary>
+            缴费详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.BillerController.AddAddress(FiiiPay.DTO.BillerAddAddressIM)">
+            <summary>
+            添加地址 如果返回码为0则为添加成功 10406: 已经达到最大值500条无法添加
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.BillerController.DeleteAddress(FiiiPay.DTO.BillerDeleteAddressIM)">
+            <summary>
+            添加地址 如果返回码为0则为删除成功
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.BillerController.EditAddress(FiiiPay.DTO.BillerEditAddressIM)">
+            <summary>
+            添加地址 如果返回码为0则为修改成功
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.BillerController.GetAddresses(FiiiPay.DTO.BillerGetAddressIM)">
+            <summary>
+            返回地址列表
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.BillerController.GetBillerCryptoCurrency(FiiiPay.DTO.BillerCryptoIM)">
+            <summary>
+            获取缴费币种状态信息
+            </summary>
+            countryid 为当前国家的id
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.BillerController.MessageFail(System.Guid)">
+            <summary>
+            消息失败
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.CountryController">
+            <summary>
+            Class FiiiPay.API.Controllers.CountryController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.CountryController.GetList">
+            <summary>
+            获取国家列表，已经根据客户端语言排序
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.CountryController.GetById(FiiiPay.API.Models.GetCountryByIdModel)">
+            <summary>
+            获取国家详情
+            </summary>
+            <param name="model">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.CountryController.CustomerService">
+            <summary>
+            获取客服账号列表，格式：{"Phone": "PhoneTest", "WX": "WXTest"}
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.CurrencyController">
+            <summary>
+            法币
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.CurrencyController.GetList">
+            <summary>
+            获取法币列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.FeedbackController">
+            <summary>
+            Class FiiiPay.API.Controllers.FeedbackController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.FeedbackController.Feedback(FiiiPay.API.Models.FeedbackIM)">
+            <summary>
+            意见反馈
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.MessagesController">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MessagesController.ReadMessage(FiiiPay.DTO.Messages.ReadMessageIM)">
+            <summary>
+            读取消息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MessagesController.OnekeyReadMessage">
+            <summary>
+            Called when [read message].
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MessagesController.DeleteMessage(FiiiPay.DTO.Messages.DeleteMessageIM)">
+            <summary>
+            删除消息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MessagesController.GetMessageList(FiiiPay.DTO.Messages.MessageListIM)">
+            <summary>
+            获取消息列表
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MessagesController.GetNewMessageList(FiiiPay.DTO.Messages.MessageListIM)">
+            <summary>
+            新方式获取消息列表（包括网关支付消息）
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.NewsController">
+            <summary>
+            用于显示新闻详情
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.NewsController.Detail(System.Int32)">
+            <summary>
+            显示新闻详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.GatewayOrderController">
+            <summary>
+            网关支付
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.GatewayOrderController.Detail(FiiiPay.DTO.GetDetailByIdIM{System.Guid})">
+            <summary>
+            获取网关订单详情
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.GatewayOrderController.PrePay(FiiiPay.DTO.GatewayOrder.GatewayPrePayIM)">
+            <summary>
+            获取订单信息
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.GatewayOrderController.Pay(FiiiPay.DTO.GatewayOrder.GatewayPayIM)">
+            <summary>
+            支付
+            </summary>
+            <param name="im">二维码字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.GatewayOrderController.MessagePaymentSuccess(System.Guid)">
+            <summary>
+            支付成功消息
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.GatewayOrderController.MessagePaymentRefund(System.Guid)">
+            <summary>
+            退款消息
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.InviteController">
+            <summary>
+            邀请好友注册fiiipay或者购买fiiipos
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.InviteController.FiiiPayPreProfit">
+            <summary>
+            获取邀请fiiipay用户的粗略详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.InviteController.FiiiPosPreProfit">
+            <summary>
+            获取邀请fiiipos用户的粗略详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.InviteController.PreRankingDetail(FiiiPay.DTO.Invite.InviteRankIM)">
+            <summary>
+            获取榜单详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.InviteController.FiiiPayProfitRecord(System.Int32)">
+            <summary>
+            邀请fiiipay用户的收益记录
+            </summary>
+            <param name="pageIndex">当前页码 1(首页)：20 其余增加10</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.InviteController.FiiiPosProfitRecord">
+            <summary>
+            邀请fiiipos用户的收益粗略记录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.InviteController.FiiiPosProfitDetailRecord(FiiiPay.DTO.Invite.FiiiposBonusRecordIM)">
+            <summary>
+            邀请fiiipos用户的收益详细记录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.InviteController.CurrentRank(FiiiPay.Framework.SystemPlatform)">
+            <summary>
+            获取当前排名
+            如果还没有收益时 不让用户展示排名 会返回-1作为一个标志
+            </summary>
+            <param name="im">只支持fiiipay和fiiipos的奖励排行</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.InviteController.SingleBonusDetail(FiiiPay.DTO.Invite.SingleBonusDetailIM)">
+            <summary>
+            单个奖励详情
+            </summary>
+            <param name="im">收益详情订单主键</param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.FiiiShopController">
+            <summary>
+            FiiiShop
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.FiiiShopController.ScanLogin(FiiiPay.API.Models.ScanQRCodeIM)">
+            <summary>
+            Fiiipay 扫码登录
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.RedPocketController">
+            <summary>
+            Class FiiiPay.API.Controllers.RedPocketController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.RedPocketController.Push(FiiiPay.API.Models.PushRedPocketModel)">
+            <summary>
+            发送红包
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.RedPocketController.Receive(FiiiPay.API.Models.ReceiveModel)">
+            <summary>
+            领取红包
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.RedPocketController.Detail(FiiiPay.DTO.GetDetailByIdIM{System.Int64})">
+            <summary>
+            红包详情
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.RedPocketController.RePush(FiiiPay.DTO.GetDetailByIdIM{System.Int64})">
+            <summary>
+            重新发送
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.RedPocketController.DetailList(FiiiPay.API.Models.RedPocketDetailListModel)">
+            <summary>
+            红包详情列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.RedPocketController.StatementDetail(FiiiPay.API.Models.StatementDetailDataModel)">
+            <summary>
+            帐单详情
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.RedPocketController.GetUSDPrice(FiiiPay.API.Models.GetUSDPriceModel)">
+            <summary>
+            获取币种对应美元价格及最大红包数
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.RedPocketController.PushList(FiiiPay.API.Models.RedPocketPageModel)">
+            <summary>
+            已发送红包列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.RedPocketController.ReceiveList(FiiiPay.API.Models.RedPocketPageModel)">
+            <summary>
+            领取红包列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.StoreOrderController">
+            <summary>
+            门店订单
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.StoreOrderController.PrePay(FiiiPay.API.Models.PreStorePayModel)">
+            <summary>
+            获取门店支付相关信息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.StoreOrderController.Pay(FiiiPay.API.Models.StoreOrderPayModel)">
+            <summary>
+            支付门店订单
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.StoreOrderController.IncomeDetail(FiiiPay.API.Models.GetByGuidModel)">
+            <summary>
+            门店收入详情
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.StoreOrderController.ConsumeDetail(FiiiPay.API.Models.GetByGuidModel)">
+            <summary>
+            门店消费详情
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.TransferController">
+            <summary>
+            转账
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.TransferController.CheckTransferAble">
+            <summary>
+            验证用户是否可以转账
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.TransferController.Detail(FiiiPay.DTO.GetDetailByIdIM{System.Int64})">
+            <summary>
+            转账详情
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.TransferController.PreTransfer(FiiiPay.DTO.Transfer.PreTransferIM)">
+            <summary>
+            准备转账
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.TransferController.Transfer(FiiiPay.DTO.Transfer.TransferIM)">
+            <summary>
+            转账
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.UserDeviceController">
+            <summary>
+            闪屏广告
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.UserDeviceController.DeleteDevice(FiiiPay.DTO.UserDeviceDeleteIM)">
+            <summary>
+            删除设备信息
+            </summary>
+            <returns>状态码0则代表成功</returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.UserDeviceController.UpdateDeviceInfo(FiiiPay.DTO.UserDeviceUpdateIM)">
+            <summary>
+            更新设备
+            </summary>
+            <returns>状态码0则代表成功</returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.UserDeviceController.GetDeviceList">
+            <summary>
+            获取设备列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.VerifyRecordController">
+            <summary>
+            用于显示审核结果详情
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.VerifyRecordController.Detail(System.Int64)">
+            <summary>
+            Details the specified identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.VerifyRecordController.FiiipayMerchantVerifyDetail(System.Int64)">
+            <summary>
+            fiiipay merchant 审核消息详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.WithdrawController">
+            <summary>
+            Class FiiiPay.API.Controllers.WithdrawController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WithdrawController.Detail(FiiiPay.DTO.GetDetailByIdIM{System.Int64})">
+            <summary>
+            提币详情
+            </summary>
+            <param name="im">im.Id = OrderId</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WithdrawController.PreWithdraw(FiiiPay.DTO.GetDetailByIdIM{System.Int32})">
+            <summary>
+            准备提币
+            </summary>
+            <param name="im">im.Id = CoinId</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WithdrawController.AddressList(FiiiPay.DTO.GetDetailByIdIM{System.Int32})">
+            <summary>
+            获取提币地址列表
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WithdrawController.VerifyWithdrawPIN(FiiiPay.API.Models.VerifyPinModel)">
+            <summary>
+            提币时，验证PIN码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WithdrawController.VerifyWithdrawIMCombine(FiiiPay.API.Models.WithdrawCombineVerifyModel)">
+            <summary>
+            提币时，综合验证
+            </summary>
+            <param name="model"></param>
+            <returns>token</returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WithdrawController.Withdraw(FiiiPay.DTO.Withdraw.WithdrawIM)">
+            <summary>
+            提币
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WithdrawController.TransactionFeeRate(FiiiPay.DTO.Withdraw.TransactionFeeRateIM)">
+            <summary>
+            获取手续费率以及手续费
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WithdrawController.ListForManageWithdrawalAddress">
+            <summary>
+            地址管理，列出所有币种以及地址数量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WithdrawController.AddAddress(FiiiPay.API.Models.AddAddressIM)">
+            <summary>
+            添加提币地址
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WithdrawController.DeleteAddress(FiiiPay.DTO.GetDetailByIdIM{System.Int64})">
+            <summary>
+            删除地址
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.DepositController">
+            <summary>
+            Class FiiiPay.API.Controllers.DepositController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.DepositController.Detail(FiiiPay.DTO.GetDetailByIdIM{System.Int64})">
+            <summary>
+            充币的详情
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.DepositController.PreDeposit(FiiiPay.DTO.GetDetailByIdIM{System.Int32})">
+            <summary>
+            充币，获取充币地址
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.StatementController">
+            <summary>
+            用户流水
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.StatementController.ListAllType(FiiiPay.DTO.ListAllTypeIM)">
+            <summary>
+            获取用户流水列表 所有类型数据
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.StatementController.ListSingleType(FiiiPay.DTO.ListSingleTypeIM)">
+            <summary>
+            获取用户流水列表 单个类型数据
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.WalletController">
+            <summary>
+            用户钱包接口
+            </summary>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WalletController.ListForDepositAndWithdrawal">
+            <summary>
+            充币以及提币的列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WalletController.PreReOrder">
+            <summary>
+            准备调整币种交易顺序
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.WalletController.ReOrder(FiiiPay.DTO.ReOrderIM)">
+            <summary>
+            排序（功能尚未实现）
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.ProfileController">
+            <summary>
+            Class FiiiPay.API.Controllers.ProfileController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.Info">
+            <summary>
+            Informations this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.UpdateNickname(FiiiPay.API.Models.UpdateNicknameModel)">
+            <summary>
+            Updates the nickname.
+            </summary>
+            <param name="im">The im.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.UpdateBirthday(FiiiPay.DTO.Profile.UpdateBirthdayIM)">
+            <summary>
+            Updates the birthday.
+            </summary>
+            <param name="im">The im.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.PreVerify">
+            <summary>
+            去认证前，需要展示Lv1和Lv2的认证状态，通过这个接口获取两个状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.PreVerifyLv1">
+            <summary>
+            Pres the verify LV1.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.UpdateLv1Info(FiiiPay.DTO.Profile.UpdateLv1InfoIM)">
+            <summary>
+            修改Lv1信息
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.PreVerifyLv2">
+            <summary>
+            Pres the verify LV2.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.UpdateLv2Info(FiiiPay.DTO.Profile.UpdateLv2InfoIM)">
+            <summary>
+            修改Lv2信息
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.UpdateAvatar(FiiiPay.DTO.Profile.UpdateAvatarIM)">
+            <summary>
+            修改头像
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.SendSetEmailCode(FiiiPay.DTO.Profile.SendSetEmailCodeIM)">
+            <summary>
+            首次设置邮箱，发送邮箱验证码
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.VerifySetEmailCode(FiiiPay.DTO.Profile.VerifyOriginalEmailIM)">
+            <summary>
+            首次设置邮箱，验证邮箱
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.VerifySetEmailPin(FiiiPay.API.Models.VerifyPinModel)">
+            <summary>
+            首次设置邮箱，验证PIN
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.SetEmail(FiiiPay.DTO.Profile.SetEmailIM)">
+            <summary>
+            设置邮箱（首次设置）
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.SendUpdateOriginalEmailCode(FiiiPay.DTO.Profile.OriginalEmailIM)">
+            <summary>
+            修改邮箱，发送修改邮箱[原邮箱]的验证码
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.VerifyOriginalEmail(FiiiPay.DTO.Profile.VerifyOriginalEmailIM)">
+            <summary>
+            修改邮箱，验证原邮箱
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.SendUpdateNewEmailCode(FiiiPay.DTO.Profile.OriginalEmailIM)">
+            <summary>
+            修改邮箱，发送修改邮箱[新邮箱]的验证码
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.VerifyNewEmailCode(FiiiPay.DTO.Profile.VerifyOriginalEmailIM)">
+            <summary>
+            修改邮箱，验证新邮箱
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.VerifyUpdateEmailPin(FiiiPay.API.Models.VerifyPinModel)">
+            <summary>
+            修改邮箱，验证PIN
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.UpdateEmail(FiiiPay.DTO.Profile.UpdateEmailIM)">
+            <summary>
+            修改邮箱
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ProfileController.UpdateGender(FiiiPay.DTO.Profile.UpdateGenderIM)">
+            <summary>
+            修改性别
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.HomePageController">
+            <summary>
+            Class FiiiPay.API.Controllers.HomePageController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.HomePageController.Index">
+            <summary>
+            获取首页数据，总金额已经由服务端计算
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.HomePageController.PreReOrder">
+            <summary>
+            准备调整币种交易顺序
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.HomePageController.ReOrder(FiiiPay.DTO.HomePage.ReOrder1IM)">
+            <summary>
+            排序（功能尚未实现）
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.HomePageController.ToggleShowInHomePage(FiiiPay.DTO.HomePage.ToggleShowInHomePageIM)">
+            <summary>
+            切换币种在首页的显示与隐藏
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.ImageController">
+            <summary>
+            Class FiiiPay.API.Controllers.ImageController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ImageController.Download(System.String)">
+            <summary>
+            下载用户相关的图片，比如用户头像，护照照片
+            </summary>
+            <param name="id">图片guid</param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ImageController.Upload(FiiiPay.DTO.Image.UploadImageIM)">
+            <summary>
+            上传图片到kyc服务器
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ImageController.UploadToMaster(FiiiPay.DTO.Image.UploadImageIM)">
+            <summary>
+            上传图片到图片服务器, 不会生成图片的缩略图
+            </summary>
+            <param name="model"></param>
+            <returns>图片ID</returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.ImageController.UploadWithThumbnailToMaster(FiiiPay.DTO.Image.UploadImageIM)">
+            <summary>
+            上传图片到图片服务器
+            会自动生成图片的缩略图
+            </summary>
+            <param name="model"></param>
+            <returns>图片ID和缩略图ID</returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.MerchantController">
+            <summary>
+            Class FiiiPay.API.Controllers.MerchantController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MerchantController.GetListByCodeList(FiiiPay.DTO.Merchant.GetListByCodeListIM)">
+            <summary>
+            蓝牙扫描附近的FiiiPos商家列表
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MerchantController.GetMerchantInfoList(FiiiPay.DTO.GetMerchantInfoListIM)">
+            <summary>
+            地图查找附近门店
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MerchantController.GetMerchantInfoListByDistance(FiiiPay.DTO.GetMerchantInfoListByDistanceIM)">
+            <summary>
+            地图查找附近门店
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MerchantController.GetMerchantInfoListByMap(FiiiPay.DTO.GetMerchantInfoListByMapIM)">
+            <summary>
+            地图查找附近商家
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MerchantController.GetMerchantDetail(FiiiPay.DTO.GetMerchantDetailIM)">
+            <summary>
+            获取商家详情
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MerchantController.GetStoreTypeList">
+            <summary>
+            获取商家类别列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MerchantController.GetMerchantInviteCode">
+            <summary>
+            获取用户开设门店的邀请码
+            </summary>
+            <returns>返回邀请码，如果用户未被邀请开设门店，则返回空</returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.MerchantController.FiiipayMerchantCreate(FiiiPay.API.Models.MerchantInfoCreateModel)">
+            <summary>
+            FiiiPay门店入驻
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.OrderController">
+            <summary>
+            Class FiiiPay.API.Controllers.OrderController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.OrderController.PrePayExistedOrder(FiiiPay.DTO.Order.PrePayExistedOrderIM)">
+            <summary>
+            准备支付推送过来的订单，通过订单号获取订单金额等信息
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.OrderController.PayExistedOrder(FiiiPay.DTO.Order.PayOrderIM)">
+            <summary>
+            支付已经存在的订单
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.OrderController.PrePay(FiiiPay.DTO.Order.PrePayIM)">
+            <summary>
+            主动支付（蓝牙、二维码、NFC都走这个流程） - 准备支付，将会传递溢价等参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.OrderController.ScanMerchantQRCode(FiiiPay.API.Models.ScanQRCodeIM)">
+            <summary>
+            扫描商家固态二维码
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.OrderController.Pay(FiiiPay.DTO.Order.PayIM)">
+            <summary>
+            主动支付（蓝牙、二维码、NFC都走这个流程）
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.OrderController.Detail(FiiiPay.DTO.GetDetailByIdIM{System.Guid})">
+            <summary>
+            获取订单详情（用于支付完成后）
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.OrderController.GetPaymentCode">
+            <summary>
+            获取支付码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Controllers.SecurityController">
+            <summary>
+            Class FiiiPay.API.Controllers.SecurityController
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.SetPin(FiiiPay.DTO.Security.SetPinIM)">
+            <summary>
+            设置二级密码，客户端首先根据登录返回的SimpleUserInfo的HasSetPin字段判断是否已经设置过Pin
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.SendResetPasswordSMSCode(FiiiPay.API.Models.SendResetPasswordSMSCodeModel)">
+            <summary>
+            发送忘记密码的短信
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.VerifyForgotPasswordCode(FiiiPay.API.Models.CheckResetPasswordSMSCodeModel)">
+            <summary>
+            验证忘记密码的验证码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.ResetPasswordByForgotPasswordCode(FiiiPay.API.Models.ResetPasswordModel)">
+            <summary>
+            重置密码通过忘记密码的接口
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.VerifyUpdateCellphonePin(FiiiPay.DTO.Security.GetUpdateCellphoneCodeIM)">
+            <summary>
+            修改手机号时，验证pin码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.PreGetVerifyNewCellphoneCode">
+            <summary>
+            准备验证新的手机号，这个接口会提供用户的国家地区码，以及国家名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.GetUpdateCellphoneNewCode(FiiiPay.DTO.Security.GetVerifyNewCellphoneCodeIM)">
+            <summary>
+            获取验证新手机号的验证码（新手机）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.VerifyUpdateCellphoneNewCode(FiiiPay.DTO.Security.VerifyUpdateCellphoneNewCodeIM)">
+            <summary>
+            修改手机时，验证新手机号的验证码（新手机）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.VerifyUpdateCellphoneCombine(FiiiPay.API.Models.BaseCombineVerifyModel)">
+            <summary>
+            修改手机号时, 综合验证
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.UpdateCellphone(FiiiPay.DTO.Security.UpdateCellphoneIM)">
+            <summary>
+            更换手机号
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.VerifyUpdatePinPin(FiiiPay.DTO.Security.GetUpdatePinCodeIM)">
+            <summary>
+            修改Pin时，验证旧的PIN码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.VerifyUpdatePinCombine(FiiiPay.API.Models.CombineVerifyModel)">
+            <summary>
+            修改Pin时，综合验证
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.UpdatePin(FiiiPay.DTO.Security.UpdatePinIM)">
+            <summary>
+            修改Pin
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.PreFindPinBack">
+            <summary>
+            找回Pin前使用此接口查看用户是否已认证身份LV1
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.VerifyUpdatePasswordPin(FiiiPay.API.Models.VerifyUpdatePasswordModel)">
+            <summary>
+            修改密码，验证PIN
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.GetSecurityCellphoneCode(FiiiPay.API.Models.GetSecurityCellphoneCodeModel)">
+            <summary>
+            获取安全验证的手机的验证码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.UpdatePassword(FiiiPay.DTO.Security.UpdatePasswordIM)">
+            <summary>
+            修改Password
+            </summary>
+            <param name="im"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.VerifyResetPinCombine(FiiiPay.API.Models.CombineVerifyModel)">
+            <summary>
+            重置PIN码时，综合验证
+            </summary>
+            <param name="model"></param>
+            <returns>token</returns>
+        </member>
+        <member name="M:FiiiPay.API.Controllers.SecurityController.ResetPIN(FiiiPay.API.Models.ResetPINModel)">
+            <summary>
+            Reset PIN 
+            </summary>
+            <param name="im">The im.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FiiiPay.API.Filters.CountryFilterAttribute">
+            <summary>
+            用户所在国家(区域)状态过滤
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Filters.MyActionFilterAttribute">
+            <summary>
+            Class FiiiPay.API.Filters.MyActionFilterAttribute
+            </summary>
+            <seealso cref="T:System.Web.Http.Filters.ActionFilterAttribute" />
+        </member>
+        <member name="M:FiiiPay.API.Filters.MyActionFilterAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Occurs before the action method is invoked.
+            </summary>
+            <param name="actionContext">The action context.</param>
+        </member>
+        <member name="T:FiiiPay.API.Filters.TokenBasedAuthenticationFilter">
+            <summary>
+            Class FiiiPay.API.Filters.TokenBasedAuthenticationFilter
+            </summary>
+            <seealso cref="T:System.Web.Http.Filters.FilterAttribute" />
+            <seealso cref="T:System.Web.Http.Filters.IAuthenticationFilter" />
+        </member>
+        <member name="P:FiiiPay.API.Filters.TokenBasedAuthenticationFilter.AuthenticationType">
+            <summary>Gets the authentication type of the OWIN middleware to use.</summary>
+            <returns>The authentication type of the OWIN middleware to use.</returns>
+        </member>
+        <member name="M:FiiiPay.API.Filters.TokenBasedAuthenticationFilter.#ctor(System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Web.Http.BaseAuthenticationFilter" /> class.</summary>
+            <param name="authenticationType">The authentication type of the OWIN middleware to use.</param>
+        </member>
+        <member name="M:FiiiPay.API.Filters.TokenBasedAuthenticationFilter.AuthenticateAsync(System.Web.Http.Filters.HttpAuthenticationContext,System.Threading.CancellationToken)">
+            <summary>Asynchronously authenticates the request.</summary>
+            <returns>The task that completes the authentication.</returns>
+            <param name="context">The authentication context.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+        </member>
+        <member name="M:FiiiPay.API.Filters.TokenBasedAuthenticationFilter.ChallengeAsync(System.Web.Http.Filters.HttpAuthenticationChallengeContext,System.Threading.CancellationToken)">
+            <summary>Asynchronously challenges an authentication.</summary>
+            <returns>The task that completes the challenge.</returns>
+            <param name="context">The context.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+        </member>
+        <member name="T:FiiiPay.API.Filters.WebApiExceptionFilterAttribute">
+            <summary>
+            Class FiiiPay.API.Filters.WebApiExceptionFilterAttribute
+            </summary>
+            <seealso cref="T:System.Web.Http.Filters.ExceptionFilterAttribute" />
+        </member>
+        <member name="M:FiiiPay.API.Filters.WebApiExceptionFilterAttribute.OnException(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+            Raises the exception event.
+            </summary>
+            <param name="actionExecutedContext">The context for the action.</param>
+        </member>
+        <member name="T:FiiiPay.API.WebApiApplication">
+            <summary>
+            Class FiiiPay.API.WebApiApplication
+            </summary>
+            <seealso cref="T:System.Web.HttpApplication" />
+        </member>
+        <member name="M:FiiiPay.API.WebApiApplication.Application_Start">
+            <summary>
+            Applications the start.
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.AddAddressIM">
+            <summary>
+            Class FiiiPay.API.Models.AddAddressIM
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.AddAddressIM.Alias">
+            <summary>
+            别名
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.AdvertisingModelcs">
+            <summary>
+            闪屏广告信息
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.AdvertisingModelcs.SingleId">
+            <summary>
+            广告唯一标志
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.AdvertisingModelcs.Version">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.AdvertisingModelcs.OpenByAPP">
+            <summary>
+            是否由APP打开
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.AdvertisingModelcs.LinkUrl">
+            <summary>
+            链接地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.AdvertisingModelcs.ImageId">
+            <summary>
+            英文图片ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.AdvertisingModelcs.CNImageId">
+            <summary>
+            中文图片ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.AdvertisingModelcs.StartTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.AdvertisingModelcs.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.AdvertisingModelcs.Status">
+            <summary>
+            是否显示
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StoreBannerOM.OpenByAPP">
+            <summary>
+            是否由APP打开
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StoreBannerOM.StartTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StoreBannerOM.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StoreBannerOM.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StoreBannerOM.ViewPermission">
+            <summary>
+            查看所需权限 0无需权限 1需登录 2需KYC通过
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StoreBannerOM.LinkUrl">
+            <summary>
+            链接地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StoreBannerOM.ImageId">
+            <summary>
+            图片ID
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.ChangeLanguageModel">
+            <summary>
+            Class ChangeLanguageModel
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ChangeLanguageModel.Language">
+            <summary>
+            Gets or sets the language.
+            </summary>
+            <value>
+            The language.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.CombineVerifyModel.DivisionCode">
+            <summary>
+            传入币种CODE，设置不同的Code，以使同一业务下系统能分别发送和验证手机码，可空
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WithdrawCombineVerifyModel.DivisionCode">
+            <summary>
+            传入币种CODE，设置不同的Code，以使同一业务下系统能分别发送和验证手机码，可空
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.CurrencyListOM">
+            <summary>
+            法币列表返回类
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.CurrencyListOM.DefaultCurrency">
+            <summary>
+            用户当前设置的法币
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.CurrencyListOM.CurrencyList">
+            <summary>
+            法币列表
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.CurrencyItem.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.CurrencyItem.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.CurrencyItem.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.FiiiShopLoginModel">
+            <summary>
+            Logined
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.FiiiShopLoginModel.UID">
+            <summary>
+            用户唯一标志
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.FiiiShopLoginModel.Status">
+            <summary>
+            登录状态
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.GatewayOrderDetailModel">
+            <summary>
+            网关订单详情
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.Id">
+            <summary>
+            交易ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.Code">
+            <summary>
+            加密货币币种名称：比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.Timestamp">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.FiatAmount">
+            <summary>
+            法币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.FiatCurrency">
+            <summary>
+            法币：比如：MRY
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.CryptoAmount">
+            <summary>
+            加密货币金额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.MerchantName">
+            <summary>
+            商家名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.Status">
+            <summary>
+            比如：已完成
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.MarkUp">
+            <summary>
+            溢价率，比如：10.00%
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.ExchangeRate">
+            <summary>
+            当时的汇率，比如：1BTC = 1670.80MRY
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.RefundTimestamp">
+            <summary>
+            退款时间，如果已经退款这个字段会有值，客户端根据这个字段是否有值显示即可
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.Type">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.OrderNo">
+            <summary>
+            交易单号，底部的条形码也使用这个
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.TradeNo">
+            <summary>
+            第三方交易单号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.CurrentExchangeRate">
+            <summary>
+            当前加密币对法币汇率
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GatewayOrderDetailModel.IncreaseRate">
+            <summary>
+            涨幅
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GetSecurityCellphoneCodeModel.DivisionCode">
+            <summary>
+            设置不同的Code，以使同一业务下系统能分别发送和验证手机码，可空
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GetUSDPriceModel.Currency">
+            <summary>
+            币种
+            </summary>
+            <value>
+            The currency.
+            </value>
+        </member>
+        <member name="T:FiiiPay.API.Models.MerchantCreateSMSCodeModel">
+            <summary>
+            发送注册手机验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantCreateSMSCodeModel.CountryId">
+            <summary>
+            国家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantCreateSMSCodeModel.Cellphone">
+            <summary>
+            手机号，不包含地区码
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.MerchantInfoCreateModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.InviteCode">
+            <summary>
+            邀请码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.MerchantName">
+            <summary>
+            商户名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.WeekTxt">
+            <summary>
+            营业时间描述
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.TagList">
+            <summary>
+            产品/服务
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.MerchantCategorys">
+            <summary>
+            商户类型
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.SupportCoins">
+            <summary>
+            支持的收款币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.Introduce">
+            <summary>
+            商户介绍
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.CountryId">
+            <summary>
+            国家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.StateId">
+            <summary>
+            省/州Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.CityId">
+            <summary>
+            市Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.Address">
+            <summary>
+            详细地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.Lng">
+            <summary>
+            经度
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.Lat">
+            <summary>
+            纬度
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.ApplicantName">
+            <summary>
+            申请人
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.Phone">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.StorefrontImg">
+            <summary>
+            店面照片
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.FigureImgList">
+            <summary>
+            店铺环境图
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.LicenseNo">
+            <summary>
+            营业执照号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.BusinessLicenseImage">
+            <summary>
+            营业执照图
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.MerchantInfoCreateModel.UseFiiiDeduction">
+            <summary>
+            是否使用FIII抵扣交易手续费
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.PushRedPocketModel">
+            <summary>
+            Class FiiiPay.API.Models.PushRedPocketModel
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.PushRedPocketModel.CryptoId">
+            <summary>
+            加密币ID
+            </summary>
+            <value>
+            The crypto identifier.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.PushRedPocketModel.Amount">
+            <summary>
+            数量
+            </summary>
+            <value>
+            The amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.PushRedPocketModel.Count">
+            <summary>
+            个数
+            </summary>
+            <value>
+            The count.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.PushRedPocketModel.PIN">
+            <summary>
+            PIN
+            </summary>
+            <value>
+            The pin.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.PushRedPocketModel.Message">
+            <summary>
+            祝福消息
+            </summary>
+            <value>
+            The message.
+            </value>
+        </member>
+        <member name="T:FiiiPay.API.Models.ReceiveModel">
+            <summary>
+            Class FiiiPay.API.Models.ReceiveModel
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ReceiveModel.PassCode">
+            <summary>
+            口令
+            </summary>
+            <value>
+            The pass code.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.RedPocketDetailListModel.PocketId">
+            <summary>
+            红包ID
+            </summary>
+            <value>
+            The pocket identifier.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.RedPocketDetailListModel.PageIndex">
+            <summary>
+            页码
+            </summary>
+            <value>
+            The index of the page.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.RedPocketDetailListModel.PageSize">
+            <summary>
+            页大小
+            </summary>
+            <value>
+            The size of the page.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.RedPocketPageModel.PageIndex">
+            <summary>
+            页码
+            </summary>
+            <value>
+            The index of the page.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.RedPocketPageModel.PageSize">
+            <summary>
+            页大小
+            </summary>
+            <value>
+            The size of the page.
+            </value>
+        </member>
+        <member name="T:FiiiPay.API.Models.GetRegisterSMSCodeModel">
+            <summary>
+            发送注册手机验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GetRegisterSMSCodeModel.CountryId">
+            <summary>
+            国家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.GetRegisterSMSCodeModel.Cellphone">
+            <summary>
+            手机号，不包含地区码
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.ChekRegisterSMSCodeModel">
+            <summary>
+            验证注册手机验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ChekRegisterSMSCodeModel.CountryId">
+            <summary>
+            国家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ChekRegisterSMSCodeModel.Cellphone">
+            <summary>
+            手机号，不包含地区码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ChekRegisterSMSCodeModel.SMSCode">
+            <summary>
+            手机验证码
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.RegisterModel">
+            <summary>
+            注册
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.RegisterModel.CountryId">
+            <summary>
+            国家ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.RegisterModel.Cellphone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.RegisterModel.Password">
+            <summary>
+            密码明文
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.RegisterModel.SMSCode">
+            <summary>
+            手机验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.RegisterModel.InviterCode">
+            <summary>
+            邀请码
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.ResetPasswordModel">
+            <summary>
+            重置密码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ResetPasswordModel.CountryId">
+            <summary>
+            国家ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ResetPasswordModel.Cellphone">
+            <summary>
+            手机号，不包含地区码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ResetPasswordModel.Password">
+            <summary>
+            密码明文
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.SendResetPasswordSMSCodeModel">
+            <summary>
+            发送重置密码手机验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.SendResetPasswordSMSCodeModel.CountryId">
+            <summary>
+            国家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.SendResetPasswordSMSCodeModel.Cellphone">
+            <summary>
+            手机号，不包含地区码
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.CheckResetPasswordSMSCodeModel">
+            <summary>
+            验证重置密码手机验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.CheckResetPasswordSMSCodeModel.CountryId">
+            <summary>
+            国家Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.CheckResetPasswordSMSCodeModel.Cellphone">
+            <summary>
+            手机号，不包含地区码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.CheckResetPasswordSMSCodeModel.Code">
+            <summary>
+            手机验证码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ResetPINModel.PIN">
+            <summary>
+            Pin
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.ScanQRCodeIM">
+            <summary>
+            扫描二维码
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ScanQRCodeIM.Code">
+            <summary>
+            二维码字符串
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.ScanMerchantQRCodeModel">
+            <summary>
+            扫描商家固态二维码返回信息
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ScanMerchantQRCodeModel.MerchantId">
+            <summary>
+            商家ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ScanMerchantQRCodeModel.MerchantName">
+            <summary>
+            商家名称
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ScanMerchantQRCodeModel.Avatar">
+            <summary>
+            商家头像ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ScanMerchantQRCodeModel.L1VerifyStatus">
+            <summary>
+            商家LV1认证状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ScanMerchantQRCodeModel.L2VerifyStatus">
+            <summary>
+            商家LV2认证状态
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ScanMerchantQRCodeModel.FiatCurrency">
+            <summary>
+            法币币种
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ScanMerchantQRCodeModel.MarkupRate">
+            <summary>
+            溢价费率，比如，0.1，客户端需要自行转换显示为10%
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.ScanMerchantQRCodeModel.WaletInfoList">
+            <summary>
+            加密币钱包详细列表
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.WalletInfo">
+            <summary>
+            加密币钱包详情
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.Id">
+            <summary>
+            币种Id
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.IconUrl">
+            <summary>
+            图标的地址
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.NewStatus">
+            <summary>
+            货币的状态 0禁用 1可用
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.Code">
+            <summary>
+            简称，比如：BTC
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.Name">
+            <summary>
+            名称，比如：Bitcoin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.UseableBalance">
+            <summary>
+            可用余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.FrozenBalance">
+            <summary>
+            冻结的余额
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.ExchangeRate">
+            <summary>
+            商家法币相对于该加密币的汇率，比如：要支付等值人民币的BTC，那么此值为0.00002013
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.FiatBalance">
+            <summary>
+            加密币换算成的法币额度
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.MerchantSupported">
+            <summary>
+            商家是否支持
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.DecimalPlace">
+            <summary>
+            小数点的位数
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.WalletInfo.CryptoEnable">
+            <summary>
+            0禁用 1启用
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.SettingFiatCurrencyModel">
+            <summary>
+            设置商家法币实体
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.SettingFiatCurrencyModel.FiatCurrency">
+            <summary>
+            法币
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StatementDetailDataModel.Id">
+            <summary>
+            Id
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.StatementDetailDataModel.Type">
+            <summary>
+            类型
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.UpdateNicknameModel.Nickname">
+            <summary>
+            昵称
+            </summary>
+            <value>
+            The nickname.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.PreStorePayModel.MerchantInfoId">
+            <summary>
+            门店ID
+            </summary>
+        </member>
+        <member name="T:FiiiPay.API.Models.StoreOrderPayModel">
+            <summary>
+            门店订单支付信息
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StoreOrderPayModel.FiatAmount">
+            <summary>
+            法币额度
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StoreOrderPayModel.CoinId">
+            <summary>
+            支付币种ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StoreOrderPayModel.MerchantInfoId">
+            <summary>
+            门店ID
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.StoreOrderPayModel.Pin">
+            <summary>
+            Pin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.USDPriceModel.MaxCount">
+            <summary>
+            红包最大数
+            </summary>
+            <value>
+            The maximum count.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.USDPriceModel.MaxAmount">
+            <summary>
+            单个红包最大金额
+            </summary>
+            <value>
+            The maximum amount.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.USDPriceModel.USDPrice">
+            <summary>
+            USD
+            </summary>
+            <value>
+            The usd price.
+            </value>
+        </member>
+        <member name="P:FiiiPay.API.Models.VerifyPinModel.PIN">
+            <summary>
+            加密的Pin
+            </summary>
+        </member>
+        <member name="P:FiiiPay.API.Models.VerifyUpdatePasswordModel.Pin">
+            <summary>
+            短信验证码
+            </summary>
+        </member>
+    </members>
+</doc>

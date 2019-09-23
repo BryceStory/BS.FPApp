@@ -1,0 +1,183 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var definePerm = permissionCodeList.Contains("POSAccountView");
+    var canResetPwd = permissionCodeList.Contains("ResetMerchantPIN");
+    var canSet = permissionCodeList.Contains("POSInfoUpdate");
+    var canGetQRCode = permissionCodeList.Contains("GetQRCode");
+}
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="MerchantName">MerchantName</label>
+            <input type="text" class="form-control" id="MerchantName" placeholder="Input MerchantName to search">
+        </div><div class="form-group">
+            <label for="CellPhone">CellPhone</label>
+            <input type="text" class="form-control" id="CellPhone" placeholder="Input CellPhone to search">
+        </div>
+        <div class="form-group">
+            <label for="POSNo">Username</label>
+            <input type="text" class="form-control" id="POSNo" placeholder="Input Username to search">
+        </div>
+        <div class="form-group">
+            <label for="POSSN">POSSN</label>
+            <input type="text" class="form-control" id="POSSN" placeholder="Input POSSN to search">
+        </div>
+        <div class="form-group">
+            <label for="Country">Country</label>
+            @Html.DropDownList("SearchCountryId", (List<SelectListItem>)ViewBag.CountryList, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Status">Status</label>
+            <select id="ddlStatus" class="form-control">
+                <option value="">ALL</option>
+                <option value="1">Actived</option>
+                <option value="0">Locked</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="SearchPOSInfo()">Search</button>
+    </form>
+</div>
+<div>
+    <table id="dtGrid"></table>
+    <div id="dtGridPager"></div>
+</div>
+<script>
+    $(function () {
+        var colnames = ["Id", "Username", "Sn", "Cellphone", "MerchantName", "CountryName", "Email", "Status", "IsAllowWithdrawal", "IsAllowAcceptPayment"];
+        var colmodels = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'Username', index: 'Username', width: 40, sortable: false },
+            { name: 'Sn', index: 'Sn', width: 40, sortable: false },
+            { name: 'Cellphone', index: 'Cellphone', width: 50, align: 'center', sortable: false },
+            { name: 'MerchantName', index: 'MerchantName', width: 40, sortable: false },
+            { name: 'CountryName', index: 'CountryName', width: 40, align: 'center' },
+            { name: 'Email', index: 'Email', width: 40, sortable: false },
+            //{ name: 'DefaultCrypto', index: 'DefaultCrypto', width: 40, sortable: false },
+            { name: 'Status', index: 'Status', width: 40, align: 'center', sortable: false },
+            { name: 'IsAllowWithdrawal', index: 'IsAllowWithdrawal', width: 40, sortable: false },
+            { name: 'IsAllowAcceptPayment', index: 'IsAllowAcceptPayment', width: 40, align: 'center' }
+        ];
+        colnames.push("View");
+        colmodels.push({
+            name: 'View', index: 'View', width: 60, align: 'center', hideinxs: true, sortable: false, formatter: function (cellvalue, options, rowdata)
+            {
+            var id = rowdata.Id;
+                var htmlstr = '';
+                htmlstr +=
+                    '<input type="button" class="btn btn-primary btn-xs" value="View" onclick="GoViewPage(\'' +
+                    id +
+                    '\')" />';
+                if ("@canSet".toLowerCase() === "true") {
+                    htmlstr +=
+                        '<input type="button" class="btn btn-primary btn-xs" value="Set" onclick="EditPOSInfoClick(\'' +
+                        id +
+                        '\')" style="margin-left:5px;" />';
+                }
+                return htmlstr;
+            }
+        });
+        if ("@definePerm".toLowerCase() === "true") {
+            colnames.push("POSAccount");
+            colmodels.push({
+                name: 'POSAccount', index: 'POSAccount', width: 60, align: 'center', hideinxs: true, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    return '<a href="javascript:" onclick="GoPOSAccountPage(\'' + rowdata.Id + '\')">POSAccount</a>';
+                }
+            });
+        }
+        if ("@canGetQRCode".toLowerCase() === "true") {
+            colnames.push("GetQRCode");
+            colmodels.push({
+                name: 'GetQRCode', index: 'GetQRCode', width: 60, align: 'center', hideinxs: true, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    return '<a href="javascript:" onclick="GetQRCode(\'' + rowdata.Id + '\')">GetQRCode</a>';
+                }
+            });
+        }
+        if ("@canResetPwd".toLowerCase() === "true")
+                        {
+            colmodels.push({
+                name: 'Reset PIN', index: 'ResetPIN', align: 'center', width: 100, sortable: false, formatter: function (cellvalue, options, rowdata) {
+
+                    return '<a href="javascript:" class="btn btn-primary btn-xs" onclick="ResetPIN(\'' + rowdata.Id + '\')">Reset PIN</a>';
+                }
+            });
+            colnames.push("ResetPIN");
+        }
+        $("#dtGrid").BoGrid({
+            url: '/POSInfoManage/LoadData',
+            ExpandColumn: 'PageName',
+            colNames: colnames,
+            colModel: colmodels,
+            ondblClickRow: function (rowid) { $.opentabpage("/POSInfoManage/Detail?Id=" + rowid, "POS Information", "POSInformation"+ rowid); },
+            onDeleteClick: "DeletePOSInfoClick",
+            pager: '#dtGridPager'
+        });
+    });
+
+    function SearchPOSInfo() {
+        var merchantName = $.trim($("#MerchantName").val());
+        var cellPhone = $.trim($("#CellPhone").val());
+        var posNo = $.trim($("#POSNo").val());
+        var status = $.trim($("#ddlStatus").val());
+        var possn = $.trim($("#POSSN").val());
+        var countryId = $("#SearchCountryId").children(":selected").val();
+        $("#dtGrid").jqGrid('setGridParam', { postData: { merchantName: merchantName, cellPhone: cellPhone, username: posNo, possn: possn, status: status,countryId: countryId}, page: 1 }).trigger("reloadGrid");
+    }
+
+    function refreshPage() {
+        var merchantName = $.trim($("#MerchantName").val());
+        var cellPhone = $.trim($("#CellPhone").val());
+        var posNo = $.trim($("#POSNo").val());
+        var status = $.trim($("#ddlStatus").val());
+        var countryId = $("#SearchCountryId").children(":selected").val();
+        var possn = $.trim($("#POSSN").val());
+        $("#dtGrid").jqGrid('setGridParam', { postData: { merchantName: merchantName, cellPhone: cellPhone, username: posNo, possn: possn, status: status, countryId: countryId } }).trigger("reloadGrid");
+    }
+    function EditPOSInfoClick(id) {
+        $.openmodalpage("editMerchantpage", "/POSInfoManage/Edit", { id: id }, "Edit Merchant", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+            });
+    }
+    function GoPOSAccountPage(id) {
+        $.opentabpage("/POSInfoManage/POSAccount?id=" + id, "POS Account Info", "POSAccount" + id);
+    }
+    function GoViewPage(id) {
+        $.opentabpage("/POSInfoManage/Detail?id=" + id, "POS Information", "POSInformation" + id);
+    }
+    function DeletePOSInfoClick(id) {
+        $.swconfirm("Sure to delete this data？", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: '/POSInfoManage/Delete',
+                    type: 'post',
+                    data: { Id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "Delete Success",
+                                type: "success"
+                            }, function () {
+                                refreshPage();
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "Delete Failed",
+                                type: "error",
+                                text: context.Message
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+    function ResetPIN(id) {
+        $.openmodalpage("resetMerchantPINpage", "/POSInfoManage/ResetPIN", { Id: id }, "Reset PIN", "");
+    }
+    function GetQRCode(id) {
+        $.openmodalpage("getQRCode", "/POSInfoManage/QRCode", { id: id }, "QRCode", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+</script>

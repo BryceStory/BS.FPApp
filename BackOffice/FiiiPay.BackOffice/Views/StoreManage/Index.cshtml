@@ -1,0 +1,114 @@
+﻿
+@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var canSet = permissionCodeList.Contains("StoreSet");
+    var canVerify = permissionCodeList.Contains("StoreApprove");
+}
+
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="UserName">UserName</label>
+            <input type="text" class="form-control" id="UserName" placeholder="Input UserName to search">
+        </div>
+        <div class="form-group">
+            <label for="CellPhone">CellPhone</label>
+            <input type="text" class="form-control" id="CellPhone" placeholder="Input CellPhone to search">
+        </div>
+        <div class="form-group">
+            <label for="MerchantName">MerchantName</label>
+            <input type="text" class="form-control" id="MerchantName" placeholder="Input MerchantName to search">
+        </div>
+        <div class="form-group">
+            <label>Country</label>
+            @Html.DropDownList("SearchCountryId", (List<SelectListItem>)ViewBag.CountryList, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Status</label>
+            @Html.DropDownList("SearchStatus", (List<SelectListItem>)ViewBag.StatusList, new { @class = "form-control" })
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="SearchStore()">Search</button>
+    </form>
+</div>
+<div style="width:100%; overflow-x:auto;">
+    <table id="dtGrid"></table>
+    <div id="dtGridPager"></div>
+</div>
+<script>
+    $(function () {
+        var colname = ["Id", "Username", "Cellphone", "MerchantName", "CountryName", "Status", "VerifyStatus","Options"];
+        var colModel = [
+            { name: 'Id', index: 'Id', align: 'center', hidden: true },
+            { name: 'Username', index: 'Username', align: 'center', width: 120 },
+            { name: 'Cellphone', index: 'Cellphone', align: 'center', width: 120 },
+            { name: 'MerchantName', index: 'MerchantName', align: 'center', width: 120 },
+            { name: 'CountryName', index: 'CountryName', align: 'center', width: 120 },
+            { name: 'Status', index: 'Status', align: 'center', width: 120 },
+            { name: 'VerifyStatus', index: 'VerifyStatus', align: 'center', width: 80, sortable: false },
+            {
+                name: 'Options',
+                index: 'Options',
+                width: 100,
+                align: 'center',
+                sortable: false,
+                formatter: function (cellvalue, options, rowdata) {
+                    var id = rowdata.Id;
+                    var htmlstr = '';
+                    if (rowdata.VerifyStatus != "Uncertified") {
+                        htmlstr +=
+                            '<input type="button" class="btn btn-primary btn-xs" value="View" onclick="GoDetailPage(\'' +
+                            id +
+                                '\')" />';
+                            }
+                    if ("@canSet".toLowerCase() === "true" && rowdata.VerifyStatus != "Uncertified") {
+                        htmlstr +=
+                            '<input type="button" class="btn btn-primary btn-xs" value="Set" onclick="GoSetPage(\'' +
+                            id +
+                            '\')" style="margin-left:5px;" />';
+                    }
+                    if ("@canVerify".toLowerCase() === "true" && rowdata.VerifyStatus != "Uncertified") {
+                        htmlstr +=
+                            '<input type="button" class="btn btn-primary btn-xs" value="Verify" onclick="GoVerifyPage(\'' +
+                            id +
+                            '\')" style="margin-left:5px;" />';
+                    }
+                    return htmlstr;
+                }
+            }
+        ];
+        $("#dtGrid").BoGrid({
+            url: '/StoreManage/LoadData',
+            colNames: colname,
+            colModel: colModel,
+            postData: GetSearchConditions(),
+            ondblClickRow: function (rowid) { showStoreTypesClick(rowid); },
+            pager: '#dtGridPager'
+        });
+    });
+    function GetSearchConditions() {
+        var merchantName = $.trim($("#MerchantName").val());
+        var userName = $.trim($("#UserName").val());
+        var cellPhone = $.trim($("#CellPhone").val());
+        var countryId = $("#SearchCountryId").children(":selected").val();
+        var status = $("#SearchStatus").children(":selected").val();
+        return { merchantName: merchantName, userName: userName, cellPhone: cellPhone, countryId: countryId, status: status };
+    }
+
+    function refreshPage() {
+        $("#dtGrid").jqGrid('setGridParam', { postData:  GetSearchConditions() }).trigger("reloadGrid");
+    }
+    function SearchStore() {
+        $("#dtGrid").jqGrid('setGridParam', { postData: GetSearchConditions() }).trigger("reloadGrid");
+    }
+    function GoSetPage(id) {
+        $.openmodalpage("setuserprofile", "/StoreManage/StoreSet", { id: id }, "User Set", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+    function GoDetailPage(id) {
+        $.opentabpage("/StoreManage/Detail?id=" + id, "Store Detail", "viewStoredetail" + id);
+    }
+    function GoVerifyPage(id) {
+        $.opentabpage("/StoreManage/Verify?id=" + id, "Verify Store", "verifystore" + id);
+    }
+</script>

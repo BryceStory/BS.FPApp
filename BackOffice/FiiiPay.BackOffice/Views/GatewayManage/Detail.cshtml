@@ -1,0 +1,86 @@
+﻿@using FiiiPay.BackOffice.Models;
+@using FiiiPay.BackOffice.ViewModels
+@model GatewayAccountViewModel
+
+<div class="pagebody">
+    <form id="formEdit" class="form-horizontal" enctype="multipart/form-data" method="post">
+        <h3>User information</h3>
+        <hr style="margin-bottom:10px; " />
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Username">Username</label>
+            <div class="col-sm-9">
+                <label class="control-label">@Model.Username</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Email">Email</label>
+            <div class="col-sm-9">
+                <label class="control-label">@Model.Email </label>
+            </div>
+        </div>
+        <h3>License information</h3>
+        <hr style="margin-bottom:10px; " />
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="CompanyName">CompanyName</label>
+            <div class="col-sm-9">
+                <label class="control-label">@Model.CompanyName</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="LicenseNo">LicenseNo</label>
+            <div class="col-sm-9">
+                <label class="control-label">@Model.LicenseNo</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">License Image</label>
+            <div class="col-sm-9">
+                <img id="previewLicense" src="~/Handlers/BlobHandler.ashx?id=@Model.BusinessLicenseImage" style="border:solid 1px #ddd;height:150px;width:150px; padding:1px; margin-top:10px; max-width:100%;" />
+            </div>
+        </div>
+        <h3>Profile information</h3>
+        <hr style="margin-bottom:10px; " />
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="FirstName">FirstName</label>
+            <div class="col-sm-9">
+                <label class="control-label">@Model.FirstName</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="LastName">LastName</label>
+            <div class="col-sm-9">
+                <label class="control-label">@Model.LastName</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="IdentityDocType">IdentityDocType</label>
+            <div class="col-sm-9">
+                <label class="control-label"> @(Model.IdentityDocType == 1 ? "IdentityCard" : "Passport")</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="IdentityDocNo">IdentityDocNo</label>
+            <div class="col-sm-9">
+                <label class="control-label">@Model.IdentityDocNo</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">FrontIdentity Image</label>
+            <div class="col-sm-9">
+                <img id="previewFrontIdentity" src="~/Handlers/BlobHandler.ashx?id=@Model.FrontIdentityImage" style="border:solid 1px #ddd;height:150px;width:150px; padding:1px; margin-top:10px; max-width:100%;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">BackIdentity Image</label>
+            <div class="col-sm-9">
+                <img id="previewBackIdentity" src="~/Handlers/BlobHandler.ashx?id=@Model.BackIdentityImage" style="border:solid 1px #ddd;height:150px;width:150px; padding:1px; margin-top:10px; max-width:100%;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">HandHoldWithCard Image</label>
+            <div class="col-sm-9">
+                <img id="previewHandHoldWithCard" src="~/Handlers/BlobHandler.ashx?id=@Model.HandHoldWithCard" style="border:solid 1px #ddd;height:150px;width:150px; padding:1px; margin-top:10px; max-width:100%;" />
+            </div>
+        </div>
+    </form>
+</div>

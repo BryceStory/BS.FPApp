@@ -1,0 +1,86 @@
+﻿@using FiiiPay.BackOffice.Models;
+
+@model StoreTypes
+
+    <div class="pagebody">
+        <form id="formEdit" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Name_CN:</label>
+                <div class="col-sm-9">
+                    @Html.TextAreaFor(t => t.Name_CN, new { Class = "form-control", placeholder = "Name_CN" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Name_EN:</label>
+                <div class="col-sm-9">
+                    @Html.TextAreaFor(t => t.Name_EN, new { Class = "form-control", placeholder = "Name_EN" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12 col-sm-offset-3">
+                    <button type="button" class="btn btn-primary" onclick="Save('@Model.Id')">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        $(function () {
+            $.autoTextarea($("#Name_CN")[0]);
+            $("#formEdit").jqValidate({
+                rules: {
+                    Name_CN: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    Name_EN: {
+                        required: true,
+                        maxlength: 50
+                    }
+                },
+                messages: {
+                    Name_CN: "This field is required.",
+                    Name_EN: "This field is required."
+                },
+                highlight: function (e) {
+                    $(e).closest('.form-group').removeClass('info').addClass('has-error');
+                },
+                success: function (e) {
+                    $(e).closest('.form-group').removeClass('has-error').addClass('info');
+                    $(e).remove();
+                }
+            });
+        });
+        function Save(id) {
+            var postdata = getFromData(id);
+            var isValid = $("#formEdit").valid();
+            if (isValid) {
+                $.ajax({
+                    url: "/StoreType/Save",
+                    type: "post",
+                    data: postdata,
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (context) {
+                        if (context.Status) {
+                            $.closemodalpage("editStoreTypepage");
+                        }
+                        else {
+                            swal({
+                                title: "Save Failed",
+                                text: context.Message,
+                                type: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        }
+        function getFromData(id) {
+            debugger;
+            var storeType = new Object();
+            storeType.Id = id;
+            storeType.Name_CN = $("#Name_CN").val();
+            storeType.Name_EN = $("#Name_EN").val();
+            return JSON.stringify({ storeType: storeType });
+        }
+    </script>

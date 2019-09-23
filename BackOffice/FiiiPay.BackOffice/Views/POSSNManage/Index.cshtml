@@ -1,0 +1,225 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Create = permissionCodeList.Contains("POSCreate"), Delete = permissionCodeList.Contains("POSDelete") };
+    var canImport = permissionCodeList.Contains("ImportPOSSN");
+    var canBatchUpdate = permissionCodeList.Contains("BatchUpdate");
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permission);
+}
+<div class="gridSearchTool" style="padding-right:200px">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="SN">SN</label>
+            <input type="text" class="form-control" id="SN" placeholder="Input SN to search">
+        </div>
+        <div class="form-group largesearchwidth">
+            <label for="StartDate">Start Date:</label>
+            <input data-val="true" class="form-control" id="StartDate" name="StartDate" type="text" value="@DateTime.UtcNow.AddYears(-1).ToString("yyyy-MM-dd")">
+            <label for="EndDate">End Date:</label>
+            <input data-val="true" class="form-control" id="EndDate" name="EndDate" type="text" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="Search()">Search</button>
+        <div style="margin-left:100px;margin-top:20px;">
+            @if (permission.Create)
+            {<button type="button" class="btn btn-batch" onclick="Create()">&nbsp; Create &nbsp;&nbsp;</button>
+            }
+            @if (canImport)
+            {
+                <button type="button" class="btn btn-batch" style="right:130px;" onclick="Import(@ViewBag.PageId)">&nbsp; Import &nbsp;&nbsp;</button>
+                <button type="button" class="btn btn-batch" style="right:130px;" onclick="ImportWhiteLabel(@ViewBag.PageId)">&nbsp; Import WhiteLabel &nbsp;&nbsp;</button>
+            }
+            @if (canBatchUpdate)
+            {
+                <button type="button" class="btn btn-batch" onclick="MarkWhiteLabel(true)">&nbsp; Mark WhiteLabel &nbsp;&nbsp;</button>
+                <button type="button" class="btn btn-batch" onclick="UnMarkWhiteLabel(false)">&nbsp; UnMark WhiteLabel &nbsp;&nbsp;</button>
+                <button type="button" class="btn btn-batch" style="right:230px;" onclick="BatchUpdate(true)">&nbsp; Batch  Enable &nbsp;&nbsp;</button>
+                <button type="button" class="btn btn-batch" style="right:360px;" onclick="BatchUpdate(false)">&nbsp; Batch Disable &nbsp;&nbsp;</button>
+            }
+        </div>
+    </form>
+</div>
+<table id="dtGrid"></table>
+<div id="dtGridPager"></div>
+<script>
+    $(function () {
+        $('#StartDate').add($('#EndDate')).datetimepicker({
+            format: 'yyyy-mm-dd',
+            minView: 'month',
+            autoclose: true
+        });
+
+        var colModel = new Array({ name: 'Id', index: 'Id', hidden: true },
+            { name: 'POSSN', index: 'POSSN', width: 100, align: 'center' },
+            { name: 'Status', index: 'Status', width: 100, align: 'center' },
+            { name: 'IsWhiteLabel', index: 'IsWhiteLabel', width: 100, align: 'center' },
+            { name: 'WhiteLabel', index: 'WhiteLabel', width: 100, align: 'center' },
+            { name: 'FirstCrypto', index: 'FirstCrypto', width: 100, align: 'center' },
+            { name: 'IsMiningEnabled', index: 'IsMiningEnabled', width: 100, align: 'center' },
+            { name: 'Timestamp', index: 'Timestamp', width: 100, align: 'center' }
+        );
+        var colNames = new Array("Id", "POSSN", "Status","IsWhiteLabel", "WhiteLabel","FirstCrypto","IsMiningEnabled", "Timestamp");
+        $("#dtGrid").BoGrid({
+            url: '/POSSNManage/LoadData',
+            colNames: colNames,
+            showBtn: true,
+            multiselect: true,
+            rowList: [10, 20, 300],
+            permvalue: "@sePermission",
+            colModel: colModel,
+
+            postData: GetSearchCondition(),
+            onDeleteClick: "deleteSNClick",
+            pager: '#dtGridPager'
+        });
+    });
+
+    function GetSearchCondition() {
+        var postData = {
+            SN: $.trim($("#SN").val()),
+            StartDate: $("#StartDate").val(),
+            EndDate: $("#EndDate").val()
+        };
+        return postData;
+    }
+
+    function Search() {
+        var postdata = GetSearchCondition();
+        $("#dtGrid").jqGrid('setGridParam', { postData: postdata, page: 1 }).trigger("reloadGrid");
+    }
+    function refreshPage() {
+        var postdata = GetSearchCondition();
+        $("#dtGrid").jqGrid('setGridParam', { postData: postdata }).trigger("reloadGrid");
+    }
+    function Create() {
+        $.openmodalpage("addSNpage", "/POSSNManage/Create", "Create POS","Create POS", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+    function Import(pageId) {
+        $.openmodalpage("importSNpage", "/POSSNManage/Import", { pageId: pageId }, "Import POS", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+    function ImportWhiteLabel(pageId) {
+        $.openmodalpage("importSNpage", "/POSSNManage/ImportWhiteLabel", { pageId: pageId }, "Import WhiteLabel POS", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+    
+
+    function deleteSNClick(id) {
+        $.swconfirm("Are your sure to delete this row?", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: "/POSSNManage/Delete",
+                    type: "post",
+                    data: { id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            $("#dtGrid").trigger('reloadGrid');
+                            swal({
+                                title: "Delete Success",
+                                type: "success"
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "Delete Failed",
+                                text: context.Message,
+                                type: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function BatchUpdate(isEnable) {
+        var ids = $("#dtGrid").jqGrid('getGridParam', 'selarrrow');
+        if (ids.length <= 0) {
+            swal({
+                title: "",
+                text: "Please select one row first",
+                type: "error"
+            });
+            return;
+        }
+        else {
+            $.swconfirm("Are you sure you want to Batch Update ", function (isconfirm) {
+                if (isconfirm) {
+                    $.ajax({
+                        url: "/POSSNManage/BatchUpdate",
+                        type: "post",
+                        data: JSON.stringify({ ids: ids, isEnable: isEnable }),
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (context) {
+                            if (context.Status) {
+                                $("#dtGrid").trigger('reloadGrid');
+                                swal({
+                                    title: "Update Success",
+                                    type: "success"
+                                });
+                            }
+                            else {
+                                swal({
+                                    title: "Update Failed",
+                                    text: context.Message,
+                                    type: "error"
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    }
+
+    function MarkWhiteLabel() {
+        $.openmodalpage("setWhiteLabelPage", "/POSSNManage/SetWhiteLabel", "Mark White Label", "Mark White Label", function () {
+            refreshPage();
+        });
+    }
+    function UnMarkWhiteLabel(isEnable) {
+        var ids = $("#dtGrid").jqGrid('getGridParam', 'selarrrow');
+        if (ids.length <= 0) {
+            swal({
+                title: "",
+                text: "Please select one row first",
+                type: "error"
+            });
+            return;
+        }
+        else {
+            $.swconfirm("Are you sure you want to Batch Update ", function (isconfirm) {
+                if (isconfirm) {
+                    $.ajax({
+                        url: "/POSSNManage/UnMarkWhiteLabel",
+                        type: "post",
+                        data: JSON.stringify({ ids: ids}),
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (context) {
+                            if (context.Status) {
+                                refreshPage();
+                                swal({
+                                    title: "Update Success",
+                                    type: "success"
+                                });
+                            }
+                            else {
+                                swal({
+                                    title: "Update Failed",
+                                    text: context.Message,
+                                    type: "error"
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    }
+
+</script>

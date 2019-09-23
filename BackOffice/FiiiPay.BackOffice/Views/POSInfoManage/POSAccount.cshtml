@@ -1,0 +1,32 @@
+﻿
+@{
+    List<FiiiPay.BackOffice.ViewModels.WalletsViewModel> walletList = ViewBag.WalletsList;
+}
+
+<div class="modeldetail">
+    <div>
+        <h3>Merchant information</h3>
+        <hr style="margin-bottom:10px; " />
+        <div>
+            <table style="margin-left:130px; width:600px;" class="table table-modeldetail text-center">
+                <thead>
+                    <tr>
+                        <th style="text-align:center;width:30%;">Currency</th>
+                        <th style="text-align:center;width:30%;">Balance</th>
+                        <th style="text-align:center;width:30%;">FrozenBalance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in walletList)
+                    {
+                        <tr>
+                            <td style="text-align:left;">@item.CurrencyName</td>
+                            <td>@item.Balance</td>
+                            <td>@item.FrozenBalance</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Update = permissionCodeList.Contains("BillerOrderUpdate") };
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permission);
+}
+
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="OrderNo">OrderNo</label>
+            <input type="text" class="form-control" id="OrderNo" placeholder="Input OrderNo to search">
+        </div>
+        <div class="form-group">
+            <label for="AccountNo">AccountNo</label>
+            <input type="text" class="form-control" id="AccountNo" placeholder="Input AccountNo to search">
+        </div>
+        <div class="form-group">
+            <label for="BillerCode">Biller Code</label>
+            <input type="text" class="form-control" id="BillerCode" placeholder="Input Biller Code to search">
+        </div>
+        <div class="form-group">
+            <label>Status</label>
+            @Html.DropDownList("SearchStatus", (List<SelectListItem>)ViewBag.StatusList, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="StartDate">Start Date</label>
+            <input data-val="true" class="form-control" id="StartDate" name="StartDate" type="text" value="@DateTime.UtcNow.AddYears(-1).ToString("yyyy-MM-dd")">
+        </div>
+        <div class="form-group">
+            <label for="EndDate">End Date</label>
+            <input data-val="true" class="form-control" id="EndDate" name="EndDate" type="text" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="Search()">Search</button>
+    </form>
+</div>
+
+<table id="dtGrid"></table>
+<div id="dtGridPager"></div>
+<script>
+    $(function () {
+        $('#StartDate').add($('#EndDate')).datetimepicker({
+            format: 'yyyy-mm-dd',
+            minView: 'month',
+            autoclose: true
+        });
+
+        var colnames = ["Id", "OrderNo", "AccountNo", "CountryName", "BillerCode","ReferenceNumber", "CryptoName", "ExchangeRate", "Amount","Status", "Timestamp"];
+        var colmodels = [
+            { name: 'Id', index: 'Id', hidden: true },
+            { name: 'OrderNo', index: 'OrderNo', align: 'center', width: 40 },
+            { name: 'AccountNo', index: 'AccountNo', align: 'center', width: 40 },
+            { name: 'CountryName', index: 'CountryName', align: 'center', width: 40 },
+            { name: 'BillerCode', index: 'BillerCode', align: 'center', width: 40 },
+            { name: 'ReferenceNumber', index: 'ReferenceNumber', align: 'center', width: 40 },
+            { name: 'Amount', index: 'Amount', align: 'center', width: 40 },
+            { name: 'CryptoName', index: 'CryptoName', align: 'center', width: 40 },
+            { name: 'ExchangeRate', index: 'ExchangeRate', align: 'center', width: 40 },
+            { name: 'Status', index: 'Status', align: 'center', width: 40 },
+            { name: 'Timestamp', index: 'Timestamp', align: 'center', width: 40 }
+        ];
+        $("#dtGrid").BoGrid({
+            url: '/BillerOrder/LoadData',
+            ExpandColumn: 'PageName',
+            permvalue: "@sePermission",
+            showBtn: true,
+            colNames: colnames,
+            onShowClick: "showAccountClick",
+            onEditClick: "editAccountClick",
+            colModel: colmodels,
+            postData: GetSearchConditions(),
+            pager: '#dtGridPager'
+        });
+    });
+
+    function editAccountClick(id) {
+        $.openmodalpage("editBillerOrderpage", "/BillerOrder/Edit", { Id: id }, "Edit BillerOrder", "", function () {
+            $("#dtGrid").trigger('reloadGrid');
+        });
+    }
+
+    function Search() {
+        $("#dtGrid").jqGrid('setGridParam', { postData: GetSearchConditions(), page: 1 }).trigger("reloadGrid");
+    }
+    function refreshPage() {
+        $("#dtGrid").jqGrid('setGridParam', { postData: GetSearchConditions() }).trigger("reloadGrid");
+    }
+    function GetSearchConditions() {
+        var OrderNo = $("#OrderNo").val();
+        var AccountNo = $("#AccountNo").val();
+        var BillerCode = $("#BillerCode").val();
+        var SearchStatus = $("#SearchStatus").children(":selected").val();
+        var StartDate = $("#StartDate").val();
+        var EndDate = $("#EndDate").val();
+        return { OrderNo: OrderNo, AccountNo: AccountNo, BillerCode: BillerCode, status: SearchStatus, StartDate: StartDate, EndDate: EndDate };
+    }
+</script>

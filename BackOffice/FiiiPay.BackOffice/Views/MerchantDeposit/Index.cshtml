@@ -1,0 +1,138 @@
+﻿@{
+    var permobj = new { Create = true, Update = true, Delete = true };
+    string sePermission = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(permobj);
+}
+<div class="gridSearchTool">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="OrderNo">OrderNo</label>
+            <input type="text" class="form-control" id="OrderNo" placeholder="Input OrderNo to search">
+        </div>
+        <div class="form-group">
+            <label for="Username">Username</label>
+            <input type="text" class="form-control" id="Username" placeholder="Input Username to search">
+        </div>
+        <div class="form-group">
+            <label for="Address">Address</label>
+            <input type="text" class="form-control" id="Address" placeholder="Input Address to search">
+        </div>
+        <div class="form-group">
+            <label for="TXID">TXID</label>
+            <input type="text" class="form-control" id="TXID" placeholder="Input TXID to search">
+        </div>
+        <div class="form-group">
+            <label for="Status">Status</label>
+            <select id="Status" class="form-control">
+                <option value="">ALL</option>
+                <option value="1">Confirmed</option>
+                <option value="2">Pending</option>
+                <option value="3">Cancelled</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Currency">Currency</label>
+            @Html.DropDownList("Currency", (List<SelectListItem>)ViewBag.CURList, new { Class = "form-control", placeholder = "Currency" })
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="Search()">Search</button>
+    </form>
+</div>
+
+<table id="dtGrid"></table>
+<div id="dtGridPager"></div>
+<script>
+    $(function () {
+        var colnames = [
+            "Id", "OrderNo", "Username", "SelfPlatform", "CryptoName", "Amount", "Address", "CountryId", "RequestId", "Address Tag", "TXID", "Status", "Timestamp"
+        ];
+        var colmodels = [
+            { name: 'Id', index: 'Id', align: 'center', hidden: true },
+            { name: 'OrderNo', index: 'OrderNo', align: 'center', width: 60 },
+            { name: 'Username', index: 'Username', align: 'center', width: 40 },
+            { name: 'SelfPlatform', index: 'SelfPlatform', align: 'center', width: 40 },
+            { name: 'CryptoName', index: 'CryptoName', align: 'center', width: 40 },
+            { name: 'Amount', index: 'Amount', width: 30, sortable: false },
+            { name: 'Address', index: 'Address', width: 40, align: 'center', sortable: false },
+            { name: 'CountryId', index: 'CountryId', hidden: true },
+            { name: 'RequestId', index: 'RequestId', hidden: true },
+            { name: 'Tag', index: 'Tag', width: 40, align: 'center', sortable: false },
+            { name: 'TXID', index: 'TXID', width: 40, align: 'center', sortable: false },
+            { name: 'Status', index: 'Status', width: 40, align: 'center' },
+            { name: 'Timestamp', index: 'Timestamp', width: 60, align: 'center' }
+        ];
+
+        colnames.push("Confirm Times");
+        colmodels.push({
+            name: 'ConfirmTimes', index: 'ConfirmTimes', width: 70, align: 'center', hideinxs: true, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                return '<a href="javascript:" onclick="GetConfirmTimes(\'' + rowdata.CountryId + '\',\'' + rowdata.RequestId + '\')">Confirm Times</a>';
+            }
+        });
+
+        colnames.push("Copy");
+        colmodels.push({
+            name: 'Copy', index: 'Copy', width: 60, align: 'center', hideinxs: true, sortable: false, formatter: function (cellvalue, options, rowdata) {
+                return '<a href="javascript:" onclick="Copy(\'' + rowdata.Address + '\')">CopyAddress</a> | <a href="javascript:" onclick="Copy(\'' + rowdata.TXID + '\')">CopyTXID</a>';
+            }
+        });
+
+        $("#dtGrid").BoGrid({
+            url: '/MerchantDeposit/LoadData',
+            ExpandColumn: 'PageName',
+            sortname: "Timestamp",
+            sortorder: "desc",
+            colNames: colnames,
+            colModel: colmodels,
+            pager: '#dtGridPager'
+        });
+    });
+
+
+    function Search() {
+        var username = $.trim($("#Username").val());
+        var orderNo = $.trim($("#OrderNo").val());
+        var address = $.trim($("#Address").val());
+        var txid = $.trim($("#TXID").val());
+        var status = $.trim($("#Status").val());
+        var cryptoId = $.trim($("#Currency").val());
+        $("#dtGrid").jqGrid('setGridParam', { postData: { orderNo: orderNo, username: username, address: address, txid: txid, status: status, cryptoId: cryptoId }, page: 1 }).trigger("reloadGrid");
+    }
+    function refreshPage() {
+        var username = $.trim($("#Username").val());
+        var orderNo = $.trim($("#OrderNo").val());
+        var address = $.trim($("#Address").val());
+        var txid = $.trim($("#TXID").val());
+        var status = $.trim($("#Status").val());
+        var cryptoId = $.trim($("#Currency").val());
+        $("#dtGrid").jqGrid('setGridParam', { postData: { orderNo: orderNo, username: username, address: address, txid: txid, status: status, cryptoId: cryptoId } }).trigger("reloadGrid");
+    }
+    function Copy(s) {
+        var oInput = document.createElement('input');
+        oInput.value = s;
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display = 'none';
+        alert('Copy Success');
+    }
+    function GetConfirmTimes(countryId, requestId) {
+        $.ajax({
+            url: "/UserWithdrawal/GetConfirmTimes",
+            type: "post",
+            data: { countryId: countryId, requestId: requestId },
+            dataType: "json",
+            //contentType: "application/json",
+            success: function (context) {
+                if (context.Result) {
+                    swal("Confirm Times:" + context.Message);
+                }
+                else {
+                    swal({
+                        title: "Query Failed",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+    }
+</script>

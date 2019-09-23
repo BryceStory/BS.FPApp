@@ -1,0 +1,175 @@
+﻿
+@using FiiiPay.BackOffice.Models;
+@using FiiiPay.BackOffice.Common;
+@model UserAccounts
+
+
+<div class="pagebody" style="width:500px;">
+    <form id="formEdit" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Username:</label>
+            <div class="col-sm-8">
+                <label class="control-label">@Model.Cellphone</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label required" for="Status">Status:</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(t => t.Status, (List<SelectListItem>)ViewBag.StatusList, new { Class = "form-control", placeholder = "Status" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label required" for="IsAllowExpense">IsAllowExpense:</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(t => t.IsAllowExpense, (List<SelectListItem>)ViewBag.IsList, new { Class = "form-control", placeholder = "IsAllowExpense" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="IsAllowWithdrawal">IsAllowWithdrawal:</label>
+            <div class="col-sm-8 col-xs-8">
+                @Html.DropDownListFor(t => t.IsAllowWithdrawal, (List<SelectListItem>)ViewBag.IsList, new { Class = "form-control", placeholder = "IsAllowWithdrawal" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="IsAllowTransfer">IsAllowTransfer:</label>
+            <div class="col-sm-8 col-xs-8">
+                @Html.DropDownListFor(t => t.IsAllowTransfer, (List<SelectListItem>)ViewBag.IsList, new { Class = "form-control", placeholder = "IsAllowTransfer" })
+            </div>
+        </div>
+
+        @if ((ValidationFlagComponent.CheckSecurityOpened(Model.ValidationFlag, FiiiPay.Framework.Enums.ValidationFlag.GooogleAuthenticator)))
+        {
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="ValidationFlag">Google Authenticator:</label>
+                <div class="col-sm-6 col-xs-8">
+                    <label class="control-label">Already opened</label>
+                </div>
+                <div class="col-sm-2 col-xs-4">
+                    <button type="button" class="btn btn-primary" onclick="Unbind('@Model.Id')">Unbind</button>
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="button" class="btn btn-primary" onclick="Save('@Model.Id')">Submit</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="button" class="btn btn-primary" onclick="DeleteErrorCount('@Model.Id','PIN')">DeleteErrorCount PIN</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="button" class="btn btn-primary" onclick="DeleteErrorCount('@Model.Id','SMS')">DeleteErrorCount SMS</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="button" class="btn btn-primary" onclick="DeleteErrorCount('@Model.Id','GoogleAuth')">DeleteErrorCount Google Auth </button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-4">
+                <button type="button" class="btn btn-primary" onclick="DeleteErrorCount('@Model.Id','Identity')">DeleteErrorCount Identity</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function Save(id) {
+        var postdata = getFromData(id);
+        $.ajax({
+            url: "/UserManage/Save",
+            type: "post",
+            data: postdata,
+            dataType: "json",
+            contentType: "application/json",
+            success: function (context) {
+                if (context.Status) {
+                    $.closemodalpage("setuserprofile");
+                }
+                else {
+                    swal({
+                        title: "Save Failed",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+
+    }
+
+    function getFromData(id) {
+        var model = new Object();
+        model.Id = id;
+        model.Status = $("#Status").val();
+        model.IsAllowWithdrawal = $("#IsAllowWithdrawal").val();
+        model.IsAllowExpense = $("#IsAllowExpense").val();
+        model.IsAllowTransfer = $("#IsAllowTransfer").val();
+        return JSON.stringify({ oModel: model });
+    }
+
+    function Unbind(id) {
+        $.swconfirm("Are your sure to unbind?", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: "/UserManage/Unbind",
+                    type: "post",
+                    data: { id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "Save Success",
+                                text: context.Message,
+                                type: "success"
+                            }, function () {
+                                $.closemodalpage("setuserprofile");
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "Failed",
+                                text: context.Message,
+                                type: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function DeleteErrorCount(id, type) {
+        $.swconfirm("Are your sure to Delete?", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: "/UserManage/DeleteErrorCount",
+                    type: "post",
+                    data: { id: id, type: type },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "Save Success",
+                                text: context.Message,
+                                type: "success"
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "Failed",
+                                text: context.Message,
+                                type: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+</script>

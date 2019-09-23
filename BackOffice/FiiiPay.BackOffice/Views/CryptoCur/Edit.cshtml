@@ -1,0 +1,176 @@
+﻿@using FiiiPay.BackOffice.Models;
+@using FiiiPay.Foundation.Entities.Enum;
+@using FiiiPay.BackOffice.ViewModels
+@model Cryptocurrencies
+@{
+    List<PriceInfoViewModel> PriceList = ViewBag.PriceList;
+    Dictionary<string, bool> roleDic = ViewBag.RoleDic;
+}
+
+<div class="pagebody">
+    <form id="formEdit" class="form-horizontal" action="@Url.Action("Save")" enctype="multipart/form-data" method="post">
+        @Html.Hidden("Id", Model.Id)
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="Name">Name</label>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(t => t.Name, new { Class = "form-control", placeholder = "UserName" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="Code">Code</label>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(t => t.Code, new { Class = "form-control", placeholder = "Code" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="DecimalPlace">DecimalPlace</label>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(t => t.DecimalPlace, new { Class = "form-control", placeholder = "DecimalPlace" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="Sequence">Sequence</label>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(t => t.Sequence, new { Class = "form-control", placeholder = "Sequence" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="NeedTag">IsNeedTag</label>
+                    <div class="col-sm-4">
+                        @{
+                            string checkedStr = (Model != null && Model.NeedTag ? "checked='checked'" : "");
+                        }
+                        <div class="checkbox" style="width:250px;">
+                            <label>@Html.CheckBoxFor(t => t.NeedTag) NeedTag</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="Status">Enable:</label>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(t => t.Enable, (List<SelectListItem>)ViewBag.StatusList, new { Class = "form-control" })
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="IsWhiteLabel">IsWhiteLabel:</label>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(t => t.IsWhiteLabel, (List<SelectListItem>)ViewBag.BoolList, new { Class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="IsFixedPrice">IsFixedPrice</label>
+                    <div class="col-sm-4">
+                        @{
+                            checkedStr = (Model != null && Model.IsFixedPrice ? "checked='checked'" : "");
+                        }
+                        <div class="checkbox" style="width:250px;">
+                            <label>@Html.CheckBoxFor(t => t.IsFixedPrice) FixedPrice</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="Withdrawal_Tier">Withdrawal_Tier</label>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="col-sm-8" style="display:table;">
+                                @Html.TextBoxFor(t => t.Withdrawal_Tier, new { Class = "form-control", placeholder = "Withdrawal_Tier" })
+                                <div style="display:table-cell;">%</div>
+                                <div style="display:table-cell;">+</div>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(t => t.Withdrawal_Fee, new { Class = "form-control", placeholder = "Withdrawal_Fee" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="Status">Status</label>
+                    <div class="col-sm-4">
+                        @{foreach (var item in roleDic)
+                            {
+                                checkedStr = "";
+                                if (item.Value)
+                                {
+                                    checkedStr = "checked='checked'";
+                                }
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <input type="checkbox" name="moduleperm" value="@item.Key" @checkedStr data-roleid="@item.Key"> @item.Key
+                                    </div>
+                                </div>
+                            }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Icon</label>
+                    <div class="col-sm-9">
+                        <input type="file" name="Icon" value="@Model.IconURL" accept="image/*" onchange="imgPreviewIconURL(this)" />
+                        <img id="previewIcon" src="~/Handlers/BlobHandler.ashx?id=@Model.IconURL" style="border:solid 1px #ddd;height:150px;width:150px; padding:1px; margin-top:10px; max-width:100%;" />
+                    </div>
+                </div>
+            </div>
+            @{
+                string isShow = (Model != null && Model.IsFixedPrice ? "" : "hidden=\"hidden\"");
+            }
+            <div id="showPriceList" class="col-sm-6" @isShow>
+                @{foreach (PriceInfoViewModel item in PriceList)
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label" for="Name">@item.CurrencyName (@item.CurrencyCode)</label>
+                            <div class="col-sm-4">
+                                @Html.TextBox(item.CurrencyCode, item.Price, new { Class = "form-control" })
+                            </div>
+                        </div>
+                    }}
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <iframe id="tempframe" name="tempframe" hidden="hidden" style="border:none;width:200px;height:28px; overflow:hidden"></iframe>
+</div>
+<script>
+    $(function () {
+        $("#IsFixedPrice").on("change", function () {
+            var $chk = $(this);
+            if ($chk.is(":checked")) {
+                $("#showPriceList").show();
+            } else {
+                $("#showPriceList").hide();
+            }
+        });
+    });
+
+    function imgPreviewIconURL(fileDom) {
+        //判断是否支持FileReader
+        if (window.FileReader) {
+            var reader = new FileReader();
+        } else {
+            alert("Your browser does not support image preview. If you need this function, please upgrade your browser!");
+        }
+
+        //获取文件
+        var file = fileDom.files[0];
+        var imageType = /^image\//;
+        //是否是图片
+        if (!imageType.test(file.type)) {
+            alert("Please select pictures!");
+            return;
+        }
+        //读取完成
+        reader.onload = function (e) {
+            //获取图片dom
+            var img = document.getElementById("previewIcon");
+            //图片路径设置为读取的图片
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+</script>

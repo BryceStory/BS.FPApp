@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Perimssion";
+    GeneralPermission gp = ViewBag.GeneralPermission;
+    FiiiPay.BackOffice.Models.Module module = ViewBag.ModuleInfo;
+}
+@model List<FiiiPay.BackOffice.Models.ModulePermission>
+<div style="margin-top:20px;padding:10px;max-width:1150px;">
+    <div style="position:relative;padding-right:90px;">
+        <table>
+            <tr>
+                <th style="width:100px;">ModuleName</th>
+                <td>@module.Name</td>
+            </tr>
+        </table>
+        @if (gp.Create)
+        {
+            <button class="btn btn-create" onclick="AddPermission()" style="bottom:-5px;">Add</button>
+        }
+    </div>
+    <div>
+        <ul class="list-unstyled rowlist">
+            <li></li>
+            <li class="row" style="font-weight:bold">
+                <div class="col-sm-3 col-xs-6">Code</div>
+                <div class="col-sm-3 col-xs-6">Name</div>
+                <div class="col-sm-3 hidden-xs">Remark</div>
+                <div class="col-sm-3 hidden-xs"></div>
+            </li>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <li class="row">
+                        <div class="col-sm-3 col-xs-6">@item.Code</div>
+                        <div class="col-sm-3 col-xs-6">@item.Description</div>
+                        <div class="col-sm-3 col-xs-12">@item.Remark</div>
+                        <div class="col-sm-3">
+                            @if (!item.IsDefault)
+                            {
+                                if (gp.Update)
+                                {
+                                    <button class="btn btn-primary btn-xs" onclick="EditPermission('@item.Id')">Update</button>
+                                }
+                                if (gp.Delete)
+                                {
+                                    <button class="btn btn-primary btn-xs" onclick="DeletePermission('@item.Id',this)">Delete</button>
+                                }
+                            }
+                        </div>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<script>
+    function AddPermission() {
+        $.openmodalpage("addpermission", "/Module/PerimissCreate", { ModuleId: "@module.Id"}, "Add Perimission");
+    }
+    function EditPermission(id) {
+        $.openmodalpage("addpermission", "/Module/PerimissEdit", { Id: id }, "Update Perimission");
+    }
+    function SavePerimission(isAdd) {
+        var isValid = $('#formEditPerimisson').valid();
+        if (isValid) {
+            var model = new Object();
+            model.Id = $("#PermId").val();
+            model.ModuleId = $("#ModelModuleGid").val();
+            model.Code = $.trim($("#Code").val());
+            model.Description = $.trim($("#Description").val());
+            model.Remark = $.trim($("#Remark").val());
+            var url = "/Module/SaveAddPermission";
+            if (isAdd == 0) {
+                url = "/Module/SaveEditPermission";
+            }
+            $.ajax({
+                url: url,
+                data: JSON.stringify({ permission: model}),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (context) {
+                    if (context.Status) {
+                        swal({
+                            title: "Save Success",
+                            type: "success"
+                        }, function () {
+                            window.location.reload();
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Save Failed",
+                            type: "error",
+                            text: context.Message
+                        });
+                    }
+                }
+            })
+        }
+    }
+    function DeletePermission(id, obj) {
+        $.swconfirm("Sure to delete this perimssion？", function (isconfirm) {
+            if (isconfirm) {
+                $.ajax({
+                    url: '/Module/SaveDeletePermission',
+                    data: { id: id },
+                    dataType: "json",
+                    success: function (context) {
+                        if (context.Status) {
+                            swal({
+                                title: "Delete Success",
+                                type: "success"
+                            }, function () {
+                                $(obj).closest("li").remove();
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "Delete Failed",
+                                type: "error",
+                                text: context.Message
+                            });
+                        }
+                    }
+                })
+            }
+        });
+    }
+</script>

@@ -1,0 +1,63 @@
+﻿@using FiiiPay.BackOffice.Models;
+
+@model Feedbacks
+
+<div class="pagebody">
+    <form id="formEdit" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Date:</label>
+            <div class="col-sm-9">
+                <label class="control-label">@Model.Timestamp.ToString() </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Type:</label>
+            <div class="col-sm-9">
+                <label class="control-label">@Model.Type </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Context:</label>
+            <div class="col-sm-9">
+                <label class="control-label">@Model.Context</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="ddlResult">Result:</label>
+            <div class="col-sm-9">
+                <select id="ddlResult" class="form-control">
+                    <option value="true">已处理</option>
+                    <option value="false">未处理</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <button type="button" class="btn btn-primary" onclick="Save(@Model.Id)">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    function Save(id) {
+        $.ajax({
+            url: "/Feedback/Save",
+            type: "post",
+            data: { id: id, selectVal: $('#ddlResult option:selected').val() },
+            dataType: "json",
+            success: function (context) {
+                if (context.Status) {
+                    $.closemodalpage("editFeedbackspage");
+                }
+                else {
+                    swal({
+                        title: "Save Failed",
+                        text: context.Message,
+                        type: "error"
+                    });
+                }
+            }
+        });
+    }
+
+</script>

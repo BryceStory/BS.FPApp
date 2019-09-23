@@ -1,0 +1,159 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    bool createPermission = permissionCodeList.Contains("FiiiPayMerchantCreate");
+    string updatePermission = permissionCodeList.Contains("FiiiPayMerchantUpdate") ? "1" : "0";
+    string settingPermission = permissionCodeList.Contains("FiiiPayMerchantSetting") ? "1" : "0";
+    string verifyPermission = permissionCodeList.Contains("FiiiPayMerchantVerify") ? "1" : "0";
+}
+<div class="gridSearchTool">
+    <form class="form-inline" onkeypress="return ExecuteSearch()" id="formSearchGrid">
+        <div class="form-group">
+            <label for="searchFiiiPayAccount">FiiiPay账号</label>
+            <input type="text" class="form-control" id="searchFiiiPayAccount" placeholder="FiiiPay账号">
+        </div>
+        <div class="form-group">
+            <label for="searchMerchantName">商家名称</label>
+            <input type="text" class="form-control" id="searchMerchantName" placeholder="商家名称">
+        </div>
+        <div class="form-group">
+            <label for="searchCountryId">国家</label>
+            @Html.DropDownList("searchCountryId", (List<SelectListItem>)ViewBag.CountryList, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="searchStatus">门店状态</label>
+            @Html.DropDownList("searchStatus", (List<SelectListItem>)ViewBag.StatusList, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="searchVerifyStatus">审核状态</label>
+            @Html.DropDownList("searchVerifyStatus", (List<SelectListItem>)ViewBag.VerifyStatusList, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary btn-sm" onclick="SearchMerchant()">搜索</button>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="ResetGrid()">重置</button>
+        </div>
+        @if (createPermission)
+        {
+            <button type="button" class="btn btn-create" onclick="AddMerchant()">新增</button>
+        }
+    </form>
+</div>
+<table id="merchantinfoGrid"></table>
+<div id="merchantinfoGridPager"></div>
+<script>
+    $(function () {
+        var colModel = new Array({ name: 'Id', index: 'Id', hidden: true },
+            { name: 'FiiiPayAccount', index: 'FiiiPayAccount', width: 100, align: 'center', sortable: false },
+            { name: 'MerchantName', index: 'MerchantName', width: 200, align: 'left', sortable: false },
+            { name: 'CountryName', index: 'CountryName', width: 80, align: 'center', sortable: false },
+            { name: 'MerchantStatus', index: 'MerchantStatus', width: 80, align: 'center', sortable: false },
+            { name: 'VerifyStatus', index: 'VerifyStatus', width: 80, align: 'center', sortable: false },
+            { name: 'AllowExpense', index: 'AllowExpense', width: 80, align: 'center', sortable: false },
+            { name: 'FromType', index: 'FromType', width: 80, align: 'center', sortable: false },
+            {
+                name: 'Options', index: 'Options', width: 120, align: 'center', sortable: false, formatter: function (cellvalue, options, rowdata) {
+                    var verifyStatus = Number(cellvalue);
+                    var btnHtml = '<a href="javascript:" class="btn btn-primary btn-xs" onclick="ViewMerchantInfo(\'' + rowdata.Id + '\')">查看</a>';
+                    if (verifyStatus == 1) {
+                        if ("@settingPermission" == "1") {
+                            btnHtml += '<a href="javascript:" class="btn btn-primary btn-xs" onclick="MerchantInfoSetting(\'' + rowdata.Id + '\')" style="margin-left:8px;">设置</a>';
+                        }
+                        if ("@updatePermission" == "1") {
+                            btnHtml += '<a href="javascript:" class="btn btn-primary btn-xs" onclick="EditMerchant(\'' + rowdata.Id + '\')" style="margin-left:8px;">修改</a>';
+                        }
+                    }
+                    else if (verifyStatus == 3) {
+                        if ("@verifyPermission" == "1") {
+                            btnHtml += '<a href="javascript:" class="btn btn-primary btn-xs" onclick="VerifyMerchant(\'' + rowdata.Id + '\')" style="margin-left:8px;">审核</a>';
+                        }
+                    }
+                    return btnHtml;
+                }
+            });
+
+        $("#merchantinfoGrid").BoGrid({
+            url: '/FiiiPayMerchant/LoadData',
+            colNames: ["Id", "账号", "商户名称", "国家", "门店状态","审核状态", "收款功能","来源", "操作"],
+            colModel: colModel,
+            sortname: 'CreateTime',
+            sortorder: 'DESC',
+            pager: '#merchantinfoGridPager'
+        });
+    });
+    function ExecuteSearch(e) {
+        if (event.keyCode == 13) {
+            SearchMerchant();
+            return false;
+        }
+        return true;
+    }
+    function SearchMerchant() {
+        var fiiipayAccount = $.trim($("#searchFiiiPayAccount").val());
+        var merchantName = $.trim($("#searchMerchantName").val());
+        var countryId = $("#searchCountryId").children(":selected").val();
+        var status = $("#searchStatus").children(":selected").val();
+        var verifyStatus = $("#searchVerifyStatus").children(":selected").val();
+        $("#merchantinfoGrid").jqGrid('setGridParam', {
+            postData: {
+                fiiipayAccount: fiiipayAccount,
+                merchantName: merchantName,
+                countryId: countryId,
+                merchantStatus: status,
+                verifyStatus: verifyStatus
+            },
+            page: 1
+        }).trigger("reloadGrid");
+    }
+    function ResetGrid() {
+        document.getElementById('formSearchGrid').reset();
+        SearchMerchant();
+    }
+    function refreshPage() {
+        $("#merchantinfoGrid").trigger('reloadGrid');
+    }
+    function AddMerchant(id) {
+        $.opentabpage("/FiiiPayMerchant/Add", "添加门店", 0, "fiiipaymerchantadd");
+    }
+    function EditMerchant(id) {
+        $.opentabpage("/FiiiPayMerchant/Edit?id=" + id, "修改门店", id,"fiiipaymerchantedit");
+    }
+    function VerifyMerchant(id) {
+        $.opentabpage("/FiiiPayMerchant/Verify?id=" + id, "审核门店", id, "fiiipaymerchantview");
+    }
+    function ViewMerchantInfo(id) {
+        $.opentabpage("/FiiiPayMerchant/Detail?id=" + id, "查看门店", id, "fiiipaymerchantview");
+    }
+    function MerchantInfoSetting(id) {
+        $.openmodalpage("storesettingpage", "/FiiiPayMerchant/Setting", { merchantId: id }, "设置门店","", function () {
+            $("#merchantinfoGrid").trigger('reloadGrid');
+        });
+    }
+    function SubmitMerchantInfoSetForm() {
+        var vaild = $("#merchantSetForm").valid();
+        if (!vaild) {
+            return false;
+        }
+        $.ajax({
+            url: '/FiiiPayMerchant/SaveSetting',
+            data: $("#merchantSetForm").serialize(),
+            dataType: "json",
+            success: function (context) {
+                if (context.Status) {
+                    swal({
+                        title: "保存成功",
+                        type: "success"
+                    }, function () {
+                        $.closemodalpage("storesettingpage");
+                        $("#merchantinfoGrid").trigger('reloadGrid');
+                    });
+                }
+                else {
+                    swal({
+                        title: "保存失败",
+                        type: "error",
+                        text: context.Message
+                    });
+                }
+            }
+        })
+    }
+</script>

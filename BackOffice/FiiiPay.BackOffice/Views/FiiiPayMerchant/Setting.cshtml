@@ -1,0 +1,51 @@
+﻿@model FiiiPay.BackOffice.Models.MerchantInformations
+<div class="pagebody">
+    <form class="form-horizontal" id="merchantSetForm">
+        @Html.HiddenFor(t => t.Id)
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Status">门店状态</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(t => t.Status, (List<SelectListItem>)ViewBag.StatusList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="IsAllowExpense">收款功能</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(t => t.IsAllowExpense, (List<SelectListItem>)ViewBag.AllowList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="FeeRate">收款手续费</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    @Html.TextBoxFor(t => t.FeeRate, new { @class = "form-control" })
+                    <span class="input-group-addon">%</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Markup">溢价</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    @Html.TextBoxFor(t => t.Markup, new { @class = "form-control" })
+                    <span class="input-group-addon">%</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <input type="button" class="btn btn-primary" onclick="SubmitMerchantInfoSetForm()" value="提交" />
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        $("#merchantSetForm").jqValidate({
+            rules: {
+                FeeRate: { required: true, number: true, min:0},
+                Markup: { required: true, number: true, min:0 }
+            }
+        });
+    })
+</script>

@@ -1,0 +1,93 @@
+﻿@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var canVerify = permissionCodeList.Contains("UserResidenceApprove");
+    var canVerifyStatus = (int)FiiiPay.Entities.Enums.VerifyStatus.UnderApproval;
+}
+<div>
+    <div class="gridSearchTool">
+        <form class="form-inline" onkeypress="return ExecuteSearch()">
+            <div class="form-group">
+                <label>Account</label>
+                <input type="text" id="SearchAccount" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Country</label>
+                @Html.DropDownList("SearchCountryId", (List<SelectListItem>)ViewBag.CountryList, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                @Html.DropDownList("SearchStatus", (List<SelectListItem>)ViewBag.StatusList, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-primary btn-sm" value="Search" onclick="DoSearch()" />
+            </div>
+            <div class="form-group">
+                Today Verify Count： @ViewBag.VerifyCount
+            </div>
+        </form>
+    </div>
+    <table id="gridlist"></table>
+    <div id="gridlistpager"></div>
+</div>
+<script>
+    $(function () {
+        var colname = ["Id", "Account", "Lastname", "Firstname", "Country", "State", "City", "Status", "SubmitTime", "Remark", "Options"];
+        var colmodel = [
+            { name: 'UserAccountId', index: 'UserAccountId', hidden: true },
+            { name: 'Cellphone', index: 'Cellphone', width: 100, align: 'center' },
+            { name: 'FirstName', index: 'FirstName', width: 60, align: 'center' },
+            { name: 'LastName', index: 'LastName', width: 60, align: 'center' },
+            { name: 'CountryName', index: 'CountryName', width: 60, align: 'center', sortable: false },
+            { name: 'State', index: 'State', width: 60, align: 'center', sortable: false },
+            { name: 'City', index: 'City', width: 60, align: 'center', sortable: false },
+            { name: 'L2VerifyStatus', index: 'L2VerifyStatus', width: 60, align: 'center', sortable: false },
+            { name: 'L2SubmissionDate', index: 'L2SubmissionDate', width: 80, align: 'center' },
+            { name: 'Remark', index: 'Remark', width: 120, align: 'center', sortable: false },
+            {
+                name: 'Options', index: 'Options', width: 60, align: 'center', sortable: false, formatter: function (cellvalue, rowdata) {
+                    var id = rowdata.rowId;
+                    var htmlstr = '';
+                    htmlstr += '<input type="button" class="btn btn-primary btn-xs" value="View" onclick="GoDetailPage(\'' + id + '\')" />';
+                    if ("@canVerify".toLowerCase() === "true") {
+                        htmlstr += '<input type="button" class="btn btn-primary btn-xs" value="Verify" onclick="GoVerifyPage(\'' + id + '\')" style="margin-left:5px;" />';
+                    }
+                    return htmlstr;
+                }
+            }
+        ];
+        $("#gridlist").BoGrid({
+            url: '/UserResidence/LoadData',
+            colNames: colname,
+            colModel: colmodel,
+            sortname: "L2SubmissionDate",
+            sortorder: "desc",
+            postData: GetSearchConditions(),
+            pager: '#gridlistpager'
+        });
+    })
+    function ExecuteSearch(e) {
+        if (event.keyCode == 13) {
+            DoSearch();
+            return false;
+        }
+        return true;
+    }
+    function DoSearch() {
+        $("#gridlist").jqGrid('setGridParam', { postData: GetSearchConditions(), page: 1 }).trigger("reloadGrid");
+    }
+    function GetSearchConditions() {
+        var countryId = $("#SearchCountryId").children(":selected").val();
+        var account = $.trim($("#SearchAccount").val());
+        var status = $("#SearchStatus").children(":selected").val();
+        return { account: account, countryId: countryId, status: status };
+    }
+    function refreshPage() {
+        $("#gridlist").jqGrid('setGridParam', { postData: GetSearchConditions() }).trigger("reloadGrid");
+    }
+    function GoVerifyPage(id) {
+        $.opentabpage("/UserResidence/Verify?id=" + id, "Verify User Residence", "verifyuserresidence"+id);
+    }
+    function GoDetailPage(id) {
+        $.opentabpage("/UserResidence/Detail?id=" + id, "User Residence Detail", "userprofileresidence" + id);
+    }
+</script>

@@ -1,0 +1,27 @@
+﻿@model FiiiPay.Entities.EntitySet.MerchantProfileSet
+@{
+    string qcodeURL = string.Format("/Handlers/GetQRCodeHandler.ashx?id={0}", Model.Id);
+}
+<div class="" style="text-align:center">
+    <img id="QRCode" src="@qcodeURL" style="max-width:400px; max-height:500px;border:solid 1px #cccccc;" />
+</div>
+<div class="row" style="margin:20px">
+    <div class="col-xs-6">
+        <form id="formEditEn" class="form-horizontal" action="@Url.Action("DownloadEn")" method="post">
+            @Html.Hidden("QRCodeMerchantId", Model.Id)
+            @Html.AntiForgeryToken()
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">Download En</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-xs-6">
+        <form id="formEditZh" class="form-horizontal" action="@Url.Action("DownloadZh")" method="post">
+            @Html.Hidden("QRCodeMerchantId", Model.Id)
+            @Html.AntiForgeryToken()
+            <div>
+                <button type="submit" class="btn btn-primary">Download Zh</button>
+            </div>
+        </form>
+    </div>
+</div>

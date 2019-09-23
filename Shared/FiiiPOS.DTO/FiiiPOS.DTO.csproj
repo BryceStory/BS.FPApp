@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C208241-CD8B-4697-A94A-181222E06AA2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FiiiPOS.DTO</RootNamespace>
+    <AssemblyName>FiiiPOS.DTO</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\Services\FiiiPOS.API\App_Data\FiiiPOS.DTO.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Product|AnyCPU'">
+    <OutputPath>bin\Product\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountNeedVerifyInfo.cs" />
+    <Compile Include="BindMerchantAuthIM.cs" />
+    <Compile Include="BindNoticeRegIdIM.cs" />
+    <Compile Include="CryptocurrencyDTO.cs" />
+    <Compile Include="DepositAddressInfo.cs" />
+    <Compile Include="FiatCurrencyDTO.cs" />
+    <Compile Include="FiiiEXLogin.cs" />
+    <Compile Include="GetFirstTitleAndNotReadCountOM.cs" />
+    <Compile Include="GetListByCodeListIM.cs" />
+    <Compile Include="GetListByCodeListOM.cs" />
+    <Compile Include="GetMerchantVerifyStatusListIM.cs" />
+    <Compile Include="GetNewsOM.cs" />
+    <Compile Include="MechantSimpleInfoDTO.cs" />
+    <Compile Include="MerchantVerifyStatusOM.cs" />
+    <Compile Include="GetMerchnatVerifyListIM.cs" />
+    <Compile Include="GetMerchnatVerifyListOM.cs" />
+    <Compile Include="GetOpenedSecuritiesOM.cs" />
+    <Compile Include="GetStatusOfSecurityOM.cs" />
+    <Compile Include="GuidsIM.cs" />
+    <Compile Include="MerchantAccountDTO.cs" />
+    <Compile Include="MerchantExTransferOrderDTO.cs" />
+    <Compile Include="MerchantSupportReceiptWalletDTO.cs" />
+    <Compile Include="MerchantTransferDTO.cs" />
+    <Compile Include="MerchantTotalAssetsDTO.cs" />
+    <Compile Include="MerchantValidateIM.cs" />
+    <Compile Include="MerchantWalletDTO.cs" />
+    <Compile Include="MerchantWithdrawalMasterSettingDTO.cs" />
+    <Compile Include="Messages\MessageIM.cs" />
+    <Compile Include="Messages\MessageOM.cs" />
+    <Compile Include="OrderDetailDTO.cs" />
+    <Compile Include="OrderDTO.cs" />
+    <Compile Include="OrderStatusDTO.cs" />
+    <Compile Include="PaymentCodeDTO.cs" />
+    <Compile Include="PrintOrderInfoDTO.cs" />
+    <Compile Include="ProfileDTO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RedisOrderDTO.cs" />
+    <Compile Include="SignonDTO.cs" />
+    <Compile Include="MerchantDepositDTO.cs" />
+    <Compile Include="TradingReportDTO.cs" />
+    <Compile Include="MerchantWithdrawalDTO.cs" />
+    <Compile Include="TransactionFeeRateResult.cs" />
+    <Compile Include="TransferFiiiExConditionDTO.cs" />
+    <Compile Include="UpdateMerchantLicenseIM.cs" />
+    <Compile Include="UpdateStatusIM.cs" />
+    <Compile Include="UpdateVerifyStatusIM.cs" />
+    <Compile Include="ValidateWithSecretIM.cs" />
+    <Compile Include="WithdrawalConditionInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FiiiPay.Entities\FiiiPay.Entities.csproj">
+      <Project>{68B13FBA-8C45-450C-9EAE-C9FECBCE5B84}</Project>
+      <Name>FiiiPay.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FiiiPay.Foundation.Entities\FiiiPay.Foundation.Entities.csproj">
+      <Project>{32C340CF-F96A-4678-B3A8-C4A850632159}</Project>
+      <Name>FiiiPay.Foundation.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

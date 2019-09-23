@@ -1,0 +1,161 @@
+﻿@using FiiiPay.BackOffice.Models;
+
+@model List<MasterSettings>
+@{
+    List<string> permissionCodeList = ViewBag.PagePermissions;
+    var permission = new GeneralPermission { Update = permissionCodeList.Contains("CustomerManageUpdate") };
+    List<MasterSettings> wxList = Model.FindAll(t => t.Name == "WX");
+    string firstWxValue = wxList?[0].Value;
+    MasterSettings fbSetting = Model.Find(t => t.Name == "FB");
+}
+
+<div class="pagebody">
+    <form id="formEdit" class="form-horizontal">
+        <ul class="pageitem">
+            <li>微信客服</li>
+        </ul>
+        <div>
+            <div class="form-group">
+                <label class="control-label col-sm-2 col-lg-1" for="Wechat">微信账号:</label>
+                <div class="col-sm-8 col-lg-6" id="wxAccountList">
+                    <div class="wxlist">
+                        <input type="text" name="Wechat" class="form-control" value="@firstWxValue" />
+                        <button class="btn btn-default" type="button" onclick="AddWxAccount()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                    </div>
+                    @if (wxList != null && wxList.Count > 1)
+                    {
+                        for (int i = 1; i < wxList.Count; i++)
+                        {
+                            <div class="wxlist">
+                                <input type="text" name="Wechat" class="form-control" value="@wxList[i].Value" />
+                                <button class="btn btn-default btn-remove" type="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-lg-offset-1 col-sm-offset-2">
+                <p>最多可以添加5个微信账号，请不要填写中文字符</p>
+            </div>
+        </div>
+        <ul class="pageitem">
+            <li>其它</li>
+        </ul>
+        <div>
+            <div class="form-group">
+                <label class="control-label col-sm-2 col-lg-1" for="Facebook">Facebook:</label>
+                <div class="col-sm-2">
+                    <label>@Html.TextBox("Facebook", @Model.Find(c => c.Name.Equals("FB")).Value, new { Class = "form-control", placeholder = "Facebook" })</label>
+                </div>
+            </div>
+            @if (permission.Update)
+            {
+                <div class="form-group">
+                    <div class="col-sm-10 col-lg-offset-1 col-sm-offset-2">
+                        <button type="button" class="btn btn-primary" onclick="Save()">确定</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </form>
+</div>
+
+<script>
+    $(function () {
+        $('#formEdit').validate({
+            errorElement: 'span',
+            errorClass: 'help-inline',
+            focusInvalid: true,
+            rules: {
+                Wechat: { required: true, maxlength: 50 },
+                Facebook: { required: true, maxlength: 50 }
+            },
+            messages: {
+                Wechat: { required: "必填项", maxlength:"不能超过50个字符"},
+                Facebook: { required: "必填项", maxlength: "不能超过50个字符" }
+            },
+            highlight: function (e) {
+                $(e).closest('.wxlist').removeClass('info').addClass('has-error');
+            },
+            success: function (e) {
+                $(e).closest('.wxlist').removeClass('has-error').addClass('info');
+                $(e).remove();
+            }
+        });
+        $("#wxAccountList").on("click", "button.btn-remove", function () {
+            $(this).closest(".wxlist").remove();
+        })
+    });
+
+    function AddWxAccount() {
+        var $list = $("#wxAccountList");
+        if ($list.children(".wxlist").length >= 5) {
+            swal({
+                title: "",
+                text: '最多只能添加5个微信账号',
+                type: "info",
+                timer: 2000,
+                buttons: false
+            });
+            return;
+        }
+        var htmlStr = '<div class="wxlist">';
+        htmlStr += '<input type="text" name="Wechat" class="form-control" />';
+        htmlStr += '<button class="btn btn-default btn-remove" type="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+        htmlStr += '</div>';
+        $list.append(htmlStr);
+    }
+
+    function Save() {
+        var checkResult = $('#formEdit').valid();
+        if (!Checkdata()) {
+            return;
+        }
+        if (checkResult) {
+            $.ajax({
+                url: "/CustomerManage/Save",
+                type: "post",
+                data: $('#formEdit').serialize(),
+                dataType: "json",
+                success: function (context) {
+                    if (context.Status) {
+                        swal({
+                            title: "",
+                            text: '更新成功',
+                            type: "success",
+                            timer: 2000,
+                            buttons: false
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "",
+                            text: '更新失败',
+                            type: "error",
+                            timer: 2000,
+                            buttons: false
+                        });
+                    }
+                }
+            });
+        }
+    }
+    function Checkdata() {
+        var $list = $("#wxAccountList").children(".wxlist");
+        var result = true;
+        $list.each(function () {
+            var $input = $(this).find("input[type='text']");
+            result = result && $input.valid();
+        });
+        return result;
+    }
+</script>
+<style>
+    .wxlist{
+        margin-top:5px;
+    }
+    .wxlist input[type="text"]{
+        width:220px;
+        display:inline-block;
+    }
+</style>

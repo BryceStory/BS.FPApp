@@ -1,0 +1,149 @@
+﻿@model FiiiPay.BackOffice.ViewModels.MerchantKYCProfileViewModel
+<div class="pagebody" style="max-width:1125px;">
+    <form class="form-horizontal" id="verifymerchantkycprofileform">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">账号</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@ViewBag.AccountName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Lastname</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.LastName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Firstname</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.FirstName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">证件类型</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.IdentityDocTypeName</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">证件号码</label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">@Model.IdentityDocNo</div>
+            </div>
+        </div>
+        <div>
+            @{
+                string frontImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.FrontIdentityImage, Model.Country);
+                string backImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.BackIdentityImage, Model.Country);
+                string handholdImageUrl = string.Format("/Handlers/BlobHandler.ashx?id={0}&cid={1}", Model.HandHoldWithCard, Model.Country);
+            }
+            <div class="pull-left text-center" style="width:360px;height:300px;">
+                <a href="javascript:" onclick="ShowBigImage(this,'@Model.FrontIdentityImage')">
+                    <img src="@frontImageUrl" style="max-width:100%; max-height:260px;border:solid 1px #ECECEC;" />
+                </a>
+                <div class="text-center">证件正面照</div>
+            </div>
+            <div class="pull-left text-center" style="width:360px;height:300px;">
+                <a href="javascript:" onclick="ShowBigImage(this,'@Model.BackIdentityImage')">
+                    <img src="@backImageUrl" style="max-width:100%;max-height:260px;border:solid 1px #ECECEC;" />
+                </a>
+                <div class="text-center">证件背面照</div>
+            </div>
+            <div class="pull-left text-center" style="width:360px;height:300px;">
+                <a href="javascript:" onclick="ShowBigImage(this,'@Model.HandHoldWithCard')">
+                    <img src="@handholdImageUrl" style="max-width:100%;max-height:260px;border:solid 1px #ECECEC;" />
+                </a>
+                <div class="text-center">手持证件照</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">审核结果</label>
+            <div class="col-sm-10">
+                @Html.Hidden("MerchantId", Model.MerchantId)
+                @Html.DropDownList("L1VerifyStatus", (List<SelectListItem>)ViewBag.VerifyStatusList, new { @class = "form-control", style = "width:200px;" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">审核备注</label>
+            <div class="col-sm-10">
+                @Html.TextArea("L1Remark", Model.L1Remark, new { @class = "form-control", placeholder = "If you Reject, please input remarks!" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+                <div class="form-control noborder">
+                    <input type="button" class="btn btn-primary" value="提交" onclick="SaveVerify()" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(function() {
+        $.autoTextarea($("#L1Remark")[0]);
+        $("#verifymerchantkycprofileform").jqValidate({
+            rules: {
+                L1Remark: {
+                    required: function() {
+                        return $("#L1VerifyStatus").children(":selected").val() ==
+                            "@((int)FiiiPay.Entities.Enums.VerifyStatus.Disapproval)";
+                    },
+                    maxlength: 500
+                }
+            }
+        });
+    });
+    function SaveVerify() {
+        var isValid = $("#verifymerchantkycprofileform").valid();
+        if (isValid) {
+            var merchantId = $("#MerchantId").val();
+            var status = $("#L1VerifyStatus").children(":selected").val();
+            var remark = $("#L1Remark").val();
+            $.ajax({
+                url: '/MerchantKYCProfile/SaveVerify',
+                data: { MerchantId: merchantId, L1VerifyStatus: status, L1Remark: remark },
+                dataType: "json",
+                success: function (context) {
+                    var certifiledstatus = "@((int)FiiiPay.Entities.Enums.VerifyStatus.Certified)";
+                    var disapprovalstatus = "@((int)FiiiPay.Entities.Enums.VerifyStatus.Disapproval)";
+                    if (context.Status) {
+                        swal({
+                            title: "Save Success",
+                            type: "success"
+                        }, function () {
+                            if (status == certifiledstatus || status == disapprovalstatus) {
+                                window.location.href = "/MerchantKYCProfile/Detail/" + merchantId;
+                            }
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Save Failed",
+                            type: "error",
+                            text: context.Message
+                        });
+                    }
+                }
+            });
+        }
+    }
+    function ShowBigImage(obj, pageid) {
+        var modaldiv = $('<div class="modal" id="bootstrap-modal-' + pageid + '" tabindex="-1" role="dialog" aria-labelledby="bootstrap-modal-label"></div>');
+        var modalhtml = '<div class="modal-dialog modal-lg" role="document">';
+        modalhtml += '<img id="img" onclick="Rotate(this)" src=' + $(obj).find("img").attr("src") + ' style="max-width:800px;max-height:600px;position:absolute;left:10%;top:100px;" />';
+        modalhtml += '</div>';
+        modaldiv.append(modalhtml);
+        $("body").append(modaldiv);
+        modaldiv.on('hide.bs.modal', function (e) {
+            $(this).remove();
+        });
+        modaldiv.modal({ keyboard: true });
+    }
+    var r = 0;
+
+    function Rotate(obj) {
+        r += 90;
+        $(obj).css('transform', 'rotate(' + r + 'deg)');
+    }
+</script>

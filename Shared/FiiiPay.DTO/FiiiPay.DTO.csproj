@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5AA85181-6E51-4077-A8F2-39B764B707E9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FiiiPay.DTO</RootNamespace>
+    <AssemblyName>FiiiPay.DTO</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\FiiiPay.DTO.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\FiiiPay.DTO.xml</DocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Product|AnyCPU'">
+    <OutputPath>bin\Product\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\FiiiPay.DTO.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FiiiPay.Framework, Version=1.0.7074.27146, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FiiiPay.Framework.1.0.7074.27146\lib\net47\FiiiPay.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BillerDTO.cs" />
+    <Compile Include="BindNoticeRegIdIM.cs" />
+    <Compile Include="CellPhoneOM.cs" />
+    <Compile Include="DateIM.cs" />
+    <Compile Include="FiiiPayMerchantInfoDTOs.cs" />
+    <Compile Include="FiiiShopLoginDTO.cs" />
+    <Compile Include="GatewayOrderDetailOM.cs" />
+    <Compile Include="GetLastActiveCountryDTO.cs" />
+    <Compile Include="GetMerchantDetailDTO.cs" />
+    <Compile Include="GetMerchantInfoListByMapDTO.cs" />
+    <Compile Include="GetMerchantInfoListDTO.cs" />
+    <Compile Include="H5RegisterIM.cs" />
+    <Compile Include="InviteCodeIM.cs" />
+    <Compile Include="ListAllTypeIM.cs" />
+    <Compile Include="ListForDepositOM.cs" />
+    <Compile Include="ListSingleTypeIM.cs" />
+    <Compile Include="LoginBySMSCodeIM.cs" />
+    <Compile Include="LoginIM.cs" />
+    <Compile Include="LoginOM.cs" />
+    <Compile Include="MerchantStoreTypeDTO.cs" />
+    <Compile Include="MessageGatewayPaymentOM.cs" />
+    <Compile Include="PosMerchantBindRecordOM.cs" />
+    <Compile Include="PushRedPocketListOM.cs" />
+    <Compile Include="RedPocketDetailOM.cs" />
+    <Compile Include="RedPocketListDetailOM.cs" />
+    <Compile Include="RedPocketPushOM.cs" />
+    <Compile Include="RedPocketReceiveListOM.cs" />
+    <Compile Include="RegisterIM.cs" />
+    <Compile Include="GetSMSCodeIM.cs" />
+    <Compile Include="SimpleUserInfoOM.cs" />
+    <Compile Include="StatementDetailOM.cs" />
+    <Compile Include="StoreOrderDTOs.cs" />
+    <Compile Include="UpdatePhoneNumberIM.cs" />
+    <Compile Include="UserDeviceDeleteDTO.cs" />
+    <Compile Include="UserDeviceItemDTO.cs" />
+    <Compile Include="UserDeviceUpdateDTO.cs" />
+    <Compile Include="UserProfileListIM.cs" />
+    <Compile Include="ValidateAuthCodeIM.cs" />
+    <Compile Include="ValidateLoginBySMSCodeIM.cs" />
+    <Compile Include="VerifyPinIM.cs" />
+    <Compile Include="VerifyRegisterSMSCodeIM.cs" />
+    <Compile Include="VerifyRegisterSMSCodeOM.cs" />
+    <Compile Include="VersionIM.cs" />
+    <Compile Include="VersionOM.cs" />
+    <Compile Include="ArticleListIM.cs" />
+    <Compile Include="ArticleListOM.cs" />
+    <Compile Include="GetFirstTitleAndNotReadCountOM.cs" />
+    <Compile Include="ReadIM.cs" />
+    <Compile Include="BindUserAuthIM.cs" />
+    <Compile Include="GetOpenedSecuritiesOM.cs" />
+    <Compile Include="GetStatusOfSecurityOM.cs" />
+    <Compile Include="UserValidateIM.cs" />
+    <Compile Include="ValidateWithSecretIM.cs" />
+    <Compile Include="DetailOM.cs" />
+    <Compile Include="PreDepositOM.cs" />
+    <Compile Include="FiiiEXLogin.cs" />
+    <Compile Include="FiiiExBalanceIM.cs" />
+    <Compile Include="TransferFiiiExConditionOM.cs" />
+    <Compile Include="TransferToExIM.cs" />
+    <Compile Include="UserExTransferOrderOM.cs" />
+    <Compile Include="GatewayCancelIM.cs" />
+    <Compile Include="GatewayOrderOM.cs" />
+    <Compile Include="GatewayOrderInfoOM.cs" />
+    <Compile Include="GatewayPayIM.cs" />
+    <Compile Include="GatewayPrePayIM.cs" />
+    <Compile Include="GetDetailByIdIM.cs" />
+    <Compile Include="GuidsIM.cs" />
+    <Compile Include="IndexIM.cs" />
+    <Compile Include="IndexOM.cs" />
+    <Compile Include="PreReOrderOM.cs" />
+    <Compile Include="ReOrderIM.cs" />
+    <Compile Include="ToggleShowInHomePageIM.cs" />
+    <Compile Include="IdList.cs" />
+    <Compile Include="UploadImageIM.cs" />
+    <Compile Include="AccountInfoDTO.cs" />
+    <Compile Include="OrderDetailDTO.cs" />
+    <Compile Include="StatementDetailDTO.cs" />
+    <Compile Include="StatementDTO.cs" />
+    <Compile Include="SignonDTO.cs" />
+    <Compile Include="TargetAccountDTO.cs" />
+    <Compile Include="TransferResult.cs" />
+    <Compile Include="FiiiposBonusRecordIM.cs" />
+    <Compile Include="FiiiposBonusRecordOM.cs" />
+    <Compile Include="FiiiposProfitDetailRecordOM.cs" />
+    <Compile Include="InviteRankIM.cs" />
+    <Compile Include="InviteRankOM.cs" />
+    <Compile Include="InviteRecordIM.cs" />
+    <Compile Include="PreFiiiPayProfitOM.cs" />
+    <Compile Include="PreFiiiPosProfitOM.cs" />
+    <Compile Include="ProfitDetailIM.cs" />
+    <Compile Include="ProfitDetailOM.cs" />
+    <Compile Include="SingleBonusDetailIM.cs" />
+    <Compile Include="SingleBonusDetailOM.cs" />
+    <Compile Include="MerchantVerifyStatusOM.cs" />
+    <Compile Include="GetListByCodeListIM.cs" />
+    <Compile Include="GetListByCodeListOM.cs" />
+    <Compile Include="GetNewsOM.cs" />
+    <Compile Include="MessageIM.cs" />
+    <Compile Include="MessageOM.cs" />
+    <Compile Include="OrderDetailOM.cs" />
+    <Compile Include="PayIM.cs" />
+    <Compile Include="PaymentCodeDTO.cs" />
+    <Compile Include="PayOrderIM.cs" />
+    <Compile Include="PayOrderOM.cs" />
+    <Compile Include="PrePayExistedOrderIM.cs" />
+    <Compile Include="PrePayExistedOrderOM.cs" />
+    <Compile Include="PrePayIM.cs" />
+    <Compile Include="PrePayOM.cs" />
+    <Compile Include="RedisOrderDTO.cs" />
+    <Compile Include="ScanMerchantQRCodeOM.cs" />
+    <Compile Include="InfoOM.cs" />
+    <Compile Include="Lv1InfoIM.cs" />
+    <Compile Include="SendSetEmailCodeIM.cs" />
+    <Compile Include="SetEmailIM.cs" />
+    <Compile Include="UpdateAvatarIM.cs" />
+    <Compile Include="UpdateEmailIM.cs" />
+    <Compile Include="UpdateGenderIM.cs" />
+    <Compile Include="UpdateLv2InfoIM.cs" />
+    <Compile Include="PreVerifyLv2OM.cs" />
+    <Compile Include="UpdateLv1InfoIM.cs" />
+    <Compile Include="PreVerifyLv1OM.cs" />
+    <Compile Include="PreVerifyOM.cs" />
+    <Compile Include="UpdateBirthdayIM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ranges.cs" />
+    <Compile Include="GetUpdateCellphoneCodeIM.cs" />
+    <Compile Include="GetUpdatePinCodeIM.cs" />
+    <Compile Include="GetVerifyNewCellphoneCodeIM.cs" />
+    <Compile Include="PreFindPinBackOM.cs" />
+    <Compile Include="PreGetVerifyNewCellphoneCodeOM.cs" />
+    <Compile Include="ResetPasswordByForgotPasswordCodeIM.cs" />
+    <Compile Include="SetPinIM.cs" />
+    <Compile Include="UpdateCellphoneIM.cs" />
+    <Compile Include="UpdatePasswordIM.cs" />
+    <Compile Include="UpdatePinIM.cs" />
+    <Compile Include="VerifyFindPinBackIdNoIM.cs" />
+    <Compile Include="VerifyForgotPasswordCodeIM.cs" />
+    <Compile Include="VerifyUpdateCellphoneNewCodeIM.cs" />
+    <Compile Include="ListIM.cs" />
+    <Compile Include="ListOM.cs" />
+    <Compile Include="TransferDetailOM.cs" />
+    <Compile Include="PreTransferIM.cs" />
+    <Compile Include="PreTransferOM.cs" />
+    <Compile Include="TransferIM.cs" />
+    <Compile Include="TransferOM.cs" />
+    <Compile Include="WalletPreReOrderOM.cs" />
+    <Compile Include="AddAddressOM.cs" />
+    <Compile Include="AddressListOM.cs" />
+    <Compile Include="WithdrawDetailOM.cs" />
+    <Compile Include="ListForManageWithdrawalAddressOM.cs" />
+    <Compile Include="PreWithdrawOM.cs" />
+    <Compile Include="TransactionFeeRateIM.cs" />
+    <Compile Include="TransactionFeeRateOM.cs" />
+    <Compile Include="WithdrawIM.cs" />
+    <Compile Include="WithdrawOM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FiiiPay.Entities\FiiiPay.Entities.csproj">
+      <Project>{68B13FBA-8C45-450C-9EAE-C9FECBCE5B84}</Project>
+      <Name>FiiiPay.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FiiiPay.Foundation.Entities\FiiiPay.Foundation.Entities.csproj">
+      <Project>{32C340CF-F96A-4678-B3A8-C4A850632159}</Project>
+      <Name>FiiiPay.Foundation.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
